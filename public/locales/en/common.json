@@ -31,5 +31,40 @@
     "resources": "Resources",
     "connect": "Connect",
     "emailUs": "contact@lyceum.com"
+  },
+  "features": {
+    "mainTitle": "Discover Our Key Features",
+    "mainSubtitle": "Enhancing your learning experience with cutting-edge tools and resources.",
+    "testGen": {
+      "title": "Custom Practice Tests",
+      "description": "Generate tailored tests based on your study progress."
+    },
+    "coursesPlatform": {
+      "title": "Structured Courses",
+      "description": "Enroll in courses with videos, PDFs, and assignments."
+    },
+    "aiTools": {
+      "title": "AI-Driven Insights",
+      "description": "Get explanations and summaries powered by AI."
+    },
+    "community": {
+      "title": "Engage & Compete",
+      "description": "Earn credits, join forums, and connect with learners."
+    }
+  },
+  "gamified": {
+    "title": "Learn, Earn, Succeed",
+    "description": "Earn credits, unlock badges, and climb the global leaderboard.",
+    "joinNow": "Join Now",
+    "leaderboardTitle": "Mini Leaderboard",
+    "points": "{{count}} pts",
+    "badge1Alt": "Mastery Badge",
+    "badge2Alt": "Completionist Badge",
+    "badge3Alt": "Top Learner Badge"
+  },
+  "leaderboard": {
+    "alice": "Alice",
+    "bob": "Bob",
+    "sam": "Sam"
   }
 }

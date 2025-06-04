@@ -1,15 +1,17 @@
-import { initI18next } from '../i18n'; // Adjust path
-import { useTranslation } from 'react-i18next/hooks'; // Or from the instance directly
+import { initI18next } from '../i18n';
+import Hero from '../../components/Hero';
+import Features from '../../components/Features';
+import Gamified from '../../components/Gamified'; // Import Gamified
 
-// Example of fetching translations for a server component
 export default async function HomePage({ params: { locale } }: { params: { locale: string }}) {
-  const { t, i18n } = await initI18next(locale, ['common']);
+  const { t } = await initI18next(locale, ['common']);
 
   return (
-    <div>
-      <h1>{t('hero.headline')}</h1>
-      <p>{t('hero.subheadline')}</p>
-      {/* More components will go here */}
-    </div>
+    <>
+      <Hero />
+      <Features />
+      <Gamified /> {/* Add Gamified component here */}
+      {/* Other page sections will be added here */}
+    </>
   );
 }

@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import "./globals.css";
-// @ts-ignore
-import nextI18NextConfig from "../../next-i18next.config.js"; // Adjust path
+import "../globals.css";
+import { locales } from "../../i18n-config"; // Import locales
 import I18nProviderClient from "../i18n-provider"; // Adjusted path
 import { dir } from 'i18next';
 import Header from "../../components/Header"; // Import Header
 import Footer from "../../components/Footer"; // Import Footer
 
 export async function generateStaticParams() {
-  return nextI18NextConfig.i18n.locales.map((locale: string) => ({ locale }));
+  return locales.map((locale: string) => ({ locale }));
 }
 
 export const metadata: Metadata = {

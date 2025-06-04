@@ -1,0 +1,5 @@
+Placeholder for hero background image.
+Please replace this with an actual image (e.g., a JPEG or PNG).
+Dimensions should be suitable for a full-screen hero section, e.g., 1920x1080.
+This is a plain text file for now to satisfy the build process.
+Ensure your actual image is named hero-bg.jpg and placed in the /public directory.

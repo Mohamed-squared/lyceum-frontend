@@ -5,8 +5,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { createInstance } from 'i18next';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next/initReactI18next';
-// @ts-ignore
-import nextI18NextConfig from '../../next-i18next.config.js'; // Adjust path
+import { defaultLocale, locales } from '../i18n-config';
 
 interface I18nProviderProps {
   locale: string;
@@ -24,8 +23,8 @@ const initI18nextClient = (locale: string, namespaces: string[], resources?: any
     .init({
       lng: locale,
       ns: namespaces,
-      fallbackLng: nextI18NextConfig.i18n.defaultLocale,
-      supportedLngs: nextI18NextConfig.i18n.locales,
+      fallbackLng: defaultLocale,
+      supportedLngs: locales,
       defaultNS: 'common',
       fallbackNS: 'common',
       resources: resources, // Pass preloaded resources
