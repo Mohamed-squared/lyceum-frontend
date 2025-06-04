@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     // Using a light cream background as a base, can be customized
     // For a gradient, you could use: bg-gradient-to-br from-lyceum-bg-historic to-slate-200
-    <section className="bg-lyceum-bg-historic text-center py-20 md:py-32">
+    <section className="bg-lyceum-bg-historic text-center py-20 md:py-32 hero-background-placeholder">
       {/* Visual Placeholder Comment:
           -----------------------------------------------------------------------------
           | TODO: Abstract background image/illustration or product mockup here.      |

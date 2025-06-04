@@ -1,23 +1,7 @@
 // src/components/WhyLyceumSection.tsx
 
-// Generic Placeholder Icon Component
-const PlaceholderIcon = ({ className }: { className?: string }) => (
-  <svg
-    className={`w-12 h-12 text-lyceum-accent mb-4 mx-auto ${className}`}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    {/* This is a generic shape; replace with actual icons for each feature */}
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" // Example: Checkmark in circle
-    />
-  </svg>
-);
+// import { FaCircle } from "react-icons/fa"; // Placeholder Icon
+import { FaCircle as PlaceholderIcon } from "react-icons/fa"; // Using FaCircle as a generic placeholder
 
 interface ProblemSolutionItem {
   id: number;
@@ -59,7 +43,7 @@ const WhyLyceumSection = () => {
                   Example: import { FaBrain, FaUserClock, FaBullseye } from 'react-icons/fa';
                   Then use <FaBrain className="w-12 h-12 text-lyceum-accent mb-4 mx-auto" />
               */}
-              <PlaceholderIcon />
+              <PlaceholderIcon className="w-12 h-12 text-lyceum-accent mb-4 mx-auto" />
               <h3 className="text-xl font-sans font-semibold text-lyceum-primary-dark mb-2">
                 {item.problem}
               </h3>

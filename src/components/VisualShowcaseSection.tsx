@@ -3,9 +3,9 @@ import Image from 'next/image'; // Using next/image for optimized images
 
 const VisualShowcaseSection = () => {
   const mockups = [
-    { id: 1, src: "https://via.placeholder.com/600x400/1A3A5A/FFFFFF?text=Dashboard+View", alt: "Lyceum Dashboard Mockup" },
-    { id: 2, src: "https://via.placeholder.com/600x400/FFD700/1A3A5A?text=TestGen+Interface", alt: "Lyceum TestGen Interface Mockup" },
-    { id: 3, src: "https://via.placeholder.com/600x400/FAF0E6/1A3A5A?text=AI+Chat+Lyra", alt: "Lyceum AI Chat Lyra Mockup" },
+    { id: 1, src: "/images/dashboard-placeholder.svg", alt: "Lyceum Dashboard Mockup" },
+    { id: 2, src: "/images/testgen-placeholder.svg", alt: "Lyceum TestGen Interface Mockup" },
+    { id: 3, src: "/images/ai-chat-placeholder.svg", alt: "Lyceum AI Chat Lyra Mockup" },
   ];
 
   return (
@@ -35,7 +35,7 @@ const VisualShowcaseSection = () => {
                 height={400} // Placeholder height
                 className="w-full h-auto object-cover"
               />
-              {/* For simple img tags, you'd use:
+              {/* Placeholder SVGs are used. Ensure actual images have correct dimensions.
               <img
                 src={mockup.src}
                 alt={mockup.alt}

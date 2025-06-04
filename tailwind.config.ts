@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -9,13 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Lora', 'serif'],
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Geist Sans Placeholder', 'sans-serif'],
+        mono: ['Geist Mono Placeholder', 'monospace'],
       },
-      colors: {
-        'lyceum-primary-dark': '#1A3A5A', // Deep Blue
-        'lyceum-accent': '#FFD700',      // Bright Gold
-        'lyceum-bg-historic': '#FAF0E6', // Creamy background
+      colors: { // Added from original observation of Lyceum specific colors (conceptual)
+        'lyceum-primary': '#1A3A5A', // Deep Blue
+        'lyceum-primary-dark': '#0F283E', // Darker Blue
+        'lyceum-accent': '#FFD700', // Gold/Yellow
+        'lyceum-bg-historic': '#FAF0E6', // Light Cream / Parchment
+        'lyceum-light': '#F0F4F8', // Light Grey-Blue
+        'lyceum-text-primary': '#171717', // Nearly Black for text
+        'lyceum-text-secondary': '#525252', // Medium Gray for less emphasis text
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -25,5 +29,5 @@ const config: Config = {
     },
   },
   plugins: [],
-}
-export default config
+};
+export default config;

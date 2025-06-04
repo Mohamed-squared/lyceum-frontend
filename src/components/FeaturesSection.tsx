@@ -1,23 +1,7 @@
 // src/components/FeaturesSection.tsx
 
-// Generic Placeholder Icon Component (can be imported if centralized)
-const PlaceholderIcon = ({ className }: { className?: string }) => (
-  <svg
-    className={`w-10 h-10 text-lyceum-primary-dark mb-3 ${className}`} // Icon color primary-dark as per spec
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    {/* This is a generic shape; replace with actual icons for each feature */}
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" // Example: Desktop screen icon
-    />
-  </svg>
-);
+// import { FiCircle } from "react-icons/fi"; // Placeholder Icon
+import { FiCircle as PlaceholderIcon } from "react-icons/fi"; // Using FiCircle as a generic placeholder
 
 interface FeatureItem {
   id: number;
@@ -76,7 +60,7 @@ const FeaturesSection = () => {
               {/* TODO: Replace PlaceholderIcon with specific icons from react-icons
                   Example: import { FiZap, FiBookOpen, FiCpu, FiMessageSquare, FiTrendingUp, FiAward } from 'react-icons/fi';
               */}
-              <PlaceholderIcon />
+              <PlaceholderIcon className="w-10 h-10 text-lyceum-primary-dark mb-3" />
               <h3 className="text-xl font-sans font-semibold text-lyceum-primary-dark mb-2">
                 {feature.name}
               </h3>
