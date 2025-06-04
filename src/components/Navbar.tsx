@@ -5,25 +5,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { HiMenuAlt3, HiX } from 'react-icons/hi'; // Using Heroicons for menu icons
 
-// Placeholder for a logo icon (e.g., a stylized quill or laurel wreath)
-const LogoIconPlaceholder = () => (
-  <svg
-    className="w-8 h-8 mr-2 text-lyceum-primary-dark"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    {/* Replace with actual SVG path for a quill or laurel wreath */}
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M12 6.25278C12 6.25278 15.5346 3 19.5 3C23.4654 3 24 6.48794 24 10.0828C24 13.6777 20.9598 17.0079 19.5 18.5L12 21L4.5 18.5C3.04019 17.0079 0 13.6777 0 10.0828C0 6.48794 0.534561 3 4.5 3C8.46544 3 12 6.25278 12 6.25278Z"
-    />
-  </svg>
-);
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 

@@ -12,7 +12,7 @@ const FinalCTASection = () => {
           href="/signup"
           className="bg-lyceum-accent hover:bg-yellow-600 text-lyceum-primary-dark font-semibold px-10 py-4 sm:px-12 sm:py-5 rounded-lg text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all transform hover:scale-105 d-inline-block"
         >
-          Sign Up Now - It's Free!
+          Sign Up Now - It&apos;s Free!
         </Link>
       </div>
     </section>

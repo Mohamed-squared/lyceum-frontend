@@ -44,7 +44,7 @@ const HowItWorksSection = () => {
           ------------------------------------------------------------------------------------
         */}
         <div className="flex flex-col md:flex-row justify-between items-start md:space-x-8">
-          {stepItems.map((step, index) => (
+          {stepItems.map((step) => (
             <div
               key={step.id}
               className="flex-1 flex flex-col items-center text-center md:items-start md:text-left mb-8 md:mb-0"
