@@ -1,11 +1,6 @@
-/* @tailwind base; */
-/* @tailwind components; */
-/* @tailwind utilities; */
-
-body {
-  background-color: blue !important;
-  color: white !important; /* To make text visible on blue background */
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
