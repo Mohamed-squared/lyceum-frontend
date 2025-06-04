@@ -1,0 +1,35 @@
+{
+  "appName": "Lyceum",
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "about": "About",
+    "support": "Support",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "hero": {
+    "headline": "Master Any Subject with Lyceum",
+    "subheadline": "Personalized tests, AI-driven learning, and gamified progress in a modern academic environment.",
+    "signup": "Sign Up Free",
+    "explore": "Explore Courses"
+  },
+  "langSwitcher": {
+    "en": "EN",
+    "ar": "AR",
+    "switchToEnglish": "Switch to English",
+    "switchToArabic": "Switch to Arabic"
+  },
+  "footer": {
+    "about": "About Us",
+    "support": "Support",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© {{year}} {{appName}}. All rights reserved.",
+    "tagline": "Empowering learners through AI.",
+    "quickLinks": "Quick Links",
+    "resources": "Resources",
+    "connect": "Connect",
+    "emailUs": "contact@lyceum.com"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "appName": "ليسيوم",
+  "nav": {
+    "home": "الرئيسية",
+    "courses": "الدورات",
+    "about": "حول",
+    "support": "الدعم",
+    "login": "تسجيل الدخول",
+    "signup": "اشترك"
+  },
+  "hero": {
+    "headline": "إتقن أي موضوع مع ليسيوم",
+    "subheadline": "اختبارات مخصصة، تعليم مدعوم بالذكاء الاصطناعي، وتقدم ممتع في بيئة أكاديمية حديثة.",
+    "signup": "اشترك مجانًا",
+    "explore": "استكشف الدورات"
+  },
+  "langSwitcher": {
+    "en": "EN",
+    "ar": "AR",
+    "switchToEnglish": "التحويل إلى الإنجليزية",
+    "switchToArabic": "التحويل إلى العربية"
+  },
+  "footer": {
+    "about": "من نحن",
+    "support": "الدعم",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "copyright": "© {{year}} {{appName}}. جميع الحقوق محفوظة.",
+    "tagline": "تمكين المتعلمين من خلال الذكاء الاصطناعي.",
+    "quickLinks": "روابط سريعة",
+    "resources": "المصادر",
+    "connect": "تواصل معنا",
+    "emailUs": "contact@lyceum.com"
+  }
+}
