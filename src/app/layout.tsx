@@ -33,7 +33,7 @@ export default function RootLayout({
           and Inter as the default sans-serif font.
           Tailwind's font-sans and font-serif will pick up from tailwind.config.ts
       */}
-      <body className={`${inter.variable} ${lora.variable} font-sans bg-red-500`}>
+      <body className={`${inter.variable} ${lora.variable} font-sans`}>
         {children}
       </body>
     </html>
