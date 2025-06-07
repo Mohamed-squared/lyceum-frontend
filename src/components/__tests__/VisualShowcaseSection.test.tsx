@@ -16,10 +16,10 @@ interface ShowcaseAssets {
 }
 
 describe('VisualShowcaseSection', () => {
-  const mockFetch = jest.fn((): Promise<Response> => // Explicitly type the return of jest.fn()
+  const mockFetch = jest.fn((): Promise<Response> =>
     Promise.resolve({
       ok: true,
-      json: () => Promise.resolve<ShowcaseAssets>({ // Type the resolved value of json()
+      json: () => Promise.resolve<ShowcaseAssets>({
         visualShowcase: {
           mockups: [
             { id: 1, src: "/mockup1.jpg", alt: "Mockup 1 Alt" },
@@ -27,14 +27,29 @@ describe('VisualShowcaseSection', () => {
           ]
         }
       }),
-    } as Response) // Cast the object to Response type
+      status: 200,
+      statusText: "OK",
+      headers: new Headers(),
+      redirected: false,
+      type: 'basic',
+      url: '',
+      clone: function (): Response {
+        return this;
+      },
+      body: null,
+      bodyUsed: false,
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+      blob: () => Promise.resolve(new Blob()),
+      formData: () => Promise.resolve(new FormData()),
+      text: () => Promise.resolve(''),
+    } as Response)
   );
 
-  let originalFetch: any; // Keep originalFetch to restore global.fetch
+  let originalFetch: typeof global.fetch;
 
   beforeEach(() => {
-    originalFetch = global.fetch; // Store original fetch
-    global.fetch = mockFetch;
+    originalFetch = global.fetch;
+    global.fetch = mockFetch as jest.MockedFunction<typeof global.fetch>; // Cast mockFetch
     mockFetch.mockClear();
   });
 

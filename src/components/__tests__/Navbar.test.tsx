@@ -27,20 +27,42 @@ const messages: NavbarMessages = {
   }
 };
 
+// Define the expected structure for the logo asset
+interface LogoAsset {
+  logo: {
+    main: string;
+  };
+}
+
 describe('Navbar', () => {
-  // Mock global.fetch for this test suite
-  const mockFetch = jest.fn(() =>
+  // Type the mock fetch function explicitly
+  const mockFetch = jest.fn((): Promise<Response> => // Explicitly return Promise<Response>
      Promise.resolve({
        ok: true,
-       json: () => Promise.resolve({ logo: { main: "/test-logo.svg" } }),
-     })
+       json: () => Promise.resolve<LogoAsset>({ logo: { main: "/test-logo.svg" } }),
+       status: 200,
+       statusText: "OK",
+       headers: new Headers(),
+       redirected: false,
+       type: 'basic',
+       url: '',
+       clone: function (): Response {
+         return this;
+       },
+       body: null,
+       bodyUsed: false,
+       arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+       blob: () => Promise.resolve(new Blob()),
+       formData: () => Promise.resolve(new FormData()),
+       text: () => Promise.resolve(''),
+     } as Response) // Cast to Response
    );
 
-  let originalFetch: any;
+  let originalFetch: typeof global.fetch;
 
   beforeEach(() => {
      originalFetch = global.fetch;
-     global.fetch = mockFetch;
+     global.fetch = mockFetch as jest.MockedFunction<typeof global.fetch>; // Cast mockFetch to the expected type
      mockFetch.mockClear();
   });
 
