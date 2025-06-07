@@ -24,6 +24,8 @@ const pathnames = {
   // Add other paths here if they are not dynamic segments
 };
 
+export type AppPathnames = keyof typeof pathnames;
+
 export const {Link, redirect, usePathname, useRouter} =
   createLocalizedPathnamesNavigation({
     locales,
