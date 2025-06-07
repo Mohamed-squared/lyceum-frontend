@@ -1,10 +1,11 @@
 {
-  "navbar": {
-    "features": "Features",
-    "courses": "Courses",
-    "aiChat": "AI Chat",
+  "HomePage": {
+    "title": "Welcome to Lyceum",
+    "subtitle": "Your AI-Powered Learning Platform"
+  },
+  "Navbar": {
     "login": "Login",
-    "signUp": "Sign Up",
-    "logoText": "Lyceum"
+    "signup": "Sign Up",
+    "about": "About Us"
   }
 }
