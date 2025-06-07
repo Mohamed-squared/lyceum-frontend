@@ -1,0 +1,15 @@
+{
+  "visualShowcase": {
+    "mockups": [
+      { "id": 1, "src": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png", "alt": "Lyceum Dashboard Mockup" },
+      { "id": 2, "src": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png", "alt": "Lyceum TestGen Interface Mockup" },
+      { "id": 3, "src": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png", "alt": "Lyceum AI Chat Lyra Mockup" }
+    ]
+  },
+  "heroSection": {
+    "backgroundImage": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.pngr"
+  },
+  "logo": {
+     "main": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png"
+  }
+}

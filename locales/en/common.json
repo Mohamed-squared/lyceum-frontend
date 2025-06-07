@@ -1,0 +1,11 @@
+{
+  "HomePage": {
+    "title": "Welcome to Lyceum",
+    "subtitle": "Your AI-Powered Learning Platform"
+  },
+  "Navbar": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "about": "About Us"
+  }
+}

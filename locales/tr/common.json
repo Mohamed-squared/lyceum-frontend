@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "features": "Özellikler",
+    "courses": "Kurslar",
+    "aiChat": "AI Sohbet",
+    "login": "Giriş Yap",
+    "signUp": "Kaydol",
+    "logoText": "Lyceum"
+  }
+}

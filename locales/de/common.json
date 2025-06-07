@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "features": "Funktionen",
+    "courses": "Kurse",
+    "aiChat": "KI-Chat",
+    "login": "Anmelden",
+    "signUp": "Registrieren",
+    "logoText": "Lyceum"
+  }
+}
