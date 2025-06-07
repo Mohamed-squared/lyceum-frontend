@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 'use client';
 
-import { Link } from '@/navigation';
+import { Link, type AppPathnames } from '@/navigation'; // Ensure Link is from @/navigation
 import { useState, useEffect } from 'react'; // Import useEffect
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
@@ -39,7 +39,7 @@ const Navbar = () => {
     { href: '#ai-chat', label: t('aiChat') },
   ];
 
-  const authLinks = [
+  const authLinks: Array<{ href: AppPathnames; label: string }> = [
     { href: '/login', label: t('login') },
   ];
 
@@ -79,7 +79,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="/signup"
+              href={'/signup' as AppPathnames}
               className="bg-lyceum-accent hover:bg-yellow-600 text-lyceum-primary-dark font-semibold px-4 py-2 rounded-md text-sm shadow-sm hover:shadow-md transition-all"
             >
               {t('signUp')}
@@ -133,7 +133,7 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              href="/signup"
+              href={'/signup' as AppPathnames}
               className="bg-lyceum-accent hover:bg-yellow-600 text-lyceum-primary-dark font-semibold block w-full text-center px-4 py-2 rounded-md text-base shadow-sm hover:shadow-md transition-all"
               onClick={() => setIsOpen(false)}
             >
