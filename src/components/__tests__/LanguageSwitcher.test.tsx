@@ -1,6 +1,6 @@
 // src/components/__tests__/LanguageSwitcher.test.tsx
 import { render, screen, fireEvent } from '@testing-library/react';
-import LanguageSwitcher from '../LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useRouter } from 'next/navigation'; // Import from the actual path
 
 // Mock next/navigation specifically for this test file if needed, or rely on global mock

@@ -1,72 +1,36 @@
-// src/components/LanguageSwitcher.tsx
+// FINAL CORRECTED CODE for: src/components/LanguageSwitcher.tsx
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from '@/navigation'; // <-- Import the CORRECT, localized hooks
+import { useLocale } from 'next-intl';
+import { useTransition } from 'react';
 
-const LanguageSwitcher = () => {
+export default function LanguageSwitcher() {
   const router = useRouter();
+  const pathname = usePathname();
+  const locale = useLocale();
+  const [isPending, startTransition] = useTransition();
 
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'ar', name: 'العربية' },
-    { code: 'tr', name: 'Türkçe' },
-    { code: 'de', name: 'Deutsch' },
-  ];
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newLocale = e.target.value;
 
-  const handleLanguageChange = (newLocale: string) => {
-    const currentPath = window.location.pathname; // e.g., /en/about, /about, /en/, /
-    const pathSegments = currentPath.split('/'); // e.g., ["", "en", "about"], ["", "about"], ["", "en", ""], ["", ""]
-
-    // Check if the first path segment (index 1) is a known locale
-    const currentLocaleIsPresentInPath = languages.some(lang => lang.code === pathSegments[1]);
-
-    let basePathWithoutLocale;
-    if (currentLocaleIsPresentInPath) {
-      // If current path is /en/foo/bar, pathSegments = ["", "en", "foo", "bar"]
-      // We want "foo/bar". So slice from index 2.
-      const segmentsAfterLocale = pathSegments.slice(2);
-      basePathWithoutLocale = segmentsAfterLocale.join('/');
-    } else {
-      // If current path is /foo/bar (default locale), pathSegments = ["", "foo", "bar"]
-      // We want "foo/bar". So slice from index 1.
-      // If current path is / (default locale, root), pathSegments = ["", ""].
-      // Slicing from index 1 gives [""]. join('/') gives "".
-      const segmentsAfterPotentialSlash = pathSegments.slice(1);
-      basePathWithoutLocale = segmentsAfterPotentialSlash.join('/');
-    }
-
-    // basePathWithoutLocale is now like "foo/bar" or "" (for root)
-
-    let newPath;
-    if (basePathWithoutLocale === "") {
-      newPath = `/${newLocale}`; // For root, e.g. /de
-    } else {
-      newPath = `/${newLocale}/${basePathWithoutLocale}`; // For other pages, e.g. /de/foo/bar
-    }
-
-    // Handle potential trailing slash if the original path had one (e.g. /en/somepage/)
-    // basePathWithoutLocale might end with a slash if pathSegments ended with an empty string
-    // e.g. /en/page/ -> pathSegments ["", "en", "page", ""] -> slice(2) -> ["page", ""] -> join -> "page/"
-    if (currentPath.endsWith('/') && !newPath.endsWith('/') && newPath !== `/${newLocale}`) {
-        newPath += '/';
-    }
-
-    router.push(newPath);
+    startTransition(() => {
+      // Use the new router to push the same pathname but with a different locale
+      router.push(pathname, { locale: newLocale });
+    });
   };
 
   return (
-    <div className="flex space-x-2">
-      {languages.map((lang) => (
-        <button
-          key={lang.code}
-          onClick={() => handleLanguageChange(lang.code)}
-          className="px-3 py-1 rounded-md text-sm font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-lyceum-accent"
-        >
-          {lang.name}
-        </button>
-      ))}
-    </div>
+    <select
+      value={locale}
+      onChange={handleChange}
+      disabled={isPending}
+      className="bg-gray-700 text-white p-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    >
+      <option value="en">English</option>
+      <option value="ar">العربية</option>
+      <option value="tr">Türkçe</option>
+      <option value="de">Deutsch</option>
+    </select>
   );
-};
-
-export default LanguageSwitcher;
+}

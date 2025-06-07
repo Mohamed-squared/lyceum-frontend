@@ -1,6 +1,6 @@
 // src/components/__tests__/VisualShowcaseSection.test.tsx
 import { render, screen, waitFor } from '@testing-library/react';
-import VisualShowcaseSection from '../VisualShowcaseSection';
+import VisualShowcaseSection from '@/components/VisualShowcaseSection';
 
 // Define types for the data structure
 interface MockupData {

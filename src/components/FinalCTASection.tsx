@@ -1,5 +1,5 @@
 // src/components/FinalCTASection.tsx
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 const FinalCTASection = () => {
   return (

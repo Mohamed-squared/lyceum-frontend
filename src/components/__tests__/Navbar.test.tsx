@@ -1,6 +1,6 @@
 // src/components/__tests__/Navbar.test.tsx
 import { render, screen, waitFor } from '@testing-library/react';
-import Navbar from '../Navbar';
+import Navbar from '@/components/Navbar';
 import { NextIntlClientProvider } from 'next-intl';
 
 // Define a more specific type for messages

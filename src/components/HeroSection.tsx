@@ -1,5 +1,5 @@
 // src/components/HeroSection.tsx
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 const HeroSection = () => {
   return (

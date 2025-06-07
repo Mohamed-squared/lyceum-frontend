@@ -1,7 +1,7 @@
 // src/components/Navbar.tsx
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { useState, useEffect } from 'react'; // Import useEffect
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
