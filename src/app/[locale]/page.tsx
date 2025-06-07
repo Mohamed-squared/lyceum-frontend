@@ -20,7 +20,7 @@ export default function HomePage() {
       <main>
         {/* Example of using the translation hook */}
         {/* You'll need to add a corresponding 'title' key to your translation files */}
-        {/* <h1>{t('title')}</h1> */}
+        <h1>{t('title')}</h1>
         <HeroSection />
         <WhyLyceumSection />
         <FeaturesSection />
