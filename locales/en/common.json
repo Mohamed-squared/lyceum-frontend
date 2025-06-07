@@ -1,11 +1,20 @@
 {
   "HomePage": {
-    "title": "Welcome to Lyceum",
-    "subtitle": "Your AI-Powered Learning Platform"
+    "title": "Welcome to Lyceum"
   },
   "Navbar": {
+    "logoText": "Lyceum",
+    "features": "Features",
+    "courses": "Courses",
+    "aiChat": "AI Chat",
     "login": "Login",
-    "signup": "Sign Up",
-    "about": "About Us"
+    "signUp": "Sign Up",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "HeroSection": {
+    "title": "Unlock Your Potential",
+    "subtitle": "Join Lyceum and start your personalized learning journey today.",
+    "ctaButton": "Get Started for Free"
   }
 }
