@@ -1,6 +1,9 @@
-// src/i18n.ts
+// FILE: src/i18n.ts
+
 import {getRequestConfig} from 'next-intl/server';
 
 export default getRequestConfig(async ({locale}) => ({
+  // Include the 'locale' property along with 'messages'
+  locale: locale,
   messages: (await import(`../locales/${locale}/common.json`)).default
 }));
