@@ -1,15 +1,15 @@
 {
   "visualShowcase": {
     "mockups": [
-      { "id": 1, "src": "https://via.placeholder.com/600x400/1A3A5A/FFFFFF?text=Dashboard+View", "alt": "Lyceum Dashboard Mockup" },
-      { "id": 2, "src": "https://via.placeholder.com/600x400/FFD700/1A3A5A?text=TestGen+Interface", "alt": "Lyceum TestGen Interface Mockup" },
-      { "id": 3, "src": "https://via.placeholder.com/600x400/FAF0E6/1A3A5A?text=AI+Chat+Lyra", "alt": "Lyceum AI Chat Lyra Mockup" }
+      { "id": 1, "src": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png", "alt": "Lyceum Dashboard Mockup" },
+      { "id": 2, "src": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png", "alt": "Lyceum TestGen Interface Mockup" },
+      { "id": 3, "src": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png", "alt": "Lyceum AI Chat Lyra Mockup" }
     ]
   },
   "heroSection": {
-    "backgroundImage": "https://via.placeholder.com/1920x1080/E0E7FF/FFFFFF?text=Hero+Background+Placeholder"
+    "backgroundImage": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.pngr"
   },
   "logo": {
-     "main": "/file.svg"
+     "main": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png"
   }
 }
