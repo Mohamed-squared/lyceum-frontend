@@ -2,14 +2,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import Navbar from '../../../public/components/Navbar';
-import HeroSection from '../../../public/components/HeroSection';
-import WhyLyceumSection from '../../../public/components/WhyLyceumSection';
-import FeaturesSection from '../../../public/components/FeaturesSection';
-import HowItWorksSection from '../../../public/components/HowItWorksSection';
-import VisualShowcaseSection from '../../../public/components/VisualShowcaseSection';
-import FinalCTASection from '../../../public/components/FinalCTASection';
-import Footer from '../../../public/components/Footer';
+import Navbar from '../../components/Navbar';
+import HeroSection from '../../components/HeroSection';
+import WhyLyceumSection from '../../components/WhyLyceumSection';
+import FeaturesSection from '../../components/FeaturesSection';
+import HowItWorksSection from '../../components/HowItWorksSection';
+import VisualShowcaseSection from '../../components/VisualShowcaseSection';
+import FinalCTASection from '../../components/FinalCTASection';
+import Footer from '../../components/Footer';
 
 export default function HomePage() {
   const t = useTranslations('HomePage'); // Example usage of useTranslations
