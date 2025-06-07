@@ -61,13 +61,13 @@ const Navbar = () => {
           {/* Desktop Navigation Links & Language Switcher */}
           <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
-              <Link
+              <a // Changed from Link to a
                 key={link.label}
                 href={link.href}
                 className="text-gray-600 hover:text-lyceum-primary-dark px-3 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
             {authLinks.map((link) => (
               <Link
@@ -113,14 +113,14 @@ const Navbar = () => {
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
-              <Link
+              <a // Changed from Link to a
                 key={link.label}
                 href={link.href}
                 className="text-gray-600 hover:bg-gray-50 hover:text-lyceum-primary-dark block px-3 py-2 rounded-md text-base font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
             {authLinks.map((link) => (
               <Link
