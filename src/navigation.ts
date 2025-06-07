@@ -15,6 +15,7 @@ import {locales} from './i18n-config'; // Assuming i18n-config.ts exists in src
 
 // For this case, as per user prompt, paths are the same
 const pathnames = {
+  '/': '/',
   '/login': '/login',
   '/signup': '/signup',
   '/about': '/about',
