@@ -65,7 +65,7 @@ const Footer: React.FC = () => {
             </h3>
             <p className="mt-4 text-base text-gray-300">
               The latest news, articles, and resources, sent to your inbox weekly.
-            </p
+            </p>
             {/* Add form here */}
           </div>
         </div>
