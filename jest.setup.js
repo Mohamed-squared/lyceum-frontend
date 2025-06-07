@@ -15,17 +15,17 @@ jest.mock('next/navigation', () => ({
 
 // Mock fetch
 global.fetch = jest.fn(() =>
- Promise.resolve({
-   ok: true,
-   json: () => Promise.resolve({
-     visualShowcase: {
-       mockups: [
-         { id: 1, src: "https://via.placeholder.com/600x400/1A3A5A/FFFFFF?text=Dashboard+View", alt: "Lyceum Dashboard Mockup" },
-       ]
-     },
-     logo: {
-       main: "/file.svg"
-     }
-   }),
- })
+  Promise.resolve({
+    ok: true,
+    json: () => Promise.resolve({ // This could be typed more strictly if needed
+      visualShowcase: {
+        mockups: [
+          { id: 1, src: "https://via.placeholder.com/600x400/1A3A5A/FFFFFF?text=Dashboard+View", alt: "Lyceum Dashboard Mockup" },
+        ]
+      },
+      logo: {
+        main: "/file.svg"
+      }
+    }),
+  } as Response) // Added 'as Response' here for clarity
 );

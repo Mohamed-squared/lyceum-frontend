@@ -3,8 +3,20 @@ import { render, screen, waitFor } from '@testing-library/react';
 import Navbar from '@/components/Navbar';
 import { NextIntlClientProvider } from 'next-intl';
 
+// Define a more specific type for messages
+interface NavbarMessages {
+  navbar: {
+    features: string;
+    courses: string;
+    aiChat: string;
+    login: string;
+    signUp: string;
+    logoText: string;
+  };
+}
+
 // Minimal messages for testing
-const messages = {
+const messages: NavbarMessages = {
   navbar: {
     features: "Features",
     courses: "Courses",
