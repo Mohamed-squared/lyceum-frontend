@@ -24,18 +24,14 @@ export const metadata: Metadata = {
   description: 'Lyceum combines intelligent test generation, AI-driven study tools, and immersive courses to personalize your path to academic excellence and lifelong learning.',
 };
 
-// Define a named interface for the RootLayout props
-interface RootLayoutProps {
-  children: React.ReactNode;
-  params: {
-    locale: string;
-  };
-}
-
 export default async function RootLayout({
   children,
-  params: {locale}
-}: RootLayoutProps) { // Use the named interface
+  params
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
+  const { locale } = params; // Destructure locale from params
   // Explicitly pass the locale to getMessages
   const messages = await getMessages({locale});
 
