@@ -1,12 +1,15 @@
-// FILE: src/app/layout.tsx
+// FINAL CODE FOR: src/app/layout.tsx
+import React from 'react';
 import './globals.css';
 
-import React from 'react'; // Ensure React is imported if needed for JSX, though for simple children it might not be.
+// This is the top-level root layout.
+// It MUST be a minimal pass-through component that only returns its children.
+// It must not render <html> or <body>.
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>; // Return children directly, wrapped in a fragment or nothing if allowed
+  return children;
 }
