@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Lora } from 'next/font/google';
 import './globals.css';
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server'; // getLocale is not strictly needed here if we use params.locale
+import {getMessages} from 'next-intl/server';
 
 // Configure Inter font
 const inter = Inter({
@@ -24,18 +24,15 @@ export const metadata: Metadata = {
   description: 'Lyceum combines intelligent test generation, AI-driven study tools, and immersive courses to personalize your path to academic excellence and lifelong learning.',
 };
 
-// Define a named interface for the RootLayout props
-interface RootLayoutProps {
-  children: React.ReactNode;
-  params: {
-    locale: string;
-  };
-}
+// REMOVED the RootLayoutProps interface
 
 export default async function RootLayout({
   children,
   params: {locale}
-}: RootLayoutProps) { // Use the named interface
+}: { // USE an inline type for props instead of the custom interface
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
   // Explicitly pass the locale to getMessages
   const messages = await getMessages({locale});
 
