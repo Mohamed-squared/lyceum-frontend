@@ -1,21 +1,46 @@
 // src/components/Navbar.tsx
-'use client'; // Needed for useState for mobile menu
+'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { HiMenuAlt3, HiX } from 'react-icons/hi'; // Using Heroicons for menu icons
+import { useState, useEffect } from 'react'; // Import useEffect
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
+import Image from 'next/image'; // Import Next Image
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations('navbar');
+  const [logoPath, setLogoPath] = useState('/file.svg'); // Default logo
+
+  useEffect(() => {
+    const fetchAssets = async () => {
+      try {
+        const response = await fetch('/assets.json');
+        if (!response.ok) {
+          throw new Error('Failed to fetch assets');
+        }
+        const data = await response.json();
+        if (data.logo && data.logo.main) {
+          setLogoPath(data.logo.main);
+        }
+      } catch (error) {
+        console.error("Error fetching logo asset:", error);
+        // Keep default logo if fetch fails
+      }
+    };
+    fetchAssets();
+  }, []);
+
 
   const navLinks = [
-    { href: '#features', label: 'Features' },
-    { href: '#courses', label: 'Courses' },
-    { href: '#ai-chat', label: 'AI Chat' },
+    { href: '#features', label: t('features') },
+    { href: '#courses', label: t('courses') },
+    { href: '#ai-chat', label: t('aiChat') },
   ];
 
   const authLinks = [
-    { href: '/login', label: 'Login' },
+    { href: '/login', label: t('login') },
   ];
 
   return (
@@ -25,14 +50,15 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              {/* <LogoIconPlaceholder /> */} {/* Uncomment if you have a logo SVG */}
+                 {/* Using next/image for the logo */}
+                 <Image src={logoPath} alt="Lyceum Logo" width={32} height={32} className="h-8 w-auto mr-2" />
               <span className="font-serif text-2xl font-bold text-lyceum-primary-dark">
-                Lyceum
+                {t('logoText')}
               </span>
             </Link>
           </div>
 
-          {/* Desktop Navigation Links */}
+          {/* Desktop Navigation Links & Language Switcher */}
           <div className="hidden md:flex items-center space-x-4">
             {navLinks.map((link) => (
               <Link
@@ -56,16 +82,18 @@ const Navbar = () => {
               href="/signup"
               className="bg-lyceum-accent hover:bg-yellow-600 text-lyceum-primary-dark font-semibold px-4 py-2 rounded-md text-sm shadow-sm hover:shadow-md transition-all"
             >
-              Sign Up
+              {t('signUp')}
             </Link>
+            <LanguageSwitcher />
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button & Language Switcher */}
           <div className="md:hidden flex items-center">
+            <LanguageSwitcher /> {/* Moved here for visibility next to menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="text-lyceum-primary-dark hover:text-lyceum-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lyceum-accent p-2 rounded-md"
+              className="text-lyceum-primary-dark hover:text-lyceum-accent focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lyceum-accent p-2 rounded-md ml-2" // Added ml-2 for spacing
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
             >
@@ -109,8 +137,9 @@ const Navbar = () => {
               className="bg-lyceum-accent hover:bg-yellow-600 text-lyceum-primary-dark font-semibold block w-full text-center px-4 py-2 rounded-md text-base shadow-sm hover:shadow-md transition-all"
               onClick={() => setIsOpen(false)}
             >
-              Sign Up
+              {t('signUp')}
             </Link>
+            {/* LanguageSwitcher is not needed here again as it's in the header */}
           </div>
         </div>
       )}

@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "features": "Features",
+    "courses": "Courses",
+    "aiChat": "AI Chat",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "logoText": "Lyceum"
+  }
+}
