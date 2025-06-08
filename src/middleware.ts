@@ -5,7 +5,7 @@ export default createMiddleware({
   // These configurations are correct and will remain.
   locales: locales,
   defaultLocale: defaultLocale,
-  localePrefix: 'as-needed'
+  localePrefix: 'always' // Changed from 'as-needed'
 });
 
 export const config = {
