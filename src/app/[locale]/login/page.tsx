@@ -54,7 +54,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gray-900 text-white">
+    <main className="relative flex min-h-screen flex-col items-center justify-center text-white">
       {/* Background Videos */}
       <video
         autoPlay
