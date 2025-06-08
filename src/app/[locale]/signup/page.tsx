@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useRouter, Link } from '@/navigation'; // Using next-intl's Link
 import { motion } from 'framer-motion';
-import { FiMail, FiLock, FiAlertCircle } from 'react-icons/fi';
+import { FiMail, FiLock, FiAlertCircle, FiLogIn } from 'react-icons/fi';
 import { FaGoogle } from 'react-icons/fa';
 import Image from 'next/image';
 import { useSupabase } from '@/app/supabase-provider';
 
-export default function LoginPage() {
+export default function SignUpPage() {
   const t = useTranslations('LoginPage');
   const router = useRouter();
   const supabase = useSupabase();
@@ -25,7 +25,7 @@ export default function LoginPage() {
     setIsLoading(true);
     setError(null);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email,
       password,
     });
@@ -33,8 +33,8 @@ export default function LoginPage() {
     if (error) {
       setError(error.message);
     } else {
-      router.push('/');
-      router.refresh();
+      alert(t('checkEmail'));
+      router.push('/login');
     }
 
     setIsLoading(false);
@@ -50,7 +50,8 @@ export default function LoginPage() {
     });
   };
 
-  // ... (variants are the same) ...
+  const containerVariants = { /* ... (Same as login page) ... */ };
+  const itemVariants = { /* ... (Same as login page) ... */ };
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center text-white">
@@ -60,8 +61,8 @@ export default function LoginPage() {
 
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
         <div className="text-center">
-          <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignIn')}</h1>
-          <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignIn')}</p>
+          <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignUp')}</h1>
+          <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignUp')}</p>
         </div>
 
         {error && (
@@ -84,7 +85,7 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Form fields are the same */}
+          {/* Form fields are the same as login page */}
           <div className="space-y-4">
             <div className="relative">
               <input id="email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="peer h-12 w-full border-b-2 border-gray-400 bg-transparent text-white placeholder-transparent focus:outline-none focus:border-blue-400" placeholder="email@example.com" />
@@ -98,12 +99,12 @@ export default function LoginPage() {
             </div>
           </div>
           <button type="submit" disabled={isLoading || isGoogleLoading} className="w-full h-12 px-6 text-white font-semibold bg-blue-600 rounded-lg hover:bg-blue-700 transition-all duration-300 disabled:bg-gray-500 flex items-center justify-center">
-            {isLoading ? <Image src="/auth/astrolabe-spinner.svg" alt="Loading..." width={28} height={28} className="animate-spin" /> : t('signInButton')}
+            {isLoading ? <Image src="/auth/astrolabe-spinner.svg" alt="Loading..." width={28} height={28} className="animate-spin" /> : t('signUpButton')}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-300 dark:text-gray-400">
-          {t('promptSignUp')} <Link href="/signup" className="font-medium text-blue-400 hover:underline ml-1">{t('signUpLink')}</Link>
+          {t('promptSignIn')} <Link href="/login" className="font-medium text-blue-400 hover:underline ml-1">{t('signInLink')}</Link>
         </p>
       </motion.div>
     </main>

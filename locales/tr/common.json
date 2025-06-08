@@ -115,6 +115,7 @@
     "promptSignIn": "Zaten üye misin?",
     "signInLink": "Giriş Yap",
     "promptSignUp": "Henüz üye değil misin?",
-    "signUpLink": "Kayıt Ol"
+    "signUpLink": "Kayıt Ol",
+    "continueWithGoogle": "Google ile Devam Et"
   }
 }

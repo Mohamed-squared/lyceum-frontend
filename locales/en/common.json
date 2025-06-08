@@ -115,6 +115,7 @@
     "promptSignIn": "Already a member?",
     "signInLink": "Sign In",
     "promptSignUp": "Not yet a member?",
-    "signUpLink": "Sign Up"
+    "signUpLink": "Sign Up",
+    "continueWithGoogle": "Continue with Google"
   }
 }

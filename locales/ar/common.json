@@ -115,6 +115,7 @@
     "promptSignIn": "هل لديك حساب بالفعل؟",
     "signInLink": "تسجيل الدخول",
     "promptSignUp": "لست عضواً بعد؟",
-    "signUpLink": "إنشاء حساب"
+    "signUpLink": "إنشاء حساب",
+    "continueWithGoogle": "المتابعة باستخدام جوجل"
   }
 }
