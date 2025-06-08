@@ -1,18 +1,28 @@
+// src/app/[locale]/signup/page.tsx
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Import useEffect
+import { useTheme } from 'next-themes'; // Import useTheme
 import { useTranslations } from 'next-intl';
-import { useRouter, Link } from '@/navigation'; // Using next-intl's Link
+import { useRouter, Link } from '@/navigation';
 import { motion } from 'framer-motion';
-import { FiMail, FiLock, FiAlertCircle, FiLogIn } from 'react-icons/fi';
+import { FiMail, FiLock, FiAlertCircle } from 'react-icons/fi'; // Removed FiLogIn as it's not used
 import { FaGoogle } from 'react-icons/fa';
 import Image from 'next/image';
 import { useSupabase } from '@/app/supabase-provider';
 
 export default function SignUpPage() {
-  const t = useTranslations('LoginPage');
+  const t = useTranslations('LoginPage'); // Assuming 'LoginPage' has all needed translations like 'headingSignUp', 'subheadingSignUp' etc.
   const router = useRouter();
   const supabase = useSupabase();
+  const { theme } = useTheme(); // Get the current theme
+
+  // This state is crucial to prevent hydration mismatch errors.
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,19 +34,14 @@ export default function SignUpPage() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
+    const { error } = await supabase.auth.signUp({ email, password });
+    if (error) { setError(error.message); }
+    else {
+      // It's better to use a more user-friendly notification system than alert()
+      // For now, keeping alert as per original logic
       alert(t('checkEmail'));
       router.push('/login');
     }
-
     setIsLoading(false);
   };
 
@@ -44,23 +49,47 @@ export default function SignUpPage() {
     setIsGoogleLoading(true);
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
+      options: { redirectTo: `${location.origin}/auth/callback` },
     });
+    //setIsGoogleLoading(false); // Typically, the page redirects, so this might not be necessary
   };
 
-  const containerVariants = { /* ... (Same as login page) ... */ };
-  const itemVariants = { /* ... (Same as login page) ... */ };
+  // Define the base class for the main container
+  const mainClass = `relative flex min-h-screen flex-col items-center justify-center text-white bg-cover bg-center`;
+
+  // Don't render anything on the server if it depends on the theme
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center text-white">
-      {/* Backgrounds */}
-      <video autoPlay loop muted playsInline key="light-video" className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10" src="/auth/atrium-bg-light.mp4" />
-      <video autoPlay loop muted playsInline key="dark-video" className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10" src="/auth/atrium-bg-dark.mp4" />
+    // Conditionally apply the correct background image class
+    <main className={`${mainClass} ${theme === 'dark' ? "bg-[url('/auth/atrium-bg-dark-poster.jpg')]" : "bg-[url('/auth/atrium-bg-light-poster.jpg')]"}`}>
 
+      {/* Video elements are now overlays and can load in the background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        key="light-video"
+        className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10"
+        src="/auth/atrium-bg-light.mp4"
+      />
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        key="dark-video"
+        className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10"
+        src="/auth/atrium-bg-dark.mp4"
+      />
+
+      {/* The rest of the form component... */}
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
         <div className="text-center">
+          {/* Make sure 'headingSignUp' and 'subheadingSignUp' are available in 'LoginPage' translations or adjust t() source */}
           <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignUp')}</h1>
           <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignUp')}</p>
         </div>
@@ -85,7 +114,6 @@ export default function SignUpPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Form fields are the same as login page */}
           <div className="space-y-4">
             <div className="relative">
               <input id="email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="peer h-12 w-full border-b-2 border-gray-400 bg-transparent text-white placeholder-transparent focus:outline-none focus:border-blue-400" placeholder="email@example.com" />

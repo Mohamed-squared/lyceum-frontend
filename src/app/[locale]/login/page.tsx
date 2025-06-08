@@ -1,8 +1,11 @@
+// src/app/[locale]/login/page.tsx
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Import useEffect
+import { useTheme } from 'next-themes'; // Import useTheme
 import { useTranslations } from 'next-intl';
-import { useRouter, Link } from '@/navigation'; // Using next-intl's Link
+import { useRouter, Link } from '@/navigation';
 import { motion } from 'framer-motion';
 import { FiMail, FiLock, FiAlertCircle } from 'react-icons/fi';
 import { FaGoogle } from 'react-icons/fa';
@@ -13,6 +16,13 @@ export default function LoginPage() {
   const t = useTranslations('LoginPage');
   const router = useRouter();
   const supabase = useSupabase();
+  const { theme } = useTheme(); // Get the current theme
+
+  // This state is crucial to prevent hydration mismatch errors.
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,19 +34,9 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      setError(error.message);
-    } else {
-      router.push('/');
-      router.refresh();
-    }
-
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) { setError(error.message); }
+    else { router.push('/'); router.refresh(); }
     setIsLoading(false);
   };
 
@@ -44,26 +44,50 @@ export default function LoginPage() {
     setIsGoogleLoading(true);
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
+      options: { redirectTo: `${location.origin}/auth/callback` },
     });
   };
 
-  // ... (variants are the same) ...
+  // Define the base class for the main container
+  const mainClass = `relative flex min-h-screen flex-col items-center justify-center text-white bg-cover bg-center`;
+
+  // Don't render anything on the server if it depends on the theme
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center text-white">
-      {/* Backgrounds */}
-      <video autoPlay loop muted playsInline key="light-video" className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10" src="/auth/atrium-bg-light.mp4" />
-      <video autoPlay loop muted playsInline key="dark-video" className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10" src="/auth/atrium-bg-dark.mp4" />
+    // Conditionally apply the correct background image class
+    <main className={`${mainClass} ${theme === 'dark' ? "bg-[url('/auth/atrium-bg-dark-poster.jpg')]" : "bg-[url('/auth/atrium-bg-light-poster.jpg')]"}`}>
 
+      {/* Video elements are now overlays and can load in the background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        key="light-video"
+        className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10"
+        src="/auth/atrium-bg-light.mp4"
+      />
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        key="dark-video"
+        className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10"
+        src="/auth/atrium-bg-dark.mp4"
+      />
+
+      {/* The rest of the form component... */}
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
+        {/* ...all other form content... (no changes here) */}
         <div className="text-center">
           <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignIn')}</h1>
           <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignIn')}</p>
         </div>
-
+        {/* ...etc... */}
         {error && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center p-3 space-x-2 text-sm text-center text-red-200 bg-red-800/50 rounded-lg">
             <FiAlertCircle className="flex-shrink-0 w-5 h-5" />
