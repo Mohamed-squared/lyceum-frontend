@@ -1,7 +1,7 @@
 {
   "HomePage": {
-    "title": "[tr] Welcome to Lyceum",
-    "subtitle": "[tr] Your AI-Powered Learning Platform"
+    "title": "Lyceum'a Hoş Geldiniz",
+    "subtitle": "Yapay Zeka Destekli Öğrenme Platformunuz"
   },
   "Navbar": {
     "logoText": "Lyceum",
@@ -10,74 +10,74 @@
     "aiChat": "AI Sohbet",
     "login": "Giriş Yap",
     "signUp": "Kaydol",
-    "about": "[tr] About Us",
-    "contact": "[tr] Contact"
+    "about": "Hakkımızda",
+    "contact": "İletişim"
   },
   "HeroSection": {
-    "title": "[tr] Unlock Your Potential",
-    "subtitle": "[tr] Join Lyceum and start your personalized learning journey today.",
-    "ctaButton": "[tr] Get Started for Free"
+    "title": "Potansiyelinizi Ortaya Çıkarın",
+    "subtitle": "Lyceum'a katılın ve kişiselleştirilmiş öğrenme yolculuğunuza bugün başlayın.",
+    "ctaButton": "Ücretsiz Başlayın"
   },
   "WhyLyceumSection": {
-    "title": "[tr] Tired of One-Size-Fits-All Learning?",
+    "title": "Tek Tip Öğrenmeden Sıkıldınız mı?",
     "problems": {
       "item1": {
-        "problem": "[tr] Ineffective Cramming",
-        "solution": "[tr] Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize."
+        "problem": "Etkisiz Ezbercilik",
+        "solution": "Lyceum, TestGen ile hedefe yönelik pratik sunarak konuları sadece ezberlemenizi değil, derinlemesine anlamanızı sağlar."
       },
       "item2": {
-        "problem": "[tr] Passive Studying",
-        "solution": "[tr] Engage actively with AI-powered tools and interactive courses that adapt to your learning style."
+        "problem": "Pasif Çalışma",
+        "solution": "Öğrenme tarzınıza uyum sağlayan yapay zeka destekli araçlar ve interaktif kurslarla aktif olarak etkileşim kurun."
       },
       "item3": {
-        "problem": "[tr] Lack of Personalization",
-        "solution": "[tr] Our platform tailors learning paths and content, focusing on your specific needs and goals."
+        "problem": "Kişiselleştirme Eksikliği",
+        "solution": "Platformumuz, özel ihtiyaçlarınıza ve hedeflerinize odaklanarak öğrenme yollarını ve içeriği size özel olarak düzenler."
       }
     }
   },
   "FeaturesSection": {
-    "title": "[tr] Your All-In-One Learning Supercharger.",
+    "title": "Hepsi Bir Arada Öğrenme Güçlendiriciniz.",
     "features": {
       "item1": {
-        "name": "[tr] TestGen Suite",
-        "description": "[tr] Generate adaptive quizzes and mock exams from any material to master topics effectively."
+        "name": "TestGen Paketi",
+        "description": "Konuları etkili bir şekilde öğrenmek için herhangi bir materyalden uyarlanabilir testler ve deneme sınavları oluşturun."
       },
       "item2": {
-        "name": "[tr] Courses Platform",
-        "description": "[tr] Access a library of expertly crafted courses across various subjects, designed for deep understanding."
+        "name": "Kurs Platformu",
+        "description": "Derinlemesine anlama için tasarlanmış, çeşitli konularda uzmanlarca hazırlanmış kurs kütüphanesine erişin."
       },
       "item3": {
-        "name": "[tr] AI-Powered Tools",
-        "description": "[tr] Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency."
+        "name": "Yapay Zeka Destekli Araçlar",
+        "description": "Çalışma verimliliğinizi artırmak için akıllı özetler, bilgi kartı oluşturma ve kavram açıklayıcılardan yararlanın."
       },
       "item4": {
-        "name": "[tr] AI Chat Studio (Lyra)",
-        "description": "[tr] Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime."
+        "name": "Yapay Zeka Sohbet Stüdyosu (Lyra)",
+        "description": "Kişisel yapay zeka öğretmeniniz Lyra ile sohbet ederek anında yardım alın ve istediğiniz zaman yönlendirmeli öğrenimden faydalanın."
       },
       "item5": {
-        "name": "[tr] Personalized Dashboards",
-        "description": "[tr] Track your progress, identify strengths and weaknesses, and get tailored recommendations."
+        "name": "Kişiselleştirilmiş Panolar",
+        "description": "İlerlemenizi takip edin, güçlü ve zayıf yönlerinizi belirleyin ve size özel öneriler alın."
       },
       "item6": {
-        "name": "[tr] Gamified Learning Paths",
-        "description": "[tr] Earn points, badges, and climb leaderboards as you achieve your learning milestones."
+        "name": "Oyunlaştırılmış Öğrenme Yolları",
+        "description": "Öğrenme hedeflerinize ulaştıkça puanlar, rozetler kazanın ve liderlik tablolarında yükselin."
       }
     }
   },
   "HowItWorksSection": {
-    "title": "[tr] Embark on Your Learning Journey in 3 Steps.",
+    "title": "Öğrenme Yolculuğunuza 3 Adımda Başlayın.",
     "steps": {
       "item1": {
-        "title": "[tr] Sign Up & Personalize",
-        "description": "[tr] Create your free account and tell us your learning goals to tailor your Lyceum experience."
+        "title": "Kaydolun ve Kişiselleştirin",
+        "description": "Ücretsiz hesabınızı oluşturun ve Lyceum deneyiminizi size özel hale getirmek için öğrenme hedeflerinizi bize bildirin."
       },
       "item2": {
-        "title": "[tr] Explore & Learn",
-        "description": "[tr] Dive into AI-generated tests, interactive courses, and utilize our smart study tools at your own pace."
+        "title": "Keşfedin ve Öğrenin",
+        "description": "Yapay zeka tarafından oluşturulan testlere, interaktif kurslara dalın ve akıllı çalışma araçlarımızı kendi hızınızda kullanın."
       },
       "item3": {
-        "title": "[tr] Achieve & Grow",
-        "description": "[tr] Track your progress, master new skills, and unlock your full academic potential with Lyceum."
+        "title": "Başarın ve Gelişin",
+        "description": "İlerlemenizi takip edin, yeni becerilerde ustalaşın ve Lyceum ile tüm akademik potansiyelinizi ortaya çıkarın."
       }
     }
   }

@@ -1,7 +1,7 @@
 {
   "HomePage": {
-    "title": "[de] Welcome to Lyceum",
-    "subtitle": "[de] Your AI-Powered Learning Platform"
+    "title": "Willkommen bei Lyceum",
+    "subtitle": "Ihre KI-gestützte Lernplattform"
   },
   "Navbar": {
     "logoText": "Lyceum",
@@ -10,74 +10,74 @@
     "aiChat": "KI-Chat",
     "login": "Anmelden",
     "signUp": "Registrieren",
-    "about": "[de] About Us",
-    "contact": "[de] Contact"
+    "about": "Über uns",
+    "contact": "Kontakt"
   },
   "HeroSection": {
-    "title": "[de] Unlock Your Potential",
-    "subtitle": "[de] Join Lyceum and start your personalized learning journey today.",
-    "ctaButton": "[de] Get Started for Free"
+    "title": "Entfalten Sie Ihr Potenzial",
+    "subtitle": "Treten Sie Lyceum bei und beginnen Sie noch heute Ihre personalisierte Lernreise.",
+    "ctaButton": "Kostenlos starten"
   },
   "WhyLyceumSection": {
-    "title": "[de] Tired of One-Size-Fits-All Learning?",
+    "title": "Haben Sie genug von Einheitslösungen beim Lernen?",
     "problems": {
       "item1": {
-        "problem": "[de] Ineffective Cramming",
-        "solution": "[de] Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize."
+        "problem": "Ineffektives Pauken",
+        "solution": "Lyceum bietet gezieltes Üben mit TestGen, um sicherzustellen, dass Sie Konzepte tiefgreifend verstehen und nicht nur auswendig lernen."
       },
       "item2": {
-        "problem": "[de] Passive Studying",
-        "solution": "[de] Engage actively with AI-powered tools and interactive courses that adapt to your learning style."
+        "problem": "Passives Lernen",
+        "solution": "Interagieren Sie aktiv mit KI-gestützten Werkzeugen und interaktiven Kursen, die sich an Ihren Lernstil anpassen."
       },
       "item3": {
-        "problem": "[de] Lack of Personalization",
-        "solution": "[de] Our platform tailors learning paths and content, focusing on your specific needs and goals."
+        "problem": "Mangelnde Personalisierung",
+        "solution": "Unsere Plattform schneidet Lernpfade und Inhalte individuell zu und konzentriert sich auf Ihre spezifischen Bedürfnisse und Ziele."
       }
     }
   },
   "FeaturesSection": {
-    "title": "[de] Your All-In-One Learning Supercharger.",
+    "title": "Ihr All-in-One Lern-Booster.",
     "features": {
       "item1": {
-        "name": "[de] TestGen Suite",
-        "description": "[de] Generate adaptive quizzes and mock exams from any material to master topics effectively."
+        "name": "TestGen Suite",
+        "description": "Erstellen Sie adaptive Quizze und Probeexamen aus beliebigem Material, um Themen effektiv zu meistern."
       },
       "item2": {
-        "name": "[de] Courses Platform",
-        "description": "[de] Access a library of expertly crafted courses across various subjects, designed for deep understanding."
+        "name": "Kursplattform",
+        "description": "Greifen Sie auf eine Bibliothek von fachmännisch erstellten Kursen zu verschiedenen Themen zu, die für ein tiefes Verständnis konzipiert sind."
       },
       "item3": {
-        "name": "[de] AI-Powered Tools",
-        "description": "[de] Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency."
+        "name": "KI-gestützte Werkzeuge",
+        "description": "Nutzen Sie intelligente Zusammenfassungen, die Erstellung von Lernkarten und Konzepterklärungen, um Ihre Lerneffizienz zu steigern."
       },
       "item4": {
-        "name": "[de] AI Chat Studio (Lyra)",
-        "description": "[de] Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime."
+        "name": "KI-Chat-Studio (Lyra)",
+        "description": "Unterhalten Sie sich mit Lyra, Ihrem persönlichen KI-Tutor, für sofortige Hilfe und geführtes Lernen jederzeit."
       },
       "item5": {
-        "name": "[de] Personalized Dashboards",
-        "description": "[de] Track your progress, identify strengths and weaknesses, and get tailored recommendations."
+        "name": "Personalisierte Dashboards",
+        "description": "Verfolgen Sie Ihren Fortschritt, identifizieren Sie Stärken und Schwächen und erhalten Sie maßgeschneiderte Empfehlungen."
       },
       "item6": {
-        "name": "[de] Gamified Learning Paths",
-        "description": "[de] Earn points, badges, and climb leaderboards as you achieve your learning milestones."
+        "name": "Gamifizierte Lernpfade",
+        "description": "Sammeln Sie Punkte, Abzeichen und erklimmen Sie die Bestenlisten, während Sie Ihre Lernmeilensteine erreichen."
       }
     }
   },
   "HowItWorksSection": {
-    "title": "[de] Embark on Your Learning Journey in 3 Steps.",
+    "title": "Beginnen Sie Ihre Lernreise in 3 Schritten.",
     "steps": {
       "item1": {
-        "title": "[de] Sign Up & Personalize",
-        "description": "[de] Create your free account and tell us your learning goals to tailor your Lyceum experience."
+        "title": "Anmelden & Personalisieren",
+        "description": "Erstellen Sie Ihr kostenloses Konto und teilen Sie uns Ihre Lernziele mit, um Ihre Lyceum-Erfahrung individuell anzupassen."
       },
       "item2": {
-        "title": "[de] Explore & Learn",
-        "description": "[de] Dive into AI-generated tests, interactive courses, and utilize our smart study tools at your own pace."
+        "title": "Entdecken & Lernen",
+        "description": "Tauchen Sie ein in KI-generierte Tests, interaktive Kurse und nutzen Sie unsere intelligenten Lernwerkzeuge in Ihrem eigenen Tempo."
       },
       "item3": {
-        "title": "[de] Achieve & Grow",
-        "description": "[de] Track your progress, master new skills, and unlock your full academic potential with Lyceum."
+        "title": "Erreichen & Wachsen",
+        "description": "Verfolgen Sie Ihren Fortschritt, meistern Sie neue Fähigkeiten und entfalten Sie Ihr volles akademisches Potenzial mit Lyceum."
       }
     }
   }

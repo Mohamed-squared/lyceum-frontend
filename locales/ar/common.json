@@ -1,83 +1,83 @@
 {
   "HomePage": {
-    "title": "[ar] Welcome to Lyceum",
-    "subtitle": "[ar] Your AI-Powered Learning Platform"
+    "title": "مرحبًا بك في ليسيوم",
+    "subtitle": "منصتك التعليمية المدعومة بالذكاء الاصطناعي"
   },
   "Navbar": {
-    "logoText": "Lyceum",
+    "logoText": "ليسيوم",
     "features": "الميزات",
     "courses": "الدورات",
     "aiChat": "الدردشة بالذكاء الاصطناعي",
     "login": "تسجيل الدخول",
     "signUp": "التسجيل",
-    "about": "[ar] About Us",
-    "contact": "[ar] Contact"
+    "about": "عنا",
+    "contact": "اتصل بنا"
   },
   "HeroSection": {
-    "title": "[ar] Unlock Your Potential",
-    "subtitle": "[ar] Join Lyceum and start your personalized learning journey today.",
-    "ctaButton": "[ar] Get Started for Free"
+    "title": "أطلق العنان لإمكانياتك",
+    "subtitle": "انضم إلى ليسيوم وابدأ رحلتك التعليمية المخصصة اليوم.",
+    "ctaButton": "ابدأ مجانًا"
   },
   "WhyLyceumSection": {
-    "title": "[ar] Tired of One-Size-Fits-All Learning?",
+    "title": "هل سئمت من التعليم الموحد الذي لا يناسب الجميع؟",
     "problems": {
       "item1": {
-        "problem": "[ar] Ineffective Cramming",
-        "solution": "[ar] Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize."
+        "problem": "الحشو غير الفعال",
+        "solution": "يقدم ليسيوم تدريبًا موجهًا باستخدام TestGen، مما يضمن فهمك العميق للمفاهيم، وليس مجرد الحفظ."
       },
       "item2": {
-        "problem": "[ar] Passive Studying",
-        "solution": "[ar] Engage actively with AI-powered tools and interactive courses that adapt to your learning style."
+        "problem": "الدراسة السلبية",
+        "solution": "تفاعل بفعالية مع الأدوات المدعومة بالذكاء الاصطناعي والدورات التفاعلية التي تتكيف مع أسلوب تعلمك."
       },
       "item3": {
-        "problem": "[ar] Lack of Personalization",
-        "solution": "[ar] Our platform tailors learning paths and content, focusing on your specific needs and goals."
+        "problem": "نقص التخصيص",
+        "solution": "تقوم منصتنا بتخصيص مسارات التعلم والمحتوى، مع التركيز على احتياجاتك وأهدافك المحددة."
       }
     }
   },
   "FeaturesSection": {
-    "title": "[ar] Your All-In-One Learning Supercharger.",
+    "title": "أداتك المتكاملة لتعزيز تعلمك.",
     "features": {
       "item1": {
-        "name": "[ar] TestGen Suite",
-        "description": "[ar] Generate adaptive quizzes and mock exams from any material to master topics effectively."
+        "name": "مجموعة TestGen",
+        "description": "أنشئ اختبارات تكيفية وامتحانات تجريبية من أي مادة لإتقان الموضوعات بفعالية."
       },
       "item2": {
-        "name": "[ar] Courses Platform",
-        "description": "[ar] Access a library of expertly crafted courses across various subjects, designed for deep understanding."
+        "name": "منصة الدورات",
+        "description": "ادخل إلى مكتبة من الدورات المصممة بخبرة في مختلف المواضيع، والمصممة للفهم العميق."
       },
       "item3": {
-        "name": "[ar] AI-Powered Tools",
-        "description": "[ar] Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency."
+        "name": "أدوات مدعومة بالذكاء الاصطناعي",
+        "description": "استخدم الملخصات الذكية، وإنشاء البطاقات التعليمية، وشروحات المفاهيم لزيادة كفاءة دراستك."
       },
       "item4": {
-        "name": "[ar] AI Chat Studio (Lyra)",
-        "description": "[ar] Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime."
+        "name": "استوديو الدردشة بالذكاء الاصطناعي (Lyra)",
+        "description": "تحدث مع Lyra، معلمك الشخصي المدعوم بالذكاء الاصطناعي، للحصول على مساعدة فورية وتعلم موجه في أي وقت."
       },
       "item5": {
-        "name": "[ar] Personalized Dashboards",
-        "description": "[ar] Track your progress, identify strengths and weaknesses, and get tailored recommendations."
+        "name": "لوحات تحكم مخصصة",
+        "description": "تتبع تقدمك، وحدد نقاط القوة والضعف، واحصل على توصيات مخصصة."
       },
       "item6": {
-        "name": "[ar] Gamified Learning Paths",
-        "description": "[ar] Earn points, badges, and climb leaderboards as you achieve your learning milestones."
+        "name": "مسارات تعليمية قائمة على الألعاب",
+        "description": "اكسب النقاط والشارات وتصدر قوائم المتصدرين بينما تحقق أهدافك التعليمية."
       }
     }
   },
   "HowItWorksSection": {
-    "title": "[ar] Embark on Your Learning Journey in 3 Steps.",
+    "title": "انطلق في رحلتك التعليمية في 3 خطوات.",
     "steps": {
       "item1": {
-        "title": "[ar] Sign Up & Personalize",
-        "description": "[ar] Create your free account and tell us your learning goals to tailor your Lyceum experience."
+        "title": "سجل وخصص تجربتك",
+        "description": "أنشئ حسابك المجاني وأخبرنا بأهدافك التعليمية لتخصيص تجربتك في ليسيوم."
       },
       "item2": {
-        "title": "[ar] Explore & Learn",
-        "description": "[ar] Dive into AI-generated tests, interactive courses, and utilize our smart study tools at your own pace."
+        "title": "استكشف وتعلم",
+        "description": "انغمس في الاختبارات التي ينشئها الذكاء الاصطناعي والدورات التفاعلية واستخدم أدواتنا الدراسية الذكية بالسرعة التي تناسبك."
       },
       "item3": {
-        "title": "[ar] Achieve & Grow",
-        "description": "[ar] Track your progress, master new skills, and unlock your full academic potential with Lyceum."
+        "title": "حقق وانمُ",
+        "description": "تتبع تقدمك، وأتقن مهارات جديدة، وأطلق العنان لإمكانياتك الأكاديمية الكاملة مع ليسيوم."
       }
     }
   }
