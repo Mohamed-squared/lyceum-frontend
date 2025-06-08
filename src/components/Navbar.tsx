@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'; // Import useEffect
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
+import { ThemeSwitcher } from './ThemeSwitcher';
 import Image from 'next/image'; // Import Next Image
 
 const Navbar = () => {
@@ -84,11 +85,13 @@ const Navbar = () => {
             >
               {t('signUp')}
             </Link>
+            <ThemeSwitcher />
             <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button & Language Switcher */}
           <div className="md:hidden flex items-center">
+            <ThemeSwitcher />
             <LanguageSwitcher /> {/* Moved here for visibility next to menu button */}
             <button
               onClick={() => setIsOpen(!isOpen)}

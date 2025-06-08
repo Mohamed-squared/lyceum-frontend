@@ -1,15 +1,17 @@
 // src/components/FeaturesSection.tsx
+'use client';
+
+import { useTranslations } from 'next-intl';
 
 // Generic Placeholder Icon Component (can be imported if centralized)
 const PlaceholderIcon = ({ className }: { className?: string }) => (
   <svg
-    className={`w-10 h-10 text-lyceum-primary-dark mb-3 ${className}`} // Icon color primary-dark as per spec
+    className={`w-10 h-10 text-lyceum-primary-dark dark:text-lyceum-accent mb-3 ${className}`} // Adjusted for dark mode
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* This is a generic shape; replace with actual icons for each feature */}
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -19,69 +21,44 @@ const PlaceholderIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-interface FeatureItem {
-  id: number;
-  name: string;
-  description: string;
-  // icon?: React.ElementType; // Future: Pass specific icons from react-icons
-}
-
-const featureItems: FeatureItem[] = [
-  {
-    id: 1,
-    name: "TestGen Suite",
-    description: "Generate adaptive quizzes and mock exams from any material to master topics effectively.",
-  },
-  {
-    id: 2,
-    name: "Courses Platform",
-    description: "Access a library of expertly crafted courses across various subjects, designed for deep understanding.",
-  },
-  {
-    id: 3,
-    name: "AI-Powered Tools",
-    description: "Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency.",
-  },
-  {
-    id: 4,
-    name: "AI Chat Studio (Lyra)",
-    description: "Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime.",
-  },
-  {
-    id: 5,
-    name: "Personalized Dashboards",
-    description: "Track your progress, identify strengths and weaknesses, and get tailored recommendations.",
-  },
-  {
-    id: 6,
-    name: "Gamified Learning Paths",
-    description: "Earn points, badges, and climb leaderboards as you achieve your learning milestones.",
-  },
-];
+// Interface no longer needed here due to direct key usage
+// interface FeatureItem {
+//   id: number;
+//   nameKey: string;
+//   descriptionKey: string;
+// }
 
 const FeaturesSection = () => {
+  const t = useTranslations('FeaturesSection');
+  const tFeatures = useTranslations('FeaturesSection.features');
+
+  const featureItems = [
+    { id: 1, nameKey: "item1.name", descriptionKey: "item1.description" },
+    { id: 2, nameKey: "item2.name", descriptionKey: "item2.description" },
+    { id: 3, nameKey: "item3.name", descriptionKey: "item3.description" },
+    { id: 4, nameKey: "item4.name", descriptionKey: "item4.description" },
+    { id: 5, nameKey: "item5.name", descriptionKey: "item5.description" },
+    { id: 6, nameKey: "item6.name", descriptionKey: "item6.description" },
+  ];
+
   return (
-    <section className="py-16 md:py-24 bg-slate-50"> {/* Slightly different background */}
+    <section className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900"> {/* Adjusted for dark mode */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-lyceum-primary-dark text-center mb-12 md:mb-16">
-          Your All-In-One Learning Supercharger.
+        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-lyceum-primary-dark dark:text-white text-center mb-12 md:mb-16">
+          {t('title')}
         </h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {featureItems.map((feature) => (
             <div
               key={feature.id}
-              className="bg-lyceum-bg-historic p-6 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out"
+              className="bg-lyceum-bg-historic dark:bg-gray-800 p-6 rounded-lg shadow-sm hover:shadow-xl transition-shadow duration-300 ease-in-out" // Adjusted for dark mode
             >
-              {/* Icon Placeholder */}
-              {/* TODO: Replace PlaceholderIcon with specific icons from react-icons
-                  Example: import { FiZap, FiBookOpen, FiCpu, FiMessageSquare, FiTrendingUp, FiAward } from 'react-icons/fi';
-              */}
-              <PlaceholderIcon />
-              <h3 className="text-xl font-sans font-semibold text-lyceum-primary-dark mb-2">
-                {feature.name}
+              <PlaceholderIcon /> {/* Consider replacing with actual icons */}
+              <h3 className="text-xl font-sans font-semibold text-lyceum-primary-dark dark:text-gray-100 mb-2">
+                {tFeatures(feature.nameKey)}
               </h3>
-              <p className="text-gray-600 font-sans text-sm">
-                {feature.description}
+              <p className="text-gray-600 dark:text-gray-300 font-sans text-sm">
+                {tFeatures(feature.descriptionKey)}
               </p>
             </div>
           ))}

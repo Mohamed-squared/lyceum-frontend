@@ -4,8 +4,81 @@
     "subtitle": "Your AI-Powered Learning Platform"
   },
   "Navbar": {
+    "logoText": "Lyceum",
+    "features": "Features",
+    "courses": "Courses",
+    "aiChat": "AI Chat",
     "login": "Login",
-    "signup": "Sign Up",
-    "about": "About Us"
+    "signUp": "Sign Up",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "HeroSection": {
+    "title": "Unlock Your Potential",
+    "subtitle": "Join Lyceum and start your personalized learning journey today.",
+    "ctaButton": "Get Started for Free"
+  },
+  "WhyLyceumSection": {
+    "title": "Tired of One-Size-Fits-All Learning?",
+    "problems": {
+      "item1": {
+        "problem": "Ineffective Cramming",
+        "solution": "Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize."
+      },
+      "item2": {
+        "problem": "Passive Studying",
+        "solution": "Engage actively with AI-powered tools and interactive courses that adapt to your learning style."
+      },
+      "item3": {
+        "problem": "Lack of Personalization",
+        "solution": "Our platform tailors learning paths and content, focusing on your specific needs and goals."
+      }
+    }
+  },
+  "FeaturesSection": {
+    "title": "Your All-In-One Learning Supercharger.",
+    "features": {
+      "item1": {
+        "name": "TestGen Suite",
+        "description": "Generate adaptive quizzes and mock exams from any material to master topics effectively."
+      },
+      "item2": {
+        "name": "Courses Platform",
+        "description": "Access a library of expertly crafted courses across various subjects, designed for deep understanding."
+      },
+      "item3": {
+        "name": "AI-Powered Tools",
+        "description": "Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency."
+      },
+      "item4": {
+        "name": "AI Chat Studio (Lyra)",
+        "description": "Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime."
+      },
+      "item5": {
+        "name": "Personalized Dashboards",
+        "description": "Track your progress, identify strengths and weaknesses, and get tailored recommendations."
+      },
+      "item6": {
+        "name": "Gamified Learning Paths",
+        "description": "Earn points, badges, and climb leaderboards as you achieve your learning milestones."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "Embark on Your Learning Journey in 3 Steps.",
+    "steps": {
+      "item1": {
+        "title": "Sign Up & Personalize",
+        "description": "Create your free account and tell us your learning goals to tailor your Lyceum experience."
+      },
+      "item2": {
+        "title": "Explore & Learn",
+        "description": "Dive into AI-generated tests, interactive courses, and utilize our smart study tools at your own pace."
+      },
+      "item3": {
+        "title": "Achieve & Grow",
+        "description": "Track your progress, master new skills, and unlock your full academic potential with Lyceum."
+      }
+    }
   }
 }

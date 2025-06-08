@@ -1,10 +1,84 @@
 {
-  "navbar": {
+  "HomePage": {
+    "title": "[tr] Welcome to Lyceum",
+    "subtitle": "[tr] Your AI-Powered Learning Platform"
+  },
+  "Navbar": {
+    "logoText": "Lyceum",
     "features": "Özellikler",
     "courses": "Kurslar",
     "aiChat": "AI Sohbet",
     "login": "Giriş Yap",
     "signUp": "Kaydol",
-    "logoText": "Lyceum"
+    "about": "[tr] About Us",
+    "contact": "[tr] Contact"
+  },
+  "HeroSection": {
+    "title": "[tr] Unlock Your Potential",
+    "subtitle": "[tr] Join Lyceum and start your personalized learning journey today.",
+    "ctaButton": "[tr] Get Started for Free"
+  },
+  "WhyLyceumSection": {
+    "title": "[tr] Tired of One-Size-Fits-All Learning?",
+    "problems": {
+      "item1": {
+        "problem": "[tr] Ineffective Cramming",
+        "solution": "[tr] Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize."
+      },
+      "item2": {
+        "problem": "[tr] Passive Studying",
+        "solution": "[tr] Engage actively with AI-powered tools and interactive courses that adapt to your learning style."
+      },
+      "item3": {
+        "problem": "[tr] Lack of Personalization",
+        "solution": "[tr] Our platform tailors learning paths and content, focusing on your specific needs and goals."
+      }
+    }
+  },
+  "FeaturesSection": {
+    "title": "[tr] Your All-In-One Learning Supercharger.",
+    "features": {
+      "item1": {
+        "name": "[tr] TestGen Suite",
+        "description": "[tr] Generate adaptive quizzes and mock exams from any material to master topics effectively."
+      },
+      "item2": {
+        "name": "[tr] Courses Platform",
+        "description": "[tr] Access a library of expertly crafted courses across various subjects, designed for deep understanding."
+      },
+      "item3": {
+        "name": "[tr] AI-Powered Tools",
+        "description": "[tr] Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency."
+      },
+      "item4": {
+        "name": "[tr] AI Chat Studio (Lyra)",
+        "description": "[tr] Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime."
+      },
+      "item5": {
+        "name": "[tr] Personalized Dashboards",
+        "description": "[tr] Track your progress, identify strengths and weaknesses, and get tailored recommendations."
+      },
+      "item6": {
+        "name": "[tr] Gamified Learning Paths",
+        "description": "[tr] Earn points, badges, and climb leaderboards as you achieve your learning milestones."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "[tr] Embark on Your Learning Journey in 3 Steps.",
+    "steps": {
+      "item1": {
+        "title": "[tr] Sign Up & Personalize",
+        "description": "[tr] Create your free account and tell us your learning goals to tailor your Lyceum experience."
+      },
+      "item2": {
+        "title": "[tr] Explore & Learn",
+        "description": "[tr] Dive into AI-generated tests, interactive courses, and utilize our smart study tools at your own pace."
+      },
+      "item3": {
+        "title": "[tr] Achieve & Grow",
+        "description": "[tr] Track your progress, master new skills, and unlock your full academic potential with Lyceum."
+      }
+    }
   }
 }

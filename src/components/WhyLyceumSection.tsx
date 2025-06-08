@@ -1,6 +1,9 @@
 // src/components/WhyLyceumSection.tsx
+'use client';
 
-// Generic Placeholder Icon Component
+import { useTranslations } from 'next-intl';
+
+// Generic Placeholder Icon Component (can be kept or removed if not used by final design)
 const PlaceholderIcon = ({ className }: { className?: string }) => (
   <svg
     className={`w-12 h-12 text-lyceum-accent mb-4 mx-auto ${className}`}
@@ -9,7 +12,6 @@ const PlaceholderIcon = ({ className }: { className?: string }) => (
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
   >
-    {/* This is a generic shape; replace with actual icons for each feature */}
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -19,52 +21,38 @@ const PlaceholderIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-interface ProblemSolutionItem {
-  id: number;
-  problem: string;
-  solution: string;
-  // icon?: React.ElementType; // Future: Pass specific icons from react-icons
-}
-
-const problemSolutionItems: ProblemSolutionItem[] = [
-  {
-    id: 1,
-    problem: "Ineffective Cramming",
-    solution: "Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize.",
-  },
-  {
-    id: 2,
-    problem: "Passive Studying",
-    solution: "Engage actively with AI-powered tools and interactive courses that adapt to your learning style.",
-  },
-  {
-    id: 3,
-    problem: "Lack of Personalization",
-    solution: "Our platform tailors learning paths and content, focusing on your specific needs and goals.",
-  },
-];
+// The interface is no longer needed here as items are defined directly with keys
+// interface ProblemSolutionItem {
+//   id: number;
+//   problemKey: string; // Key for translation
+//   solutionKey: string; // Key for translation
+// }
 
 const WhyLyceumSection = () => {
+  const t = useTranslations('WhyLyceumSection');
+  const tProblems = useTranslations('WhyLyceumSection.problems');
+
+  const problemSolutionItems = [
+    { id: 1, problemKey: "item1.problem", solutionKey: "item1.solution" },
+    { id: 2, problemKey: "item2.problem", solutionKey: "item2.solution" },
+    { id: 3, problemKey: "item3.problem", solutionKey: "item3.solution" },
+  ];
+
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white dark:bg-gray-800"> {/* Added dark mode bg */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-lyceum-primary-dark text-center mb-12 md:mb-16">
-          Tired of One-Size-Fits-All Learning?
+        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-lyceum-primary-dark dark:text-white text-center mb-12 md:mb-16">
+          {t('title')}
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12 text-center">
           {problemSolutionItems.map((item) => (
             <div key={item.id} className="p-6">
-              {/* Icon Placeholder */}
-              {/* TODO: Replace PlaceholderIcon with specific icons from react-icons later
-                  Example: import { FaBrain, FaUserClock, FaBullseye } from 'react-icons/fa';
-                  Then use <FaBrain className="w-12 h-12 text-lyceum-accent mb-4 mx-auto" />
-              */}
-              <PlaceholderIcon />
-              <h3 className="text-xl font-sans font-semibold text-lyceum-primary-dark mb-2">
-                {item.problem}
+              <PlaceholderIcon /> {/* Consider replacing with actual icons */}
+              <h3 className="text-xl font-sans font-semibold text-lyceum-primary-dark dark:text-gray-100 mb-2">
+                {tProblems(item.problemKey)}
               </h3>
-              <p className="text-gray-600 font-sans">
-                {item.solution}
+              <p className="text-gray-600 dark:text-gray-300 font-sans">
+                {tProblems(item.solutionKey)}
               </p>
             </div>
           ))}

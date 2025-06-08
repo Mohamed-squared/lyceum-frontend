@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter, Lora } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { ThemeProvider } from '@/components/ThemeProvider'; // Import the new provider
 
 // This is the main application layout. It renders the <html> and <body> tags.
 
@@ -34,11 +35,18 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning> {/* Add suppressHydrationWarning */}
       <body className={`${inter.variable} ${lora.variable} font-sans`}>
-        <NextIntlClientProvider messages={messages}>
-          {children}
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
