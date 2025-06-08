@@ -1,0 +1,80 @@
+Folder PATH listing
+Volume serial number is FA07-D261
+C:.
+¦   .gitignore
+¦   eslint.config.mjs
+¦   jest.config.js
+¦   jest.setup.js
+¦   next-env.d.ts
+¦   next.config.mjs
+¦   package-lock.json
+¦   package.json
+¦   postcss.config.mjs
+¦   README.md
+¦   tailwind.config.js
+¦   tailwind.config.ts
+¦   tree.txt
+¦   tsconfig.jest.json
+¦   tsconfig.json
+¦   
++---locales
+¦   +---ar
+¦   ¦       common.json
+¦   ¦       
+¦   +---de
+¦   ¦       common.json
+¦   ¦       
+¦   +---en
+¦   ¦       common.json
+¦   ¦       
+¦   +---tr
+¦           common.json
+¦           
++---node_modules
+¦   +---next
+¦       +---dist
+¦           +---esm
+¦               +---server
++---public
+¦       assets.json
+¦       file.svg
+¦       globe.svg
+¦       next.svg
+¦       vercel.svg
+¦       window.svg
+¦       
++---src
+    ¦   i18n-config.ts
+    ¦   i18n.ts
+    ¦   middleware.ts
+    ¦   navigation.ts
+    ¦   
+    +---app
+    ¦   ¦   favicon.ico
+    ¦   ¦   file.svg
+    ¦   ¦   globals.css
+    ¦   ¦   layout.tsx
+    ¦   ¦   
+    ¦   +---[locale]
+    ¦           layout.tsx
+    ¦           page.tsx
+    ¦           
+    +---components
+        ¦   FeaturesSection.tsx
+        ¦   FinalCTASection.tsx
+        ¦   Footer.tsx
+        ¦   HeroSection.tsx
+        ¦   HowItWorksSection.tsx
+        ¦   LanguageSwitcher.tsx
+        ¦   Logo.tsx
+        ¦   Navbar.tsx
+        ¦   ThemeProvider.tsx
+        ¦   ThemeSwitcher.tsx
+        ¦   VisualShowcaseSection.tsx
+        ¦   WhyLyceumSection.tsx
+        ¦   
+        +---__tests__
+                LanguageSwitcher.test.tsx
+                Navbar.test.tsx
+                VisualShowcaseSection.test.tsx
+                
