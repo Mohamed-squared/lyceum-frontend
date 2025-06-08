@@ -62,6 +62,7 @@ export default function LoginPage() {
         muted
         playsInline
         key="light-video"
+  poster="/auth/atrium-bg-light-poster.jpg"
         className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10"
         src="/auth/atrium-bg-light.mp4"
       />
@@ -71,6 +72,7 @@ export default function LoginPage() {
         muted
         playsInline
         key="dark-video"
+  poster="/auth/atrium-bg-dark-poster.jpg"
         className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10"
         src="/auth/atrium-bg-dark.mp4"
       />
