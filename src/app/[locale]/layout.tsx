@@ -3,7 +3,8 @@ import type { Metadata } from 'next';
 import { Inter, Lora } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { ThemeProvider } from '@/components/ThemeProvider'; // Import the new provider
+import { ThemeProvider } from '@/components/ThemeProvider';
+import SupabaseProvider from '@/app/supabase-provider'; // Added import
 
 // This is the main application layout. It renders the <html> and <body> tags.
 
@@ -35,18 +36,20 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} suppressHydrationWarning> {/* Add suppressHydrationWarning */}
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${inter.variable} ${lora.variable} font-sans`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <SupabaseProvider> {/* SupabaseProvider wraps ThemeProvider */}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
