@@ -33,7 +33,7 @@ const Navbar = () => {
             <Link href="/" className="flex items-center">
               {/* THE FIX: The src prop is now a simple, static string. */}
               {/* It starts with '/' to reference the root of the `public` directory. */}
-              <Image src="/globe.svg" alt="Lyceum Logo" width={32} height={32} className="h-8 w-auto mr-2" />
+              <Image src="/file.svg" alt="Lyceum Logo" width={32} height={32} className="h-8 w-auto mr-2" />
               <span className="font-serif text-2xl font-bold text-lyceum-primary-dark dark:text-white">
                 {t('logoText')}
               </span>
