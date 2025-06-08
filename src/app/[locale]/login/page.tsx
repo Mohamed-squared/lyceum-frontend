@@ -2,8 +2,8 @@
 
 'use client';
 
-import { useState, useEffect } from 'react'; // Import useEffect
-import { useTheme } from 'next-themes'; // Import useTheme
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
 import { useRouter, Link } from '@/navigation';
 import { motion } from 'framer-motion';
@@ -16,9 +16,8 @@ export default function LoginPage() {
   const t = useTranslations('LoginPage');
   const router = useRouter();
   const supabase = useSupabase();
-  const { theme } = useTheme(); // Get the current theme
+  const { theme } = useTheme();
 
-  // This state is crucial to prevent hydration mismatch errors.
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
@@ -48,26 +47,23 @@ export default function LoginPage() {
     });
   };
 
-  // Define the base class for the main container
   const mainClass = `relative flex min-h-screen flex-col items-center justify-center text-white bg-cover bg-center`;
 
-  // Don't render anything on the server if it depends on the theme
   if (!isMounted) {
     return null;
   }
 
   return (
-    // Conditionally apply the correct background image class
     <main className={`${mainClass} ${theme === 'dark' ? "bg-[url('/auth/atrium-bg-dark-poster.jpg')]" : "bg-[url('/auth/atrium-bg-light-poster.jpg')]"}`}>
 
-      {/* Video elements are now overlays and can load in the background */}
+      {/* Video elements z-index changed from -z-10 to z-10 */}
       <video
         autoPlay
         loop
         muted
         playsInline
         key="light-video"
-        className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10"
+        className="dark:hidden fixed inset-0 w-full h-full object-cover z-10"
         src="/auth/atrium-bg-light.mp4"
       />
       <video
@@ -76,18 +72,17 @@ export default function LoginPage() {
         muted
         playsInline
         key="dark-video"
-        className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10"
+        className="hidden dark:block fixed inset-0 w-full h-full object-cover z-10"
         src="/auth/atrium-bg-dark.mp4"
       />
 
-      {/* The rest of the form component... */}
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
-        {/* ...all other form content... (no changes here) */}
+      {/* Form container z-index changed to z-20 */}
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30 z-20">
         <div className="text-center">
           <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignIn')}</h1>
           <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignIn')}</p>
         </div>
-        {/* ...etc... */}
+
         {error && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center justify-center p-3 space-x-2 text-sm text-center text-red-200 bg-red-800/50 rounded-lg">
             <FiAlertCircle className="flex-shrink-0 w-5 h-5" />
@@ -108,7 +103,6 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Form fields are the same */}
           <div className="space-y-4">
             <div className="relative">
               <input id="email" name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} className="peer h-12 w-full border-b-2 border-gray-400 bg-transparent text-white placeholder-transparent focus:outline-none focus:border-blue-400" placeholder="email@example.com" />

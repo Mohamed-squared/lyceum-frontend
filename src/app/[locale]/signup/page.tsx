@@ -2,23 +2,22 @@
 
 'use client';
 
-import { useState, useEffect } from 'react'; // Import useEffect
-import { useTheme } from 'next-themes'; // Import useTheme
+import { useState, useEffect } from 'react';
+import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
 import { useRouter, Link } from '@/navigation';
 import { motion } from 'framer-motion';
-import { FiMail, FiLock, FiAlertCircle } from 'react-icons/fi'; // Removed FiLogIn as it's not used
+import { FiMail, FiLock, FiAlertCircle } from 'react-icons/fi';
 import { FaGoogle } from 'react-icons/fa';
 import Image from 'next/image';
 import { useSupabase } from '@/app/supabase-provider';
 
 export default function SignUpPage() {
-  const t = useTranslations('LoginPage'); // Assuming 'LoginPage' has all needed translations like 'headingSignUp', 'subheadingSignUp' etc.
+  const t = useTranslations('LoginPage');
   const router = useRouter();
   const supabase = useSupabase();
-  const { theme } = useTheme(); // Get the current theme
+  const { theme } = useTheme();
 
-  // This state is crucial to prevent hydration mismatch errors.
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
@@ -37,8 +36,6 @@ export default function SignUpPage() {
     const { error } = await supabase.auth.signUp({ email, password });
     if (error) { setError(error.message); }
     else {
-      // It's better to use a more user-friendly notification system than alert()
-      // For now, keeping alert as per original logic
       alert(t('checkEmail'));
       router.push('/login');
     }
@@ -51,29 +48,25 @@ export default function SignUpPage() {
       provider: 'google',
       options: { redirectTo: `${location.origin}/auth/callback` },
     });
-    //setIsGoogleLoading(false); // Typically, the page redirects, so this might not be necessary
   };
 
-  // Define the base class for the main container
   const mainClass = `relative flex min-h-screen flex-col items-center justify-center text-white bg-cover bg-center`;
 
-  // Don't render anything on the server if it depends on the theme
   if (!isMounted) {
     return null;
   }
 
   return (
-    // Conditionally apply the correct background image class
     <main className={`${mainClass} ${theme === 'dark' ? "bg-[url('/auth/atrium-bg-dark-poster.jpg')]" : "bg-[url('/auth/atrium-bg-light-poster.jpg')]"}`}>
 
-      {/* Video elements are now overlays and can load in the background */}
+      {/* Video elements z-index changed from -z-10 to z-10 */}
       <video
         autoPlay
         loop
         muted
         playsInline
         key="light-video"
-        className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10"
+        className="dark:hidden fixed inset-0 w-full h-full object-cover z-10"
         src="/auth/atrium-bg-light.mp4"
       />
       <video
@@ -82,14 +75,13 @@ export default function SignUpPage() {
         muted
         playsInline
         key="dark-video"
-        className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10"
+        className="hidden dark:block fixed inset-0 w-full h-full object-cover z-10"
         src="/auth/atrium-bg-dark.mp4"
       />
 
-      {/* The rest of the form component... */}
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
+      {/* Form container z-index changed to z-20 */}
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30 z-20">
         <div className="text-center">
-          {/* Make sure 'headingSignUp' and 'subheadingSignUp' are available in 'LoginPage' translations or adjust t() source */}
           <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignUp')}</h1>
           <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignUp')}</p>
         </div>
