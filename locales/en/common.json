@@ -102,5 +102,19 @@
       "description": "The latest news, articles, and resources, sent to your inbox weekly."
     },
     "copyright": "© {year} Lyceum. All rights reserved."
+  },
+  "LoginPage": {
+    "headingSignIn": "Welcome Back, Scholar",
+    "subheadingSignIn": "Your journey of knowledge awaits.",
+    "headingSignUp": "Begin Your Journey",
+    "subheadingSignUp": "Join the Lyceum and unlock your potential.",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "signInButton": "Sign In",
+    "signUpButton": "Sign Up",
+    "promptSignIn": "Already a member?",
+    "signInLink": "Sign In",
+    "promptSignUp": "Not yet a member?",
+    "signUpLink": "Sign Up"
   }
 }

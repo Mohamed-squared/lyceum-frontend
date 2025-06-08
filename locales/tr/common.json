@@ -102,5 +102,19 @@
       "description": "En son haberler, makaleler ve kaynaklar haftalık olarak gelen kutunuza gönderilir."
     },
     "copyright": "© {year} Lyceum. Tüm hakları Saklıdır."
+  },
+  "LoginPage": {
+    "headingSignIn": "Tekrar Hoş Geldin, Alim",
+    "subheadingSignIn": "Bilgi yolculuğun seni bekliyor.",
+    "headingSignUp": "Yolculuğuna Başla",
+    "subheadingSignUp": "Lyceum'a katıl ve potansiyelini ortaya çıkar.",
+    "emailLabel": "E-posta Adresi",
+    "passwordLabel": "Şifre",
+    "signInButton": "Giriş Yap",
+    "signUpButton": "Kayıt Ol",
+    "promptSignIn": "Zaten üye misin?",
+    "signInLink": "Giriş Yap",
+    "promptSignUp": "Henüz üye değil misin?",
+    "signUpLink": "Kayıt Ol"
   }
 }

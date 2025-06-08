@@ -102,5 +102,19 @@
       "description": "آخر الأخبار والمقالات والموارد ، يتم إرسالها إلى بريدك الوارد أسبوعيًا."
     },
     "copyright": "© {year} ليسيوم. كل الحقوق محفوظة."
+  },
+  "LoginPage": {
+    "headingSignIn": "مرحباً بعودتك أيها العالم",
+    "subheadingSignIn": "رحلتك المعرفية في انتظارك.",
+    "headingSignUp": "ابدأ رحلتك",
+    "subheadingSignUp": "انضم إلى الليسيوم وأطلق العنان لإمكانياتك.",
+    "emailLabel": "البريد الإلكتروني",
+    "passwordLabel": "كلمة المرور",
+    "signInButton": "تسجيل الدخول",
+    "signUpButton": "إنشاء حساب",
+    "promptSignIn": "هل لديك حساب بالفعل؟",
+    "signInLink": "تسجيل الدخول",
+    "promptSignUp": "لست عضواً بعد؟",
+    "signUpLink": "إنشاء حساب"
   }
 }

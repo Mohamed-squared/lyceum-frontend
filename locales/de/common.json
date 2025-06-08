@@ -102,5 +102,19 @@
       "description": "Die neuesten Nachrichten, Artikel und Ressourcen werden wöchentlich an Ihren Posteingang gesendet."
     },
     "copyright": "© {year} Lyceum. Alle Rechte vorbehalten."
+  },
+  "LoginPage": {
+    "headingSignIn": "Willkommen zurück, Gelehrte(r)",
+    "subheadingSignIn": "Deine Reise des Wissens wartet.",
+    "headingSignUp": "Beginne deine Reise",
+    "subheadingSignUp": "Tritt dem Lyceum bei und entfalte dein Potenzial.",
+    "emailLabel": "E-Mail-Adresse",
+    "passwordLabel": "Passwort",
+    "signInButton": "Anmelden",
+    "signUpButton": "Registrieren",
+    "promptSignIn": "Bereits Mitglied?",
+    "signInLink": "Anmelden",
+    "promptSignUp": "Noch kein Mitglied?",
+    "signUpLink": "Registrieren"
   }
 }
