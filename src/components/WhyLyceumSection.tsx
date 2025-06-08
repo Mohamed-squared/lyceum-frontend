@@ -2,6 +2,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { motion } from 'framer-motion';
 
 // Generic Placeholder Icon Component (can be kept or removed if not used by final design)
 const PlaceholderIcon = ({ className }: { className?: string }) => (
@@ -28,6 +29,15 @@ const PlaceholderIcon = ({ className }: { className?: string }) => (
 //   solutionKey: string; // Key for translation
 // }
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
 const WhyLyceumSection = () => {
   const t = useTranslations('WhyLyceumSection');
   const tProblems = useTranslations('WhyLyceumSection.problems');
@@ -39,7 +49,13 @@ const WhyLyceumSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-gray-800"> {/* Added dark mode bg */}
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={sectionVariants}
+      className="py-16 md:py-24 bg-white dark:bg-gray-800" // Added dark mode bg
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl font-serif font-bold text-lyceum-primary-dark dark:text-white text-center mb-12 md:mb-16">
           {t('title')}
@@ -58,7 +74,7 @@ const WhyLyceumSection = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

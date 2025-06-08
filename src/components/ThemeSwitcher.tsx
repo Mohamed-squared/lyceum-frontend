@@ -12,8 +12,9 @@ export function ThemeSwitcher() {
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-      aria-label="Toggle theme"
+      aria-label="Toggle light and dark theme"
     >
+      <span className="sr-only">Toggle Theme</span>
       <HiSun className="h-6 w-6 hidden dark:block" />
       <HiMoon className="h-6 w-6 block dark:hidden" />
     </button>
