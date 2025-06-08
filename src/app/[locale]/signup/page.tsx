@@ -56,8 +56,8 @@ export default function SignUpPage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center text-white">
       {/* Backgrounds */}
-      <video autoPlay loop muted playsInline key="light-video" poster="/auth/atrium-bg-light-poster.jpg" className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10 bg-[url('/auth/atrium-bg-light-poster.jpg')] bg-cover" src="/auth/atrium-bg-light.mp4" />
-      <video autoPlay loop muted playsInline key="dark-video" poster="/auth/atrium-bg-dark-poster.jpg" className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10 bg-[url('/auth/atrium-bg-dark-poster.jpg')] bg-cover" src="/auth/atrium-bg-dark.mp4" />
+      <video autoPlay loop muted playsInline key="light-video" className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10" src="/auth/atrium-bg-light.mp4" />
+      <video autoPlay loop muted playsInline key="dark-video" className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10" src="/auth/atrium-bg-dark.mp4" />
 
       <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
         <div className="text-center">
