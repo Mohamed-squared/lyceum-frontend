@@ -8,6 +8,7 @@ interface FooterLink { label: string; href: AppPathnames; }
 
 export default function Footer() {
   const t = useTranslations('Footer');
+  const currentYear = new Date().getFullYear();
 
   const sections = [
     { title: t('company.title'), links: [ { label: t('company.about'), href: '/about' }, { label: t('company.contact'), href: '/contact' } ] as FooterLink[] },
@@ -35,7 +36,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center text-gray-500 mt-8 pt-8 border-t border-gray-800">
-        <p>{t('copyright').replace('{year}', new Date().getFullYear().toString()).replace('Your Company, Inc.', 'Lyceum')}</p>
+        <p>{t('copyright', { year: currentYear })}</p>
       </div>
     </footer>
   );
