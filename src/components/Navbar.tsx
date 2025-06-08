@@ -12,7 +12,7 @@ import Image from 'next/image';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations('Navbar'); // Corrected namespace
-  const [logoPath, setLogoPath] = useState('public/file.svg');
+  const [logoPath, setLogoPath] = useState('file.svg');
 
   useEffect(() => {
     const fetchAssets = async () => {
