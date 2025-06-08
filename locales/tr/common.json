@@ -80,5 +80,27 @@
         "description": "İlerlemenizi takip edin, yeni becerilerde ustalaşın ve Lyceum ile tüm akademik potansiyelinizi ortaya çıkarın."
       }
     }
+  },
+  "FinalCTASection": {
+    "title": "Öğrenmenizde Devrim Yaratmaya Hazır mısınız?",
+    "subtitle": "Lyceum'a bugün katılın ve interaktif kurslar ve yapay zeka destekli yardım dünyasının kilidini açın.",
+    "ctaButton": "Şimdi Kaydolun - Ücretsiz!"
+  },
+  "Footer": {
+    "company": {
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "contact": "İletişim"
+    },
+    "legal": {
+      "title": "Yasal",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Hizmet Şartları"
+    },
+    "newsletter": {
+      "title": "Bülten",
+      "description": "En son haberler, makaleler ve kaynaklar haftalık olarak gelen kutunuza gönderilir."
+    },
+    "copyright": "© {year} Lyceum. Tüm hakları Saklıdır."
   }
 }

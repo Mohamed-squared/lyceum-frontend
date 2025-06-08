@@ -80,5 +80,27 @@
         "description": "Verfolgen Sie Ihren Fortschritt, meistern Sie neue Fähigkeiten und entfalten Sie Ihr volles akademisches Potenzial mit Lyceum."
       }
     }
+  },
+  "FinalCTASection": {
+    "title": "Bereit, Ihr Lernen zu revolutionieren?",
+    "subtitle": "Treten Sie Lyceum noch heute bei und entdecken Sie eine Welt interaktiver Kurse und KI-gestützter Unterstützung.",
+    "ctaButton": "Jetzt anmelden - kostenlos!"
+  },
+  "Footer": {
+    "company": {
+      "title": "Unternehmen",
+      "about": "Über uns",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "title": "Rechtliches",
+      "privacy": "Datenschutzrichtlinie",
+      "terms": "Nutzungsbedingungen"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Die neuesten Nachrichten, Artikel und Ressourcen werden wöchentlich an Ihren Posteingang gesendet."
+    },
+    "copyright": "© {year} Lyceum. Alle Rechte vorbehalten."
   }
 }

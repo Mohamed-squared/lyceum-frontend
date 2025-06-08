@@ -80,5 +80,27 @@
         "description": "Track your progress, master new skills, and unlock your full academic potential with Lyceum."
       }
     }
+  },
+  "FinalCTASection": {
+    "title": "Ready to Revolutionize Your Learning?",
+    "subtitle": "Join Lyceum today and unlock a world of interactive courses and AI-powered assistance.",
+    "ctaButton": "Sign Up Now - It's Free!"
+  },
+  "Footer": {
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "The latest news, articles, and resources, sent to your inbox weekly."
+    },
+    "copyright": "© {year} Lyceum. All rights reserved."
   }
 }

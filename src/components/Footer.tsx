@@ -1,83 +1,42 @@
-// UPDATED FILE: src/components/Footer.tsx
+// FILE: src/components/Footer.tsx
+'use client';
 import React from 'react';
-import { Link, type AppPathnames } from '@/navigation'; // Ensure Link is from @/navigation
+import { useTranslations } from 'next-intl';
+import { Link, type AppPathnames } from '@/navigation';
 
-// Define the structure for a single link
-interface FooterLinkItem {
-  label: string;
-  href: AppPathnames; // Use the strict AppPathnames type
-}
+interface FooterLink { label: string; href: AppPathnames; }
 
-// Define the structure for a section of links
-interface LinkSection {
-  title: string;
-  links: FooterLinkItem[];
-}
+export default function Footer() {
+  const t = useTranslations('Footer');
 
-const footerLinks: LinkSection[] = [
-  {
-    title: 'Company',
-    links: [
-      { label: 'About Us', href: '/about' },
-      { label: 'Contact', href: '/contact' },
-      // Add other company links here, ensuring href is a valid AppPathname
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms of Service', href: '/terms' },
-      // Add other legal links here
-    ],
-  },
-  // Add more sections as needed
-];
+  const sections = [
+    { title: t('company.title'), links: [ { label: t('company.about'), href: '/about' }, { label: t('company.contact'), href: '/contact' } ] as FooterLink[] },
+    { title: t('legal.title'), links: [ { label: t('legal.privacy'), href: '/privacy' }, { label: t('legal.terms'), href: '/terms' } ] as FooterLink[] }
+  ];
 
-const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                {section.title}
-              </h3>
-              <ul role="list" className="mt-4 space-y-4">
-                {section.links.map((item) => (
-                  <li key={item.label}>
-                    <Link
-                      href={item.href}
-                      className="text-base text-gray-300 hover:text-white"
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <div className="md:col-span-1">
-            {/* Potentially add a newsletter signup or other content here */}
-            <h3 className="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-              Subscribe to our newsletter
-            </h3>
-            <p className="mt-4 text-base text-gray-300">
-              The latest news, articles, and resources, sent to your inbox weekly.
-            </p>
-            {/* Add form here */}
+    <footer className="bg-gray-900 text-white p-8">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        {sections.map((section) => (
+          <div key={section.title}>
+            <h3 className="font-bold mb-2 uppercase">{section.title}</h3>
+            <ul className="space-y-2">
+              {section.links.map((link) => (
+                <li key={link.label}>
+                  <Link href={link.href} className="text-sm text-gray-400 hover:text-white hover:underline">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
           </div>
+        ))}
+        <div>
+          <h3 className="font-bold mb-2 uppercase">{t('newsletter.title')}</h3>
+          <p className="text-sm text-gray-400">{t('newsletter.description')}</p>
         </div>
-        <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
-          <p className="text-base text-gray-400 md:mt-0 md:order-1">
-            &copy; {new Date().getFullYear()} Your Company, Inc. All rights reserved.
-          </p>
-          {/* Social media links can go here */}
-        </div>
+      </div>
+      <div className="text-center text-gray-500 mt-8 pt-8 border-t border-gray-800">
+        <p>{t('copyright').replace('{year}', new Date().getFullYear().toString()).replace('Your Company, Inc.', 'Lyceum')}</p>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}
