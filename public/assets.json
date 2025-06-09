@@ -11,5 +11,9 @@
   },
   "logo": {
      "main": "https://i.postimg.cc/Ghq3W768/image-2025-06-07-153843483.png"
+  },
+  "onboardingIcons": {
+    "teacher": "/assets/onboarding/icon-teacher.svg",
+    "student": "/assets/onboarding/icon-student.svg"
   }
 }
