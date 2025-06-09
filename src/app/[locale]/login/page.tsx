@@ -54,30 +54,32 @@ export default function LoginPage() {
   }
 
   return (
-    <main className={`${mainClass} ${theme === 'dark' ? "bg-[url('/auth/atrium-bg-dark-poster.jpg')]" : "bg-[url('/auth/atrium-bg-light-poster.jpg')]"}`}>
+    <main className={`${mainClass} bg-transparent`}>
 
       {/* Video elements z-index changed from -z-10 to z-10 */}
       <video
+        poster="/auth/atrium-bg-light-poster.jpg"
         autoPlay
         loop
         muted
         playsInline
         key="light-video"
-        className="dark:hidden fixed inset-0 w-full h-full object-cover z-10"
+        className="dark:hidden fixed inset-0 w-full h-full object-cover -z-10"
         src="/auth/atrium-bg-light.mp4"
       />
       <video
+        poster="/auth/atrium-bg-dark-poster.jpg"
         autoPlay
         loop
         muted
         playsInline
         key="dark-video"
-        className="hidden dark:block fixed inset-0 w-full h-full object-cover z-10"
+        className="hidden dark:block fixed inset-0 w-full h-full object-cover -z-10"
         src="/auth/atrium-bg-dark.mp4"
       />
 
       {/* Form container z-index changed to z-20 */}
-      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30 z-20">
+      <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }} className="w-full max-w-md p-8 space-y-6 bg-black/30 dark:bg-gray-900/40 backdrop-blur-md rounded-2xl shadow-2xl shadow-black/30">
         <div className="text-center">
           <h1 className="text-4xl font-serif font-bold text-white">{t('headingSignIn')}</h1>
           <p className="mt-2 text-gray-300 dark:text-gray-400">{t('subheadingSignIn')}</p>
