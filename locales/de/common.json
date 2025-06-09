@@ -117,5 +117,84 @@
     "promptSignUp": "Noch kein Mitglied?",
     "signUpLink": "Registrieren",
     "continueWithGoogle": "Mit Google fortfahren"
+  },
+  "onboarding": {
+    "step": "Schritt",
+    "of": "von",
+    "welcome": {
+      "title": "Willkommen bei Lyceum! Wie sollen wir dich nennen?",
+      "description": "Dies wird dein öffentlicher Anzeigename sein.",
+      "placeholder": "Gib deinen Namen ein"
+    },
+    "role": {
+      "title": "Bist du Lehrer oder Schüler?",
+      "teacher": "Lehrer",
+      "student": "Schüler"
+    },
+    "languages": {
+      "title": "Lege deine Spracheinstellungen fest",
+      "website": "Sprache der Website-Oberfläche",
+      "explanation": "Sprache der KI-Erklärung",
+      "material": "Sprache des Kursmaterials"
+    },
+    "major": {
+      "title": "Was ist dein Hauptstudienfach (Major)?",
+      "placeholder": "z.B. Informatik, Philosophie, Physik..."
+    },
+    "majorLevel": {
+      "title": "Was ist dein aktuelles Niveau in diesem Hauptfach?",
+      "bachelor": "Bachelor-Abschluss",
+      "master": "Master-Abschluss",
+      "phd": "Promotion",
+      "postdoc": "Postdoktorand",
+      "hobbyist": "Hobbyist / Lebenslanger Lerner"
+    },
+    "studiedSubjects": {
+      "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?",
+      "description": "Gib ein Fach ein und drücke die Eingabetaste, um es hinzuzufügen.",
+      "placeholder": "z.B. Lineare Algebra, Ethik..."
+    },
+    "interestedMajors": {
+      "title": "Interessierst du dich für andere Bereiche?",
+      "description": "Füge alle anderen Hauptfächer hinzu, die du erkunden möchtest.",
+      "placeholder": "z.B. Geschichte, Biologie..."
+    },
+    "hobbies": {
+      "title": "Was sind einige deiner Hobbys?",
+      "description": "Dies hilft uns, verwandte Inhalte zu empfehlen.",
+      "placeholder": "z.B. Schach, Malen, Wandern..."
+    },
+    "news": {
+      "title": "Welche Nachrichten und Artikel möchtest du sehen?",
+      "description": "Wähle Themen aus, die dich interessieren.",
+      "placeholder": "z.B. KI-Nachrichten, Technik-Nachrichten..."
+    },
+    "contentPrefs": {
+      "title": "Optimiere deine Inhalte",
+      "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter",
+      "quotes": "Erhalte tägliche Zitate von großen Denkern"
+    },
+    "profile": {
+      "title": "Passe dein Profil an",
+      "picture": "Profilbild",
+      "banner": "Profilbanner",
+      "bio": "Deine Biografie",
+      "bioPlaceholder": "Erzähl uns ein wenig über dich..."
+    },
+    "socials": {
+      "title": "Verbinde deine Welt (optional)",
+      "description": "Verknüpfe deine anderen Konten."
+    },
+    "agreements": {
+      "title": "Abschließende Vereinbarungen",
+      "terms": "Ich stimme den Allgemeinen Geschäftsbedingungen und der Datenschutzrichtlinie zu.",
+      "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung des Lernprozesses zu."
+    },
+    "buttons": {
+      "next": "Weiter",
+      "previous": "Zurück",
+      "skip": "Überspringen",
+      "finish": "Fertig"
+    }
   }
 }
