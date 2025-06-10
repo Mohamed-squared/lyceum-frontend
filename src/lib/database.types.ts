@@ -7,34 +7,107 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          operationName?: string
-          query?: string
-          variables?: Json
-          extensions?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          ai_teacher_personality: string | null
+          bio: string | null
+          created_at: string | null
+          display_name: string | null
+          facebook_url: string | null
+          github_url: string | null
+          has_completed_onboarding: boolean | null
+          hobbies: string[] | null
+          id: string
+          instagram_url: string | null
+          interested_article_topics: string[] | null
+          interested_majors: string[] | null
+          interested_news_topics: string[] | null
+          interests: Json | null
+          major: string | null
+          major_level: string | null
+          notion_url: string | null
+          onboarding_completed: boolean
+          preferred_course_explanation_language: string | null
+          preferred_course_material_language: string | null
+          preferred_website_language: string | null
+          profile_banner_url: string | null
+          receive_quotes: boolean | null
+          role: string | null
+          studied_subjects: string[] | null
+          subscribed_to_newsletter: boolean | null
+          tiktok_url: string | null
+          updated_at: string | null
+          user_role: string | null
+          x_url: string | null
+        }
+        Insert: {
+          ai_teacher_personality?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          facebook_url?: string | null
+          github_url?: string | null
+          has_completed_onboarding?: boolean | null
+          hobbies?: string[] | null
+          id: string
+          instagram_url?: string | null
+          interested_article_topics?: string[] | null
+          interested_majors?: string[] | null
+          interested_news_topics?: string[] | null
+          interests?: Json | null
+          major?: string | null
+          major_level?: string | null
+          notion_url?: string | null
+          onboarding_completed?: boolean
+          preferred_course_explanation_language?: string | null
+          preferred_course_material_language?: string | null
+          preferred_website_language?: string | null
+          profile_banner_url?: string | null
+          receive_quotes?: boolean | null
+          role?: string | null
+          studied_subjects?: string[] | null
+          subscribed_to_newsletter?: boolean | null
+          tiktok_url?: string | null
+          updated_at?: string | null
+          user_role?: string | null
+          x_url?: string | null
+        }
+        Update: {
+          ai_teacher_personality?: string | null
+          bio?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          facebook_url?: string | null
+          github_url?: string | null
+          has_completed_onboarding?: boolean | null
+          hobbies?: string[] | null
+          id?: string
+          instagram_url?: string | null
+          interested_article_topics?: string[] | null
+          interested_majors?: string[] | null
+          interested_news_topics?: string[] | null
+          interests?: Json | null
+          major?: string | null
+          major_level?: string | null
+          notion_url?: string | null
+          onboarding_completed?: boolean
+          preferred_course_explanation_language?: string | null
+          preferred_course_material_language?: string | null
+          preferred_website_language?: string | null
+          profile_banner_url?: string | null
+          receive_quotes?: boolean | null
+          role?: string | null
+          studied_subjects?: string[] | null
+          subscribed_to_newsletter?: boolean | null
+          tiktok_url?: string | null
+          updated_at?: string | null
+          user_role?: string | null
+          x_url?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -157,9 +230,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {},
   },
