@@ -24,14 +24,17 @@ export type Database = {
           interested_article_topics: string[] | null
           interested_majors: string[] | null
           interested_news_topics: string[] | null
+          interests: Json | null
           major: string | null
           major_level: string | null
           notion_url: string | null
+          onboarding_completed: boolean
           preferred_course_explanation_language: string | null
           preferred_course_material_language: string | null
           preferred_website_language: string | null
           profile_banner_url: string | null
           receive_quotes: boolean | null
+          role: string | null
           studied_subjects: string[] | null
           subscribed_to_newsletter: boolean | null
           tiktok_url: string | null
@@ -53,14 +56,17 @@ export type Database = {
           interested_article_topics?: string[] | null
           interested_majors?: string[] | null
           interested_news_topics?: string[] | null
+          interests?: Json | null
           major?: string | null
           major_level?: string | null
           notion_url?: string | null
+          onboarding_completed?: boolean
           preferred_course_explanation_language?: string | null
           preferred_course_material_language?: string | null
           preferred_website_language?: string | null
           profile_banner_url?: string | null
           receive_quotes?: boolean | null
+          role?: string | null
           studied_subjects?: string[] | null
           subscribed_to_newsletter?: boolean | null
           tiktok_url?: string | null
@@ -82,14 +88,17 @@ export type Database = {
           interested_article_topics?: string[] | null
           interested_majors?: string[] | null
           interested_news_topics?: string[] | null
+          interests?: Json | null
           major?: string | null
           major_level?: string | null
           notion_url?: string | null
+          onboarding_completed?: boolean
           preferred_course_explanation_language?: string | null
           preferred_course_material_language?: string | null
           preferred_website_language?: string | null
           profile_banner_url?: string | null
           receive_quotes?: boolean | null
+          role?: string | null
           studied_subjects?: string[] | null
           subscribed_to_newsletter?: boolean | null
           tiktok_url?: string | null
