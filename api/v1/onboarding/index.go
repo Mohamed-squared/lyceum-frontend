@@ -128,6 +128,8 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 3. Update Database
+	// NOTE: The database schema in the prompt description did not have all these columns.
+	// This query assumes they exist. The original prompt's query has been preserved.
 	query := `
 		UPDATE public.profiles
 		SET display_name = $2, user_role = $3, preferred_website_language = $4,
