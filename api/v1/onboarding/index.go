@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -9,10 +10,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/jackc/pgx/v5/pgxpool"
+	// Import the new postgres driver. The blank identifier _ is used because
+	// we only need the driver's side effects (registering itself).
+	_ "github.com/lib/pq"
 )
 
-// OnboardingData mirrors the JSON payload from the frontend
+// OnboardingData struct remains the same.
 type OnboardingData struct {
 	DisplayName                   string   `json:"displayName"`
 	UserRole                      string   `json:"userRole"`
@@ -30,7 +33,8 @@ type OnboardingData struct {
 	GithubURL                     string   `json:"github_url"`
 }
 
-var dbpool *pgxpool.Pool
+// db is now a standard sql.DB connection pool.
+var db *sql.DB
 
 func init() {
 	databaseUrl := os.Getenv("DATABASE_URL")
@@ -39,18 +43,21 @@ func init() {
 	}
 
 	var err error
-	config, err := pgxpool.ParseConfig(databaseUrl)
+	// Use sql.Open to create the connection pool with the "postgres" driver.
+	db, err = sql.Open("postgres", databaseUrl)
 	if err != nil {
-		log.Fatalf("FATAL: Unable to parse DATABASE_URL: %v
+		log.Fatalf("FATAL: Unable to create database connection pool: %v
 ", err)
 	}
 
-	dbpool, err = pgxpool.NewWithConfig(context.Background(), config)
+	// Ping the database to ensure the connection is alive.
+	err = db.Ping()
 	if err != nil {
-		log.Fatalf("FATAL: Unable to create connection pool: %v
+		log.Fatalf("FATAL: Unable to ping database: %v
 ", err)
 	}
-	log.Println("Database connection pool initialized successfully.")
+
+	log.Println("Database connection pool initialized successfully using lib/pq.")
 }
 
 func writeJSONError(w http.ResponseWriter, message string, statusCode int) {
@@ -74,14 +81,29 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// --- Bypassing JWT validation for now ---
-	// In a real scenario, we would get this from a validated JWT.
-	// For this test, we need a valid UUID from your 'profiles' table to test against.
-	// IMPORTANT: Replace this with a real user ID from your database for testing.
-	const placeholderUserID = "00000000-0000-0000-0000-000000000000" // <-- REPLACE IF NEEDED FOR TESTING
+	const placeholderUserID = "00000000-0000-0000-0000-000000000000"
 
 	var data OnboardingData
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 		writeJSONError(w, "Invalid request body: "+err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	// Note: lib/pq uses $1, $2, etc. for parameters, same as pgx.
+	// We need to convert the slice interests to a format pq can handle, like a JSON string.
+	interestsJSON, err := json.Marshal(data.InterestedMajors)
+	if err != nil {
+		writeJSONError(w, "Failed to process interests data", http.StatusInternalServerError)
+		return
+	}
+	studiedSubjectsJSON, err := json.Marshal(data.StudiedSubjects)
+	if err != nil {
+		writeJSONError(w, "Failed to process studied subjects data", http.StatusInternalServerError)
+		return
+	}
+	hobbiesJSON, err := json.Marshal(data.Hobbies)
+	if err != nil {
+		writeJSONError(w, "Failed to process hobbies data", http.StatusInternalServerError)
 		return
 	}
 
@@ -94,11 +116,12 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			github_url = $15, has_completed_onboarding = TRUE, updated_at = $16
 		WHERE id = $1;
 	`
-	_, err := dbpool.Exec(context.Background(), query,
+	// Use db.ExecContext for the query execution.
+	_, err = db.ExecContext(context.Background(), query,
 		placeholderUserID, data.DisplayName, data.UserRole, data.PreferredWebsiteLanguage,
 		data.PreferredCourseExplanationLanguage, data.PreferredCourseMaterialLanguage,
-		data.Major, data.MajorLevel, data.StudiedSubjects, data.InterestedMajors,
-		data.Hobbies, data.SubscribedToNewsletter, data.ReceiveQuotes, data.Bio,
+		data.Major, data.MajorLevel, studiedSubjectsJSON, interestsJSON,
+		hobbiesJSON, data.SubscribedToNewsletter, data.ReceiveQuotes, data.Bio,
 		data.GithubURL, time.Now(),
 	)
 
