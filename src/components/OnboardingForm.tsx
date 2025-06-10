@@ -6,9 +6,13 @@ import { useTranslations } from 'next-intl';
 import { useSupabase } from '@/app/supabase-provider';
 import type { Session } from '@supabase/supabase-js';
 
-// Assuming these UI components are created or will be
-import { RoleSelectionCard } from './ui/RoleSelectionCard';
-import { TagInput } from './ui/TagInput';
+// Corrected default imports
+import RoleSelectionCard from './ui/RoleSelectionCard';
+import TagInput from './ui/TagInput';
+
+// Import icons for the roles
+import studentIcon from '../../public/assets/onboarding/icon-student.svg';
+import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 
 // Define the component's props
 interface OnboardingFormProps {
@@ -18,7 +22,7 @@ interface OnboardingFormProps {
 export function OnboardingForm({ session }: OnboardingFormProps) {
   const t = useTranslations('onboarding');
   const router = useRouter();
-  const supabase = useSupabase(); // Correctly get the Supabase client
+  const supabase = useSupabase();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +35,6 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   const steps = [
     { title: t('step1.title'), description: t('step1.description') },
     { title: t('step2.title'), description: t('step2.description') },
-    // Add more steps if needed
   ];
 
   const handleRoleSelect = (selectedRole: 'student' | 'teacher') => {
@@ -89,18 +92,18 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       {currentStep === 0 && (
-        <div className="flex gap-4">
+        <div className="flex justify-center gap-4 sm:gap-8">
             <RoleSelectionCard
-                role="student"
-                label={t('step1.student')}
+                icon={studentIcon}
+                title={t('step1.student')}
                 isSelected={role === 'student'}
-                onSelect={handleRoleSelect}
+                onClick={() => handleRoleSelect('student')}
             />
             <RoleSelectionCard
-                role="teacher"
-                label={t('step1.teacher')}
+                icon={teacherIcon}
+                title={t('step1.teacher')}
                 isSelected={role === 'teacher'}
-                onSelect={handleRoleSelect}
+                onClick={() => handleRoleSelect('teacher')}
             />
         </div>
       )}
@@ -108,7 +111,11 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       {currentStep === 1 && (
         <div>
             <label className="block text-gray-700 dark:text-gray-200 mb-2">{t('step2.interestsLabel')}</label>
-            <TagInput tags={interests} setTags={setInterests} placeholder={t('step2.interestsPlaceholder')} />
+            <TagInput
+                value={interests}
+                onChange={setInterests}
+                placeholder={t('step2.interestsPlaceholder')}
+            />
         </div>
       )}
 
