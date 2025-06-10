@@ -1,5 +1,4 @@
-// Path: api/v1/onboarding.go
-package v1
+package handler
 
 import (
 	"context"
@@ -35,70 +34,100 @@ type OnboardingData struct {
 
 var dbpool *pgxpool.Pool
 
+// The init() function runs once per serverless function instance.
+// It's a great place to initialize the database connection pool.
 func init() {
-	// This init function runs once when the serverless function is "warmed up".
-	// We create the database connection pool here.
 	databaseUrl := os.Getenv("DATABASE_URL")
 	if databaseUrl == "" {
-		log.Fatal("DATABASE_URL environment variable is not set.")
+		log.Fatal("FATAL: DATABASE_URL environment variable is not set.")
 	}
 
 	var err error
-	dbpool, err = pgxpool.New(context.Background(), databaseUrl)
+	config, err := pgxpool.ParseConfig(databaseUrl)
 	if err != nil {
-		log.Fatalf("Unable to create connection pool: %v
+		log.Fatalf("FATAL: Unable to parse DATABASE_URL: %v
 ", err)
 	}
+
+	dbpool, err = pgxpool.NewWithConfig(context.Background(), config)
+	if err != nil {
+		log.Fatalf("FATAL: Unable to create connection pool: %v
+", err)
+	}
+	log.Println("Database connection pool initialized successfully.")
+}
+
+// writeJSONError is a helper to send a standard JSON error response.
+func writeJSONError(w http.ResponseWriter, message string, statusCode int) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	json.NewEncoder(w).Encode(map[string]string{"error": message})
 }
 
 // Handler is the main entry point for the Vercel serverless function.
 func Handler(w http.ResponseWriter, r *http.Request) {
-    // Set CORS headers for local development. Vercel handles this in production.
+    // Vercel automatically handles CORS in production, but this is good for local/other environments.
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
-	if r.Method == "OPTIONS" {
+	// Handle pre-flight CORS requests
+	if r.Method == http.MethodOptions {
 		w.WriteHeader(http.StatusOK)
 		return
 	}
 
-	if r.Method != "POST" {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	if r.Method != http.MethodPost {
+		writeJSONError(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	// --- JWT Authentication ---
+	// 1. Extract and Validate JWT
 	authHeader := r.Header.Get("Authorization")
-	if authHeader == "" {
-		http.Error(w, "Authorization header required", http.StatusUnauthorized)
+	if authHeader == "" || !strings.HasPrefix(authHeader, "Bearer ") {
+		writeJSONError(w, "Authorization header with Bearer token required", http.StatusUnauthorized)
 		return
 	}
 	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 
-	claims := jwt.MapClaims{}
-	_, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-		return []byte(os.Getenv("SUPABASE_JWT_SECRET")), nil
+	supabaseJWTSecret := os.Getenv("SUPABASE_JWT_SECRET")
+	if supabaseJWTSecret == "" {
+		log.Println("ERROR: SUPABASE_JWT_SECRET is not set on the server.")
+		writeJSONError(w, "Internal server configuration error", http.StatusInternalServerError)
+		return
+	}
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(supabaseJWTSecret), nil
 	})
 
 	if err != nil {
-		http.Error(w, "Invalid token", http.StatusUnauthorized)
+		writeJSONError(w, "Invalid token: "+err.Error(), http.StatusUnauthorized)
+		return
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok || !token.Valid {
+		writeJSONError(w, "Invalid token claims", http.StatusUnauthorized)
 		return
 	}
 	userID, ok := claims["sub"].(string)
-	if !ok {
-		http.Error(w, "Invalid subject in token", http.StatusUnauthorized)
+	if !ok || userID == "" {
+		writeJSONError(w, "Invalid user ID in token", http.StatusUnauthorized)
 		return
 	}
 
-	// --- Decode Body and Update Database ---
+	// 2. Decode Request Body
 	var data OnboardingData
 	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
-		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		writeJSONError(w, "Invalid request body: "+err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	// --- Database Update Logic ---
+	// 3. Update Database
 	query := `
 		UPDATE public.profiles
 		SET display_name = $2, user_role = $3, preferred_website_language = $4,
@@ -117,12 +146,14 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if err != nil {
-		log.Printf("Failed to update profile for user %s: %v
-", userID, err)
-		http.Error(w, fmt.Sprintf("Failed to update profile: %v", err), http.StatusInternalServerError)
+		log.Printf("ERROR: Failed to update profile for user %s: %v", userID, err)
+		writeJSONError(w, "Failed to update profile", http.StatusInternalServerError)
 		return
 	}
 
+	log.Printf("INFO: Successfully updated profile for user %s", userID)
+
+	// 4. Send Success Response
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]string{"message": "Profile updated successfully"})
