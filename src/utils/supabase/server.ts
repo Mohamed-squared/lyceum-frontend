@@ -1,14 +1,9 @@
-// src/utils/supabase/server.ts
-
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-// This is the function we will now export and use in Server Components.
-// It correctly uses the imported 'createServerClient' internally.
-export function createClient() {
+export function createServerClient() {
   const cookieStore = cookies();
 
-  // Create a server client that can automatically read and write cookies.
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -31,8 +26,6 @@ export function createClient() {
             cookieStore.set({ name, value: '', ...options });
           } catch (error) {
             // The `delete` method was called from a Server Component.
-            // This can be ignored if you have middleware refreshing
-            // user sessions.
           }
         },
       },

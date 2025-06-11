@@ -1,35 +1,40 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
+import { createServerClient } from '@/utils/supabase/server';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-import type { NextRequest } from 'next/server'
-import type { Database } from '@/lib/database.types'
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: NextRequest) {
-  const requestUrl = new URL(request.url)
-  const code = requestUrl.searchParams.get('code')
+  const { searchParams, origin } = new URL(request.url);
+  const code = searchParams.get('code');
 
   if (code) {
-    const supabase = createRouteHandlerClient<Database>({ cookies })
-    await supabase.auth.exchangeCodeForSession(code)
+    const supabase = createServerClient();
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    // Check if the user is new or returning
-    const { data: { user } } = await supabase.auth.getUser()
-    const { data: profile, error } = await supabase
+    if (error) {
+      console.error('Auth callback error:', error.message);
+      return NextResponse.redirect(`${origin}/auth/auth-code-error`);
+    }
+
+    // This check is now more robust because it uses the real Supabase user object
+    const { data: profile } = await supabase
       .from('profiles')
-      .select('id')
-      .eq('id', user?.id)
-      .single()
+      .select('onboarding_completed')
+      .eq('id', data.user.id)
+      .single();
 
-    if (error && error.code === 'PGRST116') {
-      // New user, redirect to onboarding
-      return NextResponse.redirect(`${requestUrl.origin}/onboarding`)
-    } else if (profile) {
-      // Returning user, redirect to dashboard
-      return NextResponse.redirect(`${requestUrl.origin}/dashboard`)
+    const locale = request.cookies.get('NEXT_LOCALE')?.value || 'en';
+
+    if (!profile || !profile.onboarding_completed) {
+      // If there's no profile or onboarding is not complete, send to onboarding
+      return NextResponse.redirect(`${origin}/${locale}/onboarding`);
+    } else {
+      // If onboarding is complete, send to dashboard
+      return NextResponse.redirect(`${origin}/${locale}/dashboard`);
     }
   }
 
-  // URL to redirect to after sign in process completes
-  return NextResponse.redirect(requestUrl.origin)
+  // Redirect to an error page if there's no code
+  return NextResponse.redirect(`${origin}/auth/auth-code-error`);
 }
