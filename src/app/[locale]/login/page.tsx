@@ -2,6 +2,7 @@
 
 'use client';
 
+import { Pathnames } from '@/navigation';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
@@ -35,7 +36,7 @@ export default function LoginPage() {
     setError(null);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) { setError(error.message); }
-    else { router.push('/dashboard'); router.refresh(); }
+    else { router.push('/dashboard' as keyof Pathnames); router.refresh(); }
     setIsLoading(false);
   };
 
