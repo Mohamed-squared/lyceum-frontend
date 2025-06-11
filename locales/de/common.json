@@ -1,0 +1,138 @@
+{
+  "HomePage": {
+    "title": "Willkommen bei Lyceum",
+    "subtitle": "Ihre KI-gestützte Lernplattform"
+  },
+  "Navbar": {
+    "logoText": "Lyceum",
+    "features": "Funktionen",
+    "courses": "Kurse",
+    "aiChat": "KI-Chat",
+    "login": "Anmelden",
+    "signUp": "Registrieren",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "HeroSection": {
+    "title": "Entfalten Sie Ihr Potenzial",
+    "subtitle": "Treten Sie Lyceum bei und beginnen Sie noch heute Ihre personalisierte Lernreise.",
+    "ctaButton": "Kostenlos starten"
+  },
+  "WhyLyceumSection": {
+    "title": "Haben Sie genug von Einheitslösungen beim Lernen?",
+    "problems": {
+      "item1": {
+        "problem": "Ineffektives Pauken",
+        "solution": "Lyceum bietet gezieltes Üben mit TestGen, um sicherzustellen, dass Sie Konzepte tiefgreifend verstehen und nicht nur auswendig lernen."
+      },
+      "item2": {
+        "problem": "Passives Lernen",
+        "solution": "Interagieren Sie aktiv mit KI-gestützten Werkzeugen und interaktiven Kursen, die sich an Ihren Lernstil anpassen."
+      },
+      "item3": {
+        "problem": "Mangelnde Personalisierung",
+        "solution": "Unsere Plattform schneidet Lernpfade und Inhalte individuell zu und konzentriert sich auf Ihre spezifischen Bedürfnisse und Ziele."
+      }
+    }
+  },
+  "FeaturesSection": {
+    "title": "Ihr All-in-One Lern-Booster.",
+    "features": {
+      "item1": {
+        "name": "TestGen Suite",
+        "description": "Erstellen Sie adaptive Quizze und Probeexamen aus beliebigem Material, um Themen effektiv zu meistern."
+      },
+      "item2": {
+        "name": "Kursplattform",
+        "description": "Greifen Sie auf eine Bibliothek von fachmännisch erstellten Kursen zu verschiedenen Themen zu, die für ein tiefes Verständnis konzipiert sind."
+      },
+      "item3": {
+        "name": "KI-gestützte Werkzeuge",
+        "description": "Nutzen Sie intelligente Zusammenfassungen, die Erstellung von Lernkarten und Konzepterklärungen, um Ihre Lerneffizienz zu steigern."
+      },
+      "item4": {
+        "name": "KI-Chat-Studio (Lyra)",
+        "description": "Unterhalten Sie sich mit Lyra, Ihrem persönlichen KI-Tutor, für sofortige Hilfe und geführtes Lernen jederzeit."
+      },
+      "item5": {
+        "name": "Personalisierte Dashboards",
+        "description": "Verfolgen Sie Ihren Fortschritt, identifizieren Sie Stärken und Schwächen und erhalten Sie maßgeschneiderte Empfehlungen."
+      },
+      "item6": {
+        "name": "Gamifizierte Lernpfade",
+        "description": "Sammeln Sie Punkte, Abzeichen und erklimmen Sie die Bestenlisten, während Sie Ihre Lernmeilensteine erreichen."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "Beginnen Sie Ihre Lernreise in 3 Schritten.",
+    "steps": {
+      "item1": {
+        "title": "Anmelden & Personalisieren",
+        "description": "Erstellen Sie Ihr kostenloses Konto und teilen Sie uns Ihre Lernziele mit, um Ihre Lyceum-Erfahrung individuell anzupassen."
+      },
+      "item2": {
+        "title": "Entdecken & Lernen",
+        "description": "Tauchen Sie ein in KI-generierte Tests, interaktive Kurse und nutzen Sie unsere intelligenten Lernwerkzeuge in Ihrem eigenen Tempo."
+      },
+      "item3": {
+        "title": "Erreichen & Wachsen",
+        "description": "Verfolgen Sie Ihren Fortschritt, meistern Sie neue Fähigkeiten und entfalten Sie Ihr volles akademisches Potenzial mit Lyceum."
+      }
+    }
+  },
+  "FinalCTASection": {
+    "title": "Bereit, Ihr Lernen zu revolutionieren?",
+    "subtitle": "Treten Sie Lyceum noch heute bei und entdecken Sie eine Welt interaktiver Kurse und KI-gestützter Unterstützung.",
+    "ctaButton": "Jetzt anmelden - kostenlos!"
+  },
+  "Footer": {
+    "company": {
+      "title": "Unternehmen",
+      "about": "Über uns",
+      "contact": "Kontakt"
+    },
+    "legal": {
+      "title": "Rechtliches",
+      "privacy": "Datenschutzrichtlinie",
+      "terms": "Nutzungsbedingungen"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Die neuesten Nachrichten, Artikel und Ressourcen werden wöchentlich an Ihren Posteingang gesendet."
+    },
+    "copyright": "© {year} Lyceum. Alle Rechte vorbehalten."
+  },
+  "LoginPage": {
+    "headingSignIn": "Willkommen zurück, Gelehrte(r)",
+    "subheadingSignIn": "Deine Reise des Wissens wartet.",
+    "headingSignUp": "Beginne deine Reise",
+    "subheadingSignUp": "Tritt dem Lyceum bei und entfalte dein Potenzial.",
+    "emailLabel": "E-Mail-Adresse",
+    "passwordLabel": "Passwort",
+    "signInButton": "Anmelden",
+    "signUpButton": "Registrieren",
+    "promptSignIn": "Bereits Mitglied?",
+    "signInLink": "Anmelden",
+    "promptSignUp": "Noch kein Mitglied?",
+    "signUpLink": "Registrieren",
+    "continueWithGoogle": "Mit Google fortfahren"
+  },
+  "onboarding": {
+    "step": "Schritt", "of": "von",
+    "welcome": { "title": "Willkommen bei Lyceum! Wie sollen wir dich nennen?", "description": "Dies wird dein öffentlicher Anzeigename sein.", "placeholder": "Gib deinen Namen ein" },
+    "role": { "title": "Bist du ein Lehrender oder ein Student?", "teacher": "Lehrender", "student": "Student" },
+    "languages": { "title": "Stelle deine Spracheinstellungen ein", "website": "Sprache der Benutzeroberfläche", "explanation": "Sprache der KI-Erklärungen", "material": "Sprache des Kursmaterials" },
+    "major": { "title": "Was ist dein Hauptstudienfach?", "placeholder": "z.B. Informatik, Philosophie, Physik..." },
+    "majorLevel": { "title": "Was ist dein aktuelles Niveau in diesem Fach?", "bachelor": "Bachelor-Abschluss", "master": "Master-Abschluss", "phd": "Doktor", "postdoc": "Postdoktorand", "hobbyist": "Hobbyist / Lebenslanger Lerner" },
+    "studiedSubjects": { "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?", "description": "Gib einen Fachnamen ein und drücke Enter, um es hinzuzufügen.", "placeholder": "z.B. Lineare Algebra, Ethik..." },
+    "interestedMajors": { "title": "Interessierst du dich für andere Fachgebiete?", "description": "Füge weitere Hauptfächer hinzu, die du erkunden möchtest.", "placeholder": "z.B. Geschichte, Biologie..." },
+    "hobbies": { "title": "Was sind einige deiner Hobbies?", "description": "Dies hilft uns, verwandte Inhalte zu empfehlen.", "placeholder": "z.B. Schach, Malen, Wandern..." },
+    "news": { "title": "Welche Nachrichten und Artikel möchtest du sehen?", "description": "Wähle Themen, die dich interessieren.", "placeholder": "z.B. KI-Nachrichten, Technik-Nachrichten..." },
+    "contentPrefs": { "title": "Optimiere deine Inhalte", "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter", "quotes": "Erhalte tägliche Zitate von großen Denkern" },
+    "profile": { "title": "Passe dein Profil an", "picture": "Profilbild", "banner": "Profil-Banner", "bio": "Deine Biografie", "bioPlaceholder": "Erzähl uns ein wenig über dich..." },
+    "socials": { "title": "Verbinde deine Welt (Optional)", "description": "Verbinde deine anderen Konten." },
+    "agreements": { "title": "Abschließende Vereinbarungen", "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.", "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu." },
+    "buttons": { "next": "Weiter", "previous": "Zurück", "skip": "Überspringen", "finish": "Abschließen" }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "HomePage": {
+    "title": "Welcome to Lyceum",
+    "subtitle": "Your AI-Powered Learning Platform"
+  },
+  "Navbar": {
+    "logoText": "Lyceum",
+    "features": "Features",
+    "courses": "Courses",
+    "aiChat": "AI Chat",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "HeroSection": {
+    "title": "Unlock Your Potential",
+    "subtitle": "Join Lyceum and start your personalized learning journey today.",
+    "ctaButton": "Get Started for Free"
+  },
+  "WhyLyceumSection": {
+    "title": "Tired of One-Size-Fits-All Learning?",
+    "problems": {
+      "item1": {
+        "problem": "Ineffective Cramming",
+        "solution": "Lyceum offers targeted practice with TestGen, ensuring you understand concepts deeply, not just memorize."
+      },
+      "item2": {
+        "problem": "Passive Studying",
+        "solution": "Engage actively with AI-powered tools and interactive courses that adapt to your learning style."
+      },
+      "item3": {
+        "problem": "Lack of Personalization",
+        "solution": "Our platform tailors learning paths and content, focusing on your specific needs and goals."
+      }
+    }
+  },
+  "FeaturesSection": {
+    "title": "Your All-In-One Learning Supercharger.",
+    "features": {
+      "item1": {
+        "name": "TestGen Suite",
+        "description": "Generate adaptive quizzes and mock exams from any material to master topics effectively."
+      },
+      "item2": {
+        "name": "Courses Platform",
+        "description": "Access a library of expertly crafted courses across various subjects, designed for deep understanding."
+      },
+      "item3": {
+        "name": "AI-Powered Tools",
+        "description": "Utilize smart summaries, flashcard generation, and concept explainers to boost your study efficiency."
+      },
+      "item4": {
+        "name": "AI Chat Studio (Lyra)",
+        "description": "Converse with Lyra, your personal AI tutor, for instant help and guided learning anytime."
+      },
+      "item5": {
+        "name": "Personalized Dashboards",
+        "description": "Track your progress, identify strengths and weaknesses, and get tailored recommendations."
+      },
+      "item6": {
+        "name": "Gamified Learning Paths",
+        "description": "Earn points, badges, and climb leaderboards as you achieve your learning milestones."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "Embark on Your Learning Journey in 3 Steps.",
+    "steps": {
+      "item1": {
+        "title": "Sign Up & Personalize",
+        "description": "Create your free account and tell us your learning goals to tailor your Lyceum experience."
+      },
+      "item2": {
+        "title": "Explore & Learn",
+        "description": "Dive into AI-generated tests, interactive courses, and utilize our smart study tools at your own pace."
+      },
+      "item3": {
+        "title": "Achieve & Grow",
+        "description": "Track your progress, master new skills, and unlock your full academic potential with Lyceum."
+      }
+    }
+  },
+  "FinalCTASection": {
+    "title": "Ready to Revolutionize Your Learning?",
+    "subtitle": "Join Lyceum today and unlock a world of interactive courses and AI-powered assistance.",
+    "ctaButton": "Sign Up Now - It's Free!"
+  },
+  "Footer": {
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "contact": "Contact"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "The latest news, articles, and resources, sent to your inbox weekly."
+    },
+    "copyright": "© {year} Lyceum. All rights reserved."
+  },
+  "LoginPage": {
+    "headingSignIn": "Welcome Back, Scholar",
+    "subheadingSignIn": "Your journey of knowledge awaits.",
+    "headingSignUp": "Begin Your Journey",
+    "subheadingSignUp": "Join the Lyceum and unlock your potential.",
+    "emailLabel": "Email Address",
+    "passwordLabel": "Password",
+    "signInButton": "Sign In",
+    "signUpButton": "Sign Up",
+    "promptSignIn": "Already a member?",
+    "signInLink": "Sign In",
+    "promptSignUp": "Not yet a member?",
+    "signUpLink": "Sign Up",
+    "continueWithGoogle": "Continue with Google"
+  },
+  "onboarding": {
+    "step": "Step", "of": "of",
+    "welcome": { "title": "Welcome to Lyceum! What should we call you?", "description": "This will be your public display name.", "placeholder": "Enter your name" },
+    "role": { "title": "Are you an educator or a student?", "teacher": "Educator", "student": "Student" },
+    "languages": { "title": "Set Your Language Preferences", "website": "Website Interface Language", "explanation": "AI Explanation Language", "material": "Course Material Language" },
+    "major": { "title": "What is your primary field of study (Major)?", "placeholder": "e.g., Computer Science, Philosophy, Physics..." },
+    "majorLevel": { "title": "What is your current level in this major?", "bachelor": "Bachelor's Degree", "master": "Master's Degree", "phd": "PhD", "postdoc": "Postdoctoral", "hobbyist": "Hobbyist / Lifelong Learner" },
+    "studiedSubjects": { "title": "What subjects have you already studied in your major?", "description": "Type a subject name and press Enter to add it.", "placeholder": "e.g., Linear Algebra, Ethics..." },
+    "interestedMajors": { "title": "Are you interested in other fields?", "description": "Add any other majors you'd like to explore.", "placeholder": "e.g., History, Biology..." },
+    "hobbies": { "title": "What are some of your hobbies?", "description": "This helps us recommend related content.", "placeholder": "e.g., Chess, Painting, Hiking..." },
+    "news": { "title": "What news and articles would you like to see?", "description": "Choose topics that interest you.", "placeholder": "e.g., AI News, Tech News..." },
+    "contentPrefs": { "title": "Fine-tune Your Content", "newsletter": "Subscribe to the weekly Lyceum Newsletter", "quotes": "Get daily quotes from great thinkers" },
+    "profile": { "title": "Customize Your Profile", "picture": "Profile Picture", "banner": "Profile Banner", "bio": "Your Bio", "bioPlaceholder": "Tell us a little about yourself..." },
+    "socials": { "title": "Link Your World (Optional)", "description": "Connect your other accounts." },
+    "agreements": { "title": "Final Agreements", "terms": "I agree to the Terms and Privacy Policy.", "personalization": "I consent to my data being collected to personalize my learning." },
+    "buttons": { "next": "Next", "previous": "Back", "skip": "Skip", "finish": "Finish" }
+  }
+}

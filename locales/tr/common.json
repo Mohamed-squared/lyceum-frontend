@@ -1,0 +1,138 @@
+{
+  "HomePage": {
+    "title": "Lyceum'a Hoş Geldiniz",
+    "subtitle": "Yapay Zeka Destekli Öğrenme Platformunuz"
+  },
+  "Navbar": {
+    "logoText": "Lyceum",
+    "features": "Özellikler",
+    "courses": "Kurslar",
+    "aiChat": "AI Sohbet",
+    "login": "Giriş Yap",
+    "signUp": "Kaydol",
+    "about": "Hakkımızda",
+    "contact": "İletişim"
+  },
+  "HeroSection": {
+    "title": "Potansiyelinizi Ortaya Çıkarın",
+    "subtitle": "Lyceum'a katılın ve kişiselleştirilmiş öğrenme yolculuğunuza bugün başlayın.",
+    "ctaButton": "Ücretsiz Başlayın"
+  },
+  "WhyLyceumSection": {
+    "title": "Tek Tip Öğrenmeden Sıkıldınız mı?",
+    "problems": {
+      "item1": {
+        "problem": "Etkisiz Ezbercilik",
+        "solution": "Lyceum, TestGen ile hedefe yönelik pratik sunarak konuları sadece ezberlemenizi değil, derinlemesine anlamanızı sağlar."
+      },
+      "item2": {
+        "problem": "Pasif Çalışma",
+        "solution": "Öğrenme tarzınıza uyum sağlayan yapay zeka destekli araçlar ve interaktif kurslarla aktif olarak etkileşim kurun."
+      },
+      "item3": {
+        "problem": "Kişiselleştirme Eksikliği",
+        "solution": "Platformumuz, özel ihtiyaçlarınıza ve hedeflerinize odaklanarak öğrenme yollarını ve içeriği size özel olarak düzenler."
+      }
+    }
+  },
+  "FeaturesSection": {
+    "title": "Hepsi Bir Arada Öğrenme Güçlendiriciniz.",
+    "features": {
+      "item1": {
+        "name": "TestGen Paketi",
+        "description": "Konuları etkili bir şekilde öğrenmek için herhangi bir materyalden uyarlanabilir testler ve deneme sınavları oluşturun."
+      },
+      "item2": {
+        "name": "Kurs Platformu",
+        "description": "Derinlemesine anlama için tasarlanmış, çeşitli konularda uzmanlarca hazırlanmış kurs kütüphanesine erişin."
+      },
+      "item3": {
+        "name": "Yapay Zeka Destekli Araçlar",
+        "description": "Çalışma verimliliğinizi artırmak için akıllı özetler, bilgi kartı oluşturma ve kavram açıklayıcılardan yararlanın."
+      },
+      "item4": {
+        "name": "Yapay Zeka Sohbet Stüdyosu (Lyra)",
+        "description": "Kişisel yapay zeka öğretmeniniz Lyra ile sohbet ederek anında yardım alın ve istediğiniz zaman yönlendirmeli öğrenimden faydalanın."
+      },
+      "item5": {
+        "name": "Kişiselleştirilmiş Panolar",
+        "description": "İlerlemenizi takip edin, güçlü ve zayıf yönlerinizi belirleyin ve size özel öneriler alın."
+      },
+      "item6": {
+        "name": "Oyunlaştırılmış Öğrenme Yolları",
+        "description": "Öğrenme hedeflerinize ulaştıkça puanlar, rozetler kazanın ve liderlik tablolarında yükselin."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "Öğrenme Yolculuğunuza 3 Adımda Başlayın.",
+    "steps": {
+      "item1": {
+        "title": "Kaydolun ve Kişiselleştirin",
+        "description": "Ücretsiz hesabınızı oluşturun ve Lyceum deneyiminizi size özel hale getirmek için öğrenme hedeflerinizi bize bildirin."
+      },
+      "item2": {
+        "title": "Keşfedin ve Öğrenin",
+        "description": "Yapay zeka tarafından oluşturulan testlere, interaktif kurslara dalın ve akıllı çalışma araçlarımızı kendi hızınızda kullanın."
+      },
+      "item3": {
+        "title": "Başarın ve Gelişin",
+        "description": "İlerlemenizi takip edin, yeni becerilerde ustalaşın ve Lyceum ile tüm akademik potansiyelinizi ortaya çıkarın."
+      }
+    }
+  },
+  "FinalCTASection": {
+    "title": "Öğrenmenizde Devrim Yaratmaya Hazır mısınız?",
+    "subtitle": "Lyceum'a bugün katılın ve interaktif kurslar ve yapay zeka destekli yardım dünyasının kilidini açın.",
+    "ctaButton": "Şimdi Kaydolun - Ücretsiz!"
+  },
+  "Footer": {
+    "company": {
+      "title": "Şirket",
+      "about": "Hakkımızda",
+      "contact": "İletişim"
+    },
+    "legal": {
+      "title": "Yasal",
+      "privacy": "Gizlilik Politikası",
+      "terms": "Hizmet Şartları"
+    },
+    "newsletter": {
+      "title": "Bülten",
+      "description": "En son haberler, makaleler ve kaynaklar haftalık olarak gelen kutunuza gönderilir."
+    },
+    "copyright": "© {year} Lyceum. Tüm hakları Saklıdır."
+  },
+  "LoginPage": {
+    "headingSignIn": "Tekrar Hoş Geldin, Alim",
+    "subheadingSignIn": "Bilgi yolculuğun seni bekliyor.",
+    "headingSignUp": "Yolculuğuna Başla",
+    "subheadingSignUp": "Lyceum'a katıl ve potansiyelini ortaya çıkar.",
+    "emailLabel": "E-posta Adresi",
+    "passwordLabel": "Şifre",
+    "signInButton": "Giriş Yap",
+    "signUpButton": "Kayıt Ol",
+    "promptSignIn": "Zaten üye misin?",
+    "signInLink": "Giriş Yap",
+    "promptSignUp": "Henüz üye değil misin?",
+    "signUpLink": "Kayıt Ol",
+    "continueWithGoogle": "Google ile Devam Et"
+  },
+  "onboarding": {
+    "step": "Adım", "of": "/",
+    "welcome": { "title": "Lyceum'a hoş geldin! Sana nasıl hitap edelim?", "description": "Bu, herkese açık görünen adın olacak.", "placeholder": "Adını gir" },
+    "role": { "title": "Eğitmen misin, öğrenci mi?", "teacher": "Eğitmen", "student": "Öğrenci" },
+    "languages": { "title": "Dil Tercihlerini Ayarla", "website": "Web Sitesi Arayüz Dili", "explanation": "Yapay Zeka Açıklama Dili", "material": "Ders Materyali Dili" },
+    "major": { "title": "Ana çalışma alanın (Bölümün) nedir?", "placeholder": "Örn. Bilgisayar Bilimi, Felsefe, Fizik..." },
+    "majorLevel": { "title": "Bu bölümde şu anki seviyen nedir?", "bachelor": "Lisans Derecesi", "master": "Yüksek Lisans Derecesi", "phd": "Doktora", "postdoc": "Doktora Sonrası", "hobbyist": "Hobi Amaçlı / Yaşam Boyu Öğrenen" },
+    "studiedSubjects": { "title": "Bölümünde daha önce hangi dersleri çalıştın?", "description": "Bir ders adı yaz ve eklemek için Enter'a bas.", "placeholder": "Örn. Lineer Cebir, Etik..." },
+    "interestedMajors": { "title": "Başka alanlarla ilgileniyor musun?", "description": "Keşfetmek istediğin diğer bölümleri ekle.", "placeholder": "Örn. Tarih, Biyoloji..." },
+    "hobbies": { "title": "Hobilerinden bazıları neler?", "description": "Bu, ilgili içerikleri önermemize yardımcı olur.", "placeholder": "Örn. Satranç, Resim, Doğa Yürüyüşü..." },
+    "news": { "title": "Hangi haberleri ve makaleleri görmek istersin?", "description": "İlgini çeken konuları seç.", "placeholder": "Örn. Yapay Zeka Haberleri, Teknoloji Haberleri..." },
+    "contentPrefs": { "title": "İçeriğini İnce Ayarla", "newsletter": "Haftalık Lyceum Bültenine abone ol", "quotes": "Büyük düşünürlerden günlük alıntılar al" },
+    "profile": { "title": "Profilini Özelleştir", "picture": "Profil Resmi", "banner": "Profil Başlığı", "bio": "Biyografin", "bioPlaceholder": "Bize biraz kendinden bahset..." },
+    "socials": { "title": "Dünyanı Bağla (İsteğe Bağlı)", "description": "Diğer hesaplarını bağla." },
+    "agreements": { "title": "Son Anlaşmalar", "terms": "Şartları ve Gizlilik Politikasını kabul ediyorum.", "personalization": "Öğrenmemi kişiselleştirmek için verilerimin toplanmasına izin veriyorum." },
+    "buttons": { "next": "İleri", "previous": "Geri", "skip": "Atla", "finish": "Bitir" }
+  }
+}

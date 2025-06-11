@@ -1,0 +1,81 @@
+{
+  "onboarding": {
+    "step": "Adım",
+    "of": "nın",
+    "welcome": {
+      "title": "Lyceum'a Hoş Geldiniz! Size ne diyelim?",
+      "description": "Bu sizin herkese açık görünen adınız olacaktır.",
+      "placeholder": "Adınızı girin"
+    },
+    "role": {
+      "title": "Öğretmen misiniz öğrenci mi?",
+      "teacher": "Öğretmen",
+      "student": "Öğrenci"
+    },
+    "languages": {
+      "title": "Dil tercihlerinizi ayarlayın",
+      "website": "Web Sitesi Arayüz Dili",
+      "explanation": "Yapay Zeka Açıklama Dili",
+      "material": "Ders Materyali Dili"
+    },
+    "major": {
+      "title": "Ana çalışma alanınız (Bölüm) nedir?",
+      "placeholder": "örneğin, Bilgisayar Bilimi, Felsefe, Fizik..."
+    },
+    "majorLevel": {
+      "title": "Bu bölümdeki mevcut seviyeniz nedir?",
+      "bachelor": "Lisans Derecesi",
+      "master": "Yüksek Lisans Derecesi",
+      "phd": "Doktora",
+      "postdoc": "Doktora Sonrası",
+      "hobbyist": "Hobi Amaçlı / Yaşam Boyu Öğrenen"
+    },
+    "studiedSubjects": {
+      "title": "Bölümünüzde daha önce hangi dersleri aldınız?",
+      "description": "Bir ders yazın ve eklemek için Enter'a basın.",
+      "placeholder": "örneğin, Lineer Cebir, Etik..."
+    },
+    "interestedMajors": {
+      "title": "Başka alanlarla ilgileniyor musunuz?",
+      "description": "Keşfetmek istediğiniz diğer bölümleri ekleyin.",
+      "placeholder": "örneğin, Tarih, Biyoloji..."
+    },
+    "hobbies": {
+      "title": "Hobilerinizden bazıları nelerdir?",
+      "description": "Bu, ilgili içerikleri önermemize yardımcı olur.",
+      "placeholder": "örneğin, Satranç, Resim, Doğa Yürüyüşü..."
+    },
+    "news": {
+      "title": "Hangi haberleri ve makaleleri görmek istersiniz?",
+      "description": "İlginizi çeken konuları seçin.",
+      "placeholder": "örneğin, Yapay Zeka Haberleri, Teknoloji Haberleri..."
+    },
+    "contentPrefs": {
+      "title": "İçeriğinizi hassaslaştırın",
+      "newsletter": "Lyceum haftalık bültenine abone olun",
+      "quotes": "Büyük düşünürlerden günlük alıntılar alın"
+    },
+    "profile": {
+      "title": "Profilinizi özelleştirin",
+      "picture": "Profil Resmi",
+      "banner": "Profil Başlığı",
+      "bio": "Biyografiniz",
+      "bioPlaceholder": "Bize biraz kendinizden bahsedin..."
+    },
+    "socials": {
+      "title": "Dünyanızı bağlayın (isteğe bağlı)",
+      "description": "Diğer hesaplarınızı bağlayın."
+    },
+    "agreements": {
+      "title": "Son Anlaşmalar",
+      "terms": "Şartları ve Gizlilik Politikasını kabul ediyorum.",
+      "personalization": "Öğrenme sürecini kişiselleştirmek için verilerimin toplanmasını kabul ediyorum."
+    },
+    "buttons": {
+      "next": "İleri",
+      "previous": "Geri",
+      "skip": "Atla",
+      "finish": "Bitir"
+    }
+  }
+}
