@@ -1,10 +1,10 @@
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import { OnboardingForm } from '@/components/OnboardingForm';
 import { redirect } from 'next/navigation';
 import { getLocale } from 'next-intl/server';
 
 export default async function OnboardingPage() {
-  const supabase = createClient();
+  const supabase = createServerClient();
   const locale = await getLocale();
 
   const { data: { session } } = await supabase.auth.getSession();

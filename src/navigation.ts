@@ -18,6 +18,7 @@ const pathnames = {
   '/': '/',
   '/login': '/login',
   '/signup': '/signup',
+  '/dashboard': '/dashboard',
   '/about': '/about',
   '/terms': '/terms',
   '/privacy': '/privacy',
