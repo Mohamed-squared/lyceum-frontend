@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useSupabase } from '@/app/supabase-provider';
+import { createClient } from '@/utils/supabase/client';
 import type { Session } from '@supabase/supabase-js';
 
 // Corrected default imports
@@ -22,7 +22,7 @@ interface OnboardingFormProps {
 export function OnboardingForm({ session }: OnboardingFormProps) {
   const t = useTranslations('onboarding');
   const router = useRouter();
-  const supabase = useSupabase();
+  const supabase = createClient();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
