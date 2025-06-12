@@ -1,28 +1,11 @@
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import type { OnboardingData } from './OnboardingForm'; // Added import
 
-// Define the OnboardingData type based on the issue and database.types.ts
-export interface OnboardingData {
-  welcome: string | null; // Corresponds to display_name
-  role: string | null;
-  profile: {
-    bio: string | null;
-  };
-  major: string | null;
-  majorLevel: string | null; // Key for translation: majorLevel.someValue
-  studiedSubjects: string[] | null;
-  hobbies: string[] | null;
-  socials: {
-    twitter: string | null; // Corresponds to x_url
-    github: string | null;  // Corresponds to github_url
-    linkedin: string | null; // Add as optional, as it's not directly in profiles.Row
-  };
-  // Add any other fields from formData that might be relevant for preview but not explicitly listed
-  // For example, if other parts of formData are needed by other sections in the future.
-}
+// Removed the local OnboardingData definition as we are importing it.
 
 export interface UserProfilePreviewProps {
-  formData: OnboardingData;
+  formData: OnboardingData; // Changed to use imported OnboardingData
   profilePicturePreview: string | null;
   profileBannerPreview: string | null;
 }
@@ -74,11 +57,11 @@ const UserProfilePreview: React.FC<UserProfilePreviewProps> = ({
         </h1>
         {formData.role && (
           <span className="mt-2 inline-block px-4 py-1 text-sm font-semibold text-white bg-indigo-600 rounded-full">
-            {t(formData.role) || formData.role}
+            {t(formData.role as string) || formData.role}
           </span>
         )}
         {/* Display bio only if it exists and is not empty */}
-        {formData.profile.bio && formData.profile.bio.trim() !== '' && (
+        {formData.profile?.bio && (formData.profile.bio as string).trim() !== '' && (
           <p className="mt-3 text-md text-gray-700 max-w-prose mx-auto sm:mx-0">
             {formData.profile.bio}
           </p>
@@ -88,29 +71,29 @@ const UserProfilePreview: React.FC<UserProfilePreviewProps> = ({
       {/* Cards Section */}
       <div className="p-4 sm:p-6 space-y-6">
         {/* Academic Profile Card */}
-        {(formData.major || formData.majorLevel || (formData.studiedSubjects && formData.studiedSubjects.length > 0)) && (
+        {(formData.major || formData.majorLevel || (formData.studiedSubjects && (formData.studiedSubjects as string[]).length > 0)) && (
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">{t('academicProfileTitle') || 'Academic Profile'}</h2>
 
             {formData.major && (
               <div className="mb-3">
                 <p className="text-sm text-gray-500">{t('majorLabel') || 'Major'}</p>
-                <p className="text-md text-gray-800">{formData.major}</p>
+                <p className="text-md text-gray-800">{formData.major as string}</p>
               </div>
             )}
 
             {formData.majorLevel && (
               <div className="mb-3">
                 <p className="text-sm text-gray-500">{t('majorLevelLabel') || 'Level'}</p>
-                <p className="text-md text-gray-800">{t(`majorLevel.${formData.majorLevel}`) || formData.majorLevel}</p>
+                <p className="text-md text-gray-800">{t(`majorLevel.${formData.majorLevel as string}`) || formData.majorLevel}</p>
               </div>
             )}
 
-            {formData.studiedSubjects && formData.studiedSubjects.length > 0 && (
+            {formData.studiedSubjects && (formData.studiedSubjects as string[]).length > 0 && (
               <div>
                 <p className="text-sm text-gray-500 mb-2">{t('studiedSubjectsLabel') || 'Studied Subjects'}</p>
                 <div className="flex flex-wrap gap-2">
-                  {formData.studiedSubjects.map((subject, index) => (
+                  {(formData.studiedSubjects as string[]).map((subject, index) => (
                     <span key={index} className="px-3 py-1 text-xs font-semibold text-indigo-700 bg-indigo-100 rounded-full">
                       {subject}
                     </span>
@@ -122,13 +105,13 @@ const UserProfilePreview: React.FC<UserProfilePreviewProps> = ({
         )}
 
         {/* Interests Card */}
-        {formData.hobbies && formData.hobbies.length > 0 && (
+        {formData.hobbies && (formData.hobbies as string[]).length > 0 && (
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">
               {t('interestsTitle') || 'Interests'}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {formData.hobbies.map((hobby, index) => (
+              {(formData.hobbies as string[]).map((hobby, index) => (
                 <span key={index} className="px-3 py-1 text-xs font-semibold text-green-700 bg-green-100 rounded-full">
                   {hobby}
                 </span>
@@ -147,7 +130,7 @@ const UserProfilePreview: React.FC<UserProfilePreviewProps> = ({
               {/* Twitter (X) Link */}
               {formData.socials?.twitter && (
                 <a
-                  href={formData.socials.twitter.startsWith('http') ? formData.socials.twitter : `https://twitter.com/${formData.socials.twitter}`}
+                  href={(formData.socials.twitter as string).startsWith('http') ? formData.socials.twitter as string : `https://twitter.com/${formData.socials.twitter as string}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t('twitterAriaLabel') || 'Twitter Profile'}
@@ -159,7 +142,7 @@ const UserProfilePreview: React.FC<UserProfilePreviewProps> = ({
               {/* GitHub Link */}
               {formData.socials?.github && (
                 <a
-                  href={formData.socials.github.startsWith('http') ? formData.socials.github : `https://github.com/${formData.socials.github}`}
+                  href={(formData.socials.github as string).startsWith('http') ? formData.socials.github as string : `https://github.com/${formData.socials.github as string}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t('githubAriaLabel') || 'GitHub Profile'}
@@ -171,7 +154,7 @@ const UserProfilePreview: React.FC<UserProfilePreviewProps> = ({
               {/* LinkedIn Link */}
               {formData.socials?.linkedin && (
                 <a
-                  href={formData.socials.linkedin.startsWith('http') ? formData.socials.linkedin : `https://linkedin.com/in/${formData.socials.linkedin}`}
+                  href={(formData.socials.linkedin as string).startsWith('http') ? formData.socials.linkedin as string : `https://linkedin.com/in/${formData.socials.linkedin as string}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={t('linkedinAriaLabel') || 'LinkedIn Profile'}

@@ -23,7 +23,7 @@ import UserProfilePreview from '@/components/UserProfilePreview'; // Added
 // import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 
 // New type definition for formData
-type OnboardingData = {
+export type OnboardingData = { // Added export
   [key: string]: any;
 };
 
@@ -394,11 +394,9 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             {/* Preview Section */}
             <div className="flex-1 mt-6 md:mt-0">
               <UserProfilePreview
-                username={session?.user?.user_metadata?.full_name || session?.user?.email || t('profile.defaultUsername', { defaultMessage: 'User' })}
-                bio={profileBio}
-                profilePictureUrl={profilePicturePreview}
-                bannerUrl={profileBannerPreview}
-                // Add any other props UserProfilePreview expects
+                formData={formData} // Pass the entire formData state object
+                profilePicturePreview={profilePicturePreview}
+                profileBannerPreview={profileBannerPreview}
               />
             </div>
           </div>
