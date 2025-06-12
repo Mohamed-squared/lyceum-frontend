@@ -31,6 +31,11 @@ import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 //   studied_subjects: string[];
 // }
 
+// New type definition for formData
+type OnboardingData = {
+  [key: string]: any;
+};
+
 // Define the component's props
 interface OnboardingFormProps {
   session: Session | null;
@@ -43,7 +48,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
 
   // New state for the new onboarding flow
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [formData, setFormData] = useState<any>({}); // Initialize with an empty object, type can be refined later
+  const [formData, setFormData] = useState<OnboardingData>({}); // Apply the OnboardingData type
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null); // Keep error state
 
