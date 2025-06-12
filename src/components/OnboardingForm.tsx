@@ -19,8 +19,6 @@ interface OnboardingData {
   major: string;
   major_level: string;
   studied_subjects: string[];
-  // We'll add more fields as we build out the UI for them
-  // For now, this covers the first few steps.
 }
 
 // Define the component's props
@@ -29,7 +27,9 @@ interface OnboardingFormProps {
 }
 
 export function OnboardingForm({ session }: OnboardingFormProps) {
+  // Scoping t to 'onboarding' for steps, and creating a separate one for general errors
   const t = useTranslations('onboarding');
+  const tErrors = useTranslations('errors');
   const router = useRouter();
   const supabase = createClient();
 
@@ -37,7 +37,6 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // A single state object to hold all form data
   const [formData, setFormData] = useState<Partial<OnboardingData>>({
     display_name: '',
     role: null,
@@ -46,29 +45,26 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     studied_subjects: [],
   });
 
-  // Centralized handler for all input changes
   const handleChange = (field: keyof OnboardingData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  // Configuration for all onboarding steps
+  // CORRECTED: The 'id' now matches the keys in OnboardingData
   const steps = [
-    { id: 'welcome', title: t('welcome.title'), description: t('welcome.description'), required: true },
+    { id: 'display_name', title: t('welcome.title'), description: t('welcome.description'), required: true },
     { id: 'role', title: t('role.title'), required: true },
     { id: 'major', title: t('major.title'), required: true },
-    { id: 'majorLevel', title: t('majorLevel.title'), required: true },
-    { id: 'studiedSubjects', title: t('studiedSubjects.title'), description: t('studiedSubjects.description'), required: false },
-    // We will add the other 8 steps here once we build their UI components
+    { id: 'major_level', title: t('majorLevel.title'), required: true },
+    { id: 'studied_subjects', title: t('studiedSubjects.title'), description: t('studiedSubjects.description'), required: false },
   ];
 
   const handleNext = () => {
     setError(null);
-    // Validation check for the current step
     const currentStepConfig = steps[currentStep];
     if (currentStepConfig.required) {
       const value = formData[currentStepConfig.id as keyof OnboardingData];
       if (!value || (Array.isArray(value) && value.length === 0)) {
-        setError("This field is required."); // You can create a translation key for this
+        setError(tErrors('fieldRequired')); // Using translation key
         return;
       }
     }
@@ -86,32 +82,29 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     setError(null);
 
     if (!session?.user) {
-      setError('Authentication error.');
+      setError(tErrors('authError'));
       setIsLoading(false);
       return;
     }
 
     const { error: updateError } = await supabase
       .from('profiles')
-      .update({
-        ...formData, // Send the entire formData object
-        onboarding_completed: true,
-      })
+      .update({ ...formData, onboarding_completed: true })
       .eq('id', session.user.id);
 
     if (updateError) {
-      setError(`Failed to save profile: ${updateError.message}`);
+      setError(tErrors('profileUpdateFailed', { details: updateError.message }));
     } else {
       router.push('/dashboard');
     }
-
     setIsLoading(false);
   };
 
   const renderStepContent = () => {
+    // CORRECTED: The switch case now uses the updated id
     const stepId = steps[currentStep].id;
     switch (stepId) {
-      case 'welcome':
+      case 'display_name':
         return (
           <input
             type="text"
@@ -119,6 +112,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             placeholder={t('welcome.placeholder')}
             value={formData.display_name}
             onChange={(e) => handleChange('display_name', e.target.value)}
+            required
           />
         );
       case 'role':
@@ -136,16 +130,18 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             placeholder={t('major.placeholder')}
             value={formData.major}
             onChange={(e) => handleChange('major', e.target.value)}
+            required
           />
         );
-      case 'majorLevel':
+      case 'major_level':
         return (
             <select
                 className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
                 value={formData.major_level}
                 onChange={(e) => handleChange('major_level', e.target.value)}
+                required
             >
-                <option value="" disabled>Select your level...</option>
+                <option value="" disabled>Select your level...</option> {/* Consider translating this default option */}
                 <option value="bachelor">{t('majorLevel.bachelor')}</option>
                 <option value="master">{t('majorLevel.master')}</option>
                 <option value="phd">{t('majorLevel.phd')}</option>
@@ -153,7 +149,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
                 <option value="hobbyist">{t('majorLevel.hobbyist')}</option>
             </select>
         );
-      case 'studiedSubjects':
+      case 'studied_subjects':
         return (
             <TagInput
                 value={formData.studied_subjects || []}
@@ -162,7 +158,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             />
         );
       default:
-        return <div>Step not configured yet.</div>;
+        return <div>Step not configured yet.</div>; // Consider translating or making this a more user-friendly message
     }
   };
 

@@ -134,5 +134,10 @@
     "socials": { "title": "Dünyanı Bağla (İsteğe Bağlı)", "description": "Diğer hesaplarını bağla." },
     "agreements": { "title": "Son Anlaşmalar", "terms": "Şartları ve Gizlilik Politikasını kabul ediyorum.", "personalization": "Öğrenmemi kişiselleştirmek için verilerimin toplanmasına izin veriyorum." },
     "buttons": { "next": "İleri", "previous": "Geri", "skip": "Atla", "finish": "Bitir" }
-  }
+  },
+"errors": {
+  "fieldRequired": "Bu alan zorunludur.",
+  "authError": "Kimlik doğrulama hatası. Lütfen tekrar giriş yapın.",
+  "profileUpdateFailed": "Profil kaydedilemedi: {details}"
+}
 }

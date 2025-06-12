@@ -134,5 +134,10 @@
     "socials": { "title": "Verbinde deine Welt (Optional)", "description": "Verbinde deine anderen Konten." },
     "agreements": { "title": "Abschließende Vereinbarungen", "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.", "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu." },
     "buttons": { "next": "Weiter", "previous": "Zurück", "skip": "Überspringen", "finish": "Abschließen" }
-  }
+  },
+"errors": {
+  "fieldRequired": "Dieses Feld ist erforderlich.",
+  "authError": "Authentifizierungsfehler. Bitte melden Sie sich erneut an.",
+  "profileUpdateFailed": "Profil konnte nicht gespeichert werden: {details}"
+}
 }
