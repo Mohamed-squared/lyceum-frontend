@@ -124,7 +124,7 @@
     "role": { "title": "Eğitmen misin, öğrenci mi?", "teacher": "Eğitmen", "student": "Öğrenci" },
     "languages": { "title": "Dil Tercihlerini Ayarla", "website": "Web Sitesi Arayüz Dili", "explanation": "Yapay Zeka Açıklama Dili", "material": "Ders Materyali Dili" },
     "major": { "title": "Ana çalışma alanın (Bölümün) nedir?", "placeholder": "Örn. Bilgisayar Bilimi, Felsefe, Fizik..." },
-    "majorLevel": { "title": "Bu bölümde şu anki seviyen nedir?", "bachelor": "Lisans Derecesi", "master": "Yüksek Lisans Derecesi", "phd": "Doktora", "postdoc": "Doktora Sonrası", "hobbyist": "Hobi Amaçlı / Yaşam Boyu Öğrenen" },
+    "majorLevel": { "title": "Bu bölümde şu anki seviyen nedir?", "selectPlaceholder": "Seviyenizi seçin...", "bachelor": "Lisans Derecesi", "master": "Yüksek Lisans Derecesi", "phd": "Doktora", "postdoc": "Doktora Sonrası", "hobbyist": "Hobi Amaçlı / Yaşam Boyu Öğrenen" },
     "studiedSubjects": { "title": "Bölümünde daha önce hangi dersleri çalıştın?", "description": "Bir ders adı yaz ve eklemek için Enter'a bas.", "placeholder": "Örn. Lineer Cebir, Etik..." },
     "interestedMajors": { "title": "Başka alanlarla ilgileniyor musun?", "description": "Keşfetmek istediğin diğer bölümleri ekle.", "placeholder": "Örn. Tarih, Biyoloji..." },
     "hobbies": { "title": "Hobilerinden bazıları neler?", "description": "Bu, ilgili içerikleri önermemize yardımcı olur.", "placeholder": "Örn. Satranç, Resim, Doğa Yürüyüşü..." },

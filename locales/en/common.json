@@ -124,7 +124,7 @@
     "role": { "title": "Are you an educator or a student?", "teacher": "Educator", "student": "Student" },
     "languages": { "title": "Set Your Language Preferences", "website": "Website Interface Language", "explanation": "AI Explanation Language", "material": "Course Material Language" },
     "major": { "title": "What is your primary field of study (Major)?", "placeholder": "e.g., Computer Science, Philosophy, Physics..." },
-    "majorLevel": { "title": "What is your current level in this major?", "bachelor": "Bachelor's Degree", "master": "Master's Degree", "phd": "PhD", "postdoc": "Postdoctoral", "hobbyist": "Hobbyist / Lifelong Learner" },
+    "majorLevel": { "title": "What is your current level in this major?", "selectPlaceholder": "Select your level...", "bachelor": "Bachelor's Degree", "master": "Master's Degree", "phd": "PhD", "postdoc": "Postdoctoral", "hobbyist": "Hobbyist / Lifelong Learner" },
     "studiedSubjects": { "title": "What subjects have you already studied in your major?", "description": "Type a subject name and press Enter to add it.", "placeholder": "e.g., Linear Algebra, Ethics..." },
     "interestedMajors": { "title": "Are you interested in other fields?", "description": "Add any other majors you'd like to explore.", "placeholder": "e.g., History, Biology..." },
     "hobbies": { "title": "What are some of your hobbies?", "description": "This helps us recommend related content.", "placeholder": "e.g., Chess, Painting, Hiking..." },

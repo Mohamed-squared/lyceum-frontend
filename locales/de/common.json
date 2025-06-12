@@ -124,7 +124,7 @@
     "role": { "title": "Bist du ein Lehrender oder ein Student?", "teacher": "Lehrender", "student": "Student" },
     "languages": { "title": "Stelle deine Spracheinstellungen ein", "website": "Sprache der Benutzeroberfläche", "explanation": "Sprache der KI-Erklärungen", "material": "Sprache des Kursmaterials" },
     "major": { "title": "Was ist dein Hauptstudienfach?", "placeholder": "z.B. Informatik, Philosophie, Physik..." },
-    "majorLevel": { "title": "Was ist dein aktuelles Niveau in diesem Fach?", "bachelor": "Bachelor-Abschluss", "master": "Master-Abschluss", "phd": "Doktor", "postdoc": "Postdoktorand", "hobbyist": "Hobbyist / Lebenslanger Lerner" },
+    "majorLevel": { "title": "Was ist dein aktuelles Niveau in diesem Fach?", "selectPlaceholder": "Wählen Sie Ihr Niveau...", "bachelor": "Bachelor-Abschluss", "master": "Master-Abschluss", "phd": "Doktor", "postdoc": "Postdoktorand", "hobbyist": "Hobbyist / Lebenslanger Lerner" },
     "studiedSubjects": { "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?", "description": "Gib einen Fachnamen ein und drücke Enter, um es hinzuzufügen.", "placeholder": "z.B. Lineare Algebra, Ethik..." },
     "interestedMajors": { "title": "Interessierst du dich für andere Fachgebiete?", "description": "Füge weitere Hauptfächer hinzu, die du erkunden möchtest.", "placeholder": "z.B. Geschichte, Biologie..." },
     "hobbies": { "title": "Was sind einige deiner Hobbies?", "description": "Dies hilft uns, verwandte Inhalte zu empfehlen.", "placeholder": "z.B. Schach, Malen, Wandern..." },
