@@ -9,17 +9,17 @@ import { createClient } from '@/utils/supabase/client';
 import type { Session } from '@supabase/supabase-js';
 
 // New imports for the new onboarding flow
-import { onboardingSteps } from '../../lib/onboarding-steps';
-import RoleSelectionCard from '../ui/RoleSelectionCard'; // Already existed, ensure path is ../ui/
-import TagInput from '../ui/TagInput'; // Already existed, ensure path is ../ui/
-import LanguageSelectPlaceholder from '../ui/LanguageSelectPlaceholder';
-import SelectPlaceholder from '../ui/SelectPlaceholder';
-import MultiFieldPlaceholder from '../ui/MultiFieldPlaceholder';
-import CheckboxGroupPlaceholder from '../ui/CheckboxGroupPlaceholder';
-import SocialsPlaceholder from '../ui/SocialsPlaceholder';
+import { onboardingSteps } from '@/lib/onboarding-steps';
+import RoleSelectionCard from '@/components/ui/RoleSelectionCard';
+import TagInput from '@/components/ui/TagInput';
+import LanguageSelectPlaceholder from '@/components/ui/LanguageSelectPlaceholder';
+import SelectPlaceholder from '@/components/ui/SelectPlaceholder';
+import MultiFieldPlaceholder from '@/components/ui/MultiFieldPlaceholder';
+import CheckboxGroupPlaceholder from '@/components/ui/CheckboxGroupPlaceholder';
+import SocialsPlaceholder from '@/components/ui/SocialsPlaceholder';
 
 // Icons (assuming these might still be used or managed differently later)
-import studentIcon from '../../public/assets/onboarding/icon-student.svg';
+import studentIcon from '../../public/assets/onboarding/icon-student.svg'; // This path might also need aliasing if public is not directly servable like that. For now, focus on @/ components and lib.
 import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 
 // Interface for our form data state (old one, to be replaced or adapted)
