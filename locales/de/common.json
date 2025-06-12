@@ -132,8 +132,8 @@
     "contentPrefs": { "title": "Optimiere deine Inhalte", "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter", "quotes": "Erhalte tägliche Zitate von großen Denkern" },
     "profile": { "title": "Passe dein Profil an", "picture": "Profilbild", "banner": "Profil-Banner", "bio": "Deine Biografie", "bioPlaceholder": "Erzähl uns ein wenig über dich..." },
     "socials": { "title": "Verbinde deine Welt (Optional)", "description": "Verbinde deine anderen Konten." },
-    "agreements": { "title": "Abschließende Vereinbarungen", "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.", "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu." },
-    "buttons": { "next": "Weiter", "previous": "Zurück", "skip": "Überspringen", "finish": "Abschließen" }
+    "agreements": { "title": "Abschließende Vereinbarungen", "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.", "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu.", "mustAgreeTerms": "Sie müssen den Nutzungsbedingungen und der Datenschutzrichtlinie zustimmen, um fortzufahren." },
+    "buttons": { "next": "Weiter", "previous": "Zurück", "skip": "Überspringen", "finish": "Abschließen", "saving": "Speichern..." }
   },
 "errors": {
   "fieldRequired": "Dieses Feld ist erforderlich.",

@@ -12,7 +12,6 @@ import TagInput from './ui/TagInput';
 import studentIcon from '../../public/assets/onboarding/icon-student.svg';
 import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 
-// Fully expanded interface for all onboarding data
 interface OnboardingData {
   display_name: string;
   role: 'student' | 'teacher' | null;
@@ -30,7 +29,6 @@ interface OnboardingData {
   bio: string;
   agreed_to_terms: boolean;
   agreed_to_personalization: boolean;
-  // profile_picture_url and profile_banner_url will be handled separately
 }
 
 interface OnboardingFormProps {
@@ -47,7 +45,6 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Expanded state object with defaults for all fields
   const [formData, setFormData] = useState<Partial<OnboardingData>>({
     display_name: '',
     role: null,
@@ -57,7 +54,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     interested_majors: [],
     hobbies: [],
     news_topics: [],
-    website_language: 'en', // Default value
+    website_language: 'en',
     explanation_language: 'en',
     material_language: 'en',
     subscribe_newsletter: false,
@@ -71,7 +68,6 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  // Fully expanded steps array
   const steps = [
     { id: 'display_name', title: t('welcome.title'), required: true },
     { id: 'role', title: t('role.title'), required: true },
@@ -81,11 +77,11 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     { id: 'interested_majors', title: t('interestedMajors.title'), description: t('interestedMajors.description'), required: false },
     { id: 'hobbies', title: t('hobbies.title'), description: t('hobbies.description'), required: false },
     { id: 'news_topics', title: t('news.title'), description: t('news.description'), required: false },
-    { id: 'languages', title: t('languages.title'), required: true }, // Assuming language selection is required
+    { id: 'languages', title: t('languages.title'), required: true },
     { id: 'contentPrefs', title: t('contentPrefs.title'), required: false },
-    { id: 'profile', title: t('profile.title'), required: false }, // Bio is optional
+    { id: 'profile', title: t('profile.title'), required: false },
     { id: 'socials', title: t('socials.title'), description: t('socials.description'), required: false },
-    { id: 'agreements', title: t('agreements.title'), required: true }, // Terms agreement is required
+    { id: 'agreements', title: t('agreements.title'), required: true },
   ];
 
   const handleNext = () => {
@@ -93,16 +89,9 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     const currentStepConfig = steps[currentStep];
     if (currentStepConfig.required) {
       let value = formData[currentStepConfig.id as keyof OnboardingData];
-       // Special handling for 'agreements' step validation
-      if (currentStepConfig.id === 'agreements') {
-        value = formData.agreed_to_terms; // Only check the terms agreement for proceeding
+       if (currentStepConfig.id === 'agreements') {
+        value = formData.agreed_to_terms;
       }
-      // Special handling for 'languages' step (example, could be more complex if needed)
-      // For now, we assume individual language fields are handled by their 'required' if any, or are part of a group
-      // If 'languages' step itself is marked required, it implies all sub-fields within it are collectively required or have defaults.
-      // The current setup implies that if 'languages' step is 'required:true', the user must interact with it,
-      // but individual select defaults prevent empty values. A more robust validation might check each language field.
-
       if (!value || (Array.isArray(value) && value.length === 0)) {
         setError(tErrors('fieldRequired'));
         return;
@@ -118,16 +107,15 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Final check for terms agreement before submitting
-    if (!formData.agreed_to_terms) {
-      // This error message should ideally be translated as well
-      setError(t('agreements.mustAgreeTerms', 'You must agree to the Terms and Privacy Policy to complete onboarding.'));
-      setIsLoading(false); // Ensure loading is stopped
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
+
+    // CORRECTED: Validation check for terms agreement
+    if (!formData.agreed_to_terms) {
+      setError(t('agreements.mustAgreeTerms')); // Use the new translation key
+      setIsLoading(false);
+      return;
+    }
 
     if (!session?.user) {
       setError(tErrors('authError'));
@@ -135,15 +123,12 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       return;
     }
 
-    const { error: updateError } = await supabase
-      .from('profiles')
-      .update({ ...formData, onboarding_completed: true }) // Send all collected data
-      .eq('id', session.user.id);
+    const { error: updateError } = await supabase.from('profiles').update({ ...formData, onboarding_completed: true }).eq('id', session.user.id);
 
     if (updateError) {
       setError(tErrors('profileUpdateFailed', { details: updateError.message }));
     } else {
-      router.push('/dashboard'); // Redirect on success
+      router.push('/dashboard');
     }
     setIsLoading(false);
   };
@@ -162,7 +147,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       case 'languages': return <div className="space-y-4"><div><label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">{t('languages.website')}</label><select className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-blue-500 focus:border-blue-500" value={formData.website_language} onChange={(e) => handleChange('website_language', e.target.value)}><option value="en">English</option><option value="ar">العربية</option><option value="de">Deutsch</option><option value="tr">Türkçe</option></select></div><div><label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">{t('languages.explanation')}</label><select className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-blue-500 focus:border-blue-500" value={formData.explanation_language} onChange={(e) => handleChange('explanation_language', e.target.value)}><option value="en">English</option><option value="ar">العربية</option><option value="de">Deutsch</option><option value="tr">Türkçe</option></select></div><div><label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">{t('languages.material')}</label><select className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-blue-500 focus:border-blue-500" value={formData.material_language} onChange={(e) => handleChange('material_language', e.target.value)}><option value="en">English</option><option value="ar">العربية</option><option value="de">Deutsch</option><option value="tr">Türkçe</option></select></div></div>;
       case 'contentPrefs': return <div className="space-y-3"><label className="flex items-center gap-3 p-3 border rounded-md dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors"><input type="checkbox" className="h-5 w-5 accent-blue-600" checked={!!formData.subscribe_newsletter} onChange={(e) => handleChange('subscribe_newsletter', e.target.checked)} /><span>{t('contentPrefs.newsletter')}</span></label><label className="flex items-center gap-3 p-3 border rounded-md dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors"><input type="checkbox" className="h-5 w-5 accent-blue-600" checked={!!formData.daily_quotes} onChange={(e) => handleChange('daily_quotes', e.target.checked)} /><span>{t('contentPrefs.quotes')}</span></label></div>;
       case 'profile': return <div className="space-y-4"><div><label className="block mb-1 text-sm font-medium text-gray-700 dark:text-gray-300">{t('profile.bio')}</label><textarea className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 h-24 focus:ring-2 focus:ring-blue-500" placeholder={t('profile.bioPlaceholder')} value={formData.bio} onChange={(e) => handleChange('bio', e.target.value)} /></div><div className="text-center text-sm text-gray-500 dark:text-gray-400">{t('profile.uploadsPlaceholder', 'Profile picture and banner uploads coming soon!')}</div></div>;
-      case 'socials': return <div className="text-center text-sm text-gray-500 dark:text-gray-400">{t('socials.placeholder', 'Social links component coming soon!')}</div>; // Placeholder for future social links component
+      case 'socials': return <div className="text-center text-sm text-gray-500 dark:text-gray-400">{t('socials.placeholder', 'Social links component coming soon!')}</div>;
       case 'agreements': return <div className="space-y-3"><label className="flex items-center gap-3 p-3 border rounded-md dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors"><input type="checkbox" className="h-5 w-5 accent-blue-600" checked={!!formData.agreed_to_terms} onChange={(e) => handleChange('agreed_to_terms', e.target.checked)} required /><span>{t('agreements.terms')}</span></label><label className="flex items-center gap-3 p-3 border rounded-md dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors"><input type="checkbox" className="h-5 w-5 accent-blue-600" checked={!!formData.agreed_to_personalization} onChange={(e) => handleChange('agreed_to_personalization', e.target.checked)} /><span>{t('agreements.personalization')}</span></label></div>;
       default: return <div>{t('stepNotConfigured', 'Step not configured yet.')}</div>;
     }
@@ -199,7 +184,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             disabled={isLoading || !formData.agreed_to_terms}
             className="w-full sm:w-auto px-6 py-2.5 rounded-md font-semibold bg-green-600 text-white hover:bg-green-700 transition-colors disabled:bg-green-400 disabled:cursor-not-allowed"
           >
-            {isLoading ? t('buttons.saving', 'Saving...') : t('buttons.finish')}
+            {isLoading ? t('buttons.saving') : t('buttons.finish')}
           </button>
         )}
       </div>

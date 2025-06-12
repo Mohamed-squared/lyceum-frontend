@@ -132,8 +132,8 @@
     "contentPrefs": { "title": "Fine-tune Your Content", "newsletter": "Subscribe to the weekly Lyceum Newsletter", "quotes": "Get daily quotes from great thinkers" },
     "profile": { "title": "Customize Your Profile", "picture": "Profile Picture", "banner": "Profile Banner", "bio": "Your Bio", "bioPlaceholder": "Tell us a little about yourself..." },
     "socials": { "title": "Link Your World (Optional)", "description": "Connect your other accounts." },
-    "agreements": { "title": "Final Agreements", "terms": "I agree to the Terms and Privacy Policy.", "personalization": "I consent to my data being collected to personalize my learning." },
-    "buttons": { "next": "Next", "previous": "Back", "skip": "Skip", "finish": "Finish" }
+    "agreements": { "title": "Final Agreements", "terms": "I agree to the Terms and Privacy Policy.", "personalization": "I consent to my data being collected to personalize my learning.", "mustAgreeTerms": "You must agree to the Terms and Privacy Policy to continue." },
+    "buttons": { "next": "Next", "previous": "Back", "skip": "Skip", "finish": "Finish", "saving": "Saving..." }
   },
 "errors": {
   "fieldRequired": "This field is required.",
