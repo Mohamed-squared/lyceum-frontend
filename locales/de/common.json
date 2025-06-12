@@ -119,25 +119,102 @@
     "continueWithGoogle": "Mit Google fortfahren"
   },
   "onboarding": {
-    "step": "Schritt", "of": "von",
-    "welcome": { "title": "Willkommen bei Lyceum! Wie sollen wir dich nennen?", "description": "Dies wird dein öffentlicher Anzeigename sein.", "placeholder": "Gib deinen Namen ein" },
-    "role": { "title": "Bist du ein Lehrender oder ein Student?", "teacher": "Lehrender", "student": "Student" },
-    "languages": { "title": "Stelle deine Spracheinstellungen ein", "website": "Sprache der Benutzeroberfläche", "explanation": "Sprache der KI-Erklärungen", "material": "Sprache des Kursmaterials" },
-    "major": { "title": "Was ist dein Hauptstudienfach?", "placeholder": "z.B. Informatik, Philosophie, Physik..." },
-    "majorLevel": { "title": "Was ist dein aktuelles Niveau in diesem Fach?", "bachelor": "Bachelor-Abschluss", "master": "Master-Abschluss", "phd": "Doktor", "postdoc": "Postdoktorand", "hobbyist": "Hobbyist / Lebenslanger Lerner" },
-    "studiedSubjects": { "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?", "description": "Gib einen Fachnamen ein und drücke Enter, um es hinzuzufügen.", "placeholder": "z.B. Lineare Algebra, Ethik..." },
-    "interestedMajors": { "title": "Interessierst du dich für andere Fachgebiete?", "description": "Füge weitere Hauptfächer hinzu, die du erkunden möchtest.", "placeholder": "z.B. Geschichte, Biologie..." },
-    "hobbies": { "title": "Was sind einige deiner Hobbies?", "description": "Dies hilft uns, verwandte Inhalte zu empfehlen.", "placeholder": "z.B. Schach, Malen, Wandern..." },
-    "news": { "title": "Welche Nachrichten und Artikel möchtest du sehen?", "description": "Wähle Themen, die dich interessieren.", "placeholder": "z.B. KI-Nachrichten, Technik-Nachrichten..." },
-    "contentPrefs": { "title": "Optimiere deine Inhalte", "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter", "quotes": "Erhalte tägliche Zitate von großen Denkern" },
-    "profile": { "title": "Passe dein Profil an", "picture": "Profilbild", "banner": "Profil-Banner", "bio": "Deine Biografie", "bioPlaceholder": "Erzähl uns ein wenig über dich..." },
-    "socials": { "title": "Verbinde deine Welt (Optional)", "description": "Verbinde deine anderen Konten." },
-    "agreements": { "title": "Abschließende Vereinbarungen", "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.", "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu." },
-    "buttons": { "next": "Weiter", "previous": "Zurück", "skip": "Überspringen", "finish": "Abschließen" }
+    "step": "Schritt",
+    "of": "von",
+    "sections": {
+      "welcome": "Willkommen",
+      "role": "Rolle",
+      "language": "Sprache",
+      "fieldOfStudy": "Studienfach",
+      "level": "Niveau",
+      "studiedSubjects": "Studierte Fächer",
+      "interests": "Interessen",
+      "hobbies": "Hobbys",
+      "news": "Nachrichten",
+      "contentPreference": "Inhaltspräferenz",
+      "profile": "Profil",
+      "socials": "Soziale Netzwerke",
+      "agreements": "Vereinbarungen"
+    },
+    "buttons": {
+      "next": "Weiter",
+      "previous": "Zurück",
+      "skip": "Überspringen",
+      "finish": "Abschließen"
+    },
+    "welcome": {
+      "title": "Willkommen bei Lyceum! Wie sollen wir dich nennen?",
+      "description": "Dies wird dein öffentlicher Anzeigename sein.",
+      "placeholder": "Gib deinen Namen ein"
+    },
+    "role": {
+      "title": "Bist du ein Lehrender oder ein Student?",
+      "teacher": "Lehrender",
+      "student": "Student"
+    },
+    "languages": {
+      "title": "Stelle deine Spracheinstellungen ein",
+      "website": "Sprache der Benutzeroberfläche",
+      "explanation": "Sprache der KI-Erklärungen",
+      "material": "Sprache des Kursmaterials"
+    },
+    "major": {
+      "title": "Was ist dein Hauptstudienfach?",
+      "placeholder": "z.B. Informatik, Philosophie, Physik..."
+    },
+    "majorLevel": {
+      "title": "Was ist dein aktuelles Niveau in diesem Fach?",
+      "bachelor": "Bachelor-Abschluss",
+      "master": "Master-Abschluss",
+      "phd": "Doktor",
+      "postdoc": "Postdoktorand",
+      "hobbyist": "Hobbyist / Lebenslanger Lerner"
+    },
+    "studiedSubjects": {
+      "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?",
+      "description": "Gib einen Fachnamen ein und drücke Enter, um es hinzuzufügen.",
+      "placeholder": "z.B. Lineare Algebra, Ethik..."
+    },
+    "interestedMajors": {
+      "title": "Interessierst du dich für andere Fachgebiete?",
+      "description": "Füge weitere Hauptfächer hinzu, die du erkunden möchtest.",
+      "placeholder": "z.B. Geschichte, Biologie..."
+    },
+    "hobbies": {
+      "title": "Was sind einige deiner Hobbys?",
+      "description": "Dies hilft uns, verwandte Inhalte zu empfehlen.",
+      "placeholder": "z.B. Schach, Malen, Wandern..."
+    },
+    "news": {
+      "title": "Welche Nachrichten und Artikel möchtest du sehen?",
+      "description": "Wähle Themen, die dich interessieren.",
+      "placeholder": "z.B. KI-Nachrichten, Technik-Nachrichten..."
+    },
+    "contentPrefs": {
+      "title": "Optimiere deine Inhalte",
+      "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter",
+      "quotes": "Erhalte tägliche Zitate von großen Denkern"
+    },
+    "profile": {
+      "title": "Passe dein Profil an",
+      "picture": "Profilbild",
+      "banner": "Profil-Banner",
+      "bio": "Deine Biografie",
+      "bioPlaceholder": "Erzähl uns ein wenig über dich..."
+    },
+    "socials": {
+      "title": "Verbinde deine Welt (Optional)",
+      "description": "Verbinde deine anderen Konten."
+    },
+    "agreements": {
+      "title": "Abschließende Vereinbarungen",
+      "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.",
+      "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu."
+    }
   },
-"errors": {
-  "fieldRequired": "Dieses Feld ist erforderlich.",
-  "authError": "Authentifizierungsfehler. Bitte melden Sie sich erneut an.",
-  "profileUpdateFailed": "Profil konnte nicht gespeichert werden: {details}"
-}
+  "errors": {
+    "fieldRequired": "Dieses Feld ist erforderlich.",
+    "authError": "Authentifizierungsfehler. Bitte melden Sie sich erneut an.",
+    "profileUpdateFailed": "Profil konnte nicht gespeichert werden: {details}"
+  }
 }

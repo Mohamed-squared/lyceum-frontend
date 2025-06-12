@@ -135,85 +135,176 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   // This function handles the form's native onSubmit event
   const handleFormSubmitEvent = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Consolidate data before final submission if necessary, or directly use formData
-    // For now, directly using formData which should be up-to-date.
+    // On the final step, handleProceed will have already updated formData
+    // if it was called by the "Finish" button.
+    // Or, if "Finish" is the submit button itself, it directly calls processAndSubmitData.
     await processAndSubmitData(formData);
   };
 
-  // Local state for text input, specific to 'text' type steps
-  // This will be reset when the step changes if the new step is also 'text'
-  const [textInputValue, setTextInputValue] = useState('');
+  // --- Local State for Step Inputs ---
+  const [welcomeName, setWelcomeName] = useState('');
+  const [selectedRole, setSelectedRole] = useState<'student' | 'teacher' | null>(null);
+  const [languageSelections, setLanguageSelections] = useState({}); // Assuming object structure
+  const [majorName, setMajorName] = useState('');
+  const [selectedMajorLevel, setSelectedMajorLevel] = useState('');
+  const [currentStudiedSubjects, setCurrentStudiedSubjects] = useState<string[]>([]);
+  const [currentInterestedMajors, setCurrentInterestedMajors] = useState<string[]>([]);
+  const [currentHobbies, setCurrentHobbies] = useState<string[]>([]);
+  const [currentNewsPrefs, setCurrentNewsPrefs] = useState<string[]>([]); // Assuming array of selected news topics
+  const [contentPrefsValues, setContentPrefsValues] = useState({ newsletter: false, quotes: false }); // Adjusted based on typical usage
+  const [profileData, setProfileData] = useState({ bio: '', picture: '', banner: '' }); // Simplified
+  const [socialsData, setSocialsData] = useState({}); // Assuming object structure
+  const [agreementValues, setAgreementValues] = useState({ terms: false, personalization: false });
 
   useEffect(() => {
-    if (currentStep?.type === 'text') {
-      setTextInputValue(formData[currentStep.id] || '');
+    // Populate local state when currentStep changes or formData for that step is initialized
+    if (!currentStep) return;
+    const stepData = formData[currentStep.id];
+
+    switch (currentStep.id) {
+      case 'welcome':
+        setWelcomeName(stepData || '');
+        break;
+      case 'role':
+        setSelectedRole(stepData || null);
+        break;
+      case 'languages':
+        setLanguageSelections(stepData || {});
+        break;
+      case 'major':
+        setMajorName(stepData || '');
+        break;
+      case 'majorLevel':
+        setSelectedMajorLevel(stepData || '');
+        break;
+      case 'studiedSubjects':
+        setCurrentStudiedSubjects(stepData || []);
+        break;
+      case 'interestedMajors':
+        setCurrentInterestedMajors(stepData || []);
+        break;
+      case 'hobbies':
+        setCurrentHobbies(stepData || []);
+        break;
+      case 'news':
+        setCurrentNewsPrefs(stepData || []);
+        break;
+      case 'contentPrefs':
+        setContentPrefsValues(stepData || { newsletter: false, quotes: false });
+        break;
+      case 'profile':
+        setProfileData(stepData || { bio: '', picture: '', banner: '' });
+        break;
+      case 'socials':
+        setSocialsData(stepData || {});
+        break;
+      case 'agreements':
+        setAgreementValues(stepData || { terms: false, personalization: false });
+        break;
     }
-    // Clear textInputValue if the step changes and is not 'text', or if it's a new 'text' step.
-    // This is a simple way to manage; more complex scenarios might need per-field state or refs.
-    return () => {
-      if (currentStep?.type === 'text') {
-         // Optionally save back to formData if user navigates away using browser buttons for example
-         // For now, data is saved on "Next" button click.
-      }
-    };
   }, [currentStep, formData]);
+
+  const handleProceed = () => {
+    if (!currentStep) return;
+    let dataToSubmit: any = {};
+
+    switch (currentStep.id) {
+      case 'welcome':
+        dataToSubmit = welcomeName;
+        break;
+      case 'role':
+        dataToSubmit = selectedRole;
+        break;
+      case 'languages':
+        dataToSubmit = languageSelections;
+        break;
+      case 'major':
+        dataToSubmit = majorName;
+        break;
+      case 'majorLevel':
+        dataToSubmit = selectedMajorLevel;
+        break;
+      case 'studiedSubjects':
+        dataToSubmit = currentStudiedSubjects;
+        break;
+      case 'interestedMajors':
+        dataToSubmit = currentInterestedMajors;
+        break;
+      case 'hobbies':
+        dataToSubmit = currentHobbies;
+        break;
+      case 'news':
+        dataToSubmit = currentNewsPrefs;
+        break;
+      case 'contentPrefs':
+        dataToSubmit = contentPrefsValues;
+        break;
+      case 'profile':
+        dataToSubmit = profileData;
+        break;
+      case 'socials':
+        dataToSubmit = socialsData;
+        break;
+      case 'agreements':
+        dataToSubmit = agreementValues;
+        // For the last step, if proceeding via "Finish", data is already up-to-date in formData
+        // and handleFormSubmitEvent will be called. This case is for consistency if handleProceed
+        // was somehow called.
+        break;
+      default:
+        console.warn(`No data collection logic for step: ${currentStep.id}`);
+    }
+
+    // Update formData with the collected data for the current step
+    setFormData(prevData => ({ ...prevData, [currentStep.id]: dataToSubmit }));
+
+    if (currentStepIndex < totalSteps - 1) {
+      setCurrentStepIndex(prevIndex => prevIndex + 1);
+    } else {
+      // This 'else' means "Finish" button was clicked and it called handleProceed.
+      // The form's onSubmit will handle the submission.
+      // We ensure formData is up-to-date here.
+      // processAndSubmitData(formData); // This would be redundant if Finish is type="submit"
+    }
+  };
 
 
   const renderStepContent = () => {
     if (!currentStep) return <div>Loading step...</div>;
 
-    // Common title and description rendering can be part of the main layout
-    // This function will focus on rendering the input part of the step.
-
     switch (currentStep.type) {
       case 'text':
-        // Specific handling for 'major' id for now as it's the only text type other than welcome
-        // Welcome step is special and might not need a generic input field.
-        // For this example, 'major' will use the local textInputValue state.
-        // All 'text' types will use this for now.
+        const isWelcome = currentStep.id === 'welcome';
+        const textValue = isWelcome ? welcomeName : majorName;
+        const setText = isWelcome ? setWelcomeName : setMajorName;
         return (
-          <>
-            <input
-              type="text"
-              className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
-              placeholder={t(`${currentStep.id}.placeholder`)}
-              value={textInputValue}
-              onChange={(e) => setTextInputValue(e.target.value)}
-            />
-            {currentStepIndex < totalSteps - 1 && (
-                 <button
-                    type="button"
-                    onClick={() => {
-                        handleNext(currentStep.id, textInputValue);
-                        // setTextInputValue(''); // Clear after next, useEffect will repopulate if returning
-                    }}
-                    className="mt-4 px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                  >
-                    {t('buttons.next')}
-                  </button>
-            )}
-          </>
+          <input
+            type="text"
+            className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+            placeholder={t(`${currentStep.id}.placeholder`)}
+            value={textValue}
+            onChange={(e) => setText(e.target.value)}
+          />
         );
       case 'role':
-        // Assuming RoleSelectionCard's onChange calls handleNext directly
         return (
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
-                <RoleSelectionCard
-                    icon={studentIcon}
-                    title={t('role.student')}
-                    isSelected={formData[currentStep.id] === 'student'}
-                    onClick={() => handleNext(currentStep.id, 'student')}
-                />
-                <RoleSelectionCard
-                    icon={teacherIcon}
-                    title={t('role.teacher')}
-                    isSelected={formData[currentStep.id] === 'teacher'}
-                    onClick={() => handleNext(currentStep.id, 'teacher')}
-                />
-            </div>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
+            <RoleSelectionCard
+              icon={studentIcon}
+              title={t('role.student')}
+              isSelected={selectedRole === 'student'}
+              onClick={() => setSelectedRole('student')}
+            />
+            <RoleSelectionCard
+              icon={teacherIcon}
+              title={t('role.teacher')}
+              isSelected={selectedRole === 'teacher'}
+              onClick={() => setSelectedRole('teacher')}
+            />
+          </div>
         );
       case 'language-select':
-        return <LanguageSelectPlaceholder value={formData[currentStep.id]} onChange={(value) => handleNext(currentStep.id, value)} />;
+        return <LanguageSelectPlaceholder value={languageSelections} onChange={setLanguageSelections} />;
       case 'select':
         const selectOptions = currentStep.id === 'majorLevel' ? [
           { value: 'bachelor', label: t('majorLevel.bachelor') },
@@ -222,89 +313,71 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
           { value: 'postdoc', label: t('majorLevel.postdoc') },
           { value: 'hobbyist', label: t('majorLevel.hobbyist') },
         ] : [];
-        return <SelectPlaceholder options={selectOptions} value={formData[currentStep.id]} onChange={(value) => handleNext(currentStep.id, value)} />;
+        return <SelectPlaceholder options={selectOptions} value={selectedMajorLevel} onChange={setSelectedMajorLevel} />;
       case 'tag-input':
-         // TagInput's onChange should call handleNext directly if it provides the final array of tags.
-         // If TagInput needs a separate "Next" button, the approach would be similar to 'text' or 'checkbox-group' (contentPrefs)
+        let tagValue: string[] = [];
+        let setTagValue: (tags: string[]) => void = () => {};
+        if (currentStep.id === 'studiedSubjects') {
+          tagValue = currentStudiedSubjects;
+          setTagValue = setCurrentStudiedSubjects;
+        } else if (currentStep.id === 'interestedMajors') {
+          tagValue = currentInterestedMajors;
+          setTagValue = setCurrentInterestedMajors;
+        } else if (currentStep.id === 'hobbies') {
+          tagValue = currentHobbies;
+          setTagValue = setCurrentHobbies;
+        } else if (currentStep.id === 'news') {
+            tagValue = currentNewsPrefs;
+            setTagValue = setCurrentNewsPrefs;
+        }
         return (
-            <>
-                <TagInput
-                    value={formData[currentStep.id] || []}
-                    onChange={(tags) => setFormData(prev => ({ ...prev, [currentStep.id]: tags }))} // Update formData continuously
-                    placeholder={t(`${currentStep.id}.placeholder`)}
-                />
-                {currentStepIndex < totalSteps - 1 && (
-                    <button
-                        type="button"
-                        onClick={() => handleNext(currentStep.id, formData[currentStep.id] || [])}
-                        className="mt-4 px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                    >
-                        {t('buttons.next')}
-                    </button>
-                )}
-            </>
+          <TagInput
+            value={tagValue}
+            onChange={setTagValue}
+            placeholder={t(`${currentStep.id}.placeholder`)}
+          />
         );
-      case 'multi-field':
-        // Assuming MultiFieldPlaceholder's onChange provides the complete data object for this step
-        return <MultiFieldPlaceholder value={formData[currentStep.id]} onChange={(data) => handleNext(currentStep.id, data)} />;
+      case 'multi-field': // Assuming 'profile'
+        return (
+            <textarea
+                className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                placeholder={t('profile.bioPlaceholder')}
+                value={profileData.bio}
+                onChange={(e) => setProfileData(prev => ({ ...prev, bio: e.target.value }))}
+            />
+            // Simplified: Picture/Banner inputs would go here
+        );
       case 'checkbox-group':
-        const commonProps = {
-          value: formData[currentStep.id] || {},
-        };
-        if (currentStep.id === 'agreements') {
-          const agreementOptions = [
+        const isAgreements = currentStep.id === 'agreements';
+        const checkboxValue = isAgreements ? agreementValues : contentPrefsValues;
+        const setCheckboxValue = isAgreements ? setAgreementValues : setContentPrefsValues;
+
+        let options: { id: string, label: string }[] = [];
+        if (isAgreements) {
+          options = [
             { id: 'terms', label: t('agreements.terms') },
             { id: 'personalization', label: t('agreements.personalization') },
           ];
-          return (
-            <CheckboxGroupPlaceholder
-              name={currentStep.id}
-              options={agreementOptions}
-              value={formData[currentStep.id] || {}} // Ensure value is an object
-              onChange={(newValues) => {
-                // Update formData immediately so UI reflects the check
-                const updatedAgreementsData = { ...formData[currentStep.id], ...newValues };
-                setFormData(prev => ({ ...prev, [currentStep.id]: updatedAgreementsData }));
-
-                // Check for auto-submission condition
-                // Issue: "when both required boxes are checked"
-                // Assuming 'terms' and 'personalization' are the IDs of these required boxes.
-                if (updatedAgreementsData.terms && updatedAgreementsData.personalization) {
-                  handleFinalStep(currentStep.id, updatedAgreementsData);
-                }
-              }}
-            />
-            // No "Next" button here, auto-submission or main "Finish" button.
-          );
-        } else { // e.g., contentPrefs
-          const contentPrefsOptions = [
+        } else { // contentPrefs
+          options = [
             { id: 'newsletter', label: t('contentPrefs.newsletter') },
-            { id: 'newFeatures', label: t('contentPrefs.newFeatures') },
-            // Add other options as needed
+            { id: 'quotes', label: t('contentPrefs.quotes') }, // Corrected from newFeatures to quotes based on i18n
           ];
-          return (
-            <>
-              <CheckboxGroupPlaceholder
-                name={currentStep.id}
-                options={contentPrefsOptions}
-                {...commonProps}
-                onChange={(value) => setFormData(prev => ({ ...prev, [currentStep.id]: value }))}
-              />
-              {currentStepIndex < totalSteps - 1 && (
-                 <button
-                    type="button"
-                    onClick={() => handleNext(currentStep.id, formData[currentStep.id] || {})}
-                    className="mt-4 px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
-                  >
-                    {t('buttons.next')}
-                  </button>
-              )}
-            </>
-          );
         }
+        return (
+          <CheckboxGroupPlaceholder
+            name={currentStep.id}
+            options={options}
+            value={checkboxValue}
+            onChange={(newValues) => {
+                 // CheckboxGroupPlaceholder typically calls onChange with { id: checked_boolean }
+                 // We need to merge this into the existing state for this group
+                 setCheckboxValue(prev => ({...prev, ...newValues}));
+            }}
+          />
+        );
       case 'socials':
-        // Assuming SocialsPlaceholder's onChange provides the complete data object for this step
-        return <SocialsPlaceholder value={formData[currentStep.id]} onChange={(data) => handleNext(currentStep.id, data)} />;
+        return <SocialsPlaceholder value={socialsData} onChange={setSocialsData} />;
       default:
         return <div>Unsupported step type: {currentStep.type}</div>;
     }
@@ -314,41 +387,53 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     return <div className="text-center p-10">{t('submitting')}</div>;
   }
 
+  const isLastStep = currentStepIndex === totalSteps - 1;
+  const finishButtonDisabled = isSubmitting || (currentStep?.id === 'agreements' && (!agreementValues.terms || !agreementValues.personalization));
+
+
   return (
     <form onSubmit={handleFormSubmitEvent} className="w-full max-w-2xl mx-auto p-8 rounded-lg shadow-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-blue-500 mb-2">{t('step')} {currentStepIndex + 1} {t('of')} {totalSteps}</p>
         <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t(`${currentStep?.id}.title`)}</h2>
-        <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">{t(`${currentStep?.id}.description`)}</p>
+        {/* Updated description styling */}
+        <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">{t(`${currentStep?.id}.description`)}</p>
       </div>
 
       {error && <p className="text-red-500 mb-4 text-center bg-red-100 dark:bg-red-900/20 p-3 rounded-md">{error}</p>}
 
-      <div className="min-h-[150px] flex flex-col items-center justify-center"> {/* Changed to flex-col for button placement */}
+      <div className="min-h-[200px] flex flex-col items-center justify-center"> {/* Increased min-h for content */}
           <div className="w-full max-w-md mx-auto">
             {renderStepContent()}
           </div>
       </div>
 
+      {/* Navigation Controls */}
       <div className="flex justify-between mt-10">
-        {currentStepIndex > 0 ? (
+        <button
+          type="button"
+          onClick={handleBack}
+          className="px-6 py-2 rounded-md font-semibold bg-gray-200 dark:bg-slate-600 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-slate-500 transition-colors"
+          disabled={isSubmitting || currentStepIndex === 0}
+        >
+          {t('buttons.previous')}
+        </button>
+
+        {!isLastStep && (
           <button
             type="button"
-            onClick={handleBack}
-            className="px-6 py-2 rounded-md font-semibold bg-gray-200 dark:bg-slate-600 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-slate-500 transition-colors"
-            disabled={isSubmitting} // Disable while submitting
-          >
-            {t('buttons.previous')}
-          </button>
-        ) : <div />}
-
-        {/* General Next button is removed from here if steps provide their own or navigate on change */}
-        {/* The "Finish" button is the form's submit button, shown only on the last step conceptually, */}
-        {/* or if all steps use their own "Next" and this serves as the final action. */}
-        {currentStepIndex === totalSteps - 1 && ( // Only show Finish button on the last step
-          <button
-            type="submit"
+            onClick={handleProceed}
             disabled={isSubmitting}
+            className="px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors disabled:bg-blue-400"
+          >
+            {t('buttons.next')}
+          </button>
+        )}
+
+        {isLastStep && (
+          <button
+            type="submit" // Form submission triggers handleFormSubmitEvent
+            disabled={finishButtonDisabled}
             className="px-6 py-2 rounded-md font-semibold bg-green-600 text-white hover:bg-green-700 transition-colors disabled:bg-green-400 disabled:cursor-not-allowed"
           >
             {isSubmitting ? t('buttons.saving') : t('buttons.finish')}
