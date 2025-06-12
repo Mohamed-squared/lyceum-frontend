@@ -176,7 +176,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             <input
               type="text"
               className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
-              placeholder={t(`${currentStep.id}.placeholder`, {}, { defaultValue: `Enter ${currentStep.id}` })}
+              placeholder={t(`${currentStep.id}.placeholder`)}
               value={textInputValue}
               onChange={(e) => setTextInputValue(e.target.value)}
             />
@@ -189,7 +189,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
                     }}
                     className="mt-4 px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
                   >
-                    {t('buttons.next', 'Next')}
+                    {t('buttons.next')}
                   </button>
             )}
           </>
@@ -200,13 +200,13 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
                 <RoleSelectionCard
                     icon={studentIcon}
-                    title={t('role.student', 'Student')}
+                    title={t('role.student')}
                     isSelected={formData[currentStep.id] === 'student'}
                     onClick={() => handleNext(currentStep.id, 'student')}
                 />
                 <RoleSelectionCard
                     icon={teacherIcon}
-                    title={t('role.teacher', 'Teacher')}
+                    title={t('role.teacher')}
                     isSelected={formData[currentStep.id] === 'teacher'}
                     onClick={() => handleNext(currentStep.id, 'teacher')}
                 />
@@ -216,11 +216,11 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         return <LanguageSelectPlaceholder value={formData[currentStep.id]} onChange={(value) => handleNext(currentStep.id, value)} />;
       case 'select':
         const selectOptions = currentStep.id === 'majorLevel' ? [
-          { value: 'bachelor', label: t('majorLevel.bachelor', 'Bachelor') },
-          { value: 'master', label: t('majorLevel.master', 'Master') },
-          { value: 'phd', label: t('majorLevel.phd', 'PhD') },
-          { value: 'postdoc', label: t('majorLevel.postdoc', 'Postdoc') },
-          { value: 'hobbyist', label: t('majorLevel.hobbyist', 'Hobbyist') },
+          { value: 'bachelor', label: t('majorLevel.bachelor') },
+          { value: 'master', label: t('majorLevel.master') },
+          { value: 'phd', label: t('majorLevel.phd') },
+          { value: 'postdoc', label: t('majorLevel.postdoc') },
+          { value: 'hobbyist', label: t('majorLevel.hobbyist') },
         ] : [];
         return <SelectPlaceholder options={selectOptions} value={formData[currentStep.id]} onChange={(value) => handleNext(currentStep.id, value)} />;
       case 'tag-input':
@@ -231,7 +231,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
                 <TagInput
                     value={formData[currentStep.id] || []}
                     onChange={(tags) => setFormData(prev => ({ ...prev, [currentStep.id]: tags }))} // Update formData continuously
-                    placeholder={t(`${currentStep.id}.placeholder`, {}, {defaultValue: 'Add tags...'})}
+                    placeholder={t(`${currentStep.id}.placeholder`)}
                 />
                 {currentStepIndex < totalSteps - 1 && (
                     <button
@@ -239,7 +239,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
                         onClick={() => handleNext(currentStep.id, formData[currentStep.id] || [])}
                         className="mt-4 px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
                     >
-                        {t('buttons.next', 'Next')}
+                        {t('buttons.next')}
                     </button>
                 )}
             </>
@@ -253,8 +253,8 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         };
         if (currentStep.id === 'agreements') {
           const agreementOptions = [
-            { id: 'terms', label: t('agreements.terms', 'I agree to the terms and conditions') },
-            { id: 'personalization', label: t('agreements.personalization', 'I agree to content personalization') },
+            { id: 'terms', label: t('agreements.terms') },
+            { id: 'personalization', label: t('agreements.personalization') },
           ];
           return (
             <CheckboxGroupPlaceholder
@@ -278,8 +278,8 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
           );
         } else { // e.g., contentPrefs
           const contentPrefsOptions = [
-            { id: 'newsletter', label: t('contentPrefs.newsletter', 'Receive newsletter') },
-            { id: 'newFeatures', label: t('contentPrefs.newFeatures', 'Get notified about new features') },
+            { id: 'newsletter', label: t('contentPrefs.newsletter') },
+            { id: 'newFeatures', label: t('contentPrefs.newFeatures') },
             // Add other options as needed
           ];
           return (
@@ -296,7 +296,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
                     onClick={() => handleNext(currentStep.id, formData[currentStep.id] || {})}
                     className="mt-4 px-6 py-2 rounded-md font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
                   >
-                    {t('buttons.next', 'Next')}
+                    {t('buttons.next')}
                   </button>
               )}
             </>
@@ -311,15 +311,15 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   };
 
   if (isSubmitting) {
-    return <div className="text-center p-10">{t('submitting', 'Submitting...')}</div>;
+    return <div className="text-center p-10">{t('submitting')}</div>;
   }
 
   return (
     <form onSubmit={handleFormSubmitEvent} className="w-full max-w-2xl mx-auto p-8 rounded-lg shadow-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
       <div className="text-center mb-8">
-        <p className="text-sm font-semibold text-blue-500 mb-2">{t('step', 'Step')} {currentStepIndex + 1} {t('of')} {totalSteps}</p>
-        <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t(`${currentStep?.id}.title`, {}, { defaultValue: currentStep?.id })}</h2>
-        <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">{t(`${currentStep?.id}.description`, {}, { defaultValue: '' })}</p>
+        <p className="text-sm font-semibold text-blue-500 mb-2">{t('step')} {currentStepIndex + 1} {t('of')} {totalSteps}</p>
+        <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t(`${currentStep?.id}.title`)}</h2>
+        <p className="text-gray-600 dark:text-gray-300 max-w-md mx-auto">{t(`${currentStep?.id}.description`)}</p>
       </div>
 
       {error && <p className="text-red-500 mb-4 text-center bg-red-100 dark:bg-red-900/20 p-3 rounded-md">{error}</p>}
@@ -338,7 +338,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             className="px-6 py-2 rounded-md font-semibold bg-gray-200 dark:bg-slate-600 text-gray-800 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-slate-500 transition-colors"
             disabled={isSubmitting} // Disable while submitting
           >
-            {t('buttons.previous', 'Back')}
+            {t('buttons.previous')}
           </button>
         ) : <div />}
 
@@ -351,7 +351,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             disabled={isSubmitting}
             className="px-6 py-2 rounded-md font-semibold bg-green-600 text-white hover:bg-green-700 transition-colors disabled:bg-green-400 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? t('buttons.saving', 'Saving...') : t('buttons.finish', 'Finish')}
+            {isSubmitting ? t('buttons.saving') : t('buttons.finish')}
           </button>
         )}
       </div>
