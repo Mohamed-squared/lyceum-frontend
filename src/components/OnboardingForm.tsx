@@ -355,17 +355,69 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             placeholder={t(`${currentStep.id}.placeholder`)}
           />
         );
-      case 'multi-field': // Assuming 'profile'
+      case 'multi-field': // This is the profile step, currentStep.id === 'profile'
         return (
+          <>
+            <label htmlFor="bio" className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+              {t('profile.bio')}
+            </label>
             <textarea
-                className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
-                placeholder={t('profile.bioPlaceholder')}
-                value={profileBio}
-                onChange={(e) => setProfileBio(e.target.value)}
+              id="bio"
+              className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-slate-700 dark:border-slate-600"
+              rows={3}
+              placeholder={t('profile.bioPlaceholder')}
+              value={profileBio}
+              onChange={(e) => setProfileBio(e.target.value)}
             />
-            {/* Inputs for profilePictureFile and profileBannerFile would go here
-                Example: <input type="file" onChange={(e) => setProfilePictureFile(e.target.files ? e.target.files[0] : null)} />
-            */}
+
+            {/* Profile Picture upload placeholder */}
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('profile.picture')}</label>
+              <div className="mt-1 flex items-center">
+                <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-700">
+                  {/* TODO: Placeholder for image preview, if profilePictureFile is set, show preview */}
+                  {profilePictureFile && <img src={URL.createObjectURL(profilePictureFile)} alt="Preview" className="h-full w-full object-cover" />}
+                </span>
+                <input
+                  type="file"
+                  id="profilePicture"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={(e) => setProfilePictureFile(e.target.files ? e.target.files[0] : null)}
+                />
+                <label
+                  htmlFor="profilePicture"
+                  className="cursor-pointer ml-5 rounded-md border border-slate-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700"
+                >
+                  {t('profile.changeButton') || 'Change'} {/* Added fallback for translation key */}
+                </label>
+              </div>
+            </div>
+
+            {/* Profile Banner upload placeholder */}
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('profile.banner')}</label>
+              {/* Actual file input will be implemented later */}
+              <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-slate-300 px-6 pt-5 pb-6 dark:border-slate-600">
+                <div className="space-y-1 text-center">
+                  {/* TODO: Placeholder for icon/text, show banner preview if profileBannerFile is set */}
+                  {profileBannerFile ?
+                    <img src={URL.createObjectURL(profileBannerFile)} alt="Banner Preview" className="max-h-32 mx-auto" /> :
+                    <svg className="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>}
+                  <div className="flex text-sm text-slate-600 dark:text-slate-400">
+                    <label htmlFor="profileBanner" className="relative cursor-pointer rounded-md bg-white dark:bg-slate-800 font-medium text-indigo-600 dark:text-indigo-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-slate-800 hover:text-indigo-500 dark:hover:text-indigo-300">
+                      <span>{t('profile.uploadFile') || 'Upload a file'}</span>
+                      <input id="profileBanner" name="profileBanner" type="file" className="sr-only" accept="image/*" onChange={(e) => setProfileBannerFile(e.target.files ? e.target.files[0] : null)} />
+                    </label>
+                    <p className="pl-1">{t('profile.dragAndDrop') || 'or drag and drop'}</p>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{t('profile.imageTypes') || 'PNG, JPG, GIF up to 10MB'}</p>
+                </div>
+              </div>
+            </div>
+          </>
         );
       case 'checkbox-group':
         const isAgreements = currentStep.id === 'agreements';
