@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import Cropper, { Area } from 'react-easy-crop';
+import getCroppedImg from '../../utils/cropImage';
 
 interface ImageCropperProps {
   imageSrc: string;
@@ -31,16 +32,15 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
   }, []);
 
   const showCroppedImage = useCallback(async () => {
-    // For now, just log the pixels.
-    // Later, we'll use a utility function here to get the File object.
-    console.log('Cropped Area Pixels:', croppedAreaPixels);
     if (croppedAreaPixels) {
-      // Placeholder for calling the actual onCropComplete prop
-      // For example:
-      // const croppedImageFile = await cropImageUtility(imageSrc, croppedAreaPixels);
-      // if (croppedImageFile) {
-      //   onCropComplete(croppedImageFile);
-      // }
+      try {
+        const croppedImageFile = await getCroppedImg(imageSrc, croppedAreaPixels);
+        if (croppedImageFile) {
+          onCropComplete(croppedImageFile);
+        }
+      } catch (e) {
+        console.error('Error cropping image:', e);
+      }
     }
   }, [croppedAreaPixels, imageSrc, onCropComplete]);
 

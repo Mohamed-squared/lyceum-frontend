@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react'; // Ensure useEffect is imported
+import { useState, useEffect, useRef } from 'react'; // Ensure useEffect and useRef is imported
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { createClient } from '@/utils/supabase/client';
@@ -12,7 +12,8 @@ import type { Session } from '@supabase/supabase-js';
 import { onboardingSteps } from '@/lib/onboarding-steps';
 import RoleSelectionCard from '@/components/ui/RoleSelectionCard';
 import TagInput from '@/components/ui/TagInput';
-import MultiFieldPlaceholder from '@/components/ui/MultiFieldPlaceholder';
+import ImageCropper from '@/components/ui/ImageCropper'; // Added
+import UserProfilePreview from '@/components/UserProfilePreview'; // Added
 // All placeholder components LanguageSelectPlaceholder, SelectPlaceholder, CheckboxGroupPlaceholder, SocialsPlaceholder
 // have been implemented directly in this file, so their imports are no longer needed.
 
@@ -46,6 +47,11 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Refs for file inputs
+  const profilePictureInputRef = useRef<HTMLInputElement>(null);
+  const profileBannerInputRef = useRef<HTMLInputElement>(null);
+
+
   const handleChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
@@ -77,10 +83,19 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       return;
     }
 
+    // TODO: Handle file uploads for profilePictureFile and profileBannerFile
+    // For now, we're just submitting the text data.
+    // In a real app, you'd upload files to storage (e.g., Supabase Storage)
+    // and then save the URLs in the 'user_profile' JSON.
+    const dataToSubmit = { ...finalData };
+    delete dataToSubmit.profilePictureFile; // Example: don't send raw File objects
+    delete dataToSubmit.profileBannerFile;  // Example: don't send raw File objects
+
+
     try {
       const { error: updateError } = await supabase
         .from('profiles')
-        .update({ user_profile: finalData, onboarding_completed: true })
+        .update({ user_profile: dataToSubmit, onboarding_completed: true })
         .eq('id', session.user.id);
 
       if (updateError) {
@@ -97,7 +112,13 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
 
   const handleFormSubmitEvent = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await processAndSubmitData(formData);
+    // Include files in formData if they exist, for processAndSubmitData to potentially handle
+    const fullFormData = {
+        ...formData,
+        profilePictureFile: profilePictureFile, // This might be File object or null
+        profileBannerFile: profileBannerFile,   // This might be File object or null
+    };
+    await processAndSubmitData(fullFormData);
   };
 
   // --- Local State for Step Inputs ---
@@ -117,6 +138,14 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   const [profileBannerFile, setProfileBannerFile] = useState<File | null>(null);
   const [socials, setSocials] = useState<{ twitter: string; github: string; linkedin: string }>({ twitter: '', github: '', linkedin: '' });
 
+  // New state for image cropping and preview
+  const [imageToCrop, setImageToCrop] = useState<string | null>(null);
+  const [cropperOpen, setCropperOpen] = useState<boolean>(false);
+  const [cropAspectRatio, setCropAspectRatio] = useState<number>(1); // 1 for profile (square), 16/9 for banner
+  const [profilePicturePreview, setProfilePicturePreview] = useState<string | null>(null);
+  const [profileBannerPreview, setProfileBannerPreview] = useState<string | null>(null);
+
+
   useEffect(() => {
     if (!currentStep) return;
     const stepData = formData[currentStep.id];
@@ -133,7 +162,12 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       case 'news': setCurrentNewsPrefs(stepData || []); break;
       case 'contentPrefs': setContentPrefsValues(stepData || {}); break;
       case 'profile':
-        setProfileBio(typeof stepData === 'object' && stepData?.bio ? stepData.bio : '');
+        // Assuming profile data in formData.profile might just be bio for now.
+        // Previews will be set by the new image selection flow.
+        setProfileBio(stepData?.bio || '');
+        // If formData also stored URLs, you could load them:
+        // setProfilePicturePreview(formData.profile?.pictureUrl || profilePicturePreview || null);
+        // setProfileBannerPreview(formData.profile?.bannerUrl || profileBannerPreview || null);
         break;
       case 'socials': setSocials(stepData || { twitter: '', github: '', linkedin: '' }); break;
       case 'agreements': setAgreementValues(stepData || {}); break;
@@ -157,8 +191,9 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       case 'contentPrefs': dataToSubmit = contentPrefsValues; break;
       case 'profile':
         dataToSubmit = { bio: profileBio };
-        // Note: File uploads would typically be handled separately, e.g., upload then store URL.
-        // For this form data, we're primarily concerned with the bio text.
+        // profilePictureFile and profileBannerFile are managed in component state.
+        // They are not directly part of the `formData` for this step's dataToSubmit,
+        // but will be included in the final submission if needed.
         break;
       case 'socials': dataToSubmit = socials; break;
       case 'agreements': dataToSubmit = agreementValues; break;
@@ -287,51 +322,88 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
           />
         );
       }
-      case 'multi-field': // This is the profile step
+      case 'multi-field': { // This is the profile step
+        const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, type: 'profile' | 'banner') => {
+          const file = event.target.files?.[0];
+          if (file) {
+            const objectUrl = URL.createObjectURL(file);
+            setImageToCrop(objectUrl);
+            setCropAspectRatio(type === 'profile' ? 1 : 16 / 9);
+            setCropperOpen(true);
+            // event.target.value = ''; // Reset file input - This causes issues if ref is used
+            // Instead, reset using ref if the input element is still the same
+            if (type === 'profile' && profilePictureInputRef.current) {
+                profilePictureInputRef.current.value = '';
+            } else if (type === 'banner' && profileBannerInputRef.current) {
+                profileBannerInputRef.current.value = '';
+            }
+          }
+        };
+
         return (
-          <>
-            <label htmlFor="bio" className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('profile.bio')}</label>
-            <textarea
-              id="bio"
-              className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-slate-700 dark:border-slate-600"
-              rows={3}
-              placeholder={t('profile.bioPlaceholder')}
-              value={profileBio}
-              onChange={(e) => setProfileBio(e.target.value)}
-            />
-            <div className="mt-4">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('profile.picture')}</label>
-              <div className="mt-1 flex items-center">
-                <span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-700">
-                  {profilePictureFile && <img src={URL.createObjectURL(profilePictureFile)} alt="Preview" className="h-full w-full object-cover" />}
-                </span>
-                <input type="file" id="profilePicture" className="hidden" accept="image/*" onChange={(e) => setProfilePictureFile(e.target.files ? e.target.files[0] : null)} />
-                <label htmlFor="profilePicture" className="cursor-pointer ml-5 rounded-md border border-slate-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700">
-                  {t('profile.changeButton')}
-                </label>
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Input Section */}
+            <div className="flex-1 space-y-4">
+              <div>
+                <label htmlFor="bio" className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('profile.bio')}</label>
+                <textarea
+                  id="bio"
+                  className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-slate-700 dark:border-slate-600"
+                  rows={3}
+                  placeholder={t('profile.bioPlaceholder')}
+                  value={profileBio}
+                  onChange={(e) => setProfileBio(e.target.value)}
+                />
+              </div>
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, 'profile')}
+                  id="profilePictureInput"
+                  ref={profilePictureInputRef}
+                  className="hidden"
+                />
+                <button
+                  type="button"
+                  onClick={() => profilePictureInputRef.current?.click()}
+                  className="w-full justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+                >
+                  {t('profile.uploadPictureButton', { defaultMessage: 'Upload Profile Picture' })}
+                </button>
+              </div>
+              <div>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, 'banner')}
+                  id="profileBannerInput"
+                  ref={profileBannerInputRef}
+                  className="hidden"
+                />
+                <button
+                  type="button"
+                  onClick={() => profileBannerInputRef.current?.click()}
+                  className="w-full justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600"
+                >
+                  {t('profile.uploadBannerButton', { defaultMessage: 'Upload Profile Banner' })}
+                </button>
               </div>
             </div>
-            <div className="mt-4">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('profile.banner')}</label>
-              <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-slate-300 px-6 pt-5 pb-6 dark:border-slate-600">
-                <div className="space-y-1 text-center">
-                  {profileBannerFile ? <img src={URL.createObjectURL(profileBannerFile)} alt="Banner Preview" className="max-h-32 mx-auto" /> :
-                    <svg className="mx-auto h-12 w-12 text-slate-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>}
-                  <div className="flex text-sm text-slate-600 dark:text-slate-400">
-                    <label htmlFor="profileBanner" className="relative cursor-pointer rounded-md bg-white dark:bg-slate-800 font-medium text-indigo-600 dark:text-indigo-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 dark:focus-within:ring-offset-slate-800 hover:text-indigo-500 dark:hover:text-indigo-300">
-                      <span>{t('profile.uploadFile')}</span>
-                      <input id="profileBanner" name="profileBanner" type="file" className="sr-only" accept="image/*" onChange={(e) => setProfileBannerFile(e.target.files ? e.target.files[0] : null)} />
-                    </label>
-                    <p className="pl-1">{t('profile.dragAndDrop')}</p>
-                  </div>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{t('profile.imageTypes')}</p>
-                </div>
-              </div>
+
+            {/* Preview Section */}
+            <div className="flex-1 mt-6 md:mt-0">
+              <UserProfilePreview
+                username={session?.user?.user_metadata?.full_name || session?.user?.email || t('profile.defaultUsername', { defaultMessage: 'User' })}
+                bio={profileBio}
+                profilePictureUrl={profilePicturePreview}
+                bannerUrl={profileBannerPreview}
+                // Add any other props UserProfilePreview expects
+              />
             </div>
-          </>
+          </div>
         );
+      }
       case 'checkbox-group': {
         const isAgreementsStep = currentStep.id === 'agreements';
         // Use existing state: contentPrefsValues for 'contentPrefs', agreementValues for 'agreements'
@@ -409,6 +481,40 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
 
   return (
     <form onSubmit={handleFormSubmitEvent} className="w-full max-w-2xl mx-auto p-8 rounded-lg shadow-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+      {cropperOpen && imageToCrop && (
+        <ImageCropper
+          imageSrc={imageToCrop}
+          aspectRatio={cropAspectRatio}
+          onClose={() => {
+            setCropperOpen(false);
+            if (imageToCrop && imageToCrop.startsWith('blob:')) {
+              URL.revokeObjectURL(imageToCrop);
+            }
+            setImageToCrop(null);
+          }}
+          onCropComplete={(croppedFile) => {
+            const newPreviewUrl = URL.createObjectURL(croppedFile);
+            if (cropAspectRatio === 1) { // Profile picture
+              setProfilePictureFile(croppedFile);
+              if (profilePicturePreview && profilePicturePreview.startsWith('blob:')) {
+                URL.revokeObjectURL(profilePicturePreview);
+              }
+              setProfilePicturePreview(newPreviewUrl);
+            } else { // Banner
+              setProfileBannerFile(croppedFile);
+              if (profileBannerPreview && profileBannerPreview.startsWith('blob:')) {
+                URL.revokeObjectURL(profileBannerPreview);
+              }
+              setProfileBannerPreview(newPreviewUrl);
+            }
+            setCropperOpen(false);
+            if (imageToCrop && imageToCrop.startsWith('blob:')) {
+              URL.revokeObjectURL(imageToCrop);
+            }
+            setImageToCrop(null);
+          }}
+        />
+      )}
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-blue-500 mb-2">{t('step')} {currentStepIndex + 1} {t('of')} {totalSteps}</p>
         <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t(`${currentStep?.id}.title`)}</h2>
@@ -449,7 +555,6 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
           >
             {isSubmitting ? t('submitting') : t('buttons.finish')}
             {/* Changed 'buttons.saving' to 'submitting' to match the text when the form is in submitting state */}
-            {isSubmitting ? t('submitting') : t('buttons.finish')}
           </button>
         )}
       </div>
