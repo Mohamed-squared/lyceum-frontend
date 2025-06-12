@@ -377,32 +377,34 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         return (
           <div className="space-y-4">
             <div>
-              <label htmlFor="socials-twitter" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Twitter</label> {/* Label could be t('socials.twitterLabel') */}
-              <input type="text" id="socials-twitter" className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500" placeholder={t('socials.twitterPlaceholder', { defaultMessage: 'https://twitter.com/username'})} value={socials.twitter} onChange={(e) => handleSocialChange('twitter', e.target.value)} />
+              <label htmlFor="socials-twitter" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('socials.twitter')}</label>
+              <input type="text" id="socials-twitter" className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500" placeholder={t('socials.twitterPlaceholder')} value={socials.twitter} onChange={(e) => handleSocialChange('twitter', e.target.value)} />
             </div>
             <div>
-              <label htmlFor="socials-github" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">GitHub</label> {/* Label could be t('socials.githubLabel') */}
-              <input type="text" id="socials-github" className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500" placeholder={t('socials.githubPlaceholder', { defaultMessage: 'https://github.com/username'})} value={socials.github} onChange={(e) => handleSocialChange('github', e.target.value)} />
+              <label htmlFor="socials-github" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('socials.github')}</label>
+              <input type="text" id="socials-github" className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500" placeholder={t('socials.githubPlaceholder')} value={socials.github} onChange={(e) => handleSocialChange('github', e.target.value)} />
             </div>
             <div>
-              <label htmlFor="socials-linkedin" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">LinkedIn</label> {/* Label could be t('socials.linkedinLabel') */}
-              <input type="text" id="socials-linkedin" className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500" placeholder={t('socials.linkedinPlaceholder', { defaultMessage: 'https://linkedin.com/in/username'})} value={socials.linkedin} onChange={(e) => handleSocialChange('linkedin', e.target.value)} />
+              <label htmlFor="socials-linkedin" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('socials.linkedin')}</label>
+              <input type="text" id="socials-linkedin" className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500" placeholder={t('socials.linkedinPlaceholder')} value={socials.linkedin} onChange={(e) => handleSocialChange('linkedin', e.target.value)} />
             </div>
           </div>
         );
       }
       default:
-        return <div>Unsupported step type: {currentStep.type}</div>;
+        const defaultMessage = "Unsupported step type: " + currentStep.type;
+        return <div>{defaultMessage}</div>; // Fallback for unsupported step types
     }
   };
 
   if (isSubmitting) {
-    return <div className="text-center p-10">{t('submitting')}</div>; // Correct path
+    return <div className="text-center p-10">{t('submitting')}</div>;
   }
 
   const isLastStep = currentStepIndex === totalSteps - 1;
-  // Assuming 'terms' and 'personalization' are direct keys in 'agreementValues'
-  const finishButtonDisabled = isSubmitting || (currentStep?.id === 'agreements' && (!agreementValues.terms || !agreementValues.personalization));
+  const finishButtonDisabled = isSubmitting ||
+    (currentStep?.id === 'agreements' &&
+     (!agreementValues.terms || !agreementValues.personalization));
 
 
   return (
@@ -410,7 +412,8 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-blue-500 mb-2">{t('step')} {currentStepIndex + 1} {t('of')} {totalSteps}</p>
         <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t(`${currentStep?.id}.title`)}</h2>
-        <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">{t(`${currentStep?.id}.description`)}</p>
+        {/* Added null check for currentStep.id in description as well */}
+        <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">{currentStep?.id ? t(`${currentStep.id}.description`) : ''}</p>
       </div>
 
       {error && <p className="text-red-500 mb-4 text-center bg-red-100 dark:bg-red-900/20 p-3 rounded-md">{error}</p>}
@@ -444,7 +447,9 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             type="submit" disabled={finishButtonDisabled}
             className="px-6 py-2 rounded-md font-semibold bg-green-600 text-white hover:bg-green-700 transition-colors disabled:bg-green-400 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? t('buttons.saving') : t('buttons.finish')}
+            {isSubmitting ? t('submitting') : t('buttons.finish')}
+            {/* Changed 'buttons.saving' to 'submitting' to match the text when the form is in submitting state */}
+            {isSubmitting ? t('submitting') : t('buttons.finish')}
           </button>
         )}
       </div>

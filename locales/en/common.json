@@ -119,104 +119,21 @@
     "continueWithGoogle": "Continue with Google"
   },
   "onboarding": {
-    "step": "Step",
-    "of": "of",
-    "sections": {
-      "welcome": "Welcome",
-      "role": "Role",
-      "language": "Language",
-      "fieldOfStudy": "Field of Study",
-      "level": "Level",
-      "studiedSubjects": "Studied Subjects",
-      "interests": "Interests",
-      "hobbies": "Hobbies",
-      "news": "News",
-      "contentPreference": "Content Preference",
-      "profile": "Profile",
-      "socials": "Socials",
-      "agreements": "Agreements"
-    },
-    "buttons": {
-      "next": "Next",
-      "previous": "Back",
-      "skip": "Skip",
-      "finish": "Finish"
-    },
-    "welcome": {
-      "title": "Welcome to Lyceum! What should we call you?",
-      "description": "This will be your public display name.",
-      "placeholder": "Enter your name"
-    },
-    "role": {
-      "title": "Are you an educator or a student?",
-      "teacher": "Educator",
-      "student": "Student"
-    },
-    "languages": {
-      "title": "Set Your Language Preferences",
-      "website": "Website Interface Language",
-      "explanation": "AI Explanation Language",
-      "material": "Course Material Language"
-    },
-    "major": {
-      "title": "What is your primary field of study (Major)?",
-      "placeholder": "e.g., Computer Science, Philosophy, Physics..."
-    },
-    "majorLevel": {
-      "title": "What is your current level in this major?",
-      "bachelor": "Bachelor's Degree",
-      "master": "Master's Degree",
-      "phd": "PhD",
-      "postdoc": "Postdoctoral",
-      "hobbyist": "Hobbyist / Lifelong Learner"
-    },
-    "studiedSubjects": {
-      "title": "What subjects have you already studied in your major?",
-      "description": "Type a subject name and press Enter to add it.",
-      "placeholder": "e.g., Linear Algebra, Ethics..."
-    },
-    "interestedMajors": {
-      "title": "Are you interested in other fields?",
-      "description": "Add any other majors you'd like to explore.",
-      "placeholder": "e.g., History, Biology..."
-    },
-    "hobbies": {
-      "title": "What are some of your hobbies?",
-      "description": "This helps us recommend related content.",
-      "placeholder": "e.g., Chess, Painting, Hiking..."
-    },
-    "news": {
-      "title": "What news and articles would you like to see?",
-      "description": "Choose topics that interest you.",
-      "placeholder": "e.g., AI News, Tech News..."
-    },
-    "contentPrefs": {
-      "title": "Fine-tune Your Content",
-      "newsletter": "Subscribe to the weekly Lyceum Newsletter",
-      "quotes": "Get daily quotes from great thinkers"
-    },
-    "profile": {
-      "title": "Customize Your Profile",
-      "description": "Make your profile stand out. You can upload a picture, banner, and write a short bio.",
-      "picture": "Profile Picture",
-      "banner": "Profile Banner",
-      "bio": "Your Bio",
-      "bioPlaceholder": "Tell us a little about yourself...",
-      "changeButton": "Change",
-      "uploadFile": "Upload a file",
-      "dragAndDrop": "or drag and drop",
-      "imageTypes": "PNG, JPG up to 5MB"
-    },
-    "socials": {
-      "title": "Link Your World (Optional)",
-      "description": "Connect your other accounts."
-    },
-    "agreements": {
-      "title": "Final Agreements",
-      "terms": "I agree to the Terms and Privacy Policy.",
-      "personalization": "I consent to my data being collected to personalize my learning."
-    },
-    "submitting": "Saving your profile..."
+    "step": "Step", "of": "of", "submitting": "Saving your profile...",
+    "welcome": { "title": "Welcome to Lyceum! What should we call you?", "description": "This will be your public display name.", "placeholder": "Enter your name" },
+    "role": { "title": "Are you an educator or a student?", "description": "This helps us tailor the platform to your needs.", "teacher": "Educator", "student": "Student" },
+    "languages": { "title": "Set Your Language Preferences", "description": "Choose the languages for the interface, AI explanations, and course content.", "website": "Website Interface Language", "explanation": "AI Explanation Language", "material": "Course Material Language" },
+    "major": { "title": "What is your primary field of study (Major)?", "description": "This will be the focus of your personalized learning path.", "placeholder": "e.g., Computer Science, Philosophy, Physics..." },
+    "majorLevel": { "title": "What is your current level in this major?", "description": "Let us know where you are in your academic journey.", "placeholder": "Select your current level...", "bachelor": "Bachelor's Degree", "master": "Master's Degree", "phd": "PhD", "postdoc": "Postdoctoral", "hobbyist": "Hobbyist / Lifelong Learner" },
+    "studiedSubjects": { "title": "What subjects have you already studied in your major?", "description": "This helps us avoid recommending content you've already mastered. Type a subject and press Enter.", "placeholder": "e.g., Linear Algebra, Ethics..." },
+    "interestedMajors": { "title": "Are you interested in other fields?", "description": "We can suggest fascinating content from other areas of study.", "placeholder": "e.g., History, Biology..." },
+    "hobbies": { "title": "What are some of your hobbies?", "description": "Let's connect your passions with your learning. Add a few of your interests.", "placeholder": "e.g., Chess, Painting, Hiking..." },
+    "news": { "title": "What news and articles would you like to see?", "description": "Stay updated with topics that matter to you.", "placeholder": "e.g., AI News, Tech News..." },
+    "contentPrefs": { "title": "Fine-tune Your Content", "description": "Select any additional content you'd like to receive.", "newsletter": "Subscribe to the weekly Lyceum Newsletter", "quotes": "Get daily quotes from great thinkers" },
+    "socials": { "title": "Link Your World (Optional)", "description": "Connect your social media or professional accounts to your profile.", "twitter": "Twitter Profile URL", "twitterPlaceholder": "https://twitter.com/username", "github": "GitHub Profile URL", "githubPlaceholder": "https://github.com/username", "linkedin": "LinkedIn Profile URL", "linkedinPlaceholder": "https://linkedin.com/in/username" },
+    "profile": { "title": "Customize Your Profile", "description": "Make your profile stand out. You can upload a picture, banner, and write a short bio.", "picture": "Profile Picture", "banner": "Profile Banner", "bio": "Your Bio", "bioPlaceholder": "Tell us a little about yourself...", "changeButton": "Change", "uploadFile": "Upload a file", "dragAndDrop": "or drag and drop", "imageTypes": "PNG, JPG up to 5MB" },
+    "agreements": { "title": "Final Agreements", "description": "Please review and agree to the following to complete your setup.", "terms": "I agree to the Terms and Privacy Policy.", "personalization": "I consent to my data being collected to personalize my learning." },
+    "buttons": { "next": "Next", "previous": "Back", "skip": "Skip", "finish": "Finish" }
   },
   "errors": {
     "fieldRequired": "This field is required.",
