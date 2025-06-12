@@ -119,21 +119,110 @@
     "continueWithGoogle": "Google ile Devam Et"
   },
   "onboarding": {
-    "step": "Adım", "of": "/", "submitting": "Profilin kaydediliyor...",
-    "welcome": { "title": "Lyceum'a hoş geldin! Sana nasıl hitap edelim?", "description": "Bu, herkese açık görünen adın olacak.", "placeholder": "Adını gir" },
-    "role": { "title": "Bir eğitimci misin yoksa öğrenci mi?", "description": "Bu, platformu ihtiyaçlarına göre uyarlamamıza yardımcı olur.", "teacher": "Eğitimci", "student": "Öğrenci" },
-    "languages": { "title": "Dil Tercihlerini Ayarla", "description": "Arayüz, yapay zeka açıklamaları ve kurs içerikleri için dilleri seç.", "website": "Web Sitesi Arayüz Dili", "explanation": "Yapay Zeka Açıklama Dili", "material": "Kurs Materyali Dili" },
-    "major": { "title": "Ana çalışma alanın (Bölümün) nedir?", "description": "Bu, kişiselleştirilmiş öğrenme yolunun odak noktası olacak.", "placeholder": "Örn. Bilgisayar Bilimleri, Felsefe, Fizik..." },
-    "majorLevel": { "title": "Bu bölümdeki mevcut seviyen nedir?", "description": "Akademik yolculuğunun neresinde olduğunu bize bildir.", "placeholder": "Mevcut seviyeni seç...", "bachelor": "Lisans Derecesi", "master": "Yüksek Lisans Derecesi", "phd": "Doktora", "postdoc": "Doktora Sonrası", "hobbyist": "Hobi Amaçlı / Yaşam Boyu Öğrenen" },
-    "studiedSubjects": { "title": "Bölümünde daha önce hangi dersleri çalıştın?", "description": "Bu, zaten uzmanlaştığın içerikleri önermekten kaçınmamıza yardımcı olur. Bir ders yaz ve Enter'a bas.", "placeholder": "Örn. Lineer Cebir, Etik..." },
-    "interestedMajors": { "title": "Diğer alanlarla ilgileniyor musun?", "description": "Sana diğer çalışma alanlarından büyüleyici içerikler önerebiliriz.", "placeholder": "Örn. Tarih, Biyoloji..." },
-    "hobbies": { "title": "Hobilerinden bazıları neler?", "description": "Tutkularını öğrenmenle birleştirelim. İlgilendiğin birkaç alanı ekle.", "placeholder": "Örn. Satranç, Resim, Yürüyüş..." },
-    "news": { "title": "Hangi haberleri ve makaleleri görmek istersin?", "description": "Senin için önemli olan konularda güncel kal.", "placeholder": "Örn. Yapay Zeka Haberleri, Teknoloji Haberleri..." },
-    "contentPrefs": { "title": "İçeriğini İnce Ayarla", "description": "Almak istediğin ek içerikleri seç.", "newsletter": "Haftalık Lyceum Bültenine abone ol", "quotes": "Büyük düşünürlerden günlük alıntılar al" },
-    "socials": { "title": "Dünyanı Bağla (İsteğe Bağlı)", "description": "Sosyal medya veya profesyonel hesaplarını profiline bağla.", "twitter": "Twitter Profil URL'si", "twitterPlaceholder": "https://twitter.com/username", "github": "GitHub Profil URL'si", "githubPlaceholder": "https://github.com/username", "linkedin": "LinkedIn Profil URL'si", "linkedinPlaceholder": "https://linkedin.com/in/username" },
-    "profile": { "title": "Profilini Özelleştir", "description": "Profilini öne çıkar. Bir resim, banner yükleyebilir ve kısa bir biyografi yazabilirsin.", "picture": "Profil Resmi", "banner": "Profil Banner'ı", "bio": "Biyografin", "bioPlaceholder": "Bize biraz kendinden bahset...", "changeButton": "Değiştir", "uploadFile": "Dosya yükle", "dragAndDrop": "veya sürükleyip bırak", "imageTypes": "PNG, JPG 5MB'a kadar" },
-    "agreements": { "title": "Son Anlaşmalar", "description": "Kurulumunu tamamlamak için lütfen aşağıdakileri incele ve kabul et.", "terms": "Kullanım Koşullarını ve Gizlilik Politikasını kabul ediyorum.", "personalization": "Öğrenme deneyimimi kişiselleştirmek için verilerimin toplanmasına izin veriyorum." },
-    "buttons": { "next": "İleri", "previous": "Geri", "skip": "Atla", "finish": "Bitir" }
+    "step": "Adım",
+    "of": "/",
+    "submitting": "Profilin kaydediliyor...",
+    "welcome": {
+      "title": "Lyceum'a hoş geldin! Sana nasıl hitap edelim?",
+      "description": "Bu, herkese açık görünen adın olacak.",
+      "placeholder": "Adını gir"
+    },
+    "role": {
+      "title": "Bir eğitimci misin yoksa öğrenci mi?",
+      "description": "Bu, platformu ihtiyaçlarına göre uyarlamamıza yardımcı olur.",
+      "teacher": "Eğitimci",
+      "student": "Öğrenci"
+    },
+    "languages": {
+      "title": "Dil Tercihlerini Ayarla",
+      "description": "Arayüz, yapay zeka açıklamaları ve kurs içerikleri için dilleri seç.",
+      "website": "Web Sitesi Arayüz Dili",
+      "explanation": "Yapay Zeka Açıklama Dili",
+      "material": "Kurs Materyali Dili"
+    },
+    "major": {
+      "title": "Ana çalışma alanın (Bölümün) nedir?",
+      "description": "Bu, kişiselleştirilmiş öğrenme yolunun odak noktası olacak.",
+      "placeholder": "Örn. Bilgisayar Bilimleri, Felsefe, Fizik..."
+    },
+    "majorLevel": {
+      "title": "Bu bölümdeki mevcut seviyen nedir?",
+      "description": "Akademik yolculuğunun neresinde olduğunu bize bildir.",
+      "placeholder": "Mevcut seviyeni seç...",
+      "bachelor": "Lisans Derecesi",
+      "master": "Yüksek Lisans Derecesi",
+      "phd": "Doktora",
+      "postdoc": "Doktora Sonrası",
+      "hobbyist": "Hobi Amaçlı / Yaşam Boyu Öğrenen"
+    },
+    "studiedSubjects": {
+      "title": "Bölümünde daha önce hangi dersleri çalıştın?",
+      "description": "Bu, zaten uzmanlaştığın içerikleri önermekten kaçınmamıza yardımcı olur. Bir ders yaz ve Enter'a bas.",
+      "placeholder": "Örn. Lineer Cebir, Etik..."
+    },
+    "interestedMajors": {
+      "title": "Diğer alanlarla ilgileniyor musun?",
+      "description": "Sana diğer çalışma alanlarından büyüleyici içerikler önerebiliriz.",
+      "placeholder": "Örn. Tarih, Biyoloji..."
+    },
+    "hobbies": {
+      "title": "Hobilerinden bazıları neler?",
+      "description": "Tutkularını öğrenmenle birleştirelim. İlgilendiğin birkaç alanı ekle.",
+      "placeholder": "Örn. Satranç, Resim, Yürüyüş..."
+    },
+    "news": {
+      "title": "Hangi haberleri ve makaleleri görmek istersin?",
+      "description": "Senin için önemli olan konularda güncel kal.",
+      "placeholder": "Örn. Yapay Zeka Haberleri, Teknoloji Haberleri..."
+    },
+    "contentPrefs": {
+      "title": "İçeriğini İnce Ayarla",
+      "description": "Almak istediğin ek içerikleri seç.",
+      "newsletter": "Haftalık Lyceum Bültenine abone ol",
+      "quotes": "Büyük düşünürlerden günlük alıntılar al"
+    },
+    "socials": {
+      "title": "Dünyanı Bağla (İsteğe Bağlı)",
+      "description": "Sosyal medya veya profesyonel hesaplarını profiline bağla.",
+      "twitter": "Twitter Profil URL'si",
+      "twitterPlaceholder": "https://twitter.com/username",
+      "github": "GitHub Profil URL'si",
+      "githubPlaceholder": "https://github.com/username",
+      "linkedin": "LinkedIn Profil URL'si",
+      "linkedinPlaceholder": "https://linkedin.com/in/username"
+    },
+    "profile": {
+      "title": "Profilini Özelleştir",
+      "description": "Profilini öne çıkar. Bir resim, banner yükleyebilir ve kısa bir biyografi yazabilirsin.",
+      "picture": "Profil Resmi",
+      "banner": "Profil Banner'ı",
+      "bio": "Biyografin",
+      "bioPlaceholder": "Bize biraz kendinden bahset...",
+      "changeButton": "Değiştir",
+      "uploadFile": "Dosya yükle",
+      "dragAndDrop": "veya sürükleyip bırak",
+      "imageTypes": "PNG, JPG 5MB'a kadar",
+      "uploadPictureButton": "Resim Yükle",
+      "uploadBannerButton": "Banner Yükle"
+    },
+    "agreements": {
+      "title": "Son Anlaşmalar",
+      "description": "Kurulumunu tamamlamak için lütfen aşağıdakileri incele ve kabul et.",
+      "terms": "Kullanım Koşullarını ve Gizlilik Politikasını kabul ediyorum.",
+      "personalization": "Öğrenme deneyimimi kişiselleştirmek için verilerimin toplanmasına izin veriyorum."
+    },
+    "buttons": {
+      "next": "İleri",
+      "previous": "Geri",
+      "skip": "Atla",
+      "finish": "Bitir"
+    },
+    "academicProfileTitle": "Akademik Profil",
+    "interestsTitle": "İlgi Alanları",
+    "socialsTitle": "Sosyal Medya",
+    "majorLabel": "Ana Dal",
+    "majorLevelLabel": "Mevcut Seviye",
+    "studiedSubjectsLabel": "Çalışılan Dersler"
   },
   "errors": {
     "fieldRequired": "Bu alan zorunludur.",

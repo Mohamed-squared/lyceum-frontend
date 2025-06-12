@@ -119,21 +119,110 @@
     "continueWithGoogle": "Mit Google fortfahren"
   },
   "onboarding": {
-    "step": "Schritt", "of": "von", "submitting": "Dein Profil wird gespeichert...",
-    "welcome": { "title": "Willkommen bei Lyceum! Wie sollen wir dich nennen?", "description": "Dies wird dein öffentlicher Anzeigename sein.", "placeholder": "Gib deinen Namen ein" },
-    "role": { "title": "Bist du ein Lehrender oder ein Lernender?", "description": "Dies hilft uns, die Plattform an deine Bedürfnisse anzupassen.", "teacher": "Lehrender", "student": "Lernender" },
-    "languages": { "title": "Lege deine Spracheinstellungen fest", "description": "Wähle die Sprachen für die Benutzeroberfläche, KI-Erklärungen und Kursinhalte.", "website": "Sprache der Benutzeroberfläche", "explanation": "Sprache der KI-Erklärungen", "material": "Sprache der Kursmaterialien" },
-    "major": { "title": "Was ist dein Hauptstudienfach?", "description": "Dies wird der Schwerpunkt deines personalisierten Lernpfades sein.", "placeholder": "z.B. Informatik, Philosophie, Physik..." },
-    "majorLevel": { "title": "Auf welchem Niveau befindest du dich in deinem Hauptfach?", "description": "Lass uns wissen, wo du auf deiner akademischen Reise stehst.", "placeholder": "Wähle dein aktuelles Niveau...", "bachelor": "Bachelor-Abschluss", "master": "Master-Abschluss", "phd": "Promotion", "postdoc": "Postdoktorand", "hobbyist": "Hobbyist / Lebenslanger Lerner" },
-    "studiedSubjects": { "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?", "description": "Dies hilft uns, Inhalte zu vermeiden, die du bereits beherrschst. Gib ein Fach ein und drücke die Eingabetaste.", "placeholder": "z.B. Lineare Algebra, Ethik..." },
-    "interestedMajors": { "title": "Interessierst du dich für andere Fachgebiete?", "description": "Wir können dir faszinierende Inhalte aus anderen Studienbereichen vorschlagen.", "placeholder": "z.B. Geschichte, Biologie..." },
-    "hobbies": { "title": "Was sind einige deiner Hobbies?", "description": "Lass uns deine Leidenschaften mit deinem Lernen verbinden. Füge einige deiner Interessen hinzu.", "placeholder": "z.B. Schach, Malen, Wandern..." },
-    "news": { "title": "Welche Nachrichten und Artikel möchtest du sehen?", "description": "Bleib auf dem Laufenden mit Themen, die dir wichtig sind.", "placeholder": "z.B. KI-Nachrichten, Technik-Nachrichten..." },
-    "contentPrefs": { "title": "Optimiere deine Inhalte", "description": "Wähle zusätzliche Inhalte aus, die du erhalten möchtest.", "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter", "quotes": "Erhalte tägliche Zitate von großen Denkern" },
-    "socials": { "title": "Verbinde deine Welt (Optional)", "description": "Verbinde deine Social-Media- oder beruflichen Konten mit deinem Profil.", "twitter": "Twitter-Profil-URL", "twitterPlaceholder": "https://twitter.com/username", "github": "GitHub-Profil-URL", "githubPlaceholder": "https://github.com/username", "linkedin": "LinkedIn-Profil-URL", "linkedinPlaceholder": "https://linkedin.com/in/username" },
-    "profile": { "title": "Passe dein Profil an", "description": "Hebe dein Profil hervor. Du kannst ein Bild, ein Banner hochladen und eine kurze Biografie schreiben.", "picture": "Profilbild", "banner": "Profilbanner", "bio": "Deine Biografie", "bioPlaceholder": "Erzähl uns ein wenig über dich...", "changeButton": "Ändern", "uploadFile": "Datei hochladen", "dragAndDrop": "oder per Drag & Drop ziehen", "imageTypes": "PNG, JPG bis zu 5MB" },
-    "agreements": { "title": "Abschließende Vereinbarungen", "description": "Bitte überprüfe die folgenden Punkte und stimme zu, um deine Einrichtung abzuschließen.", "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.", "personalization": "Ich stimme zu, dass meine Daten zur Personalisierung meines Lernens gesammelt werden." },
-    "buttons": { "next": "Weiter", "previous": "Zurück", "skip": "Überspringen", "finish": "Abschließen" }
+    "step": "Schritt",
+    "of": "von",
+    "submitting": "Dein Profil wird gespeichert...",
+    "welcome": {
+      "title": "Willkommen bei Lyceum! Wie sollen wir dich nennen?",
+      "description": "Dies wird dein öffentlicher Anzeigename sein.",
+      "placeholder": "Gib deinen Namen ein"
+    },
+    "role": {
+      "title": "Bist du ein Lehrender oder ein Lernender?",
+      "description": "Dies hilft uns, die Plattform an deine Bedürfnisse anzupassen.",
+      "teacher": "Lehrender",
+      "student": "Lernender"
+    },
+    "languages": {
+      "title": "Lege deine Spracheinstellungen fest",
+      "description": "Wähle die Sprachen für die Benutzeroberfläche, KI-Erklärungen und Kursinhalte.",
+      "website": "Sprache der Benutzeroberfläche",
+      "explanation": "Sprache der KI-Erklärungen",
+      "material": "Sprache der Kursmaterialien"
+    },
+    "major": {
+      "title": "Was ist dein Hauptstudienfach?",
+      "description": "Dies wird der Schwerpunkt deines personalisierten Lernpfades sein.",
+      "placeholder": "z.B. Informatik, Philosophie, Physik..."
+    },
+    "majorLevel": {
+      "title": "Auf welchem Niveau befindest du dich in deinem Hauptfach?",
+      "description": "Lass uns wissen, wo du auf deiner akademischen Reise stehst.",
+      "placeholder": "Wähle dein aktuelles Niveau...",
+      "bachelor": "Bachelor-Abschluss",
+      "master": "Master-Abschluss",
+      "phd": "Promotion",
+      "postdoc": "Postdoktorand",
+      "hobbyist": "Hobbyist / Lebenslanger Lerner"
+    },
+    "studiedSubjects": {
+      "title": "Welche Fächer hast du bereits in deinem Hauptfach studiert?",
+      "description": "Dies hilft uns, Inhalte zu vermeiden, die du bereits beherrschst. Gib ein Fach ein und drücke die Eingabetaste.",
+      "placeholder": "z.B. Lineare Algebra, Ethik..."
+    },
+    "interestedMajors": {
+      "title": "Interessierst du dich für andere Fachgebiete?",
+      "description": "Wir können dir faszinierende Inhalte aus anderen Studienbereichen vorschlagen.",
+      "placeholder": "z.B. Geschichte, Biologie..."
+    },
+    "hobbies": {
+      "title": "Was sind einige deiner Hobbies?",
+      "description": "Lass uns deine Leidenschaften mit deinem Lernen verbinden. Füge einige deiner Interessen hinzu.",
+      "placeholder": "z.B. Schach, Malen, Wandern..."
+    },
+    "news": {
+      "title": "Welche Nachrichten und Artikel möchtest du sehen?",
+      "description": "Bleib auf dem Laufenden mit Themen, die dir wichtig sind.",
+      "placeholder": "z.B. KI-Nachrichten, Technik-Nachrichten..."
+    },
+    "contentPrefs": {
+      "title": "Optimiere deine Inhalte",
+      "description": "Wähle zusätzliche Inhalte aus, die du erhalten möchtest.",
+      "newsletter": "Abonniere den wöchentlichen Lyceum-Newsletter",
+      "quotes": "Erhalte tägliche Zitate von großen Denkern"
+    },
+    "socials": {
+      "title": "Verbinde deine Welt (Optional)",
+      "description": "Verbinde deine Social-Media- oder beruflichen Konten mit deinem Profil.",
+      "twitter": "Twitter-Profil-URL",
+      "twitterPlaceholder": "https://twitter.com/username",
+      "github": "GitHub-Profil-URL",
+      "githubPlaceholder": "https://github.com/username",
+      "linkedin": "LinkedIn-Profil-URL",
+      "linkedinPlaceholder": "https://linkedin.com/in/username"
+    },
+    "profile": {
+      "title": "Passe dein Profil an",
+      "description": "Hebe dein Profil hervor. Du kannst ein Bild, ein Banner hochladen und eine kurze Biografie schreiben.",
+      "picture": "Profilbild",
+      "banner": "Profilbanner",
+      "bio": "Deine Biografie",
+      "bioPlaceholder": "Erzähl uns ein wenig über dich...",
+      "changeButton": "Ändern",
+      "uploadFile": "Datei hochladen",
+      "dragAndDrop": "oder per Drag & Drop ziehen",
+      "imageTypes": "PNG, JPG bis zu 5MB",
+      "uploadPictureButton": "Bild hochladen",
+      "uploadBannerButton": "Banner hochladen"
+    },
+    "agreements": {
+      "title": "Abschließende Vereinbarungen",
+      "description": "Bitte überprüfe die folgenden Punkte und stimme zu, um deine Einrichtung abzuschließen.",
+      "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.",
+      "personalization": "Ich stimme zu, dass meine Daten zur Personalisierung meines Lernens gesammelt werden."
+    },
+    "buttons": {
+      "next": "Weiter",
+      "previous": "Zurück",
+      "skip": "Überspringen",
+      "finish": "Abschließen"
+    },
+    "academicProfileTitle": "Akademisches Profil",
+    "interestsTitle": "Interessen",
+    "socialsTitle": "Soziale Netzwerke",
+    "majorLabel": "Hauptfach",
+    "majorLevelLabel": "Aktuelles Niveau",
+    "studiedSubjectsLabel": "Studierte Fächer"
   },
   "errors": {
     "fieldRequired": "Dieses Feld ist erforderlich.",

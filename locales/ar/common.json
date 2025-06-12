@@ -119,21 +119,110 @@
     "continueWithGoogle": "المتابعة باستخدام جوجل"
   },
   "onboarding": {
-    "step": "خطوة", "of": "من", "submitting": "جارٍ حفظ ملفك الشخصي...",
-    "welcome": { "title": "أهلاً بك في Lyceum! ماذا يجب أن نناديك؟", "description": "سيكون هذا اسمك العام المعروض.", "placeholder": "أدخل اسمك" },
-    "role": { "title": "هل أنت معلم أم طالب؟", "description": "هذا يساعدنا على تخصيص المنصة لاحتياجاتك.", "teacher": "معلم", "student": "طالب" },
-    "languages": { "title": "حدد تفضيلات اللغة الخاصة بك", "description": "اختر اللغات لواجهة الموقع، شروحات الذكاء الاصطناعي، ومحتوى الدورات.", "website": "لغة واجهة الموقع", "explanation": "لغة شروحات الذكاء الاصطناعي", "material": "لغة مواد الدورة" },
-    "major": { "title": "ما هو مجال دراستك الرئيسي؟", "description": "سيكون هذا هو محور مسار تعلمك المخصص.", "placeholder": "مثال: علوم الحاسب، الفلسفة، الفيزياء..." },
-    "majorLevel": { "title": "ما هو مستواك الحالي في هذا التخصص؟", "description": "دعنا نعرف أين أنت في رحلتك الأكاديمية.", "placeholder": "اختر مستواك الحالي...", "bachelor": "درجة البكالوريوس", "master": "درجة الماجستير", "phd": "دكتوراه", "postdoc": "ما بعد الدكتوراه", "hobbyist": "هاوٍ / متعلم مدى الحياة" },
-    "studiedSubjects": { "title": "ما هي المواد التي درستها بالفعل في تخصصك؟", "description": "هذا يساعدنا على تجنب اقتراح محتوى قد أتقنته بالفعل. اكتب اسم المادة واضغط على Enter.", "placeholder": "مثال: الجبر الخطي، الأخلاق..." },
-    "interestedMajors": { "title": "هل أنت مهتم بمجالات أخرى؟", "description": "يمكننا اقتراح محتوى شيق من مجالات دراسية أخرى.", "placeholder": "مثال: التاريخ، علم الأحياء..." },
-    "hobbies": { "title": "ما هي بعض هواياتك؟", "description": "دعنا نربط شغفك بتعلمك. أضف بعض اهتماماتك.", "placeholder": "مثال: الشطرنج، الرسم، التنزه..." },
-    "news": { "title": "ما هي الأخبار والمقالات التي تود رؤيتها؟", "description": "ابق على اطلاع بالمواضيع التي تهمك.", "placeholder": "مثال: أخبار الذكاء الاصطناعي، أخبار التكنولوجيا..." },
-    "contentPrefs": { "title": "صقل المحتوى الخاص بك", "description": "اختر أي محتوى إضافي تود الحصول عليه.", "newsletter": "اشترك في النشرة الإخبارية الأسبوعية لـ Lyceum", "quotes": "احصل على اقتباسات يومية من كبار المفكرين" },
-    "socials": { "title": "Link Your World (Optional)", "description": "Connect your social media or professional accounts to your profile.", "twitter": "رابط ملف تويتر", "twitterPlaceholder": "https://twitter.com/username", "github": "رابط ملف GitHub", "githubPlaceholder": "https://github.com/username", "linkedin": "رابط ملف LinkedIn", "linkedinPlaceholder": "https://linkedin.com/in/username" },
-    "profile": { "title": "خصص ملفك الشخصي", "description": "اجعل ملفك الشخصي مميزًا. يمكنك تحميل صورة، بانر، وكتابة سيرة ذاتية قصيرة.", "picture": "صورة الملف الشخصي", "banner": "بانر الملف الشخصي", "bio": "سيرتك الذاتية", "bioPlaceholder": "أخبرنا قليلاً عن نفسك...", "changeButton": "تغيير", "uploadFile": "رفع ملف", "dragAndDrop": "أو اسحب وأفلت", "imageTypes": "PNG, JPG حتى 5 ميجابايت" },
-    "agreements": { "title": "الاتفاقيات النهائية", "description": "يرجى مراجعة والموافقة على ما يلي لإكمال إعدادك.", "terms": "أوافق على شروط الخدمة وسياسة الخصوصية.", "personalization": "أوافق على جمع بياناتي لتخصيص تعلمي." },
-    "buttons": { "next": "التالي", "previous": "السابق", "skip": "تخطي", "finish": "إنهاء" }
+    "step": "خطوة",
+    "of": "من",
+    "submitting": "جارٍ حفظ ملفك الشخصي...",
+    "welcome": {
+      "title": "أهلاً بك في Lyceum! ماذا يجب أن نناديك؟",
+      "description": "سيكون هذا اسمك العام المعروض.",
+      "placeholder": "أدخل اسمك"
+    },
+    "role": {
+      "title": "هل أنت معلم أم طالب؟",
+      "description": "هذا يساعدنا على تخصيص المنصة لاحتياجاتك.",
+      "teacher": "معلم",
+      "student": "طالب"
+    },
+    "languages": {
+      "title": "حدد تفضيلات اللغة الخاصة بك",
+      "description": "اختر اللغات لواجهة الموقع، شروحات الذكاء الاصطناعي، ومحتوى الدورات.",
+      "website": "لغة واجهة الموقع",
+      "explanation": "لغة شروحات الذكاء الاصطناعي",
+      "material": "لغة مواد الدورة"
+    },
+    "major": {
+      "title": "ما هو مجال دراستك الرئيسي؟",
+      "description": "سيكون هذا هو محور مسار تعلمك المخصص.",
+      "placeholder": "مثال: علوم الحاسب، الفلسفة، الفيزياء..."
+    },
+    "majorLevel": {
+      "title": "ما هو مستواك الحالي في هذا التخصص؟",
+      "description": "دعنا نعرف أين أنت في رحلتك الأكاديمية.",
+      "placeholder": "اختر مستواك الحالي...",
+      "bachelor": "درجة البكالوريوس",
+      "master": "درجة الماجستير",
+      "phd": "دكتوراه",
+      "postdoc": "ما بعد الدكتوراه",
+      "hobbyist": "هاوٍ / متعلم مدى الحياة"
+    },
+    "studiedSubjects": {
+      "title": "ما هي المواد التي درستها بالفعل في تخصصك؟",
+      "description": "هذا يساعدنا على تجنب اقتراح محتوى قد أتقنته بالفعل. اكتب اسم المادة واضغط على Enter.",
+      "placeholder": "مثال: الجبر الخطي، الأخلاق..."
+    },
+    "interestedMajors": {
+      "title": "هل أنت مهتم بمجالات أخرى؟",
+      "description": "يمكننا اقتراح محتوى شيق من مجالات دراسية أخرى.",
+      "placeholder": "مثال: التاريخ، علم الأحياء..."
+    },
+    "hobbies": {
+      "title": "ما هي بعض هواياتك؟",
+      "description": "دعنا نربط شغفك بتعلمك. أضف بعض اهتماماتك.",
+      "placeholder": "مثال: الشطرنج، الرسم، التنزه..."
+    },
+    "news": {
+      "title": "ما هي الأخبار والمقالات التي تود رؤيتها؟",
+      "description": "ابق على اطلاع بالمواضيع التي تهمك.",
+      "placeholder": "مثال: أخبار الذكاء الاصطناعي، أخبار التكنولوجيا..."
+    },
+    "contentPrefs": {
+      "title": "صقل المحتوى الخاص بك",
+      "description": "اختر أي محتوى إضافي تود الحصول عليه.",
+      "newsletter": "اشترك في النشرة الإخبارية الأسبوعية لـ Lyceum",
+      "quotes": "احصل على اقتباسات يومية من كبار المفكرين"
+    },
+    "socials": {
+      "title": "اربط عالمك (اختياري)",
+      "description": "اربط حساباتك على وسائل التواصل الاجتماعي أو حساباتك المهنية بملفك الشخصي.",
+      "twitter": "رابط ملف تويتر",
+      "twitterPlaceholder": "https://twitter.com/username",
+      "github": "رابط ملف GitHub",
+      "githubPlaceholder": "https://github.com/username",
+      "linkedin": "رابط ملف LinkedIn",
+      "linkedinPlaceholder": "https://linkedin.com/in/username"
+    },
+    "profile": {
+      "title": "خصص ملفك الشخصي",
+      "description": "اجعل ملفك الشخصي مميزًا. يمكنك تحميل صورة، بانر، وكتابة سيرة ذاتية قصيرة.",
+      "picture": "صورة الملف الشخصي",
+      "banner": "بانر الملف الشخصي",
+      "bio": "سيرتك الذاتية",
+      "bioPlaceholder": "أخبرنا قليلاً عن نفسك...",
+      "changeButton": "تغيير",
+      "uploadFile": "رفع ملف",
+      "dragAndDrop": "أو اسحب وأفلت",
+      "imageTypes": "PNG, JPG حتى 5 ميجابايت",
+      "uploadPictureButton": "تحميل صورة",
+      "uploadBannerButton": "تحميل بانر"
+    },
+    "agreements": {
+      "title": "الاتفاقيات النهائية",
+      "description": "يرجى مراجعة والموافقة على ما يلي لإكمال إعدادك.",
+      "terms": "أوافق على شروط الخدمة وسياسة الخصوصية.",
+      "personalization": "أوافق على جمع بياناتي لتخصيص تعلمي."
+    },
+    "buttons": {
+      "next": "التالي",
+      "previous": "السابق",
+      "skip": "تخطي",
+      "finish": "إنهاء"
+    },
+    "academicProfileTitle": "الملف الأكاديمي",
+    "interestsTitle": "الاهتمامات",
+    "socialsTitle": "التواصل الاجتماعي",
+    "majorLabel": "التخصص الأساسي",
+    "majorLevelLabel": "المستوى الحالي",
+    "studiedSubjectsLabel": "المواد المدروسة"
   },
   "errors": {
     "fieldRequired": "هذا الحقل مطلوب.",
