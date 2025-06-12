@@ -378,7 +378,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         );
       case 'select': // For majorLevel
         if (currentStep.id === 'majorLevel') {
-          const majorLevelOptionsObject = t('majorLevel', { returnObjects: true }) as Record<string, string>;
+          const majorLevelOptionsObject = t('majorLevel', { returnObjects: true }) as unknown as Record<string, string>;
           const majorLevelOptions = Object.keys(majorLevelOptionsObject).map(key => {
             // Ensure that the key is one of the expected keys if necessary, or handle potential errors.
             // For now, we assume all keys in majorLevel are valid options.
@@ -505,7 +505,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
 
         // Get keys for checkboxes from translations (e.g., 'terms', 'personalization' for agreements)
         // The t(currentStep.id, ...) will correctly access `onboarding.agreements` or `onboarding.contentPrefs`
-        const optionKeysObject = t(currentStep.id, { returnObjects: true }) as Record<string, string>;
+        const optionKeysObject = t(currentStep.id, { returnObjects: true }) as unknown as Record<string, string>;
         // We need to filter out "title", "description" or any other non-checkbox keys if they exist at this level
         const checkboxKeys = Object.keys(optionKeysObject).filter(key =>
             typeof optionKeysObject[key] === 'string' && !['title', 'description', 'placeholder'].includes(key)
