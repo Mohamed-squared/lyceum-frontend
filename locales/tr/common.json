@@ -210,7 +210,8 @@
       "title": "Son Anlaşmalar",
       "terms": "Şartları ve Gizlilik Politikasını kabul ediyorum.",
       "personalization": "Öğrenmemi kişiselleştirmek için verilerimin toplanmasına izin veriyorum."
-    }
+    },
+    "submitting": "Profilin kaydediliyor..."
   },
   "errors": {
     "fieldRequired": "Bu alan zorunludur.",

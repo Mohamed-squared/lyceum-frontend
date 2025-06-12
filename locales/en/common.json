@@ -210,7 +210,8 @@
       "title": "Final Agreements",
       "terms": "I agree to the Terms and Privacy Policy.",
       "personalization": "I consent to my data being collected to personalize my learning."
-    }
+    },
+    "submitting": "Saving your profile..."
   },
   "errors": {
     "fieldRequired": "This field is required.",

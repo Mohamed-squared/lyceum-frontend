@@ -14,7 +14,7 @@ export const onboardingSteps: OnboardingStep[] = [
   { id: 'hobbies', type: 'tag-input' },
   { id: 'news', type: 'tag-input' },
   { id: 'contentPrefs', type: 'checkbox-group' },
-  { id: 'profile', type: 'multi-field' },
   { id: 'socials', type: 'socials' },
+  { id: 'profile', type: 'multi-field' },
   { id: 'agreements', type: 'checkbox-group' },
 ];

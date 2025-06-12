@@ -210,7 +210,8 @@
       "title": "Abschließende Vereinbarungen",
       "terms": "Ich stimme den Nutzungsbedingungen und der Datenschutzrichtlinie zu.",
       "personalization": "Ich stimme der Erhebung meiner Daten zur Personalisierung meines Lernens zu."
-    }
+    },
+    "submitting": "Dein Profil wird gespeichert..."
   },
   "errors": {
     "fieldRequired": "Dieses Feld ist erforderlich.",

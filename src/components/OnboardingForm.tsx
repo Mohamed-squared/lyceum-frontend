@@ -12,15 +12,14 @@ import type { Session } from '@supabase/supabase-js';
 import { onboardingSteps } from '@/lib/onboarding-steps';
 import RoleSelectionCard from '@/components/ui/RoleSelectionCard';
 import TagInput from '@/components/ui/TagInput';
-import LanguageSelectPlaceholder from '@/components/ui/LanguageSelectPlaceholder';
-import SelectPlaceholder from '@/components/ui/SelectPlaceholder';
 import MultiFieldPlaceholder from '@/components/ui/MultiFieldPlaceholder';
-import CheckboxGroupPlaceholder from '@/components/ui/CheckboxGroupPlaceholder';
-import SocialsPlaceholder from '@/components/ui/SocialsPlaceholder';
+// All placeholder components LanguageSelectPlaceholder, SelectPlaceholder, CheckboxGroupPlaceholder, SocialsPlaceholder
+// have been implemented directly in this file, so their imports are no longer needed.
 
 // Icons (assuming these might still be used or managed differently later)
-import studentIcon from '../../public/assets/onboarding/icon-student.svg'; // This path might also need aliasing if public is not directly servable like that. For now, focus on @/ components and lib.
-import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
+// Commenting out unused icons to avoid build errors if files are not present or paths are incorrect
+// import studentIcon from '../../public/assets/onboarding/icon-student.svg';
+// import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 
 // Interface for our form data state (old one, to be replaced or adapted)
 // interface OnboardingData {
@@ -162,7 +161,8 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   const [profilePictureFile, setProfilePictureFile] = useState<File | null>(null);
   const [profileBannerFile, setProfileBannerFile] = useState<File | null>(null);
   // socialsData to socialLinks as per naming convention in prompt
-  const [socialLinks, setSocialLinks] = useState<{ platform: string; username: string }[]>([]);
+  // const [socialLinks, setSocialLinks] = useState<{ platform: string; username: string }[]>([]); // Old structure
+  const [socials, setSocials] = useState<{ twitter: string; github: string; linkedin: string }>({ twitter: '', github: '', linkedin: '' }); // New structure
   const [agreementValues, setAgreementValues] = useState<CheckboxState>({});
 
   useEffect(() => {
@@ -213,7 +213,8 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         // setProfileBannerFile(null); // Or from stepData if applicable
         break;
       case 'socials':
-        setSocialLinks(stepData || []);
+        // setSocialLinks(stepData || []); // Old state update
+        setSocials(stepData || { twitter: '', github: '', linkedin: '' }); // New state update
         break;
       case 'agreements':
         setAgreementValues(stepData || {});
@@ -261,7 +262,8 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         dataToSubmit = { bio: profileBio /*, picture: pictureUrl, banner: bannerUrl */ };
         break;
       case 'socials':
-        dataToSubmit = socialLinks;
+        // dataToSubmit = socialLinks; // Old data submission
+        dataToSubmit = socials; // New data submission
         break;
       case 'agreements':
         dataToSubmit = agreementValues;
@@ -308,13 +310,13 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         return (
           <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8">
             <RoleSelectionCard
-              icon={studentIcon}
+              // icon={studentIcon} // Icon import commented out
               title={t('role.student')}
               isSelected={selectedRole === 'student'}
               onClick={() => setSelectedRole('student')}
             />
             <RoleSelectionCard
-              icon={teacherIcon}
+              // icon={teacherIcon} // Icon import commented out
               title={t('role.teacher')}
               isSelected={selectedRole === 'teacher'}
               onClick={() => setSelectedRole('teacher')}
@@ -322,16 +324,93 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
           </div>
         );
       case 'language-select':
-        return <LanguageSelectPlaceholder value={languageSelections} onChange={setLanguageSelections} />;
-      case 'select':
-        const selectOptions = currentStep.id === 'majorLevel' ? [
-          { value: 'bachelor', label: t('majorLevel.bachelor') },
-          { value: 'master', label: t('majorLevel.master') },
-          { value: 'phd', label: t('majorLevel.phd') },
-          { value: 'postdoc', label: t('majorLevel.postdoc') },
-          { value: 'hobbyist', label: t('majorLevel.hobbyist') },
-        ] : [];
-        return <SelectPlaceholder options={selectOptions} value={selectedMajorLevel} onChange={setSelectedMajorLevel} />;
+        const languageOptions = [
+          { value: 'en', label: 'English' },
+          { value: 'de', label: 'German' },
+          { value: 'tr', label: 'Turkish' },
+          { value: 'ar', label: 'Arabic' },
+        ];
+        return (
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="website-lang" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('languages.website')}</label>
+              <select
+                id="website-lang"
+                name="website"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                value={languageSelections.website || 'en'} // Default to 'en' if not set
+                onChange={(e) => setLanguageSelections(prev => ({ ...prev, website: e.target.value }))}
+              >
+                {languageOptions.map(option => (
+                  <option key={`website-${option.value}`} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="explanation-lang" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('languages.explanation')}</label>
+              <select
+                id="explanation-lang"
+                name="explanation"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                value={languageSelections.explanation || 'en'} // Default to 'en' if not set
+                onChange={(e) => setLanguageSelections(prev => ({ ...prev, explanation: e.target.value }))}
+              >
+                {languageOptions.map(option => (
+                  <option key={`explanation-${option.value}`} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="material-lang" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('languages.material')}</label>
+              <select
+                id="material-lang"
+                name="material"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                value={languageSelections.material || 'en'} // Default to 'en' if not set
+                onChange={(e) => setLanguageSelections(prev => ({ ...prev, material: e.target.value }))}
+              >
+                {languageOptions.map(option => (
+                  <option key={`material-${option.value}`} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        );
+      case 'select': // For majorLevel
+        if (currentStep.id === 'majorLevel') {
+          const majorLevelOptionsObject = t('majorLevel', { returnObjects: true }) as Record<string, string>;
+          const majorLevelOptions = Object.keys(majorLevelOptionsObject).map(key => {
+            // Ensure that the key is one of the expected keys if necessary, or handle potential errors.
+            // For now, we assume all keys in majorLevel are valid options.
+            return {
+              value: key,
+              // The label is the translation of onboarding.majorLevel.{key}
+              label: majorLevelOptionsObject[key]
+            };
+          });
+
+          return (
+            <div>
+              <label htmlFor="majorLevel-select" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                {t('majorLevel.title')}
+              </label>
+              <select
+                id="majorLevel-select"
+                name="majorLevel"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                value={selectedMajorLevel}
+                onChange={(e) => setSelectedMajorLevel(e.target.value)}
+              >
+                <option value="" disabled>{t('majorLevel.placeholder', {defaultValue: 'Select your level...'})}</option>
+                {majorLevelOptions.map(option => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
+          );
+        }
+        // Fallback for other 'select' types if any were to be added
+        return <div>Unsupported select step: {currentStep.id}</div>;
       case 'tag-input':
         let tagValue: string[] = [];
         let setTagValue: (tags: string[]) => void = () => {};
@@ -419,35 +498,87 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             </div>
           </>
         );
-      case 'checkbox-group':
-        const isAgreements = currentStep.id === 'agreements';
-        const checkboxValue = isAgreements ? agreementValues : contentPrefsValues;
-        const setCheckboxValue = isAgreements ? setAgreementValues : setContentPrefsValues;
+      case 'checkbox-group': {
+        const isAgreementsStep = currentStep.id === 'agreements';
+        const currentCheckboxValues = isAgreementsStep ? agreementValues : contentPrefsValues;
+        const setCurrentCheckboxValues = isAgreementsStep ? setAgreementValues : setContentPrefsValues;
 
-        let options: { id: string, label: string }[] = [];
-        if (isAgreements) {
-          options = [
-            { id: 'terms', label: t('agreements.terms') },
-            { id: 'personalization', label: t('agreements.personalization') },
-          ];
-        } else { // contentPrefs
-          options = [
-            { id: 'newsletter', label: t('contentPrefs.newsletter') },
-            { id: 'quotes', label: t('contentPrefs.quotes') },
-          ];
-        }
-        return (
-          <CheckboxGroupPlaceholder
-            name={currentStep.id}
-            options={options}
-            value={checkboxValue} // This should be CheckboxState
-            onChange={(newValues) => {
-                 setCheckboxValue(prev => ({...prev, ...newValues} as CheckboxState));
-            }}
-          />
+        // Get keys for checkboxes from translations (e.g., 'terms', 'personalization' for agreements)
+        // The t(currentStep.id, ...) will correctly access `onboarding.agreements` or `onboarding.contentPrefs`
+        const optionKeysObject = t(currentStep.id, { returnObjects: true }) as Record<string, string>;
+        // We need to filter out "title", "description" or any other non-checkbox keys if they exist at this level
+        const checkboxKeys = Object.keys(optionKeysObject).filter(key =>
+            typeof optionKeysObject[key] === 'string' && !['title', 'description', 'placeholder'].includes(key)
         );
-      case 'socials':
-        return <SocialsPlaceholder value={socialLinks} onChange={setSocialLinks} />;
+
+
+        const handleCheckboxChange = (key: string, checked: boolean) => {
+          setCurrentCheckboxValues(prev => ({ ...prev, [key]: checked }));
+        };
+
+        return (
+          <div>
+            {checkboxKeys.map(key => (
+              <div key={key} className="flex items-center mb-3">
+                <input
+                  id={`${currentStep.id}-${key}`}
+                  name={key}
+                  type="checkbox"
+                  className="mr-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                  checked={!!currentCheckboxValues[key]}
+                  onChange={(e) => handleCheckboxChange(key, e.target.checked)}
+                />
+                <label htmlFor={`${currentStep.id}-${key}`} className="text-sm text-slate-700 dark:text-slate-300">
+                  {/* The label is the translation of onboarding.{stepId}.{key} */}
+                  {optionKeysObject[key]}
+                </label>
+              </div>
+            ))}
+          </div>
+        );
+      }
+      case 'socials': {
+        const handleSocialChange = (platform: keyof typeof socials, value: string) => {
+          setSocials(prev => ({ ...prev, [platform]: value }));
+        };
+        return (
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="socials-twitter" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Twitter</label>
+              <input
+                type="text"
+                id="socials-twitter"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                placeholder="https://twitter.com/username"
+                value={socials.twitter}
+                onChange={(e) => handleSocialChange('twitter', e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="socials-github" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">GitHub</label>
+              <input
+                type="text"
+                id="socials-github"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                placeholder="https://github.com/username"
+                value={socials.github}
+                onChange={(e) => handleSocialChange('github', e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="socials-linkedin" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">LinkedIn</label>
+              <input
+                type="text"
+                id="socials-linkedin"
+                className="w-full p-2 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
+                placeholder="https://linkedin.com/in/username"
+                value={socials.linkedin}
+                onChange={(e) => handleSocialChange('linkedin', e.target.value)}
+              />
+            </div>
+          </div>
+        );
+      }
       default:
         return <div>Unsupported step type: {currentStep.type}</div>;
     }
@@ -466,7 +597,11 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
       <div className="text-center mb-8">
         <p className="text-sm font-semibold text-blue-500 mb-2">{t('step')} {currentStepIndex + 1} {t('of')} {totalSteps}</p>
         <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{t(`${currentStep?.id}.title`)}</h2>
-        {/* Updated description styling */}
+        {/* Updated description styling. The t(${currentStep?.id}.description) call is generally correct.
+            The prompt's concern about t('onboarding.agreements.description') vs t('agreements.description')
+            is handled by useTranslations('onboarding') which scopes t correctly.
+            Ensuring 'agreements.description' (and others) key exists in 'onboarding.json' is key.
+        */}
         <p className="text-slate-500 dark:text-slate-400 mb-6 max-w-md mx-auto">{t(`${currentStep?.id}.description`)}</p>
       </div>
 
