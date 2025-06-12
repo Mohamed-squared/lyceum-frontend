@@ -36,6 +36,11 @@ type OnboardingData = {
   [key: string]: any;
 };
 
+// Type for checkbox group states
+type CheckboxState = {
+  [key: string]: boolean;
+};
+
 // Define the component's props
 interface OnboardingFormProps {
   session: Session | null;
@@ -142,22 +147,28 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
   };
 
   // --- Local State for Step Inputs ---
-  const [welcomeName, setWelcomeName] = useState('');
-  const [selectedRole, setSelectedRole] = useState<'student' | 'teacher' | null>(null);
-  const [languageSelections, setLanguageSelections] = useState({}); // Assuming object structure
-  const [majorName, setMajorName] = useState('');
-  const [selectedMajorLevel, setSelectedMajorLevel] = useState('');
+  const [welcomeName, setWelcomeName] = useState<string>('');
+  const [selectedRole, setSelectedRole] = useState<string>(''); // As per requirement
+  const [languageSelections, setLanguageSelections] = useState<{ website: string; explanation: string; material: string }>({ website: '', explanation: '', material: '' });
+  const [majorName, setMajorName] = useState<string>('');
+  const [selectedMajorLevel, setSelectedMajorLevel] = useState<string>('');
   const [currentStudiedSubjects, setCurrentStudiedSubjects] = useState<string[]>([]);
   const [currentInterestedMajors, setCurrentInterestedMajors] = useState<string[]>([]);
   const [currentHobbies, setCurrentHobbies] = useState<string[]>([]);
-  const [currentNewsPrefs, setCurrentNewsPrefs] = useState<string[]>([]); // Assuming array of selected news topics
-  const [contentPrefsValues, setContentPrefsValues] = useState({ newsletter: false, quotes: false }); // Adjusted based on typical usage
-  const [profileData, setProfileData] = useState({ bio: '', picture: '', banner: '' }); // Simplified
-  const [socialsData, setSocialsData] = useState({}); // Assuming object structure
-  const [agreementValues, setAgreementValues] = useState({ terms: false, personalization: false });
+  const [currentNewsPrefs, setCurrentNewsPrefs] = useState<string[]>([]);
+  const [contentPrefsValues, setContentPrefsValues] = useState<CheckboxState>({});
+  // For profile: bio is string, picture/banner are files
+  const [profileBio, setProfileBio] = useState<string>('');
+  const [profilePictureFile, setProfilePictureFile] = useState<File | null>(null);
+  const [profileBannerFile, setProfileBannerFile] = useState<File | null>(null);
+  // socialsData to socialLinks as per naming convention in prompt
+  const [socialLinks, setSocialLinks] = useState<{ platform: string; username: string }[]>([]);
+  const [agreementValues, setAgreementValues] = useState<CheckboxState>({});
 
   useEffect(() => {
     // Populate local state when currentStep changes or formData for that step is initialized
+    // Note: `profileData` which was an object is now split into `profileBio`, `profilePictureFile`, `profileBannerFile`
+    // `socialsData` is now `socialLinks`
     if (!currentStep) return;
     const stepData = formData[currentStep.id];
 
@@ -166,10 +177,10 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         setWelcomeName(stepData || '');
         break;
       case 'role':
-        setSelectedRole(stepData || null);
+        setSelectedRole(stepData || ''); // Adjusted initial state to empty string
         break;
       case 'languages':
-        setLanguageSelections(stepData || {});
+        setLanguageSelections(stepData || { website: '', explanation: '', material: '' });
         break;
       case 'major':
         setMajorName(stepData || '');
@@ -190,16 +201,22 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         setCurrentNewsPrefs(stepData || []);
         break;
       case 'contentPrefs':
-        setContentPrefsValues(stepData || { newsletter: false, quotes: false });
+        setContentPrefsValues(stepData || {});
         break;
       case 'profile':
-        setProfileData(stepData || { bio: '', picture: '', banner: '' });
+        // Assuming stepData for profile might contain bio, picture, and banner info
+        // For local state, we're primarily managing bio text and file objects separately
+        setProfileBio(typeof stepData === 'object' && stepData?.bio ? stepData.bio : '');
+        // File states (profilePictureFile, profileBannerFile) are typically not stored in formData directly
+        // but handled upon selection. Initialization here is for completeness if direct URL/reference were stored.
+        // setProfilePictureFile(null); // Or from stepData if applicable
+        // setProfileBannerFile(null); // Or from stepData if applicable
         break;
       case 'socials':
-        setSocialsData(stepData || {});
+        setSocialLinks(stepData || []);
         break;
       case 'agreements':
-        setAgreementValues(stepData || { terms: false, personalization: false });
+        setAgreementValues(stepData || {});
         break;
     }
   }, [currentStep, formData]);
@@ -240,10 +257,11 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         dataToSubmit = contentPrefsValues;
         break;
       case 'profile':
-        dataToSubmit = profileData;
+        // Consolidate profile data for submission. Files would be handled separately (e.g., upload then store URL).
+        dataToSubmit = { bio: profileBio /*, picture: pictureUrl, banner: bannerUrl */ };
         break;
       case 'socials':
-        dataToSubmit = socialsData;
+        dataToSubmit = socialLinks;
         break;
       case 'agreements':
         dataToSubmit = agreementValues;
@@ -342,10 +360,12 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
             <textarea
                 className="w-full p-3 border rounded-md dark:bg-slate-700 dark:border-slate-600 focus:ring-2 focus:ring-blue-500"
                 placeholder={t('profile.bioPlaceholder')}
-                value={profileData.bio}
-                onChange={(e) => setProfileData(prev => ({ ...prev, bio: e.target.value }))}
+                value={profileBio}
+                onChange={(e) => setProfileBio(e.target.value)}
             />
-            // Simplified: Picture/Banner inputs would go here
+            {/* Inputs for profilePictureFile and profileBannerFile would go here
+                Example: <input type="file" onChange={(e) => setProfilePictureFile(e.target.files ? e.target.files[0] : null)} />
+            */}
         );
       case 'checkbox-group':
         const isAgreements = currentStep.id === 'agreements';
@@ -361,23 +381,21 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
         } else { // contentPrefs
           options = [
             { id: 'newsletter', label: t('contentPrefs.newsletter') },
-            { id: 'quotes', label: t('contentPrefs.quotes') }, // Corrected from newFeatures to quotes based on i18n
+            { id: 'quotes', label: t('contentPrefs.quotes') },
           ];
         }
         return (
           <CheckboxGroupPlaceholder
             name={currentStep.id}
             options={options}
-            value={checkboxValue}
+            value={checkboxValue} // This should be CheckboxState
             onChange={(newValues) => {
-                 // CheckboxGroupPlaceholder typically calls onChange with { id: checked_boolean }
-                 // We need to merge this into the existing state for this group
-                 setCheckboxValue(prev => ({...prev, ...newValues}));
+                 setCheckboxValue(prev => ({...prev, ...newValues} as CheckboxState));
             }}
           />
         );
       case 'socials':
-        return <SocialsPlaceholder value={socialsData} onChange={setSocialsData} />;
+        return <SocialsPlaceholder value={socialLinks} onChange={setSocialLinks} />;
       default:
         return <div>Unsupported step type: {currentStep.type}</div>;
     }
