@@ -197,10 +197,15 @@
     },
     "profile": {
       "title": "Profilini Özelleştir",
+      "description": "Profilini öne çıkar. Bir resim, banner yükleyebilir ve kısa bir biyografi yazabilirsin.",
       "picture": "Profil Resmi",
-      "banner": "Profil Başlığı",
+      "banner": "Profil Banner'ı",
       "bio": "Biyografin",
-      "bioPlaceholder": "Bize biraz kendinden bahset..."
+      "bioPlaceholder": "Bize biraz kendinden bahset...",
+      "changeButton": "Değiştir",
+      "uploadFile": "Dosya yükle",
+      "dragAndDrop": "veya sürükleyip bırak",
+      "imageTypes": "PNG, JPG 5MB'a kadar"
     },
     "socials": {
       "title": "Dünyanı Bağla (İsteğe Bağlı)",

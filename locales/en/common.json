@@ -197,10 +197,15 @@
     },
     "profile": {
       "title": "Customize Your Profile",
+      "description": "Make your profile stand out. You can upload a picture, banner, and write a short bio.",
       "picture": "Profile Picture",
       "banner": "Profile Banner",
       "bio": "Your Bio",
-      "bioPlaceholder": "Tell us a little about yourself..."
+      "bioPlaceholder": "Tell us a little about yourself...",
+      "changeButton": "Change",
+      "uploadFile": "Upload a file",
+      "dragAndDrop": "or drag and drop",
+      "imageTypes": "PNG, JPG up to 5MB"
     },
     "socials": {
       "title": "Link Your World (Optional)",

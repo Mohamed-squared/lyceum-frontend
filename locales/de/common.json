@@ -197,10 +197,15 @@
     },
     "profile": {
       "title": "Passe dein Profil an",
+      "description": "Hebe dein Profil hervor. Du kannst ein Bild, ein Banner hochladen und eine kurze Biografie schreiben.",
       "picture": "Profilbild",
-      "banner": "Profil-Banner",
+      "banner": "Profilbanner",
       "bio": "Deine Biografie",
-      "bioPlaceholder": "Erzähl uns ein wenig über dich..."
+      "bioPlaceholder": "Erzähl uns ein wenig über dich...",
+      "changeButton": "Ändern",
+      "uploadFile": "Datei hochladen",
+      "dragAndDrop": "oder per Drag & Drop ziehen",
+      "imageTypes": "PNG, JPG bis zu 5MB"
     },
     "socials": {
       "title": "Verbinde deine Welt (Optional)",
