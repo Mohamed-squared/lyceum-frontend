@@ -1,6 +1,10 @@
+// Full code for src/app/[locale]/dashboard/page.tsx
+
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import DashboardCard from '@/components/DashboardCard'; // Assuming this is the correct path
 
 export default async function DashboardPage() {
   const supabase = createServerClient();
@@ -14,38 +18,57 @@ export default async function DashboardPage() {
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const t = useTranslations('Dashboard'); // Assuming 'Dashboard' is the namespace for dashboard translations
+  const t = useTranslations('Dashboard');
+
+  const cardTitles = [
+    "TestGen Snapshot Card",
+    "Courses Snapshot Card",
+    "Analytics Snapshot Card",
+    "Settings Snapshot Card",
+    "Help Snapshot Card",
+  ];
 
   return (
     <div className="container mx-auto p-4">
-      <header className="relative mb-8">
-        {/* Placeholder for Profile Banner */}
-        <div className="h-48 bg-gray-300 dark:bg-gray-700 rounded-lg"></div>
-        {/* Placeholder for Profile Picture */}
-        <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-gray-400 dark:bg-gray-600 rounded-full border-4 border-white dark:border-gray-800"></div>
+      <header className="relative">
+        {/* Banner Image */}
+        <div className="w-full h-52 rounded-lg overflow-hidden">
+          <Image
+            src="/assets/dashboard/default-banner.jpg"
+            alt="Profile Banner"
+            width={1200} // Provide appropriate dimensions for aspect ratio
+            height={208} // h-52 is 13rem = 208px
+            className="w-full h-full object-cover" // object-cover with parent having h-full
+          />
+        </div>
+        {/* Profile Picture */}
+        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
+          <Image
+            src="/assets/dashboard/default-pfp.svg"
+            alt="Profile Picture"
+            width={144} // w-36 is 9rem = 144px
+            height={144} // h-36 is 9rem = 144px
+            className="rounded-full border-4 border-yellow-400"
+          />
+        </div>
       </header>
 
-      {/* Add margin-top to account for the overlaid profile picture */}
-      <main className="mt-16">
-        <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">
+      {/* Welcome Text - Adjusted margin top to account for PFP */}
+      <div className="text-center mt-20 mb-8">
+        <h2 className="text-2xl font-semibold text-slate-50">Welcome, Scholar!</h2>
+        <p className="text-md text-slate-300">Scholar's Credits: 250</p>
+      </div>
+
+      <main>
+        <h1 className="text-3xl font-bold text-slate-100 mb-6">
           {t('dashboardTitle')}
         </h1>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Placeholder Cards */}
-          {[
-            "TestGen Snapshot Card",
-            "Courses Snapshot Card",
-            "Analytics Snapshot Card",
-            "Settings Snapshot Card",
-            "Help Snapshot Card",
-          ].map((cardTitle, index) => (
-            <div
-              key={index}
-              className="bg-blue-100 dark:bg-blue-900 p-6 rounded-lg shadow-md min-h-[150px] flex items-center justify-center"
-            >
-              <p className="text-blue-700 dark:text-blue-300">{cardTitle}</p>
-            </div>
+          {cardTitles.map((cardTitle, index) => (
+            <DashboardCard key={index}>
+              <p className="text-slate-100">{cardTitle}</p> {/* Ensure text is visible on dark card bg */}
+            </DashboardCard>
           ))}
         </section>
       </main>
