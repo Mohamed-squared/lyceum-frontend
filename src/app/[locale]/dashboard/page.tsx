@@ -26,7 +26,7 @@ export default async function DashboardPage() {
     return null; // Ensure component returns null after redirect
   }
 
-  const t = await getTranslations('Dashboard');
+  const t = await getTranslations('Dashboard'); // Assuming 'Dashboard' namespace holds these keys
 
   let dashboardData: any;
   let apiError: string | null = null;
@@ -66,7 +66,7 @@ export default async function DashboardPage() {
       {/* Welcome Text - Adjusted margin top to account for PFP */}
       <div className="text-center mt-20 mb-8">
         <h2 className="text-2xl font-semibold text-slate-50">
-          {dashboardData?.welcomeMessage || t('welcome') || 'Welcome to your Dashboard!'}
+          {dashboardData?.welcomeMessage || t('welcomeMessage') || 'Welcome!'}
         </h2>
         <p className="text-md text-slate-300">
           {dashboardData?.credits || t('credits') || 'We are glad to have you.'}
@@ -94,29 +94,27 @@ export default async function DashboardPage() {
               />,
               <CoursesSnapshotCard
                 key="courses"
-                title={dashboardData.coursesCard?.title || t('coursesCard.title') || 'Your Courses'}
-                enrollmentStatus={dashboardData.coursesCard?.enrollmentStatus || t('coursesCard.enrollmentPlaceholder') || 'N/A'}
-                todaysFocus={dashboardData.coursesCard?.todaysFocus || t('coursesCard.focusPlaceholder') || 'N/A'}
-                buttonText={dashboardData.coursesCard?.buttonText || t('coursesCard.buttonText') || 'View Courses'}
+                title={dashboardData.courses?.title || t('coursesCard.title') || 'Your Courses'}
+                enrollmentStatus={dashboardData.courses?.enrollmentStatus || t('coursesCard.enrollmentPlaceholder') || 'N/A'}
+                todaysFocus={dashboardData.courses?.todaysFocus || t('coursesCard.focusPlaceholder') || 'N/A'}
+                buttonText={dashboardData.courses?.buttonText || t('coursesCard.buttonText') || 'View Courses'}
               />,
               <InspirationalQuoteCard
                 key="quote"
-                title={dashboardData.inspirationalQuoteCard?.title || t('inspirationalQuoteCard.title') || 'Inspirational Quote'}
-                quote={dashboardData.inspirationalQuoteCard?.quote || t('inspirationalQuoteCard.quotePlaceholder') || 'No quote available'}
-                author={dashboardData.inspirationalQuoteCard?.author || t('inspirationalQuoteCard.authorPlaceholder') || 'Unknown author'}
-                buttonText={t('inspirationalQuoteCard.refreshButtonText') || 'Refresh'}
+                title={dashboardData.quote?.title || t('quoteCard.title') || 'Inspirational Quote'}
+                quote={dashboardData.quote?.quote || t('quoteCard.quotePlaceholder') || 'No quote available'}
+                author={dashboardData.quote?.author || t('quoteCard.authorPlaceholder') || 'Unknown author'}
+                buttonText={t('quoteCard.refreshButtonText') || 'Refresh'}
               />,
               <LyceumNewsCard
                 key="news"
-                title={dashboardData.lyceumNewsCard?.title || t('lyceumNewsCard.title') || 'Lyceum News'}
-                // Assuming API provides 'newsItems' which matches Array<{ text: string; time: string; }>
-                items={dashboardData.lyceumNewsCard?.newsItems || t.raw('lyceumNewsCard.newsItemsFallback') || []}
+                title={dashboardData.news?.title || t('newsCard.title') || 'Lyceum News'}
+                items={dashboardData.news?.items || t.raw('newsCard.items') || []}
               />,
               <QuickLinksCard
                 key="links"
-                title={dashboardData.quickLinksCard?.title || t('quickLinksCard.title') || 'Quick Links'}
-                // Assuming API provides 'links' which matches Array<{ text: string; icon: string; }>
-                links={dashboardData.quickLinksCard?.links || t.raw('quickLinksCard.linksFallback') || []}
+                title={dashboardData.quickLinks?.title || t('quickLinksCard.title') || 'Quick Links'}
+                links={dashboardData.quickLinks?.links || t.raw('quickLinksCard.links') || []}
               />,
             ].map((Component, index) => (
               <DashboardCard key={index}>
