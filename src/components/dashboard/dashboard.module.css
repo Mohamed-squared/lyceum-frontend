@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.main {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quickLinksContainer {
+  margin-bottom: 20px; /* Add space below the quick links card */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: space-around; /* or space-between */
+}
+
+.quoteCardContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.newsCardContainer {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

@@ -1,22 +1,22 @@
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import { Dashboard } from '@/components/dashboard/dashboard'; // Import the new Dashboard
+import { getDictionary } from '@/i18n'; // Assuming you might need this for localized text later
+import { Locale } from '@/i18n-config'; // Assuming you might need this
 
-export default async function DashboardPage() {
+export default async function DashboardPage({ params: { locale } }: { params: { locale: Locale } }) {
   const supabase = createServerClient();
+  // const dictionary = await getDictionary(locale); // Example if you need translations
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect('/login');
+    return redirect(`/${locale}/login`); // Ensure locale is part of redirect
   }
 
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
-      <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-200">Welcome to your Dashboard</h1>
-      <p className="text-lg text-gray-600 dark:text-gray-400 mt-2">This page is under construction.</p>
-      <p className="mt-4 text-sm text-gray-500">Your User ID: {user.id}</p>
-    </div>
+    <Dashboard /> // Render the new Dashboard component
   );
 }
