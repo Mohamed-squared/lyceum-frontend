@@ -84,8 +84,14 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     setIsLoading(false);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto p-8 rounded-lg shadow-md bg-white dark:bg-gray-800">
+    <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="w-full max-w-lg mx-auto p-8 rounded-lg shadow-md bg-white dark:bg-gray-800">
       <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{steps[currentStep].title}</h2>
       <p className="text-gray-600 dark:text-gray-300 mb-6">{steps[currentStep].description}</p>
 
