@@ -230,6 +230,114 @@
     "profileUpdateFailed": "Failed to save profile: {details}"
   },
   "Dashboard": {
-    "title": "Home Dashboard"
+    "title": "Scholar's Dashboard",
+    "welcome": "Welcome back, Scholar!",
+    "credits": "You have {credits} Scholar's Credits.",
+    "testGenCard": {
+      "title": "TestGen Snapshot",
+      "description": "Review your latest TestGen activities and progress.",
+      "buttonText": "Go to TestGen Dashboard",
+      "noTestsMessage": "No TestGen activities yet. Create your first adaptive test!",
+      "loadingMessage": "Loading TestGen data...",
+      "errorMessage": "Could not load TestGen data.",
+      "tests": [
+        {
+          "name": "Abstract Algebra (Artin)",
+          "mastered": 12,
+          "total": 15,
+          "lastScore": 88,
+          "pendingPDFExams": 2
+        },
+        {
+          "name": "Quantum Mechanics (Griffiths)",
+          "mastered": 5,
+          "total": 10,
+          "lastScore": 75,
+          "pendingPDFExams": 1
+        }
+      ]
+    },
+    "coursesCard": {
+      "title": "Courses Snapshot",
+      "description": "{count} Courses Enrolled",
+      "buttonText": "Go to My Courses",
+      "noCoursesMessage": "Not enrolled in any courses yet. Explore our catalog!",
+      "loadingMessage": "Loading course data...",
+      "errorMessage": "Could not load course data.",
+      "courses": [
+        {
+          "name": "Introduction to Quantum Mechanics",
+          "focus": "Complete Chapter 3: The Postulates of Quantum Mechanics",
+          "grade": "A-"
+        },
+        {
+          "name": "Advanced Calculus",
+          "focus": "Review Series and Sequences for upcoming quiz",
+          "grade": "B+"
+        }
+      ]
+    },
+    "inspirationalQuoteCard": {
+      "title": "Quote of the Day",
+      "loadingMessage": "Fetching inspiring quote...",
+      "errorMessage": "Could not load quote."
+    },
+    "lyceumNewsCard": {
+      "title": "Lyceum News",
+      "loadingMessage": "Loading news...",
+      "errorMessage": "Could not load news.",
+      "newsItems": [
+        {
+          "title": "New Feature: Collaborative Study Groups",
+          "excerpt": "Invite your peers to study together with our new collaborative tools.",
+          "link": "/news/collaborative-study-groups"
+        },
+        {
+          "title": "Course Spotlight: The Philosophy of Mind",
+          "excerpt": "Explore the fundamental questions of consciousness and thought.",
+          "link": "/courses/philosophy-of-mind"
+        },
+        {
+          "title": "Maintenance Update",
+          "excerpt": "Scheduled maintenance on Sunday at 2 AM UTC. Expect brief downtime.",
+          "link": "/news/maintenance-update"
+        }
+      ]
+    },
+    "quickLinksCard": {
+      "title": "Quick Links",
+      "links": [
+        {
+          "text": "Generate Test",
+          "icon": "/assets/icons/icon-test.svg",
+          "href": "/testgen"
+        },
+        {
+          "text": "Browse Courses",
+          "icon": "/assets/icons/icon-courses.svg",
+          "href": "/courses"
+        },
+        {
+          "text": "AI Chat Studio",
+          "icon": "/assets/icons/icon-chat.svg",
+          "href": "/ai-chat"
+        },
+        {
+          "text": "My Courses",
+          "icon": "/assets/icons/icon-my-courses.svg",
+          "href": "/my-courses"
+        },
+        {
+          "text": "Leaderboard",
+          "icon": "/assets/icons/icon-leaderboard.svg",
+          "href": "/leaderboard"
+        },
+        {
+          "text": "Profile Settings",
+          "icon": "/assets/icons/icon-settings.svg",
+          "href": "/profile/settings"
+        }
+      ]
+    }
   }
 }

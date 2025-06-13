@@ -230,6 +230,114 @@
     "profileUpdateFailed": "فشل حفظ الملف الشخصي: {details}"
   },
   "Dashboard": {
-    "title": "لوحة التحكم الرئيسية"
+    "title": "لوحة تحكم الطالب",
+    "welcome": "مرحباً بعودتك أيها الباحث!",
+    "credits": "لديك {credits} من أرصدة الباحث.",
+    "testGenCard": {
+      "title": "لمحة عن TestGen",
+      "description": "راجع أحدث أنشطتك وتقدمك في TestGen.",
+      "buttonText": "الذهاب إلى لوحة تحكم TestGen",
+      "noTestsMessage": "لا توجد أنشطة TestGen حتى الآن. قم بإنشاء أول اختبار تكيفي لك!",
+      "loadingMessage": "جارٍ تحميل بيانات TestGen...",
+      "errorMessage": "تعذر تحميل بيانات TestGen.",
+      "tests": [
+        {
+          "name": "الجبر التجريدي (آرتن)",
+          "mastered": 12,
+          "total": 15,
+          "lastScore": 88,
+          "pendingPDFExams": 2
+        },
+        {
+          "name": "ميكانيكا الكم (غريفيث)",
+          "mastered": 5,
+          "total": 10,
+          "lastScore": 75,
+          "pendingPDFExams": 1
+        }
+      ]
+    },
+    "coursesCard": {
+      "title": "لمحة عن الدورات",
+      "description": "{count} دورات مسجلة",
+      "buttonText": "الذهاب إلى دوراتي",
+      "noCoursesMessage": "غير مسجل في أي دورات حتى الآن. استكشف كتالوجنا!",
+      "loadingMessage": "جارٍ تحميل بيانات الدورة...",
+      "errorMessage": "تعذر تحميل بيانات الدورة.",
+      "courses": [
+        {
+          "name": "مقدمة في ميكانيكا الكم",
+          "focus": "إكمال الفصل 3: مسلمات ميكانيكا الكم",
+          "grade": "أ-"
+        },
+        {
+          "name": "حساب التفاضل والتكامل المتقدم",
+          "focus": "مراجعة المتسلسلات والمتتاليات للاختبار القادم",
+          "grade": "ب+"
+        }
+      ]
+    },
+    "inspirationalQuoteCard": {
+      "title": "اقتباس اليوم",
+      "loadingMessage": "جارٍ جلب اقتباس ملهم...",
+      "errorMessage": "تعذر تحميل الاقتباس."
+    },
+    "lyceumNewsCard": {
+      "title": "أخبار ليسيوم",
+      "loadingMessage": "جارٍ تحميل الأخبار...",
+      "errorMessage": "تعذر تحميل الأخبار.",
+      "newsItems": [
+        {
+          "title": "ميزة جديدة: مجموعات دراسية تعاونية",
+          "excerpt": "ادعُ زملائك للدراسة معًا باستخدام أدواتنا التعاونية الجديدة.",
+          "link": "/news/collaborative-study-groups"
+        },
+        {
+          "title": "دورة مميزة: فلسفة العقل",
+          "excerpt": "استكشف الأسئلة الأساسية للوعي والفكر.",
+          "link": "/courses/philosophy-of-mind"
+        },
+        {
+          "title": "تحديث الصيانة",
+          "excerpt": "صيانة مجدولة يوم الأحد الساعة 2 صباحًا بالتوقيت العالمي المنسق. توقع فترة توقف قصيرة.",
+          "link": "/news/maintenance-update"
+        }
+      ]
+    },
+    "quickLinksCard": {
+      "title": "روابط سريعة",
+      "links": [
+        {
+          "text": "إنشاء اختبار",
+          "icon": "/assets/icons/icon-test.svg",
+          "href": "/testgen"
+        },
+        {
+          "text": "تصفح الدورات",
+          "icon": "/assets/icons/icon-courses.svg",
+          "href": "/courses"
+        },
+        {
+          "text": "استوديو الدردشة بالذكاء الاصطناعي",
+          "icon": "/assets/icons/icon-chat.svg",
+          "href": "/ai-chat"
+        },
+        {
+          "text": "دوراتي",
+          "icon": "/assets/icons/icon-my-courses.svg",
+          "href": "/my-courses"
+        },
+        {
+          "text": "لوحة المتصدرين",
+          "icon": "/assets/icons/icon-leaderboard.svg",
+          "href": "/leaderboard"
+        },
+        {
+          "text": "إعدادات الملف الشخصي",
+          "icon": "/assets/icons/icon-settings.svg",
+          "href": "/profile/settings"
+        }
+      ]
+    }
   }
 }

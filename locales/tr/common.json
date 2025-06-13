@@ -230,6 +230,114 @@
     "profileUpdateFailed": "Profil kaydedilemedi: {details}"
   },
   "Dashboard": {
-    "title": "Ana Kontrol Paneli"
+    "title": "Alim Kontrol Paneli",
+    "welcome": "Tekrar hoş geldin, Alim!",
+    "credits": "{credits} Alim Kredin var.",
+    "testGenCard": {
+      "title": "TestGen Anlık Görüntüsü",
+      "description": "En son TestGen aktivitelerinizi ve ilerlemenizi gözden geçirin.",
+      "buttonText": "TestGen Kontrol Paneline Git",
+      "noTestsMessage": "Henüz TestGen aktivitesi yok. İlk uyarlanabilir testinizi oluşturun!",
+      "loadingMessage": "TestGen verileri yükleniyor...",
+      "errorMessage": "TestGen verileri yüklenemedi.",
+      "tests": [
+        {
+          "name": "Soyut Cebir (Artin)",
+          "mastered": 12,
+          "total": 15,
+          "lastScore": 88,
+          "pendingPDFExams": 2
+        },
+        {
+          "name": "Kuantum Mekaniği (Griffiths)",
+          "mastered": 5,
+          "total": 10,
+          "lastScore": 75,
+          "pendingPDFExams": 1
+        }
+      ]
+    },
+    "coursesCard": {
+      "title": "Kurs Anlık Görüntüsü",
+      "description": "{count} Kursa Kayıtlı",
+      "buttonText": "Kurslarıma Git",
+      "noCoursesMessage": "Henüz hiçbir kursa kayıtlı değilsiniz. Kataloğumuzu keşfedin!",
+      "loadingMessage": "Kurs verileri yükleniyor...",
+      "errorMessage": "Kurs verileri yüklenemedi.",
+      "courses": [
+        {
+          "name": "Kuantum Mekaniğine Giriş",
+          "focus": "Bölüm 3'ü tamamla: Kuantum Mekaniğinin Postülatları",
+          "grade": "A-"
+        },
+        {
+          "name": "İleri Kalkülüs",
+          "focus": "Yaklaşan sınav için Seriler ve Diziler konusunu tekrar et",
+          "grade": "B+"
+        }
+      ]
+    },
+    "inspirationalQuoteCard": {
+      "title": "Günün Sözü",
+      "loadingMessage": "İlham verici alıntı getiriliyor...",
+      "errorMessage": "Alıntı yüklenemedi."
+    },
+    "lyceumNewsCard": {
+      "title": "Lyceum Haberleri",
+      "loadingMessage": "Haberler yükleniyor...",
+      "errorMessage": "Haberler yüklenemedi.",
+      "newsItems": [
+        {
+          "title": "Yeni Özellik: İşbirlikçi Çalışma Grupları",
+          "excerpt": "Yeni işbirlikçi araçlarımızla akranlarınızı birlikte çalışmaya davet edin.",
+          "link": "/news/collaborative-study-groups"
+        },
+        {
+          "title": "Öne Çıkan Kurs: Zihin Felsefesi",
+          "excerpt": "Bilinç ve düşüncenin temel sorularını keşfedin.",
+          "link": "/courses/philosophy-of-mind"
+        },
+        {
+          "title": "Bakım Güncellemesi",
+          "excerpt": "Pazar günü UTC 2'de planlanmış bakım. Kısa bir kesinti bekleyin.",
+          "link": "/news/maintenance-update"
+        }
+      ]
+    },
+    "quickLinksCard": {
+      "title": "Hızlı Bağlantılar",
+      "links": [
+        {
+          "text": "Test Oluştur",
+          "icon": "/assets/icons/icon-test.svg",
+          "href": "/testgen"
+        },
+        {
+          "text": "Kurslara Göz At",
+          "icon": "/assets/icons/icon-courses.svg",
+          "href": "/courses"
+        },
+        {
+          "text": "AI Sohbet Stüdyosu",
+          "icon": "/assets/icons/icon-chat.svg",
+          "href": "/ai-chat"
+        },
+        {
+          "text": "Kurslarım",
+          "icon": "/assets/icons/icon-my-courses.svg",
+          "href": "/my-courses"
+        },
+        {
+          "text": "Liderlik Tablosu",
+          "icon": "/assets/icons/icon-leaderboard.svg",
+          "href": "/leaderboard"
+        },
+        {
+          "text": "Profil Ayarları",
+          "icon": "/assets/icons/icon-settings.svg",
+          "href": "/profile/settings"
+        }
+      ]
+    }
   }
 }

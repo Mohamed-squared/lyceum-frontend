@@ -230,6 +230,114 @@
     "profileUpdateFailed": "Profil konnte nicht gespeichert werden: {details}"
   },
   "Dashboard": {
-    "title": "Home-Dashboard"
+    "title": "Gelehrten-Dashboard",
+    "welcome": "Willkommen zurück, Gelehrte(r)!",
+    "credits": "Sie haben {credits} Gelehrten-Credits.",
+    "testGenCard": {
+      "title": "TestGen-Schnappschuss",
+      "description": "Überprüfen Sie Ihre neuesten TestGen-Aktivitäten und Fortschritte.",
+      "buttonText": "Zum TestGen-Dashboard",
+      "noTestsMessage": "Noch keine TestGen-Aktivitäten. Erstellen Sie Ihren ersten adaptiven Test!",
+      "loadingMessage": "TestGen-Daten werden geladen...",
+      "errorMessage": "TestGen-Daten konnten nicht geladen werden.",
+      "tests": [
+        {
+          "name": "Abstrakte Algebra (Artin)",
+          "mastered": 12,
+          "total": 15,
+          "lastScore": 88,
+          "pendingPDFExams": 2
+        },
+        {
+          "name": "Quantenmechanik (Griffiths)",
+          "mastered": 5,
+          "total": 10,
+          "lastScore": 75,
+          "pendingPDFExams": 1
+        }
+      ]
+    },
+    "coursesCard": {
+      "title": "Kurs-Schnappschuss",
+      "description": "{count} Kurse belegt",
+      "buttonText": "Zu Meine Kurse",
+      "noCoursesMessage": "Noch in keinen Kursen eingeschrieben. Entdecken Sie unseren Katalog!",
+      "loadingMessage": "Kursdaten werden geladen...",
+      "errorMessage": "Kursdaten konnten nicht geladen werden.",
+      "courses": [
+        {
+          "name": "Einführung in die Quantenmechanik",
+          "focus": "Kapitel 3 abschließen: Die Postulate der Quantenmechanik",
+          "grade": "A-"
+        },
+        {
+          "name": "Höhere Analysis",
+          "focus": "Reihen und Folgen für das bevorstehende Quiz wiederholen",
+          "grade": "B+"
+        }
+      ]
+    },
+    "inspirationalQuoteCard": {
+      "title": "Zitat des Tages",
+      "loadingMessage": "Inspirierendes Zitat wird abgerufen...",
+      "errorMessage": "Zitat konnte nicht geladen werden."
+    },
+    "lyceumNewsCard": {
+      "title": "Lyceum-Nachrichten",
+      "loadingMessage": "Nachrichten werden geladen...",
+      "errorMessage": "Nachrichten konnten nicht geladen werden.",
+      "newsItems": [
+        {
+          "title": "Neues Feature: Kollaborative Lerngruppen",
+          "excerpt": "Laden Sie Ihre Kommilitonen ein, gemeinsam mit unseren neuen kollaborativen Werkzeugen zu lernen.",
+          "link": "/news/collaborative-study-groups"
+        },
+        {
+          "title": "Kurs im Fokus: Philosophie des Geistes",
+          "excerpt": "Erkunden Sie die grundlegenden Fragen des Bewusstseins und Denkens.",
+          "link": "/courses/philosophy-of-mind"
+        },
+        {
+          "title": "Wartungsupdate",
+          "excerpt": "Geplante Wartung am Sonntag um 2 Uhr UTC. Erwarten Sie eine kurze Ausfallzeit.",
+          "link": "/news/maintenance-update"
+        }
+      ]
+    },
+    "quickLinksCard": {
+      "title": "Schnellzugriffe",
+      "links": [
+        {
+          "text": "Test generieren",
+          "icon": "/assets/icons/icon-test.svg",
+          "href": "/testgen"
+        },
+        {
+          "text": "Kurse durchsuchen",
+          "icon": "/assets/icons/icon-courses.svg",
+          "href": "/courses"
+        },
+        {
+          "text": "KI-Chat-Studio",
+          "icon": "/assets/icons/icon-chat.svg",
+          "href": "/ai-chat"
+        },
+        {
+          "text": "Meine Kurse",
+          "icon": "/assets/icons/icon-my-courses.svg",
+          "href": "/my-courses"
+        },
+        {
+          "text": "Bestenliste",
+          "icon": "/assets/icons/icon-leaderboard.svg",
+          "href": "/leaderboard"
+        },
+        {
+          "text": "Profileinstellungen",
+          "icon": "/assets/icons/icon-settings.svg",
+          "href": "/profile/settings"
+        }
+      ]
+    }
   }
 }

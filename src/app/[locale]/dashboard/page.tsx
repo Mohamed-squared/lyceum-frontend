@@ -2,7 +2,7 @@
 
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { getTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import DashboardCard from '@/components/DashboardCard'; // Assuming this is the correct path
 
@@ -24,16 +24,48 @@ export default async function DashboardPage() {
     return redirect('/login');
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const t = await getTranslations('Dashboard');
 
   // The new components will be rendered directly in the grid
   const dashboardComponents = [
-    <TestGenSnapshotCard key="testgen" />,
-    <CoursesSnapshotCard key="courses" />,
-    <InspirationalQuoteCard key="quote" />,
-    <LyceumNewsCard key="news" />,
-    <QuickLinksCard key="links" />,
+    <TestGenSnapshotCard
+      key="testgen"
+      title={t('testGenCard.title')}
+      description={t('testGenCard.description')}
+      buttonText={t('testGenCard.buttonText')}
+      noTestsMessage={t('testGenCard.noTestsMessage')}
+      loadingMessage={t('testGenCard.loadingMessage')}
+      errorMessage={t('testGenCard.errorMessage')}
+      tests={t.raw('testGenCard.tests')}
+    />,
+    <CoursesSnapshotCard
+      key="courses"
+      title={t('coursesCard.title')}
+      description={t('coursesCard.description')}
+      buttonText={t('coursesCard.buttonText')}
+      noCoursesMessage={t('coursesCard.noCoursesMessage')}
+      loadingMessage={t('coursesCard.loadingMessage')}
+      errorMessage={t('coursesCard.errorMessage')}
+      courses={t.raw('coursesCard.courses')}
+    />,
+    <InspirationalQuoteCard
+      key="quote"
+      title={t('inspirationalQuoteCard.title')}
+      loadingMessage={t('inspirationalQuoteCard.loadingMessage')}
+      errorMessage={t('inspirationalQuoteCard.errorMessage')}
+    />,
+    <LyceumNewsCard
+      key="news"
+      title={t('lyceumNewsCard.title')}
+      newsItems={t.raw('lyceumNewsCard.newsItems')}
+      loadingMessage={t('lyceumNewsCard.loadingMessage')}
+      errorMessage={t('lyceumNewsCard.errorMessage')}
+    />,
+    <QuickLinksCard
+      key="links"
+      title={t('quickLinksCard.title')}
+      links={t.raw('quickLinksCard.links')}
+    />,
   ];
 
   return (
@@ -63,8 +95,8 @@ export default async function DashboardPage() {
 
       {/* Welcome Text - Adjusted margin top to account for PFP */}
       <div className="text-center mt-20 mb-8">
-        <h2 className="text-2xl font-semibold text-slate-50">Welcome, Scholar!</h2>
-        <p className="text-md text-slate-300">Scholar's Credits: 250</p>
+        <h2 className="text-2xl font-semibold text-slate-50">{t('welcome')}</h2>
+        <p className="text-md text-slate-300">{t('credits')}</p>
       </div>
 
       <main>
