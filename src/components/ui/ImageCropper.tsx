@@ -72,8 +72,8 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
           }}
           className="zoom-range"
         />
-        <button onClick={showCroppedImage}>Save</button>
-        <button onClick={onClose}>Cancel</button>
+        <button type="button" onClick={showCroppedImage}>Save</button>
+        <button type="button" onClick={onClose}>Cancel</button>
       </div>
       <style jsx>{`
         .image-cropper-overlay {
