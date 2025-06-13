@@ -119,20 +119,225 @@
     "continueWithGoogle": "المتابعة باستخدام جوجل"
   },
   "onboarding": {
-    "step": "خطوة", "of": "من",
-    "welcome": { "title": "مرحباً بك في ليسيوم! ماذا يجب أن نناديك؟", "description": "سيكون هذا اسمك المعروض العام.", "placeholder": "أدخل اسمك" },
-    "role": { "title": "هل أنت معلم أم طالب؟", "teacher": "معلم", "student": "طالب" },
-    "languages": { "title": "قم بتعيين تفضيلات اللغة الخاصة بك", "website": "لغة واجهة الموقع", "explanation": "لغة شرح الذكاء الاصطناعي", "material": "لغة مواد الدورة" },
-    "major": { "title": "ما هو مجال دراستك الرئيسي (التخصص)؟", "placeholder": "على سبيل المثال، علوم الحاسوب، الفلسفة، الفيزياء..." },
-    "majorLevel": { "title": "ما هو مستواك الحالي في هذا التخصص؟", "bachelor": "درجة البكالوريوس", "master": "درجة الماجستير", "phd": "دكتوراه", "postdoc": "ما بعد الدكتوراه", "hobbyist": "هاو / متعلم مدى الحياة" },
-    "studiedSubjects": { "title": "ما هي المواد التي درستها بالفعل في تخصصك؟", "description": "اكتب اسم مادة واضغط على Enter لإضافتها.", "placeholder": "على سبيل المثال، الجبر الخطي، الأخلاق..." },
-    "interestedMajors": { "title": "هل أنت مهتم بمجالات أخرى؟", "description": "أضف أي تخصصات أخرى ترغب في استكشافها.", "placeholder": "على سبيل المثال، التاريخ، الأحياء..." },
-    "hobbies": { "title": "ما هي بعض هواياتك؟", "description": "يساعدنا هذا في التوصية بمحتوى ذي صلة.", "placeholder": "على سبيل المثال، الشطرنج، الرسم، التنزه..." },
-    "news": { "title": "ما هي الأخبار والمقالات التي ترغب في رؤيتها؟", "description": "اختر الموضوعات التي تهمك.", "placeholder": "على سبيل المثال، أخبار الذكاء الاصطناعي، أخبار التكنولوجيا..." },
-    "contentPrefs": { "title": "قم بضبط المحتوى الخاص بك", "newsletter": "اشترك في النشرة الإخبارية الأسبوعية لـ Lyceum", "quotes": "احصل على اقتباسات يومية من عظماء المفكرين" },
-    "profile": { "title": "قم بتخصيص ملفك الشخصي", "picture": "صورة الملف الشخصي", "banner": "بانر الملف الشخصي", "bio": "سيرتك الذاتية", "bioPlaceholder": "أخبرنا قليلاً عن نفسك..." },
-    "socials": { "title": "اربط عالمك (اختياري)", "description": "اربط حساباتك الأخرى." },
-    "agreements": { "title": "الاتفاقيات النهائية", "terms": "أوافق على الشروط وسياسة الخصوصية.", "personalization": "أوافق على جمع بياناتي لتخصيص عملية التعلم." },
-    "buttons": { "next": "التالي", "previous": "السابق", "skip": "تخطى", "finish": "إنهاء" }
+    "step": "خطوة",
+    "of": "من",
+    "submitting": "جارٍ حفظ ملفك الشخصي...",
+    "welcome": {
+      "title": "أهلاً بك في Lyceum! ماذا يجب أن نناديك؟",
+      "description": "سيكون هذا اسمك العام المعروض.",
+      "placeholder": "أدخل اسمك"
+    },
+    "role": {
+      "title": "هل أنت معلم أم طالب؟",
+      "description": "هذا يساعدنا على تخصيص المنصة لاحتياجاتك.",
+      "teacher": "معلم",
+      "student": "طالب"
+    },
+    "languages": {
+      "title": "حدد تفضيلات اللغة الخاصة بك",
+      "description": "اختر اللغات لواجهة الموقع، شروحات الذكاء الاصطناعي، ومحتوى الدورات.",
+      "website": "لغة واجهة الموقع",
+      "explanation": "لغة شروحات الذكاء الاصطناعي",
+      "material": "لغة مواد الدورة"
+    },
+    "major": {
+      "title": "ما هو مجال دراستك الرئيسي؟",
+      "description": "سيكون هذا هو محور مسار تعلمك المخصص.",
+      "placeholder": "مثال: علوم الحاسب، الفلسفة، الفيزياء..."
+    },
+    "majorLevel": {
+      "title": "ما هو مستواك الحالي في هذا التخصص؟",
+      "description": "دعنا نعرف أين أنت في رحلتك الأكاديمية.",
+      "placeholder": "اختر مستواك الحالي...",
+      "bachelor": "درجة البكالوريوس",
+      "master": "درجة الماجستير",
+      "phd": "دكتوراه",
+      "postdoc": "ما بعد الدكتوراه",
+      "hobbyist": "هاوٍ / متعلم مدى الحياة"
+    },
+    "studiedSubjects": {
+      "title": "ما هي المواد التي درستها بالفعل في تخصصك؟",
+      "description": "هذا يساعدنا على تجنب اقتراح محتوى قد أتقنته بالفعل. اكتب اسم المادة واضغط على Enter.",
+      "placeholder": "مثال: الجبر الخطي، الأخلاق..."
+    },
+    "interestedMajors": {
+      "title": "هل أنت مهتم بمجالات أخرى؟",
+      "description": "يمكننا اقتراح محتوى شيق من مجالات دراسية أخرى.",
+      "placeholder": "مثال: التاريخ، علم الأحياء..."
+    },
+    "hobbies": {
+      "title": "ما هي بعض هواياتك؟",
+      "description": "دعنا نربط شغفك بتعلمك. أضف بعض اهتماماتك.",
+      "placeholder": "مثال: الشطرنج، الرسم، التنزه..."
+    },
+    "news": {
+      "title": "ما هي الأخبار والمقالات التي تود رؤيتها؟",
+      "description": "ابق على اطلاع بالمواضيع التي تهمك.",
+      "placeholder": "مثال: أخبار الذكاء الاصطناعي، أخبار التكنولوجيا..."
+    },
+    "contentPrefs": {
+      "title": "صقل المحتوى الخاص بك",
+      "description": "اختر أي محتوى إضافي تود الحصول عليه.",
+      "newsletter": "اشترك في النشرة الإخبارية الأسبوعية لـ Lyceum",
+      "quotes": "احصل على اقتباسات يومية من كبار المفكرين"
+    },
+    "socials": {
+      "title": "اربط عالمك (اختياري)",
+      "description": "اربط حساباتك على وسائل التواصل الاجتماعي أو حساباتك المهنية بملفك الشخصي.",
+      "twitter": "رابط ملف تويتر",
+      "twitterPlaceholder": "https://twitter.com/username",
+      "github": "رابط ملف GitHub",
+      "githubPlaceholder": "https://github.com/username",
+      "linkedin": "رابط ملف LinkedIn",
+      "linkedinPlaceholder": "https://linkedin.com/in/username"
+    },
+    "profile": {
+      "title": "خصص ملفك الشخصي",
+      "description": "اجعل ملفك الشخصي مميزًا. يمكنك تحميل صورة، بانر، وكتابة سيرة ذاتية قصيرة.",
+      "picture": "صورة الملف الشخصي",
+      "banner": "بانر الملف الشخصي",
+      "bio": "سيرتك الذاتية",
+      "bioPlaceholder": "أخبرنا قليلاً عن نفسك...",
+      "changeButton": "تغيير",
+      "uploadFile": "رفع ملف",
+      "dragAndDrop": "أو اسحب وأفلت",
+      "imageTypes": "PNG, JPG حتى 5 ميجابايت",
+      "uploadPictureButton": "تحميل صورة",
+      "uploadBannerButton": "تحميل بانر"
+    },
+    "agreements": {
+      "title": "الاتفاقيات النهائية",
+      "description": "يرجى مراجعة والموافقة على ما يلي لإكمال إعدادك.",
+      "terms": "أوافق على شروط الخدمة وسياسة الخصوصية.",
+      "personalization": "أوافق على جمع بياناتي لتخصيص تعلمي."
+    },
+    "buttons": {
+      "next": "التالي",
+      "previous": "السابق",
+      "skip": "تخطي",
+      "finish": "إنهاء"
+    },
+    "academicProfileTitle": "الملف الأكاديمي",
+    "interestsTitle": "الاهتمامات",
+    "socialsTitle": "التواصل الاجتماعي",
+    "majorLabel": "التخصص الأساسي",
+    "majorLevelLabel": "المستوى الحالي",
+    "studiedSubjectsLabel": "المواد المدروسة"
+  },
+  "errors": {
+    "fieldRequired": "هذا الحقل مطلوب.",
+    "authError": "خطأ في المصادقة. يرجى تسجيل الدخول مرة أخرى.",
+    "profileUpdateFailed": "فشل حفظ الملف الشخصي: {details}"
+  },
+  "Dashboard": {
+    "title": "لوحة تحكم الطالب",
+    "welcome": "مرحباً بعودتك أيها الباحث!",
+    "credits": "لديك {credits} من أرصدة الباحث.",
+    "testGenCard": {
+      "title": "لمحة عن TestGen",
+      "description": "راجع أحدث أنشطتك وتقدمك في TestGen.",
+      "buttonText": "الذهاب إلى لوحة تحكم TestGen",
+      "noTestsMessage": "لا توجد أنشطة TestGen حتى الآن. قم بإنشاء أول اختبار تكيفي لك!",
+      "loadingMessage": "جارٍ تحميل بيانات TestGen...",
+      "errorMessage": "تعذر تحميل بيانات TestGen.",
+      "tests": [
+        {
+          "name": "الجبر التجريدي (آرتن)",
+          "mastered": 12,
+          "total": 15,
+          "lastScore": 88,
+          "pendingPDFExams": 2
+        },
+        {
+          "name": "ميكانيكا الكم (غريفيث)",
+          "mastered": 5,
+          "total": 10,
+          "lastScore": 75,
+          "pendingPDFExams": 1
+        }
+      ]
+    },
+    "coursesCard": {
+      "title": "لمحة عن الدورات",
+      "description": "{count} دورات مسجلة",
+      "buttonText": "الذهاب إلى دوراتي",
+      "noCoursesMessage": "غير مسجل في أي دورات حتى الآن. استكشف كتالوجنا!",
+      "loadingMessage": "جارٍ تحميل بيانات الدورة...",
+      "errorMessage": "تعذر تحميل بيانات الدورة.",
+      "courses": [
+        {
+          "name": "مقدمة في ميكانيكا الكم",
+          "focus": "إكمال الفصل 3: مسلمات ميكانيكا الكم",
+          "grade": "أ-"
+        },
+        {
+          "name": "حساب التفاضل والتكامل المتقدم",
+          "focus": "مراجعة المتسلسلات والمتتاليات للاختبار القادم",
+          "grade": "ب+"
+        }
+      ]
+    },
+    "inspirationalQuoteCard": {
+      "title": "اقتباس اليوم",
+      "loadingMessage": "جارٍ جلب اقتباس ملهم...",
+      "errorMessage": "تعذر تحميل الاقتباس."
+    },
+    "lyceumNewsCard": {
+      "title": "أخبار ليسيوم",
+      "loadingMessage": "جارٍ تحميل الأخبار...",
+      "errorMessage": "تعذر تحميل الأخبار.",
+      "newsItems": [
+        {
+          "title": "ميزة جديدة: مجموعات دراسية تعاونية",
+          "excerpt": "ادعُ زملائك للدراسة معًا باستخدام أدواتنا التعاونية الجديدة.",
+          "link": "/news/collaborative-study-groups"
+        },
+        {
+          "title": "دورة مميزة: فلسفة العقل",
+          "excerpt": "استكشف الأسئلة الأساسية للوعي والفكر.",
+          "link": "/courses/philosophy-of-mind"
+        },
+        {
+          "title": "تحديث الصيانة",
+          "excerpt": "صيانة مجدولة يوم الأحد الساعة 2 صباحًا بالتوقيت العالمي المنسق. توقع فترة توقف قصيرة.",
+          "link": "/news/maintenance-update"
+        }
+      ]
+    },
+    "quickLinksCard": {
+      "title": "روابط سريعة",
+      "links": [
+        {
+          "text": "إنشاء اختبار",
+          "icon": "/assets/icons/icon-test.svg",
+          "href": "/testgen"
+        },
+        {
+          "text": "تصفح الدورات",
+          "icon": "/assets/icons/icon-courses.svg",
+          "href": "/courses"
+        },
+        {
+          "text": "استوديو الدردشة بالذكاء الاصطناعي",
+          "icon": "/assets/icons/icon-chat.svg",
+          "href": "/ai-chat"
+        },
+        {
+          "text": "دوراتي",
+          "icon": "/assets/icons/icon-my-courses.svg",
+          "href": "/my-courses"
+        },
+        {
+          "text": "لوحة المتصدرين",
+          "icon": "/assets/icons/icon-leaderboard.svg",
+          "href": "/leaderboard"
+        },
+        {
+          "text": "إعدادات الملف الشخصي",
+          "icon": "/assets/icons/icon-settings.svg",
+          "href": "/profile/settings"
+        }
+      ]
+    }
   }
 }

@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+:root {
+  --foreground-rgb: 255, 255, 255; /* Changed to light text for dark bg */
+  --background-start-rgb: 0, 0, 0; /* Not directly used by body bg-slate-900 but good to align */
+  --background-end-rgb: 0, 0, 0; /* Not directly used by body bg-slate-900 but good to align */
+}
+
+/* Remove dark mode specific :root overrides if we're setting a fixed dark theme */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+*/
+
+@layer base {
+  body {
+    /* Remove old color and background properties */
+    /* color: rgb(var(--foreground-rgb)); */
+    /* background: linear-gradient(
+        to bottom,
+        transparent,
+        rgb(var(--background-end-rgb))
+      )
+      rgb(var(--background-start-rgb)); */
+
+    /* Add new background and text color */
+    @apply bg-slate-900 text-slate-50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

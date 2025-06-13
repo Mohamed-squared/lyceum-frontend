@@ -119,20 +119,225 @@
     "continueWithGoogle": "Continue with Google"
   },
   "onboarding": {
-    "step": "Step", "of": "of",
-    "welcome": { "title": "Welcome to Lyceum! What should we call you?", "description": "This will be your public display name.", "placeholder": "Enter your name" },
-    "role": { "title": "Are you an educator or a student?", "teacher": "Educator", "student": "Student" },
-    "languages": { "title": "Set Your Language Preferences", "website": "Website Interface Language", "explanation": "AI Explanation Language", "material": "Course Material Language" },
-    "major": { "title": "What is your primary field of study (Major)?", "placeholder": "e.g., Computer Science, Philosophy, Physics..." },
-    "majorLevel": { "title": "What is your current level in this major?", "bachelor": "Bachelor's Degree", "master": "Master's Degree", "phd": "PhD", "postdoc": "Postdoctoral", "hobbyist": "Hobbyist / Lifelong Learner" },
-    "studiedSubjects": { "title": "What subjects have you already studied in your major?", "description": "Type a subject name and press Enter to add it.", "placeholder": "e.g., Linear Algebra, Ethics..." },
-    "interestedMajors": { "title": "Are you interested in other fields?", "description": "Add any other majors you'd like to explore.", "placeholder": "e.g., History, Biology..." },
-    "hobbies": { "title": "What are some of your hobbies?", "description": "This helps us recommend related content.", "placeholder": "e.g., Chess, Painting, Hiking..." },
-    "news": { "title": "What news and articles would you like to see?", "description": "Choose topics that interest you.", "placeholder": "e.g., AI News, Tech News..." },
-    "contentPrefs": { "title": "Fine-tune Your Content", "newsletter": "Subscribe to the weekly Lyceum Newsletter", "quotes": "Get daily quotes from great thinkers" },
-    "profile": { "title": "Customize Your Profile", "picture": "Profile Picture", "banner": "Profile Banner", "bio": "Your Bio", "bioPlaceholder": "Tell us a little about yourself..." },
-    "socials": { "title": "Link Your World (Optional)", "description": "Connect your other accounts." },
-    "agreements": { "title": "Final Agreements", "terms": "I agree to the Terms and Privacy Policy.", "personalization": "I consent to my data being collected to personalize my learning." },
-    "buttons": { "next": "Next", "previous": "Back", "skip": "Skip", "finish": "Finish" }
+    "step": "Step",
+    "of": "of",
+    "submitting": "Saving your profile...",
+    "welcome": {
+      "title": "Welcome to Lyceum! What should we call you?",
+      "description": "This will be your public display name.",
+      "placeholder": "Enter your name"
+    },
+    "role": {
+      "title": "Are you an educator or a student?",
+      "description": "This helps us tailor the platform to your needs.",
+      "teacher": "Educator",
+      "student": "Student"
+    },
+    "languages": {
+      "title": "Set Your Language Preferences",
+      "description": "Choose the languages for the interface, AI explanations, and course content.",
+      "website": "Website Interface Language",
+      "explanation": "AI Explanation Language",
+      "material": "Course Material Language"
+    },
+    "major": {
+      "title": "What is your primary field of study (Major)?",
+      "description": "This will be the focus of your personalized learning path.",
+      "placeholder": "e.g., Computer Science, Philosophy, Physics..."
+    },
+    "majorLevel": {
+      "title": "What is your current level in this major?",
+      "description": "Let us know where you are in your academic journey.",
+      "placeholder": "Select your current level...",
+      "bachelor": "Bachelor's Degree",
+      "master": "Master's Degree",
+      "phd": "PhD",
+      "postdoc": "Postdoctoral",
+      "hobbyist": "Hobbyist / Lifelong Learner"
+    },
+    "studiedSubjects": {
+      "title": "What subjects have you already studied in your major?",
+      "description": "This helps us avoid recommending content you've already mastered. Type a subject and press Enter.",
+      "placeholder": "e.g., Linear Algebra, Ethics..."
+    },
+    "interestedMajors": {
+      "title": "Are you interested in other fields?",
+      "description": "We can suggest fascinating content from other areas of study.",
+      "placeholder": "e.g., History, Biology..."
+    },
+    "hobbies": {
+      "title": "What are some of your hobbies?",
+      "description": "Let's connect your passions with your learning. Add a few of your interests.",
+      "placeholder": "e.g., Chess, Painting, Hiking..."
+    },
+    "news": {
+      "title": "What news and articles would you like to see?",
+      "description": "Stay updated with topics that matter to you.",
+      "placeholder": "e.g., AI News, Tech News..."
+    },
+    "contentPrefs": {
+      "title": "Fine-tune Your Content",
+      "description": "Select any additional content you'd like to receive.",
+      "newsletter": "Subscribe to the weekly Lyceum Newsletter",
+      "quotes": "Get daily quotes from great thinkers"
+    },
+    "socials": {
+      "title": "Link Your World (Optional)",
+      "description": "Connect your social media or professional accounts to your profile.",
+      "twitter": "Twitter Profile URL",
+      "twitterPlaceholder": "https://twitter.com/username",
+      "github": "GitHub Profile URL",
+      "githubPlaceholder": "https://github.com/username",
+      "linkedin": "LinkedIn Profile URL",
+      "linkedinPlaceholder": "https://linkedin.com/in/username"
+    },
+    "profile": {
+      "title": "Customize Your Profile",
+      "description": "Make your profile stand out. You can upload a picture, banner, and write a short bio.",
+      "picture": "Profile Picture",
+      "banner": "Profile Banner",
+      "bio": "Your Bio",
+      "bioPlaceholder": "Tell us a little about yourself...",
+      "changeButton": "Change",
+      "uploadFile": "Upload a file",
+      "dragAndDrop": "or drag and drop",
+      "imageTypes": "PNG, JPG up to 5MB",
+      "uploadPictureButton": "Upload Picture",
+      "uploadBannerButton": "Upload Banner"
+    },
+    "agreements": {
+      "title": "Final Agreements",
+      "description": "Please review and agree to the following to complete your setup.",
+      "terms": "I agree to the Terms and Privacy Policy.",
+      "personalization": "I consent to my data being collected to personalize my learning."
+    },
+    "buttons": {
+      "next": "Next",
+      "previous": "Back",
+      "skip": "Skip",
+      "finish": "Finish"
+    },
+    "academicProfileTitle": "Academic Profile",
+    "interestsTitle": "Interests",
+    "socialsTitle": "Socials",
+    "majorLabel": "Primary Major",
+    "majorLevelLabel": "Current Level",
+    "studiedSubjectsLabel": "Studied Subjects"
+  },
+  "errors": {
+    "fieldRequired": "This field is required.",
+    "authError": "Authentication error. Please log in again.",
+    "profileUpdateFailed": "Failed to save profile: {details}"
+  },
+  "Dashboard": {
+    "title": "Scholar's Dashboard",
+    "welcome": "Welcome back, Scholar!",
+    "credits": "You have {credits} Scholar's Credits.",
+    "testGenCard": {
+      "title": "TestGen Snapshot",
+      "description": "Review your latest TestGen activities and progress.",
+      "buttonText": "Go to TestGen Dashboard",
+      "noTestsMessage": "No TestGen activities yet. Create your first adaptive test!",
+      "loadingMessage": "Loading TestGen data...",
+      "errorMessage": "Could not load TestGen data.",
+      "tests": [
+        {
+          "name": "Abstract Algebra (Artin)",
+          "mastered": 12,
+          "total": 15,
+          "lastScore": 88,
+          "pendingPDFExams": 2
+        },
+        {
+          "name": "Quantum Mechanics (Griffiths)",
+          "mastered": 5,
+          "total": 10,
+          "lastScore": 75,
+          "pendingPDFExams": 1
+        }
+      ]
+    },
+    "coursesCard": {
+      "title": "Courses Snapshot",
+      "description": "{count} Courses Enrolled",
+      "buttonText": "Go to My Courses",
+      "noCoursesMessage": "Not enrolled in any courses yet. Explore our catalog!",
+      "loadingMessage": "Loading course data...",
+      "errorMessage": "Could not load course data.",
+      "courses": [
+        {
+          "name": "Introduction to Quantum Mechanics",
+          "focus": "Complete Chapter 3: The Postulates of Quantum Mechanics",
+          "grade": "A-"
+        },
+        {
+          "name": "Advanced Calculus",
+          "focus": "Review Series and Sequences for upcoming quiz",
+          "grade": "B+"
+        }
+      ]
+    },
+    "inspirationalQuoteCard": {
+      "title": "Quote of the Day",
+      "loadingMessage": "Fetching inspiring quote...",
+      "errorMessage": "Could not load quote."
+    },
+    "lyceumNewsCard": {
+      "title": "Lyceum News",
+      "loadingMessage": "Loading news...",
+      "errorMessage": "Could not load news.",
+      "newsItems": [
+        {
+          "title": "New Feature: Collaborative Study Groups",
+          "excerpt": "Invite your peers to study together with our new collaborative tools.",
+          "link": "/news/collaborative-study-groups"
+        },
+        {
+          "title": "Course Spotlight: The Philosophy of Mind",
+          "excerpt": "Explore the fundamental questions of consciousness and thought.",
+          "link": "/courses/philosophy-of-mind"
+        },
+        {
+          "title": "Maintenance Update",
+          "excerpt": "Scheduled maintenance on Sunday at 2 AM UTC. Expect brief downtime.",
+          "link": "/news/maintenance-update"
+        }
+      ]
+    },
+    "quickLinksCard": {
+      "title": "Quick Links",
+      "links": [
+        {
+          "text": "Generate Test",
+          "icon": "/assets/icons/icon-test.svg",
+          "href": "/testgen"
+        },
+        {
+          "text": "Browse Courses",
+          "icon": "/assets/icons/icon-courses.svg",
+          "href": "/courses"
+        },
+        {
+          "text": "AI Chat Studio",
+          "icon": "/assets/icons/icon-chat.svg",
+          "href": "/ai-chat"
+        },
+        {
+          "text": "My Courses",
+          "icon": "/assets/icons/icon-my-courses.svg",
+          "href": "/my-courses"
+        },
+        {
+          "text": "Leaderboard",
+          "icon": "/assets/icons/icon-leaderboard.svg",
+          "href": "/leaderboard"
+        },
+        {
+          "text": "Profile Settings",
+          "icon": "/assets/icons/icon-settings.svg",
+          "href": "/profile/settings"
+        }
+      ]
+    }
   }
 }
