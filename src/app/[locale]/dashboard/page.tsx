@@ -6,6 +6,13 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import DashboardCard from '@/components/DashboardCard'; // Assuming this is the correct path
 
+// Import the new components
+import TestGenSnapshotCard from '@/components/dashboard/TestGenSnapshotCard';
+import CoursesSnapshotCard from '@/components/dashboard/CoursesSnapshotCard';
+import InspirationalQuoteCard from '@/components/dashboard/InspirationalQuoteCard';
+import LyceumNewsCard from '@/components/dashboard/LyceumNewsCard';
+import QuickLinksCard from '@/components/dashboard/QuickLinksCard';
+
 export default async function DashboardPage() {
   const supabase = createServerClient();
 
@@ -20,12 +27,13 @@ export default async function DashboardPage() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const t = useTranslations('Dashboard');
 
-  const cardTitles = [
-    "TestGen Snapshot Card",
-    "Courses Snapshot Card",
-    "Analytics Snapshot Card",
-    "Settings Snapshot Card",
-    "Help Snapshot Card",
+  // The new components will be rendered directly in the grid
+  const dashboardComponents = [
+    <TestGenSnapshotCard key="testgen" />,
+    <CoursesSnapshotCard key="courses" />,
+    <InspirationalQuoteCard key="quote" />,
+    <LyceumNewsCard key="news" />,
+    <QuickLinksCard key="links" />,
   ];
 
   return (
@@ -65,9 +73,9 @@ export default async function DashboardPage() {
         </h1>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {cardTitles.map((cardTitle, index) => (
+          {dashboardComponents.map((Component, index) => (
             <DashboardCard key={index}>
-              <p className="text-slate-100">{cardTitle}</p> {/* Ensure text is visible on dark card bg */}
+              {Component}
             </DashboardCard>
           ))}
         </section>
