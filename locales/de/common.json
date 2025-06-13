@@ -228,5 +228,8 @@
     "fieldRequired": "Dieses Feld ist erforderlich.",
     "authError": "Authentifizierungsfehler. Bitte melden Sie sich erneut an.",
     "profileUpdateFailed": "Profil konnte nicht gespeichert werden: {details}"
+  },
+  "Dashboard": {
+    "title": "Home-Dashboard"
   }
 }

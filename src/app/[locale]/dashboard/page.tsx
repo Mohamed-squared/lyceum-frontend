@@ -2,7 +2,7 @@
 
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl';
 import Image from 'next/image';
 import DashboardCard from '@/components/DashboardCard'; // Assuming this is the correct path
 
@@ -25,7 +25,7 @@ export default async function DashboardPage() {
   }
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const t = useTranslations('Dashboard');
+  const t = await getTranslations('Dashboard');
 
   // The new components will be rendered directly in the grid
   const dashboardComponents = [
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
 
       <main>
         <h1 className="text-3xl font-bold text-slate-100 mb-6">
-          {t('dashboardTitle')}
+          {t('title')}
         </h1>
 
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

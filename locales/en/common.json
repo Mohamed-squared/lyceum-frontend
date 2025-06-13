@@ -228,5 +228,8 @@
     "fieldRequired": "This field is required.",
     "authError": "Authentication error. Please log in again.",
     "profileUpdateFailed": "Failed to save profile: {details}"
+  },
+  "Dashboard": {
+    "title": "Home Dashboard"
   }
 }

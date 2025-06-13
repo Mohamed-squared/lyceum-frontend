@@ -228,5 +228,8 @@
     "fieldRequired": "Bu alan zorunludur.",
     "authError": "Kimlik doğrulama hatası. Lütfen tekrar giriş yapın.",
     "profileUpdateFailed": "Profil kaydedilemedi: {details}"
+  },
+  "Dashboard": {
+    "title": "Ana Kontrol Paneli"
   }
 }

@@ -228,5 +228,8 @@
     "fieldRequired": "هذا الحقل مطلوب.",
     "authError": "خطأ في المصادقة. يرجى تسجيل الدخول مرة أخرى.",
     "profileUpdateFailed": "فشل حفظ الملف الشخصي: {details}"
+  },
+  "Dashboard": {
+    "title": "لوحة التحكم الرئيسية"
   }
 }
