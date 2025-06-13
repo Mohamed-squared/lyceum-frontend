@@ -85,43 +85,38 @@ export default async function DashboardPage() {
             {[
               <TestGenSnapshotCard
                 key="testgen"
-                title={dashboardData.testGen?.title || t('testGenCard.title')}
-                description={dashboardData.testGen?.description || t('testGenCard.description')}
-                buttonText={dashboardData.testGen?.buttonText || t('testGenCard.buttonText')}
-                noTestsMessage={dashboardData.testGen?.noTestsMessage || t('testGenCard.noTestsMessage')}
-                loadingMessage={t('testGenCard.loadingMessage')}
-                errorMessage={t('testGenCard.errorMessage')}
-                tests={dashboardData.testGen?.tests || t.raw('testGenCard.tests')}
+                title={dashboardData.testGen?.title || t('testGenCard.title', 'Test Generation')}
+                subject={dashboardData.testGen?.subject || t('testGenCard.subjectPlaceholder', 'N/A')}
+                chapters={dashboardData.testGen?.chapters || t('testGenCard.chaptersPlaceholder', 'N/A')}
+                lastExam={dashboardData.testGen?.lastExam || t('testGenCard.lastExamPlaceholder', 'N/A')}
+                pendingExams={dashboardData.testGen?.pendingExams || t('testGenCard.pendingExamsPlaceholder', 'N/A')}
+                buttonText={dashboardData.testGen?.buttonText || t('testGenCard.buttonText', 'View Tests')}
               />,
               <CoursesSnapshotCard
                 key="courses"
-                title={dashboardData.coursesCard?.title || t('coursesCard.title')}
-                description={dashboardData.coursesCard?.description || t('coursesCard.description')}
-                buttonText={dashboardData.coursesCard?.buttonText || t('coursesCard.buttonText')}
-                noCoursesMessage={dashboardData.coursesCard?.noCoursesMessage || t('coursesCard.noCoursesMessage')}
-                loadingMessage={t('coursesCard.loadingMessage')}
-                errorMessage={t('coursesCard.errorMessage')}
-                courses={dashboardData.coursesCard?.courses || t.raw('coursesCard.courses')}
+                title={dashboardData.coursesCard?.title || t('coursesCard.title', 'Courses')}
+                enrollmentStatus={dashboardData.coursesCard?.enrollmentStatus || t('coursesCard.enrollmentPlaceholder', 'N/A')}
+                todaysFocus={dashboardData.coursesCard?.todaysFocus || t('coursesCard.focusPlaceholder', 'N/A')}
+                buttonText={dashboardData.coursesCard?.buttonText || t('coursesCard.buttonText', 'View Courses')}
               />,
               <InspirationalQuoteCard
                 key="quote"
-                title={dashboardData.inspirationalQuoteCard?.title || t('inspirationalQuoteCard.title')}
-                quote={dashboardData.inspirationalQuoteCard?.quote}
-                author={dashboardData.inspirationalQuoteCard?.author}
-                loadingMessage={t('inspirationalQuoteCard.loadingMessage')}
-                errorMessage={t('inspirationalQuoteCard.errorMessage')}
+                title={dashboardData.inspirationalQuoteCard?.title || t('inspirationalQuoteCard.title', 'Inspirational Quote')}
+                quote={dashboardData.inspirationalQuoteCard?.quote || t('inspirationalQuoteCard.quotePlaceholder', 'No quote available today.')}
+                author={dashboardData.inspirationalQuoteCard?.author || t('inspirationalQuoteCard.authorPlaceholder', 'Unknown')}
+                buttonText={t('inspirationalQuoteCard.refreshButtonText', 'Refresh')}
               />,
               <LyceumNewsCard
                 key="news"
-                title={dashboardData.lyceumNewsCard?.title || t('lyceumNewsCard.title')}
-                newsItems={dashboardData.lyceumNewsCard?.newsItems || t.raw('lyceumNewsCard.newsItems')}
-                loadingMessage={t('lyceumNewsCard.loadingMessage')}
-                errorMessage={t('lyceumNewsCard.errorMessage')}
+                title={dashboardData.lyceumNewsCard?.title || t('lyceumNewsCard.title', 'Lyceum News')}
+                // Assuming API provides 'newsItems' which matches Array<{ text: string; time: string; }>
+                items={dashboardData.lyceumNewsCard?.newsItems || t.raw('lyceumNewsCard.newsItemsFallback') || []}
               />,
               <QuickLinksCard
                 key="links"
-                title={dashboardData.quickLinksCard?.title || t('quickLinksCard.title')}
-                links={dashboardData.quickLinksCard?.links || t.raw('quickLinksCard.links')}
+                title={dashboardData.quickLinksCard?.title || t('quickLinksCard.title', 'Quick Links')}
+                // Assuming API provides 'links' which matches Array<{ text: string; icon: string; }>
+                links={dashboardData.quickLinksCard?.links || t.raw('quickLinksCard.linksFallback') || []}
               />,
             ].map((Component, index) => (
               <DashboardCard key={index}>
