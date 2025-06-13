@@ -58,3 +58,32 @@ export const apiClient = async (
     }
   }
 */
+
+/**
+ * Fetches data from a protected API endpoint using GET request.
+ *
+ * @param path - The API path to request (e.g., "/users").
+ * @param token - The JWT token for authentication.
+ * @returns A promise that resolves to the JSON response from the API.
+ * @throws An error if the API request fails.
+ */
+export const getAuthenticated = async (path: string, token: string): Promise<any> => {
+  const baseUrl = getApiBaseUrl();
+  // Ensure the path starts with a slash
+  const formattedPath = path.startsWith('/') ? path : `/${path}`;
+  const url = `${baseUrl}${formattedPath}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`API request failed with status ${response.status}`);
+  }
+
+  return await response.json();
+};

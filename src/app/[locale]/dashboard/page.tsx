@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import DashboardCard from '@/components/DashboardCard'; // Assuming this is the correct path
+import { getAuthenticated } from '@/utils/apiClient'; // Added import
 
 // Import the new components
 import TestGenSnapshotCard from '@/components/dashboard/TestGenSnapshotCard';
@@ -17,56 +18,25 @@ export default async function DashboardPage() {
   const supabase = createServerClient();
 
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    data: { session },
+  } = await supabase.auth.getSession();
 
-  if (!user) {
-    return redirect('/login');
+  if (!session) {
+    redirect('/login');
+    return null; // Ensure component returns null after redirect
   }
 
   const t = await getTranslations('Dashboard');
 
-  // The new components will be rendered directly in the grid
-  const dashboardComponents = [
-    <TestGenSnapshotCard
-      key="testgen"
-      title={t('testGenCard.title')}
-      description={t('testGenCard.description')}
-      buttonText={t('testGenCard.buttonText')}
-      noTestsMessage={t('testGenCard.noTestsMessage')}
-      loadingMessage={t('testGenCard.loadingMessage')}
-      errorMessage={t('testGenCard.errorMessage')}
-      tests={t.raw('testGenCard.tests')}
-    />,
-    <CoursesSnapshotCard
-      key="courses"
-      title={t('coursesCard.title')}
-      description={t('coursesCard.description')}
-      buttonText={t('coursesCard.buttonText')}
-      noCoursesMessage={t('coursesCard.noCoursesMessage')}
-      loadingMessage={t('coursesCard.loadingMessage')}
-      errorMessage={t('coursesCard.errorMessage')}
-      courses={t.raw('coursesCard.courses')}
-    />,
-    <InspirationalQuoteCard
-      key="quote"
-      title={t('inspirationalQuoteCard.title')}
-      loadingMessage={t('inspirationalQuoteCard.loadingMessage')}
-      errorMessage={t('inspirationalQuoteCard.errorMessage')}
-    />,
-    <LyceumNewsCard
-      key="news"
-      title={t('lyceumNewsCard.title')}
-      newsItems={t.raw('lyceumNewsCard.newsItems')}
-      loadingMessage={t('lyceumNewsCard.loadingMessage')}
-      errorMessage={t('lyceumNewsCard.errorMessage')}
-    />,
-    <QuickLinksCard
-      key="links"
-      title={t('quickLinksCard.title')}
-      links={t.raw('quickLinksCard.links')}
-    />,
-  ];
+  let dashboardData: any;
+  let apiError: string | null = null;
+
+  try {
+    dashboardData = await getAuthenticated('/api/v1/dashboard', session.access_token);
+  } catch (error) {
+    console.error('API Error fetching dashboard data:', error);
+    apiError = 'Failed to load dashboard content. Please try again later.';
+  }
 
   return (
     <div className="container mx-auto p-4">
@@ -76,9 +46,9 @@ export default async function DashboardPage() {
           <Image
             src="/assets/dashboard/default-banner.jpg"
             alt="Profile Banner"
-            width={1200} // Provide appropriate dimensions for aspect ratio
-            height={208} // h-52 is 13rem = 208px
-            className="w-full h-full object-cover" // object-cover with parent having h-full
+            width={1200}
+            height={208}
+            className="w-full h-full object-cover"
           />
         </div>
         {/* Profile Picture */}
@@ -86,8 +56,8 @@ export default async function DashboardPage() {
           <Image
             src="/assets/dashboard/default-pfp.svg"
             alt="Profile Picture"
-            width={144} // w-36 is 9rem = 144px
-            height={144} // h-36 is 9rem = 144px
+            width={144}
+            height={144}
             className="rounded-full border-4 border-yellow-400"
           />
         </div>
@@ -95,8 +65,12 @@ export default async function DashboardPage() {
 
       {/* Welcome Text - Adjusted margin top to account for PFP */}
       <div className="text-center mt-20 mb-8">
-        <h2 className="text-2xl font-semibold text-slate-50">{t('welcome')}</h2>
-        <p className="text-md text-slate-300">{t('credits')}</p>
+        <h2 className="text-2xl font-semibold text-slate-50">
+          {dashboardData?.welcomeMessage || t('welcome')}
+        </h2>
+        <p className="text-md text-slate-300">
+          {dashboardData?.credits || t('credits')}
+        </p>
       </div>
 
       <main>
@@ -104,13 +78,58 @@ export default async function DashboardPage() {
           {t('title')}
         </h1>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dashboardComponents.map((Component, index) => (
-            <DashboardCard key={index}>
-              {Component}
-            </DashboardCard>
-          ))}
-        </section>
+        {apiError && <p className="text-red-500 text-center mb-4">{apiError}</p>}
+
+        {!apiError && dashboardData && (
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              <TestGenSnapshotCard
+                key="testgen"
+                title={dashboardData.testGen?.title || t('testGenCard.title')}
+                description={dashboardData.testGen?.description || t('testGenCard.description')}
+                buttonText={dashboardData.testGen?.buttonText || t('testGenCard.buttonText')}
+                noTestsMessage={dashboardData.testGen?.noTestsMessage || t('testGenCard.noTestsMessage')}
+                loadingMessage={t('testGenCard.loadingMessage')}
+                errorMessage={t('testGenCard.errorMessage')}
+                tests={dashboardData.testGen?.tests || t.raw('testGenCard.tests')}
+              />,
+              <CoursesSnapshotCard
+                key="courses"
+                title={dashboardData.coursesCard?.title || t('coursesCard.title')}
+                description={dashboardData.coursesCard?.description || t('coursesCard.description')}
+                buttonText={dashboardData.coursesCard?.buttonText || t('coursesCard.buttonText')}
+                noCoursesMessage={dashboardData.coursesCard?.noCoursesMessage || t('coursesCard.noCoursesMessage')}
+                loadingMessage={t('coursesCard.loadingMessage')}
+                errorMessage={t('coursesCard.errorMessage')}
+                courses={dashboardData.coursesCard?.courses || t.raw('coursesCard.courses')}
+              />,
+              <InspirationalQuoteCard
+                key="quote"
+                title={dashboardData.inspirationalQuoteCard?.title || t('inspirationalQuoteCard.title')}
+                quote={dashboardData.inspirationalQuoteCard?.quote}
+                author={dashboardData.inspirationalQuoteCard?.author}
+                loadingMessage={t('inspirationalQuoteCard.loadingMessage')}
+                errorMessage={t('inspirationalQuoteCard.errorMessage')}
+              />,
+              <LyceumNewsCard
+                key="news"
+                title={dashboardData.lyceumNewsCard?.title || t('lyceumNewsCard.title')}
+                newsItems={dashboardData.lyceumNewsCard?.newsItems || t.raw('lyceumNewsCard.newsItems')}
+                loadingMessage={t('lyceumNewsCard.loadingMessage')}
+                errorMessage={t('lyceumNewsCard.errorMessage')}
+              />,
+              <QuickLinksCard
+                key="links"
+                title={dashboardData.quickLinksCard?.title || t('quickLinksCard.title')}
+                links={dashboardData.quickLinksCard?.links || t.raw('quickLinksCard.links')}
+              />,
+            ].map((Component, index) => (
+              <DashboardCard key={index}>
+                {Component}
+              </DashboardCard>
+            ))}
+          </section>
+        )}
       </main>
     </div>
   );
