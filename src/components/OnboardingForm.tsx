@@ -6,7 +6,8 @@ import { useState, useEffect, useRef } from 'react'; // Ensure useEffect and use
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { createClient } from '@/utils/supabase/client';
-import type { Session } from '@supabase/supabase-js';
+// Session type is not directly used in this component after previous refactor, but good to keep if needed for other Supabase interactions.
+// import type { Session } from '@supabase/supabase-js';
 
 // New imports for the new onboarding flow
 import { onboardingSteps } from '@/lib/onboarding-steps';
@@ -14,16 +15,9 @@ import RoleSelectionCard from '@/components/ui/RoleSelectionCard';
 import TagInput from '@/components/ui/TagInput';
 import ImageCropper from '@/components/ui/ImageCropper';
 import UserProfilePreview from '@/components/UserProfilePreview';
-// All placeholder components LanguageSelectPlaceholder, SelectPlaceholder, CheckboxGroupPlaceholder, SocialsPlaceholder
-// have been implemented directly in this file, so their imports are no longer needed.
-
-// Icons (assuming these might still be used or managed differently later)
-// Commenting out unused icons to avoid build errors if files are not present or paths are incorrect
-// import studentIcon from '../../public/assets/onboarding/icon-student.svg';
-// import teacherIcon from '../../public/assets/onboarding/icon-teacher.svg';
 
 // New type definition for formData
-export type OnboardingData = { // Added export
+export type OnboardingData = {
   [key: string]: any;
 };
 
@@ -37,13 +31,13 @@ interface OnboardingFormProps {
   // session prop is no longer needed as we fetch it inside the component
 }
 
-export function OnboardingForm({}: OnboardingFormProps) { // Removed session from props
+export function OnboardingForm({}: OnboardingFormProps) {
   const router = useRouter();
-  const t = useTranslations('onboarding'); // Scoped to 'onboarding'
+  const t = useTranslations('onboarding');
   const supabase = createClient();
 
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [formData, setFormData] = useState<OnboardingData>({});
+  const [formData, setFormData] = useState<OnboardingData>({}); // This stores step-specific data, not the final submission structure
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,16 +45,85 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
   const profilePictureInputRef = useRef<HTMLInputElement>(null);
   const profileBannerInputRef = useRef<HTMLInputElement>(null);
 
+  // --- Local State for ALL Step Inputs (used for direct binding and final submission mapping) ---
+  const [welcomeName, setWelcomeName] = useState<string>('');
+  const [selectedRole, setSelectedRole] = useState<string>('');
+  const [languageSelections, setLanguageSelections] = useState<{ website: string; explanation: string; material: string }>({ website: 'en', explanation: 'en', material: 'en' });
+  const [majorName, setMajorName] = useState<string>('');
+  const [selectedMajorLevel, setSelectedMajorLevel] = useState<string>('');
+  const [currentStudiedSubjects, setCurrentStudiedSubjects] = useState<string[]>([]);
+  const [currentInterestedMajors, setCurrentInterestedMajors] = useState<string[]>([]);
+  const [currentHobbies, setCurrentHobbies] = useState<string[]>([]);
+  const [currentNewsPrefs, setCurrentNewsPrefs] = useState<string[]>([]); // For 'news' step, if needed for backend
+  const [contentPrefsValues, setContentPrefsValues] = useState<CheckboxState>({}); // For 'contentPrefs' e.g., quotes
+  const [agreementValues, setAgreementValues] = useState<CheckboxState>({}); // For 'agreements' e.g., newsletter
+  const [profileBio, setProfileBio] = useState<string>('');
+  const [socials, setSocials] = useState<{ twitter: string; github: string; linkedin: string }>({ twitter: '', github: '', linkedin: '' });
 
-  const handleChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
+  // States for file objects and previews (not directly sent to backend JSON, URLs would be)
+  const [profilePictureFile, setProfilePictureFile] = useState<File | null>(null);
+  const [profileBannerFile, setProfileBannerFile] = useState<File | null>(null);
+  const [imageToCrop, setImageToCrop] = useState<string | null>(null);
+  const [cropperOpen, setCropperOpen] = useState<boolean>(false);
+  const [cropAspectRatio, setCropAspectRatio] = useState<number>(1);
+  const [profilePicturePreview, setProfilePicturePreview] = useState<string | null>(null);
+  const [profileBannerPreview, setProfileBannerPreview] = useState<string | null>(null);
 
   const currentStep = onboardingSteps[currentStepIndex];
   const totalSteps = onboardingSteps.length;
 
-  const handleNext = (stepId: string, data: any) => {
-    setFormData(prevData => ({ ...prevData, [stepId]: data }));
+  // useEffect to populate step-specific states when currentStep or formData changes
+  useEffect(() => {
+    if (!currentStep) return;
+    // formData here is the object storing data by step ID. We use this to rehydrate inputs if user navigates back/forth.
+    const stepData = formData[currentStep.id];
+
+    switch (currentStep.id) {
+      case 'welcome': if(stepData !== undefined) setWelcomeName(stepData); break;
+      case 'role': if(stepData !== undefined) setSelectedRole(stepData); break;
+      case 'languages': if(stepData !== undefined) setLanguageSelections(stepData); else setLanguageSelections({ website: 'en', explanation: 'en', material: 'en' }); break;
+      case 'major': if(stepData !== undefined) setMajorName(stepData); break;
+      case 'majorLevel': if(stepData !== undefined) setSelectedMajorLevel(stepData); break;
+      case 'studiedSubjects': if(stepData !== undefined) setCurrentStudiedSubjects(stepData); else setCurrentStudiedSubjects([]); break;
+      case 'interestedMajors': if(stepData !== undefined) setCurrentInterestedMajors(stepData); else setCurrentInterestedMajors([]); break;
+      case 'hobbies': if(stepData !== undefined) setCurrentHobbies(stepData); else setCurrentHobbies([]); break;
+      case 'news': if(stepData !== undefined) setCurrentNewsPrefs(stepData); else setCurrentNewsPrefs([]); break; // Assuming 'news' maps to currentNewsPrefs
+      case 'contentPrefs': if(stepData !== undefined) setContentPrefsValues(stepData); else setContentPrefsValues({}); break;
+      case 'profile':
+        if(stepData?.bio !== undefined) setProfileBio(stepData.bio); else setProfileBio('');
+        // Note: File previews are handled by their own state and updated via ImageCropper.
+        // If formData stored URLs (e.g., from a previous session), you'd load them here.
+        break;
+      case 'socials': if(stepData !== undefined) setSocials(stepData); else setSocials({ twitter: '', github: '', linkedin: '' }); break;
+      case 'agreements': if(stepData !== undefined) setAgreementValues(stepData); else setAgreementValues({}); break;
+    }
+  }, [currentStep, formData]);
+
+
+  const handleProceed = () => {
+    if (!currentStep) return;
+    let dataToStoreInFormData: any; // This is what gets stored in the formData state object, keyed by step.id
+
+    // Collect data from current step's local state to store in formData
+    switch (currentStep.id) {
+      case 'welcome': dataToStoreInFormData = welcomeName; break;
+      case 'role': dataToStoreInFormData = selectedRole; break;
+      case 'languages': dataToStoreInFormData = languageSelections; break;
+      case 'major': dataToStoreInFormData = majorName; break;
+      case 'majorLevel': dataToStoreInFormData = selectedMajorLevel; break;
+      case 'studiedSubjects': dataToStoreInFormData = currentStudiedSubjects; break;
+      case 'interestedMajors': dataToStoreInFormData = currentInterestedMajors; break;
+      case 'hobbies': dataToStoreInFormData = currentHobbies; break;
+      case 'news': dataToStoreInFormData = currentNewsPrefs; break;
+      case 'contentPrefs': dataToStoreInFormData = contentPrefsValues; break;
+      case 'profile': dataToStoreInFormData = { bio: profileBio }; break; // Only bio is part of this step's direct form data for now
+      case 'socials': dataToStoreInFormData = socials; break;
+      case 'agreements': dataToStoreInFormData = agreementValues; break;
+      default: console.warn(`No data collection logic for step: ${currentStep.id}`); dataToStoreInFormData = {};
+    }
+    // Update formData with the collected data for the current step
+    setFormData(prevData => ({ ...prevData, [currentStep.id]: dataToStoreInFormData }));
+
     if (currentStepIndex < totalSteps - 1) {
       setCurrentStepIndex(prevIndex => prevIndex + 1);
     }
@@ -68,43 +131,46 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
 
   const handleBack = () => {
     if (currentStepIndex > 0) {
-      setCurrentStepIndex(prevIndex => prevIndex + 1);
+      // Corrected: Decrement the index to go to the previous step
+      setCurrentStepIndex(prevIndex => prevIndex - 1);
     }
   };
 
-  const processAndSubmitData = async (finalData: any) => {
+  const processAndSubmitData = async (dataForBackend: any) => {
     console.log('--- DEBUG: processAndSubmitData triggered');
     setIsSubmitting(true);
     setError(null);
 
     try {
-      console.log('--- DEBUG: Form data being submitted:', finalData);
+      // This dataForBackend is already mapped to the backend structure
+      console.log('--- DEBUG: Mapped data being submitted to backend:', dataForBackend);
 
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
       if (sessionError || !session) {
         console.error('--- DEBUG: Error fetching session or no active session found:', sessionError);
         setError(t('errors.authError', { defaultMessage: 'Authentication error. Please sign in again.' }));
+        setIsSubmitting(false); // Added to ensure isSubmitting is reset
         return;
       }
-      console.log('--- DEBUG: Session found:', session);
+      console.log('--- DEBUG: Session found'); // Removed session object from log for brevity
 
       const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       if (!apiUrl) {
         console.error('--- DEBUG: NEXT_PUBLIC_API_BASE_URL is not set.');
         setError(t('errors.configError', { defaultMessage: 'Configuration error. Please contact support.' }));
+        setIsSubmitting(false); // Added to ensure isSubmitting is reset
         return;
       }
-      console.log('--- DEBUG: API Base URL found:', apiUrl);
+      console.log('--- DEBUG: API Base URL found'); // Removed apiUrl from log
 
       const fullApiUrl = `${apiUrl}/api/v1/onboarding`;
       console.log('--- DEBUG: Calling API URL:', fullApiUrl);
 
-      // Remove file objects if they exist, assuming URLs are handled separately or already part of finalData
-      const dataToSubmit = { ...finalData };
-      delete dataToSubmit.profilePictureFile; // Example, adjust if file handling is different
-      delete dataToSubmit.profileBannerFile;   // Example, adjust if file handling is different
-
+      // Note: File uploads (profilePictureFile, profileBannerFile) are not handled here.
+      // This function assumes that if images are part of the submission, their URLs
+      // would be included in `dataForBackend` by `handleFormSubmitEvent` if needed.
+      // The current Go backend struct does not include image URLs, so we are good.
 
       const response = await fetch(fullApiUrl, {
         method: 'POST',
@@ -112,7 +178,7 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify(dataToSubmit),
+        body: JSON.stringify(dataForBackend), // dataForBackend is now the correctly mapped object
       });
 
       console.log('--- DEBUG: API response status:', response.status);
@@ -129,7 +195,6 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
 
     } catch (e: any) {
       console.error('--- DEBUG: Error during form submission process:', e);
-      // Ensure a user-friendly message, potentially masking technical details from e.message
       const errorMessage = e.message.includes("API responded with") ? e.message : t('errors.unexpectedError', { defaultMessage: 'An unexpected error occurred. Please try again.' });
       setError(errorMessage);
     } finally {
@@ -138,23 +203,30 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
   };
 
   const handleFormSubmitEvent = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // 1. Prevent default form submission
-    console.log('--- DEBUG: handleFormSubmitEvent triggered'); // 2. Log when handler is triggered
+    event.preventDefault();
+    console.log('--- DEBUG: handleFormSubmitEvent triggered');
 
-    const profileStepData = formData.profile || {};
-    const currentProfileData = {
-      ...profileStepData,
-      bio: profileBio,
+    // Part 1: Transform data to match Go backend structure
+    const backendData = {
+      displayName: welcomeName || "",
+      userRole: selectedRole || "",
+      preferred_website_language: languageSelections.website || "en",
+      preferred_course_explanation_language: languageSelections.explanation || "en",
+      preferred_course_material_language: languageSelections.material || "en",
+      major: majorName || "",
+      majorLevel: selectedMajorLevel || "",
+      studied_subjects: currentStudiedSubjects || [],
+      interested_majors: currentInterestedMajors || [],
+      hobbies: currentHobbies || [],
+      bio: profileBio || "",
+      github_url: socials.github || "",
+      // Ensure boolean conversion, defaulting to false if undefined
+      subscribed_to_newsletter: !!agreementValues.newsletter,
+      receive_quotes: !!contentPrefsValues.quotes
     };
 
-    const fullFormData = {
-        ...formData,
-        profile: currentProfileData,
-        // Actual file objects (profilePictureFile, profileBannerFile) are managed in component state
-        // and are not directly part of `fullFormData` unless explicitly added for submission.
-        // The new `processAndSubmitData` assumes `finalData` contains what's needed or URLs.
-    };
-    await processAndSubmitData(fullFormData);
+    // Pass the correctly-mapped object to processAndSubmitData
+    await processAndSubmitData(backendData);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
@@ -163,60 +235,6 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
     }
   };
 
-  // --- Local State for Step Inputs ---
-  const [welcomeName, setWelcomeName] = useState<string>('');
-  const [selectedRole, setSelectedRole] = useState<string>('');
-  const [languageSelections, setLanguageSelections] = useState<{ website: string; explanation: string; material: string }>({ website: 'en', explanation: 'en', material: 'en' });
-  const [majorName, setMajorName] = useState<string>('');
-  const [selectedMajorLevel, setSelectedMajorLevel] = useState<string>('');
-  const [currentStudiedSubjects, setCurrentStudiedSubjects] = useState<string[]>([]);
-  const [currentInterestedMajors, setCurrentInterestedMajors] = useState<string[]>([]);
-  const [currentHobbies, setCurrentHobbies] = useState<string[]>([]);
-  const [currentNewsPrefs, setCurrentNewsPrefs] = useState<string[]>([]);
-  const [contentPrefsValues, setContentPrefsValues] = useState<CheckboxState>({});
-  const [agreementValues, setAgreementValues] = useState<CheckboxState>({});
-  const [profileBio, setProfileBio] = useState<string>('');
-  const [profilePictureFile, setProfilePictureFile] = useState<File | null>(null);
-  const [profileBannerFile, setProfileBannerFile] = useState<File | null>(null);
-  const [socials, setSocials] = useState<{ twitter: string; github: string; linkedin: string }>({ twitter: '', github: '', linkedin: '' });
-
-  // New state for image cropping and preview
-  const [imageToCrop, setImageToCrop] = useState<string | null>(null);
-  const [cropperOpen, setCropperOpen] = useState<boolean>(false);
-  const [cropAspectRatio, setCropAspectRatio] = useState<number>(1);
-  const [profilePicturePreview, setProfilePicturePreview] = useState<string | null>(null);
-  const [profileBannerPreview, setProfileBannerPreview] = useState<string | null>(null);
-
-
-  useEffect(() => {
-    if (!currentStep) return;
-    const stepData = formData[currentStep.id];
-
-    switch (currentStep.id) {
-      case 'welcome': setWelcomeName(stepData || ''); break;
-      case 'role': setSelectedRole(stepData || ''); break;
-      case 'languages': setLanguageSelections(stepData || { website: 'en', explanation: 'en', material: 'en' }); break;
-      case 'major': setMajorName(stepData || ''); break;
-      case 'majorLevel': setSelectedMajorLevel(stepData || ''); break;
-      case 'studiedSubjects': setCurrentStudiedSubjects(stepData || []); break;
-      case 'interestedMajors': setCurrentInterestedMajors(stepData || []); break;
-      case 'hobbies': setCurrentHobbies(stepData || []); break;
-      case 'news': setCurrentNewsPrefs(stepData || []); break;
-      case 'contentPrefs': setContentPrefsValues(stepData || {}); break;
-      case 'profile':
-        setProfileBio(stepData?.bio || '');
-        // Previews (profilePicturePreview, profileBannerPreview) are managed by their own state
-        // and updated upon successful crop via ImageCropper's onCropComplete.
-        // If you store URLs in `formData.profile.pictureUrl` etc., you could load them here:
-        // setProfilePicturePreview(stepData?.pictureUrl || null);
-        // setProfileBannerPreview(stepData?.bannerUrl || null);
-        break;
-      case 'socials': setSocials(stepData || { twitter: '', github: '', linkedin: '' }); break;
-      case 'agreements': setAgreementValues(stepData || {}); break;
-    }
-  }, [currentStep, formData]);
-
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, imageType: 'profile' | 'banner') => {
     const file = event.target.files?.[0];
     if (file) {
@@ -224,39 +242,7 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
       setImageToCrop(objectUrl);
       setCropAspectRatio(imageType === 'profile' ? 1 : 16 / 9);
       setCropperOpen(true);
-      if (event.target) event.target.value = ''; // Reset file input to allow re-selection
-    }
-  };
-
-  const handleProceed = () => {
-    if (!currentStep) return;
-    let dataToSubmit: any = {};
-
-    switch (currentStep.id) {
-      case 'welcome': dataToSubmit = welcomeName; break;
-      case 'role': dataToSubmit = selectedRole; break;
-      case 'languages': dataToSubmit = languageSelections; break;
-      case 'major': dataToSubmit = majorName; break;
-      case 'majorLevel': dataToSubmit = selectedMajorLevel; break;
-      case 'studiedSubjects': dataToSubmit = currentStudiedSubjects; break;
-      case 'interestedMajors': dataToSubmit = currentInterestedMajors; break;
-      case 'hobbies': dataToSubmit = currentHobbies; break;
-      case 'news': dataToSubmit = currentNewsPrefs; break;
-      case 'contentPrefs': dataToSubmit = contentPrefsValues; break;
-      case 'profile':
-        // The bio is now managed by profileBio state, updated via UserProfilePreview's onBioChange
-        dataToSubmit = { bio: profileBio };
-        // Files (profilePictureFile, profileBannerFile) are handled by their own state variables
-        // and are not part of the step-specific data here.
-        break;
-      case 'socials': dataToSubmit = socials; break;
-      case 'agreements': dataToSubmit = agreementValues; break;
-      default: console.warn(`No data collection logic for step: ${currentStep.id}`);
-    }
-    setFormData(prevData => ({ ...prevData, [currentStep.id]: dataToSubmit }));
-
-    if (currentStepIndex < totalSteps - 1) {
-      setCurrentStepIndex(prevIndex => prevIndex + 1);
+      if (event.target) event.target.value = '';
     }
   };
 
@@ -342,17 +328,16 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
         if (currentStep.id === 'studiedSubjects') { tagValue = currentStudiedSubjects; setTagValue = setCurrentStudiedSubjects; }
         else if (currentStep.id === 'interestedMajors') { tagValue = currentInterestedMajors; setTagValue = setCurrentInterestedMajors; }
         else if (currentStep.id === 'hobbies') { tagValue = currentHobbies; setTagValue = setCurrentHobbies; }
-        else if (currentStep.id === 'news') { tagValue = currentNewsPrefs; setTagValue = setCurrentNewsPrefs; }
+        else if (currentStep.id === 'news') { tagValue = currentNewsPrefs; setTagValue = setCurrentNewsPrefs; } // Added for 'news' step
         return (<TagInput value={tagValue} onChange={setTagValue} placeholder={t(`${currentStep.id}.placeholder`)} />);
       }
-      case 'multi-field': // This is the profile step
-        // The UserProfilePreview component now handles bio input and image click triggers
+      case 'multi-field':
         return (
           <UserProfilePreview
-            formData={{...formData, profile: {...(formData.profile || {}), bio: profileBio} }} // Pass current bio state along with other formData
+            formData={{...formData, profile: {...(formData.profile || {}), bio: profileBio} }}
             profilePicturePreview={profilePicturePreview}
             profileBannerPreview={profileBannerPreview}
-            onBioChange={(newBio) => setProfileBio(newBio)} // Update profileBio state directly
+            onBioChange={(newBio) => setProfileBio(newBio)}
             onPictureClick={() => profilePictureInputRef.current?.click()}
             onBannerClick={() => profileBannerInputRef.current?.click()}
           />
@@ -363,6 +348,8 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
         const setCheckboxValue = isAgreementsStep ? setAgreementValues : setContentPrefsValues;
         const checkboxOptionsObject = t.raw(currentStep.id) as Record<string, any>;
         const checkboxKeys = Object.keys(checkboxOptionsObject).filter(key => !['title', 'description', 'placeholder'].includes(key));
+        // Example keys for agreements: 'terms', 'personalization', 'newsletter'
+        // Example keys for contentPrefs: 'quotes', 'updates'
         return (
           <div>
             {checkboxKeys.map(key => (
@@ -392,16 +379,19 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
     }
   };
 
-  if (isSubmitting && currentStepIndex === totalSteps -1) { // Show submitting indicator only on the last step submission attempt
+  if (isSubmitting && currentStepIndex === totalSteps -1) {
     return <div className="text-center p-10">{t('submitting')}</div>;
   }
 
   const isLastStep = currentStepIndex === totalSteps - 1;
-  const finishButtonDisabled = isSubmitting || (currentStep?.id === 'agreements' && (!agreementValues.terms || !agreementValues.personalization));
+  // Ensure agreementValues.terms and agreementValues.personalization are checked for the 'agreements' step before enabling finish.
+  // Assuming 'terms' and 'personalization' are keys in agreementValues for the agreements step.
+  const agreementsMet = currentStep?.id === 'agreements' ? (!!agreementValues.terms && !!agreementValues.personalization) : true;
+  const finishButtonDisabled = isSubmitting || (isLastStep && !agreementsMet);
+
 
   return (
     <form onSubmit={handleFormSubmitEvent} onKeyDown={handleKeyDown} className="w-full max-w-2xl mx-auto p-8 rounded-lg shadow-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
-      {/* Hidden File Inputs */}
       <input type="file" ref={profilePictureInputRef} onChange={(e) => handleFileChange(e, 'profile')} accept="image/*" className="hidden" id="profilePictureInput" />
       <input type="file" ref={profileBannerInputRef} onChange={(e) => handleFileChange(e, 'banner')} accept="image/*" className="hidden" id="profileBannerInput" />
 
@@ -416,11 +406,11 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
           }}
           onCropComplete={(croppedFile) => {
             const newPreviewUrl = URL.createObjectURL(croppedFile);
-            if (cropAspectRatio === 1) { // Profile picture
+            if (cropAspectRatio === 1) {
               setProfilePictureFile(croppedFile);
               if (profilePicturePreview && profilePicturePreview.startsWith('blob:')) { URL.revokeObjectURL(profilePicturePreview); }
               setProfilePicturePreview(newPreviewUrl);
-            } else { // Banner
+            } else {
               setProfileBannerFile(croppedFile);
               if (profileBannerPreview && profileBannerPreview.startsWith('blob:')) { URL.revokeObjectURL(profileBannerPreview); }
               setProfileBannerPreview(newPreviewUrl);
@@ -440,7 +430,7 @@ export function OnboardingForm({}: OnboardingFormProps) { // Removed session fro
       {error && <p className="text-red-500 mb-4 text-center bg-red-100 dark:bg-red-900/20 p-3 rounded-md">{error}</p>}
 
       <div className="min-h-[200px] flex flex-col items-center justify-center">
-          <div className="w-full max-w-md mx-auto"> {/* Ensure this div allows UserProfilePreview to take appropriate width */}
+          <div className="w-full max-w-md mx-auto">
             {renderStepContent()}
           </div>
       </div>
