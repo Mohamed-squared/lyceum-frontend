@@ -240,6 +240,7 @@
       "noTestsMessage": "No TestGen activities yet. Create your first adaptive test!",
       "loadingMessage": "Loading TestGen data...",
       "errorMessage": "Could not load TestGen data.",
+      "subjectPlaceholder": "No subject selected",
       "tests": [
         {
           "name": "Abstract Algebra (Artin)",

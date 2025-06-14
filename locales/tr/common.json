@@ -240,6 +240,7 @@
       "noTestsMessage": "Henüz TestGen aktivitesi yok. İlk uyarlanabilir testinizi oluşturun!",
       "loadingMessage": "TestGen verileri yükleniyor...",
       "errorMessage": "TestGen verileri yüklenemedi.",
+      "subjectPlaceholder": "Konu seçilmedi",
       "tests": [
         {
           "name": "Soyut Cebir (Artin)",

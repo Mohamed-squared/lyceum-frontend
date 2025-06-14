@@ -240,6 +240,7 @@
       "noTestsMessage": "لا توجد أنشطة TestGen حتى الآن. قم بإنشاء أول اختبار تكيفي لك!",
       "loadingMessage": "جارٍ تحميل بيانات TestGen...",
       "errorMessage": "تعذر تحميل بيانات TestGen.",
+      "subjectPlaceholder": "لم يتم اختيار أي مادة",
       "tests": [
         {
           "name": "الجبر التجريدي (آرتن)",

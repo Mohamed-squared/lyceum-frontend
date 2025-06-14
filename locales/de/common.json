@@ -240,6 +240,7 @@
       "noTestsMessage": "Noch keine TestGen-Aktivitäten. Erstellen Sie Ihren ersten adaptiven Test!",
       "loadingMessage": "TestGen-Daten werden geladen...",
       "errorMessage": "TestGen-Daten konnten nicht geladen werden.",
+      "subjectPlaceholder": "Kein Fach ausgewählt",
       "tests": [
         {
           "name": "Abstrakte Algebra (Artin)",

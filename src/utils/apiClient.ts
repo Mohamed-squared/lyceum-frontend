@@ -79,6 +79,7 @@ export const getAuthenticated = async (path: string, token: string): Promise<any
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
+    cache: 'no-store',
   });
 
   if (!response.ok) {
