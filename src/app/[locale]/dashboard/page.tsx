@@ -44,7 +44,7 @@ export default async function DashboardPage() {
         {/* Banner Image */}
         <div className="w-full h-52 rounded-lg overflow-hidden">
           <Image
-            src="/assets/dashboard/default-banner.jpg"
+            src={dashboardData?.profileBannerUrl || '/assets/dashboard/default-banner.jpg'}
             alt="Profile Banner"
             width={1200}
             height={208}
@@ -54,7 +54,7 @@ export default async function DashboardPage() {
         {/* Profile Picture */}
         <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
           <Image
-            src="/assets/dashboard/default-pfp.svg"
+            src={dashboardData?.profilePictureUrl || '/assets/dashboard/default-pfp.svg'}
             alt="Profile Picture"
             width={144}
             height={144}
