@@ -104,7 +104,7 @@ export default async function DashboardPage() {
                 title={dashboardData.quote?.title || t('quoteCard.title') || 'Inspirational Quote'}
                 quote={dashboardData.quote?.quote || t('quoteCard.quotePlaceholder') || 'No quote available'}
                 author={dashboardData.quote?.author || t('quoteCard.authorPlaceholder') || 'Unknown author'}
-                buttonText={t('quoteCard.refreshButtonText') || 'Refresh'}
+                buttonText={dashboardData.quote?.buttonText || 'Refresh'}
               />,
               <LyceumNewsCard
                 key="news"
