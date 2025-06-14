@@ -34,10 +34,10 @@ type CheckboxState = {
 
 // Define the component's props
 interface OnboardingFormProps {
-  session: Session | null;
+  // session prop is no longer needed as we fetch it inside the component
 }
 
-export function OnboardingForm({ session }: OnboardingFormProps) {
+export function OnboardingForm({}: OnboardingFormProps) { // Removed session from props
   const router = useRouter();
   const t = useTranslations('onboarding'); // Scoped to 'onboarding'
   const supabase = createClient();
@@ -68,65 +68,92 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
 
   const handleBack = () => {
     if (currentStepIndex > 0) {
-      setCurrentStepIndex(prevIndex => prevIndex - 1);
+      setCurrentStepIndex(prevIndex => prevIndex + 1);
     }
   };
 
   const processAndSubmitData = async (finalData: any) => {
+    console.log('--- DEBUG: processAndSubmitData triggered');
     setIsSubmitting(true);
     setError(null);
-    console.log('Final Onboarding Data:', finalData);
-
-    if (!session?.user) {
-      setError(t('errors.authError', { defaultMessage: 'Authentication error. Please sign in again.'}));
-      setIsSubmitting(false);
-      return;
-    }
-
-    const dataToSubmit = { ...finalData };
-    // Note: Actual file upload to Supabase storage would happen here or before this.
-    // For this example, we assume profilePictureFile and profileBannerFile might be URLs if already uploaded,
-    // or would be handled by a separate upload mechanism.
-    // Supabase user_profile typically stores URLs, not raw File objects.
-    delete dataToSubmit.profilePictureFile;
-    delete dataToSubmit.profileBannerFile;
-
 
     try {
-      const { error: updateError } = await supabase
-        .from('profiles')
-        .update({ user_profile: dataToSubmit, onboarding_completed: true })
-        .eq('id', session.user.id);
+      console.log('--- DEBUG: Form data being submitted:', finalData);
 
-      if (updateError) {
-        setError(t('errors.profileUpdateFailed', { details: updateError.message, defaultMessage: `Profile update failed: ${updateError.message}` }));
-      } else {
-        router.push('/dashboard');
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError || !session) {
+        console.error('--- DEBUG: Error fetching session or no active session found:', sessionError);
+        setError(t('errors.authError', { defaultMessage: 'Authentication error. Please sign in again.' }));
+        return;
       }
-    } catch (e:any) {
-      setError(t('errors.unexpectedError', { message: e.message, defaultMessage: `An unexpected error occurred: ${e.message}` }));
+      console.log('--- DEBUG: Session found:', session);
+
+      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      if (!apiUrl) {
+        console.error('--- DEBUG: NEXT_PUBLIC_API_BASE_URL is not set.');
+        setError(t('errors.configError', { defaultMessage: 'Configuration error. Please contact support.' }));
+        return;
+      }
+      console.log('--- DEBUG: API Base URL found:', apiUrl);
+
+      const fullApiUrl = `${apiUrl}/api/v1/onboarding`;
+      console.log('--- DEBUG: Calling API URL:', fullApiUrl);
+
+      // Remove file objects if they exist, assuming URLs are handled separately or already part of finalData
+      const dataToSubmit = { ...finalData };
+      delete dataToSubmit.profilePictureFile; // Example, adjust if file handling is different
+      delete dataToSubmit.profileBannerFile;   // Example, adjust if file handling is different
+
+
+      const response = await fetch(fullApiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.access_token}`,
+        },
+        body: JSON.stringify(dataToSubmit),
+      });
+
+      console.log('--- DEBUG: API response status:', response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('--- DEBUG: API response error text:', errorText);
+        setError(t('errors.submissionFailed', { status: response.status, details: errorText, defaultMessage: `Submission failed: API responded with ${response.status}` }));
+        throw new Error(`API responded with ${response.status}`);
+      }
+
+      console.log('--- DEBUG: Onboarding data submitted successfully.');
+      router.push('/dashboard');
+
+    } catch (e: any) {
+      console.error('--- DEBUG: Error during form submission process:', e);
+      // Ensure a user-friendly message, potentially masking technical details from e.message
+      const errorMessage = e.message.includes("API responded with") ? e.message : t('errors.unexpectedError', { defaultMessage: 'An unexpected error occurred. Please try again.' });
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleFormSubmitEvent = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault(); // 1. Prevent default form submission
+    console.log('--- DEBUG: handleFormSubmitEvent triggered'); // 2. Log when handler is triggered
+
     const profileStepData = formData.profile || {};
     const currentProfileData = {
       ...profileStepData,
-      bio: profileBio, // Ensure the latest bio from state is included
+      bio: profileBio,
     };
 
     const fullFormData = {
         ...formData,
-        profile: currentProfileData, // Update profile entry with latest bio
-        // The actual File objects for picture/banner are in profilePictureFile/profileBannerFile states
-        // and are not directly part of the JSON `formData` sent to Supabase unless converted/uploaded.
+        profile: currentProfileData,
+        // Actual file objects (profilePictureFile, profileBannerFile) are managed in component state
+        // and are not directly part of `fullFormData` unless explicitly added for submission.
+        // The new `processAndSubmitData` assumes `finalData` contains what's needed or URLs.
     };
-    // Pass the File objects separately if your submission logic handles uploads
-    // For now, they are not part of `fullFormData` sent to `processAndSubmitData`
-    // as `processAndSubmitData` expects serializable data for `user_profile`.
     await processAndSubmitData(fullFormData);
   };
 
@@ -365,7 +392,7 @@ export function OnboardingForm({ session }: OnboardingFormProps) {
     }
   };
 
-  if (isSubmitting) {
+  if (isSubmitting && currentStepIndex === totalSteps -1) { // Show submitting indicator only on the last step submission attempt
     return <div className="text-center p-10">{t('submitting')}</div>;
   }
 
