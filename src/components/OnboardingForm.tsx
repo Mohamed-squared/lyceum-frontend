@@ -68,6 +68,8 @@ export function OnboardingForm({}: OnboardingFormProps) {
   const [cropAspectRatio, setCropAspectRatio] = useState<number>(1);
   const [profilePicturePreview, setProfilePicturePreview] = useState<string | null>(null);
   const [profileBannerPreview, setProfileBannerPreview] = useState<string | null>(null);
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(null);
+  const [profileBannerUrl, setProfileBannerUrl] = useState<string | null>(null);
 
   const currentStep = onboardingSteps[currentStepIndex];
   const totalSteps = onboardingSteps.length;
@@ -99,6 +101,74 @@ export function OnboardingForm({}: OnboardingFormProps) {
     }
   }, [currentStep, formData]);
 
+  const handleImageUpload = async (imageBlob: Blob, storagePath: 'avatars' | 'banners') => {
+    const supabase = createClient(); // createClient is already available in the outer scope, but creating a new instance is fine.
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      setError(t('errors.authError', { defaultMessage: 'You must be logged in to upload images.' }));
+      return;
+    }
+
+    const fileName = `${user.id}-${storagePath}-${Date.now()}.png`;
+    const filePath = `${user.id}/${fileName}`; // Store images in a folder per user for better organization
+
+    try {
+      setIsSubmitting(true); // Indicate loading state
+      const { error: uploadError } = await supabase.storage
+        .from(storagePath) // 'avatars' or 'banners'
+        .upload(filePath, imageBlob, {
+          cacheControl: '3600',
+          upsert: false, // Important: set to true if you want to overwrite, false if you want to prevent overwriting.
+        });
+
+      if (uploadError) {
+        console.error(`Error uploading to ${storagePath}:`, uploadError);
+        setError(t('errors.uploadFailed', { details: uploadError.message, defaultMessage: 'Image upload failed.' }));
+        setIsSubmitting(false);
+        return;
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from(storagePath)
+        .getPublicUrl(filePath);
+
+      if (!publicUrlData || !publicUrlData.publicUrl) {
+        setError(t('errors.uploadFailed', { details: 'Failed to get public URL.', defaultMessage: 'Image upload failed.' }));
+        setIsSubmitting(false);
+        return;
+      }
+
+      const url = publicUrlData.publicUrl;
+
+      if (storagePath === 'avatars') {
+        setProfilePictureUrl(url);
+        // Update formData for profile step if it exists, or handle it directly in final submission
+        setFormData(prevData => ({
+          ...prevData,
+          profile: { ...(prevData.profile || {}), profile_picture_url: url }
+        }));
+      } else if (storagePath === 'banners') {
+        setProfileBannerUrl(url);
+        setFormData(prevData => ({
+          ...prevData,
+          profile: { ...(prevData.profile || {}), profile_banner_url: url }
+        }));
+      }
+
+      // Update preview (optional, if you want the preview to show the uploaded image URL)
+      // For now, existing preview logic using blob URLs will remain.
+      // If you want to switch preview to new URL:
+      // if (storagePath === 'avatars') setProfilePicturePreview(url);
+      // else setProfileBannerPreview(url);
+
+    } catch (e: any) {
+      console.error(`Unexpected error during image upload to ${storagePath}:`, e);
+      setError(t('errors.unexpectedError', { defaultMessage: 'An unexpected error occurred during upload.' }));
+    } finally {
+      setIsSubmitting(false); // Reset loading state
+    }
+  };
 
   const handleProceed = () => {
     if (!currentStep) return;
@@ -222,7 +292,10 @@ export function OnboardingForm({}: OnboardingFormProps) {
       github_url: socials.github || "",
       // Ensure boolean conversion, defaulting to false if undefined
       subscribed_to_newsletter: !!agreementValues.newsletter,
-      receive_quotes: !!contentPrefsValues.quotes
+      receive_quotes: !!contentPrefsValues.quotes,
+      // Add the new URLs
+      profile_picture_url: profilePictureUrl || "", // Get from state
+      profile_banner_url: profileBannerUrl || "",   // Get from state
     };
 
     // Pass the correctly-mapped object to processAndSubmitData
@@ -404,17 +477,23 @@ export function OnboardingForm({}: OnboardingFormProps) {
             if (imageToCrop && imageToCrop.startsWith('blob:')) { URL.revokeObjectURL(imageToCrop); }
             setImageToCrop(null);
           }}
-          onCropComplete={(croppedFile) => {
-            const newPreviewUrl = URL.createObjectURL(croppedFile);
-            if (cropAspectRatio === 1) {
-              setProfilePictureFile(croppedFile);
+          onSave={async (croppedBlob) => { // Changed from onCropComplete
+            // Determine storage path based on aspect ratio or another state if available
+            const storagePath = cropAspectRatio === 1 ? 'avatars' : 'banners';
+            await handleImageUpload(croppedBlob, storagePath);
+
+            // Keep existing preview logic using the blob from cropper for immediate feedback
+            const newPreviewUrl = URL.createObjectURL(croppedBlob);
+            if (storagePath === 'avatars') {
+              setProfilePictureFile(croppedBlob as File); // Keep if state is used elsewhere, otherwise can remove
               if (profilePicturePreview && profilePicturePreview.startsWith('blob:')) { URL.revokeObjectURL(profilePicturePreview); }
               setProfilePicturePreview(newPreviewUrl);
             } else {
-              setProfileBannerFile(croppedFile);
+              setProfileBannerFile(croppedBlob as File); // Keep if state is used elsewhere, otherwise can remove
               if (profileBannerPreview && profileBannerPreview.startsWith('blob:')) { URL.revokeObjectURL(profileBannerPreview); }
               setProfileBannerPreview(newPreviewUrl);
             }
+
             setCropperOpen(false);
             if (imageToCrop && imageToCrop.startsWith('blob:')) { URL.revokeObjectURL(imageToCrop); }
             setImageToCrop(null);

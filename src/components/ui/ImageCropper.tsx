@@ -4,14 +4,14 @@ import getCroppedImg from '../../utils/cropImage';
 
 interface ImageCropperProps {
   imageSrc: string;
-  onCropComplete: (croppedImage: File) => void; // This will be File eventually
+  onSave: (imageBlob: Blob) => void;
   onClose: () => void;
   aspectRatio: number;
 }
 
 const ImageCropper: React.FC<ImageCropperProps> = ({
   imageSrc,
-  onCropComplete,
+  onSave,
   onClose,
   aspectRatio,
 }) => {
@@ -36,13 +36,13 @@ const ImageCropper: React.FC<ImageCropperProps> = ({
       try {
         const croppedImageFile = await getCroppedImg(imageSrc, croppedAreaPixels);
         if (croppedImageFile) {
-          onCropComplete(croppedImageFile);
+          onSave(croppedImageFile);
         }
       } catch (e) {
         console.error('Error cropping image:', e);
       }
     }
-  }, [croppedAreaPixels, imageSrc, onCropComplete]);
+  }, [croppedAreaPixels, imageSrc, onSave]);
 
   // Callbacks and UI will be added in the next steps
 
