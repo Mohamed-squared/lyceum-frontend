@@ -88,3 +88,37 @@ export const getAuthenticated = async (path: string, token: string): Promise<any
 
   return await response.json();
 };
+
+/**
+ * Posts data to a protected API endpoint.
+ *
+ * @param path - The API path to post to (e.g., "/courses").
+ * @param token - The JWT token for authentication.
+ * @param body - The data to be sent in the request body.
+ * @returns A promise that resolves to the JSON response from the API.
+ * @throws An error if the API request fails.
+ */
+export const postAuthenticated = async (path: string, token: string, body: any): Promise<any> => {
+  const baseUrl = getApiBaseUrl();
+  const formattedPath = path.startsWith('/') ? path : `/${path}`;
+  const url = `${baseUrl}${formattedPath}`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    // Use the error message from the API if available
+    const errorMessage = responseData.error?.message || `API request failed with status ${response.status}`;
+    throw new Error(errorMessage);
+  }
+
+  return responseData;
+};

@@ -1,5 +1,9 @@
+"use client";
+
 // Full code for src/app/[locale]/dashboard/page.tsx
 
+import { useState } from 'react';
+import CreateCourseModal from '@/components/dashboard/CreateCourseModal';
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
@@ -27,6 +31,14 @@ export default async function DashboardPage() {
   }
 
   const t = await getTranslations('Dashboard'); // Assuming 'Dashboard' namespace holds these keys
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCourseCreated = (newCourse: any) => {
+    // For now, we'll just log it. Later we can update the UI.
+    console.log('New course created successfully:', newCourse);
+    // You might want to refresh the dashboard data here in the future
+  };
 
   let dashboardData: any;
   let apiError: string | null = null;
@@ -74,9 +86,17 @@ export default async function DashboardPage() {
       </div>
 
       <main>
-        <h1 className="text-3xl font-bold text-slate-100 mb-6">
-          {t('title')}
-        </h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-slate-100">
+            {t('title')}
+          </h1>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-bold py-2 px-4 rounded"
+          >
+            + Create New Course
+          </button>
+        </div>
 
         {apiError && <p className="text-red-500 text-center mb-4">{apiError}</p>}
 
@@ -123,6 +143,12 @@ export default async function DashboardPage() {
             ))}
           </section>
         )}
+        <CreateCourseModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          sessionToken={session.access_token}
+          onCourseCreated={handleCourseCreated}
+        />
       </main>
     </div>
   );
