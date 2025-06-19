@@ -52,48 +52,69 @@ export default function CreateCourseModal({ isOpen, onClose, sessionToken, onCou
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) { return null; }
 
+  // The 'return' statement below replaces the original one.
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-      <div className="bg-slate-800 p-8 rounded-lg shadow-xl w-full max-w-lg text-slate-100 relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-slate-100">&times;</button>
-        <h2 className="text-2xl font-bold mb-6">Create New Course</h2>
+    // Modal Backdrop: Replicates frosted glass from components.css
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50">
+      {/* Modal Card: Replicates .content-card from components.css */}
+      <div className="bg-slate-800/80 border border-slate-700/50 p-8 rounded-lg shadow-xl w-full max-w-lg text-slate-100 relative backdrop-blur-lg">
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-2xl font-bold">&times;</button>
+        <h2 className="text-2xl font-bold mb-6 text-slate-100">Create New Course</h2>
         <form onSubmit={handleSubmit}>
+          {/* Form Group for Title */}
           <div className="mb-4">
-            <label htmlFor="title" className="block text-sm font-medium text-slate-300 mb-2">Title</label>
+            {/* Label: Replicates label styles from forms.css */}
+            <label htmlFor="title" className="block text-sm font-medium text-slate-300 mb-1">Title</label>
+            {/* Input: Replicates .form-control styles from forms.css */}
             <input
               type="text"
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 focus:ring-yellow-400 focus:border-yellow-400"
+              className="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-slate-100 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
               required
             />
           </div>
+
+          {/* Form Group for Description */}
           <div className="mb-4">
-            <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-2">Description</label>
+            <label htmlFor="description" className="block text-sm font-medium text-slate-300 mb-1">Description</label>
+            {/* Textarea: Replicates textarea styles from forms.css */}
             <textarea
               id="description"
               rows={4}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 focus:ring-yellow-400 focus:border-yellow-400"
+              className="w-full bg-slate-700 border border-slate-600 rounded-md px-3 py-2 text-slate-100 focus:ring-2 focus:ring-yellow-400 focus:border-yellow-400 outline-none transition"
+              placeholder="e.g., An introductory course on quantum mechanics..."
             />
           </div>
+
+          {/* Form Group for Visibility */}
           <div className="mb-6">
             <span className="block text-sm font-medium text-slate-300 mb-2">Visibility</span>
-            <div className="flex items-center space-x-4">
-                <label className="flex items-center"><input type="radio" name="visibility" value="private" checked={visibility === 'private'} onChange={() => setVisibility('private')} className="form-radio text-yellow-400 bg-slate-700 border-slate-600 focus:ring-yellow-400" /> <span className="ml-2">Private</span></label>
-                <label className="flex items-center"><input type="radio" name="visibility" value="public" checked={visibility === 'public'} onChange={() => setVisibility('public')} className="form-radio text-yellow-400 bg-slate-700 border-slate-600 focus:ring-yellow-400" /> <span className="ml-2">Public</span></label>
+            {/* Radio Buttons: Replicates radio styles from forms.css */}
+            <div className="flex items-center space-x-6">
+                <label className="flex items-center cursor-pointer">
+                    <input type="radio" name="visibility" value="private" checked={visibility === 'private'} onChange={() => setVisibility('private')} className="h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-full border-2 border-slate-500 bg-slate-700 checked:bg-slate-700 checked:border-yellow-400 checked:ring-2 ring-offset-2 ring-offset-slate-800 ring-yellow-400 transition" />
+                    <span className="ml-2 text-slate-300">Private</span>
+                </label>
+                <label className="flex items-center cursor-pointer">
+                    <input type="radio" name="visibility" value="public" checked={visibility === 'public'} onChange={() => setVisibility('public')} className="h-4 w-4 shrink-0 cursor-pointer appearance-none rounded-full border-2 border-slate-500 bg-slate-700 checked:bg-slate-700 checked:border-yellow-400 checked:ring-2 ring-offset-2 ring-offset-slate-800 ring-yellow-400 transition" />
+                    <span className="ml-2 text-slate-300">Public</span>
+                </label>
             </div>
           </div>
-          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <div className="flex justify-end">
-            <button type="button" onClick={onClose} className="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded mr-2" disabled={isLoading}>Cancel</button>
-            <button type="submit" className="bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-bold py-2 px-4 rounded" disabled={isLoading}>
+
+          {/* Error Message Display */}
+          {error && <p className="text-red-400 text-sm mb-4 text-center">{error}</p>}
+
+          {/* Action Buttons: Replicates .btn-secondary and .btn-primary from buttons.css */}
+          <div className="flex justify-end gap-3 mt-8">
+            <button type="button" onClick={onClose} className="px-4 py-2 rounded-md bg-slate-600 text-slate-100 font-semibold hover:bg-slate-500 transition disabled:opacity-50" disabled={isLoading}>Cancel</button>
+            <button type="submit" className="px-4 py-2 rounded-md bg-yellow-400 text-slate-900 font-semibold hover:bg-yellow-500 transition disabled:opacity-50" disabled={isLoading}>
               {isLoading ? 'Creating...' : 'Create Course'}
             </button>
           </div>
