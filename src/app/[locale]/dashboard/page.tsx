@@ -1,22 +1,7 @@
-"use client";
-
-// Full code for src/app/[locale]/dashboard/page.tsx
-
-import { useState } from 'react';
-import CreateCourseModal from '@/components/dashboard/CreateCourseModal';
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
-import DashboardCard from '@/components/DashboardCard'; // Assuming this is the correct path
-import { getAuthenticated } from '@/utils/apiClient'; // Added import
-
-// Import the new components
-import TestGenSnapshotCard from '@/components/dashboard/TestGenSnapshotCard';
-import CoursesSnapshotCard from '@/components/dashboard/CoursesSnapshotCard';
-import InspirationalQuoteCard from '@/components/dashboard/InspirationalQuoteCard';
-import LyceumNewsCard from '@/components/dashboard/LyceumNewsCard';
-import QuickLinksCard from '@/components/dashboard/QuickLinksCard';
+import { getAuthenticated } from '@/utils/apiClient';
+import DashboardClient from '@/components/dashboard/DashboardClient';
 
 export default async function DashboardPage() {
   const supabase = createServerClient();
@@ -30,20 +15,11 @@ export default async function DashboardPage() {
     return null; // Ensure component returns null after redirect
   }
 
-  const t = await getTranslations('Dashboard'); // Assuming 'Dashboard' namespace holds these keys
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleCourseCreated = (newCourse: any) => {
-    // For now, we'll just log it. Later we can update the UI.
-    console.log('New course created successfully:', newCourse);
-    // You might want to refresh the dashboard data here in the future
-  };
-
-  let dashboardData: any;
+  let dashboardData: any = null;
   let apiError: string | null = null;
 
   try {
+    // getAuthenticated will be run on the server here
     dashboardData = await getAuthenticated('/api/v1/dashboard', session.access_token);
   } catch (error) {
     console.error('API Error fetching dashboard data:', error);
@@ -51,105 +27,10 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <header className="relative">
-        {/* Banner Image */}
-        <div className="w-full h-52 rounded-lg overflow-hidden">
-          <Image
-            src={dashboardData?.profileBannerUrl || '/assets/dashboard/default-banner.jpg'}
-            alt="Profile Banner"
-            width={1200}
-            height={208}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        {/* Profile Picture */}
-        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
-          <Image
-            src={dashboardData?.profilePictureUrl || '/assets/dashboard/default-pfp.svg'}
-            alt="Profile Picture"
-            width={144}
-            height={144}
-            className="rounded-full border-4 border-yellow-400"
-          />
-        </div>
-      </header>
-
-      {/* Welcome Text - Adjusted margin top to account for PFP */}
-      <div className="text-center mt-20 mb-8">
-        <h2 className="text-2xl font-semibold text-slate-50">
-          {dashboardData?.welcomeMessage || t('welcomeMessage') || 'Welcome!'}
-        </h2>
-        <p className="text-md text-slate-300">
-          {dashboardData?.credits || t('credits') || 'We are glad to have you.'}
-        </p>
-      </div>
-
-      <main>
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-slate-100">
-            {t('title')}
-          </h1>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-bold py-2 px-4 rounded"
-          >
-            + Create New Course
-          </button>
-        </div>
-
-        {apiError && <p className="text-red-500 text-center mb-4">{apiError}</p>}
-
-        {!apiError && dashboardData && (
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              <TestGenSnapshotCard
-                key="testgen"
-                title={dashboardData.testGen?.title || t('testGenCard.title') || 'Test Generation'}
-                subject={dashboardData.testGen?.subject || t('testGenCard.subjectPlaceholder') || 'N/A'}
-                chapters={dashboardData.testGen?.chapters || t('testGenCard.chaptersPlaceholder') || 'N/A'}
-                lastExam={dashboardData.testGen?.lastExam || t('testGenCard.lastExamPlaceholder') || 'N/A'}
-                pendingExams={dashboardData.testGen?.pendingExams || t('testGenCard.pendingExamsPlaceholder') || 'N/A'}
-                buttonText={dashboardData.testGen?.buttonText || t('testGenCard.buttonText') || 'View Tests'}
-              />,
-              <CoursesSnapshotCard
-                key="courses"
-                title={dashboardData.courses?.title || t('coursesCard.title') || 'Your Courses'}
-                enrollmentStatus={dashboardData.courses?.enrollmentStatus || t('coursesCard.enrollmentPlaceholder') || 'N/A'}
-                todaysFocus={dashboardData.courses?.todaysFocus || t('coursesCard.focusPlaceholder') || 'N/A'}
-                buttonText={dashboardData.courses?.buttonText || t('coursesCard.buttonText') || 'View Courses'}
-              />,
-              <InspirationalQuoteCard
-                key="quote"
-                title={dashboardData.quote?.title || t('quoteCard.title') || 'Inspirational Quote'}
-                quote={dashboardData.quote?.quote || t('quoteCard.quotePlaceholder') || 'No quote available'}
-                author={dashboardData.quote?.author || t('quoteCard.authorPlaceholder') || 'Unknown author'}
-                buttonText={dashboardData.quote?.buttonText || 'Refresh'}
-              />,
-              <LyceumNewsCard
-                key="news"
-                title={dashboardData.news?.title || t('newsCard.title') || 'Lyceum News'}
-                items={dashboardData.news?.items || t.raw('newsCard.items') || []}
-              />,
-              <QuickLinksCard
-                key="links"
-                title={dashboardData.quickLinks?.title || t('quickLinksCard.title') || 'Quick Links'}
-                links={dashboardData.quickLinks?.links || t.raw('quickLinksCard.links') || []}
-              />,
-            ].map((Component, index) => (
-              <DashboardCard key={index}>
-                {Component}
-              </DashboardCard>
-            ))}
-          </section>
-        )}
-        <CreateCourseModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          sessionToken={session.access_token}
-          onCourseCreated={handleCourseCreated}
-        />
-      </main>
-    </div>
+    <DashboardClient
+      session={session}
+      initialData={dashboardData?.data} // Pass the nested 'data' object
+      apiError={apiError}
+    />
   );
 }
