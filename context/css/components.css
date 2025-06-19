@@ -1,0 +1,511 @@
+/* --- START OF FILE components.css --- */
+
+/* === components.css === */
+/* Styles for reusable UI components like cards, loaders, toasts, etc. */
+
+/* ==========================================================================
+   Main Application Card & Content Area
+   ========================================================================== */
+
+.content-card {
+    background-color: rgba(255, 255, 255, var(--card-bg-alpha)); /* Light mode: White with dynamic opacity */
+    -webkit-backdrop-filter: blur(5px); /* Frosted glass effect for Safari */
+    backdrop-filter: blur(5px);      /* Standard Frosted glass effect */
+
+    padding: 1.5rem 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: background-color var(--transition-std), box-shadow var(--transition-std), border-color var(--transition-std);
+    border: 1px solid var(--color-gray-200); /* Light border for definition */
+    margin-bottom: 1.5rem;
+}
+.dark .content-card {
+    background-color: rgba(30, 41, 59, var(--card-bg-alpha)); /* Dark mode: var(--color-gray-800) with dynamic opacity */
+    border-color: rgba(71, 85, 105, 0.5); /* Darker, slightly transparent border (var(--color-gray-600) with alpha) */
+    box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.2), 0 2px 6px -2px rgba(0, 0, 0, 0.15); /* Slightly adjusted dark shadow for depth */
+}
+
+/* Card Header Area */
+#card-header {
+    /* Light mode base white, dynamic alpha */
+    background-color: rgba(255, 255, 255, var(--card-bg-alpha));
+    -webkit-backdrop-filter: blur(4px); /* Keep blur consistent with content-card if desired */
+    backdrop-filter: blur(4px);         /* Keep blur consistent with content-card if desired */
+    padding: 1rem;
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    transition: border-color var(--transition-std), background-color var(--transition-std);
+}
+.dark #card-header {
+    /* Dark mode base var(--color-gray-800), dynamic alpha */
+    background-color: rgba(30, 41, 59, var(--card-bg-alpha));
+    border-bottom-color: rgba(71, 85, 105, var(--card-bg-alpha)); /* Keeping the slightly more opaque border for definition */
+}
+#subject-info p { margin-bottom: 0.1rem; }
+#subject-info .font-semibold { color: var(--color-gray-800); transition: color var(--transition-std); }
+.dark #subject-info .font-semibold { color: var(--color-gray-100); }
+
+#user-section #user-display img {
+    width: 2.25rem; height: 2.25rem;
+    border-radius: var(--border-radius-full);
+    object-fit: cover;
+    border: 2px solid var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition-std);
+}
+.dark #user-section #user-display img {
+    border-color: var(--color-gray-700);
+}
+
+/* Dynamic Content Area (#content) */
+#content {
+    margin-top: 1rem;
+}
+
+/* Progress Dashboard Area (#dashboard) */
+#dashboard {
+    background-color: rgba(248, 250, 252, var(--card-bg-alpha)); /* Light mode: var(--color-gray-50) with dynamic opacity */
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    transition: background-color var(--transition-std), border-color var(--transition-std);
+}
+.dark #dashboard {
+    background-color: rgba(30, 41, 59, var(--card-bg-alpha)); /* Dark mode: var(--color-gray-800) with dynamic opacity */
+    border-color: rgba(71, 85, 105, 0.5); /* From original dark mode style */
+}
+
+/* Inner cards of the Progress Dashboard */
+#dashboard-content .grid > div {
+    background-color: rgba(255, 255, 255, var(--card-bg-alpha)); /* Light mode: White with dynamic opacity */
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-gray-200);
+    min-height: 18rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: background-color var(--transition-std), border-color var(--transition-std), box-shadow var(--transition-std);
+}
+.dark #dashboard-content .grid > div {
+    background-color: rgba(51, 65, 85, var(--card-bg-alpha)); /* Dark mode: var(--color-gray-700) with dynamic opacity */
+    border-color: rgba(100, 116, 139, 0.4); /* var(--color-gray-600) with alpha, from original */
+}
+/* Redundant dark style from original, now covered by the one above with var()
+.dark #dashboard-content .grid > div {
+    background-color: var(--color-gray-700); // This would be solid
+    border-color: var(--border-color-dark);
+}
+*/
+#dashboard-content h3, #dashboard-content h4 {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--color-gray-700);
+    flex-shrink: 0;
+    transition: color var(--transition-std);
+}
+.dark #dashboard-content h3, .dark #dashboard-content h4 { color: var(--color-gray-300); }
+#dashboard-content .chart-container {
+    flex-grow: 1;
+    position: relative;
+    min-height: 150px;
+}
+
+/* ==========================================================================
+   Loading, Alerts, Misc UI
+   ========================================================================== */
+
+.loader {
+    border: 3px solid var(--color-primary-200);
+    border-left-color: var(--color-primary-500);
+    border-radius: 50%;
+    width: 1.75rem;
+    height: 1.75rem;
+    animation: spin 0.8s linear infinite;
+}
+.dark .loader {
+    border-color: var(--color-primary-800);
+    border-left-color: var(--color-primary-400);
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+#loading-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(248, 250, 252, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+#loading-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+#loading-overlay > div {
+    background-color: var(--color-white);
+    padding: 1.5rem 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid var(--border-color);
+    transition: background-color var(--transition-std), border-color var(--transition-std);
+}
+#loading-overlay p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-gray-700);
+    margin-bottom: 0;
+    transition: color var(--transition-std);
+}
+.dark #loading-overlay {
+    background-color: rgba(15, 23, 42, 0.7);
+}
+.dark #loading-overlay > div {
+    background-color: var(--color-gray-800);
+    border-color: var(--border-color-dark);
+}
+.dark #loading-overlay p {
+    color: var(--color-gray-200);
+}
+
+.toast-notification {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 110;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid transparent;
+    padding: 0.8rem 1.2rem;
+    display: flex;
+    align-items: center;
+    max-width: 350px;
+    animation: toastIn 0.4s ease-out forwards;
+    background-clip: padding-box;
+    transition: background-color var(--transition-std), color var(--transition-std), border-color var(--transition-std);
+}
+@keyframes toastIn {
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; transform: translateX(0); }
+}
+@keyframes toastOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100%); }
+}
+.toast-notification.fade-out {
+    animation: toastOut 0.4s ease-in forwards;
+}
+
+.toast-notification p { margin-bottom: 0; font-size: 0.9rem; }
+.toast-notification .toast-icon { width: 1.25rem; height: 1.25rem; margin-right: 0.75rem; flex-shrink: 0; }
+.toast-success { background-color: var(--color-success-100); color: var(--color-success-800); border-color: var(--color-success-300); }
+.dark .toast-success { background-color: var(--color-success-900); color: var(--color-success-100); border-color: var(--color-success-700); }
+.toast-error { background-color: var(--color-danger-100); color: var(--color-danger-800); border-color: var(--color-danger-300); }
+.dark .toast-error { background-color: var(--color-danger-900); color: var(--color-danger-100); border-color: var(--color-danger-700); }
+.toast-warning { background-color: var(--color-warning-100); color: var(--color-warning-800); border-color: var(--color-warning-300); }
+.dark .toast-warning { background-color: var(--color-warning-900); color: var(--color-warning-100); border-color: var(--color-warning-700); }
+.toast-info { background-color: var(--color-info-100); color: var(--color-info-800); border-color: var(--color-info-300); }
+.dark .toast-info { background-color: var(--color-info-900); color: var(--color-info-100); border-color: var(--color-info-700); }
+
+canvas { max-width: 100%; height: auto !important; display: block; }
+
+/* Admin Indicator Icon */
+.admin-icon {
+    display: inline-block;
+    margin-left: 0.3em;
+    color: var(--color-warning-500);
+    width: 0.8em;
+    height: 0.8em;
+    vertical-align: middle;
+    transition: color var(--transition-std);
+}
+.dark .admin-icon {
+    color: var(--color-warning-300);
+}
+
+/* Details/Summary disclosure widget */
+details > summary {
+    cursor: pointer;
+    padding: 0.5em 0;
+    font-weight: 500;
+    color: var(--color-gray-700);
+    transition: color var(--transition-fast);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before {
+    content: '►'; display: inline-block; margin-right: 0.5em;
+    font-size: 0.7em; transition: transform var(--transition-fast), color var(--transition-fast);
+    color: var(--color-gray-400);
+    flex-shrink: 0;
+}
+details[open] > summary::before { transform: rotate(90deg); }
+.dark details > summary { color: var(--color-gray-300); }
+details > summary:hover { color: var(--color-primary-600); }
+.dark details > summary:hover { color: var(--color-primary-400); }
+details[open] > summary { margin-bottom: 0.5em; }
+details > div {
+    padding: 1em; background-color: var(--color-gray-50);
+    border-radius: var(--border-radius-md); border: 1px solid var(--border-color);
+    margin-top: 0.5em;
+    transition: background-color var(--transition-std), border-color var(--transition-std);
+}
+.dark details > div {
+    background-color: var(--color-gray-700); border-color: var(--border-color-dark);
+}
+
+/* Background Setting Preview */
+.background-setting-preview {
+    width: 100%;
+    height: 5rem; /* Adjust as needed */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-400);
+    font-size: 0.875rem;
+}
+.dark .background-setting-preview {
+    border-color: var(--border-color-dark);
+    color: var(--color-gray-500);
+}
+
+/* Active control state for music player buttons (e.g. shuffle, repeat) */
+.active-control {
+    color: var(--color-primary-500) !important; /* Force active color */
+}
+.dark .active-control {
+    color: var(--color-primary-400) !important;
+}
+
+/* Disabled feature button styling */
+.disabled-feature {
+    opacity: 0.6;
+    cursor: not-allowed;
+    position: relative;
+}
+.disabled-feature::after {
+    content: "Soon";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: var(--color-warning-400);
+    color: var(--color-black);
+    font-size: 0.6rem;
+    padding: 0.05rem 0.25rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+}
+.dark .disabled-feature::after {
+    background-color: var(--color-warning-500);
+}
+
+/* Toggle Switch for Experimental Features */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px; /* Slightly smaller */
+  height: 24px; /* Slightly smaller */
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-gray-300);
+  transition: .3s;
+}
+.dark .slider {
+    background-color: var(--color-gray-600);
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; /* Smaller knob */
+  width: 18px; /* Smaller knob */
+  left: 3px; /* Adjusted position */
+  bottom: 3px; /* Adjusted position */
+  background-color: white;
+  transition: .3s;
+}
+input:checked + .slider {
+  background-color: var(--color-primary-500);
+}
+.dark input:checked + .slider {
+  background-color: var(--color-primary-400);
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--color-primary-500);
+}
+.dark input:focus + .slider {
+  box-shadow: 0 0 1px var(--color-primary-400);
+}
+input:checked + .slider:before {
+  transform: translateX(20px); /* Adjusted travel distance */
+}
+.slider.round {
+  border-radius: 24px; /* Keep it pill-shaped */
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* === components.css (or wherever these animations are defined) === */
+
+/* Define theme-specific animation colors as CSS variables */
+:root {
+    /* Light Theme Animation Colors */
+    --flash-success-bg-start: var(--color-success-100);
+    --flash-success-border-start: var(--color-success-400);
+    --flash-success-bg-mid: var(--color-success-200);
+    --flash-success-border-mid: var(--color-success-500);
+
+    --flash-info-bg-start: var(--color-info-100);
+    --flash-info-border-start: var(--color-info-400);
+    --flash-info-bg-mid: var(--color-info-200);
+    --flash-info-border-mid: var(--color-info-500);
+
+    --flash-success-intense-bg-start: var(--color-success-500);
+    --flash-success-intense-bg-mid: var(--color-success-400);
+}
+
+.dark {
+    /* Dark Theme Animation Colors */
+    --flash-success-bg-start: var(--color-success-800);
+    --flash-success-border-start: var(--color-success-600);
+    --flash-success-bg-mid: var(--color-success-700);
+    --flash-success-border-mid: var(--color-success-500);
+
+    --flash-info-bg-start: var(--color-info-800);
+    --flash-info-border-start: var(--color-info-600);
+    --flash-info-bg-mid: var(--color-info-700);
+    --flash-info-border-mid: var(--color-info-500);
+
+    --flash-success-intense-bg-start: var(--color-success-400);
+    --flash-success-intense-bg-mid: var(--color-success-300);
+}
+
+/* Define a single set of keyframes using the variables */
+@keyframes flash-bg-success {
+    0%   { background-color: var(--flash-success-bg-start); border-color: var(--flash-success-border-start); }
+    50%  { background-color: var(--flash-success-bg-mid); border-color: var(--flash-success-border-mid); }
+    100% { background-color: initial; border-color: initial; } /* Revert to original/parent styles */
+}
+
+.flash-success {
+    animation: flash-bg-success 1.5s ease-out;
+}
+
+@keyframes flash-bg-info {
+    0%   { background-color: var(--flash-info-bg-start); border-color: var(--flash-info-border-start); }
+    50%  { background-color: var(--flash-info-bg-mid); border-color: var(--flash-info-border-mid); }
+    100% { background-color: initial; border-color: initial; }
+}
+
+.flash-info {
+    animation: flash-bg-info 1.5s ease-out;
+}
+
+@keyframes flash-bg-success-intense { /* For buttons */
+    0%   { background-color: var(--flash-success-intense-bg-start); }
+    50%  { background-color: var(--flash-success-intense-bg-mid); }
+    100% { background-color: initial; } /* Will revert to the button's base background */
+}
+
+.flash-success-intense {
+    animation: flash-bg-success-intense 2s ease-out;
+}
+
+/* --- END OF FILE components.css --- */
+
+/* === NEW STYLES FOR LESSON UI TOGGLES AND LAYOUT === */
+.hidden-component {
+    display: none !important;
+}
+
+.lesson-toggle-btn {
+    /* Base style from btn-secondary-small or similar */
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem; /* text-xs */
+    border: 1px solid var(--color-gray-300);
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-700);
+    border-radius: var(--border-radius-md);
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    cursor: pointer; /* Ensure it looks clickable */
+}
+
+.dark .lesson-toggle-btn {
+    border-color: var(--color-gray-500);
+    background-color: var(--color-gray-600);
+    color: var(--color-gray-200);
+}
+
+.lesson-toggle-btn.active {
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+    border-color: var(--color-primary-500);
+}
+
+.dark .lesson-toggle-btn.active {
+    background-color: var(--color-primary-400);
+    color: var(--color-gray-900);
+    border-color: var(--color-primary-400);
+}
+
+.lesson-toggle-btn:not(.active):hover {
+    background-color: var(--color-gray-300);
+}
+
+.dark .lesson-toggle-btn:not(.active):hover {
+    background-color: var(--color-gray-500);
+}
+
+.component-wrapper {
+    /* Add some bottom margin for spacing if not handled by space-y on parent */
+    margin-bottom: 1rem; 
+}
+
+/* Ensure video players and PDF viewers don't overflow their containers if they are direct children */
+.component-wrapper > .aspect-video, 
+.component-wrapper > #pdf-viewer-container {
+    width: 100%;
+}
