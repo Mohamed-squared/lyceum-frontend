@@ -17,22 +17,28 @@ export default async function DashboardPage() {
   }
 
   let dashboardData: any = null;
+  let myCoursesData: any = null; // Add this line and initialize to null
   let apiError: string | null = null;
 
   try {
-    // getAuthenticated will be run on the server here
-    dashboardData = await getAuthenticated('/api/v1/dashboard', session.access_token);
-    const myCoursesData = await getAuthenticated('/api/v1/courses', session.access_token);
+    // Fetch both sets of data concurrently for better performance
+    [dashboardData, myCoursesData] = await Promise.all([
+      getAuthenticated('/api/v1/dashboard', session.access_token),
+      getAuthenticated('/api/v1/courses', session.access_token)
+    ]);
   } catch (error) {
     console.error('API Error fetching dashboard data:', error);
     apiError = 'Failed to load dashboard content. Please try again later.';
+    // Ensure myCoursesData is initialized in case of an error before this point,
+    // or handle it by ensuring it's an empty array for the prop.
+    // The current prop passing `myCoursesData?.data || []` handles this.
   }
 
   return (
     <DashboardClient
       session={session}
-      initialData={dashboardData?.data} // Pass the nested 'data' object
-      myCourses={myCoursesData?.data || []} // Add this new prop
+      initialData={dashboardData?.data}
+      myCourses={myCoursesData?.data || []} // Verify this line
       apiError={apiError}
     />
   );

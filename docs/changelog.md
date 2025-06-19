@@ -8,3 +8,7 @@
 - Created `MyCoursesCard.tsx` component to display a list of courses.
 - Modified `dashboard/page.tsx` to fetch course data from the new `GET /api/v1/courses` endpoint on the server.
 - Modified `DashboardClient.tsx` to accept the course list as a prop and render the `MyCoursesCard` component.
+
+### Task F-1.5: Fix Variable Declaration in Dashboard Page
+- Corrected a build error in `dashboard/page.tsx` by properly declaring the `myCoursesData` variable.
+- Refactored the data fetching logic to use `Promise.all`, allowing dashboard and course data to be fetched concurrently, improving performance.
