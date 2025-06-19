@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 
 // Import Components
 import DashboardCard from '@/components/DashboardCard';
+import MyCoursesCard from '@/components/dashboard/MyCoursesCard'; // Import MyCoursesCard
 import TestGenSnapshotCard from '@/components/dashboard/TestGenSnapshotCard';
 import CoursesSnapshotCard from '@/components/dashboard/CoursesSnapshotCard';
 import InspirationalQuoteCard from '@/components/dashboard/InspirationalQuoteCard';
@@ -17,10 +18,11 @@ import CreateCourseModal from '@/components/dashboard/CreateCourseModal';
 interface DashboardClientProps {
   session: any; // Using 'any' for now, can be tightened with Supabase types later
   initialData: any;
+  myCourses: any[]; // Add this line
   apiError: string | null;
 }
 
-export default function DashboardClient({ session, initialData, apiError }: DashboardClientProps) {
+export default function DashboardClient({ session, initialData, myCourses, apiError }: DashboardClientProps) {
   const t = useTranslations('Dashboard');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -83,7 +85,12 @@ export default function DashboardClient({ session, initialData, apiError }: Dash
         {!apiError && initialData && (
           <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              // The components remain the same
+              // Add the new card here
+              <MyCoursesCard
+                key="my-courses"
+                title={t('myCoursesCard.title') || 'My Courses'}
+                courses={myCourses}
+              />,
               <TestGenSnapshotCard key="testgen" {...initialData.testGen} />,
               <CoursesSnapshotCard key="courses" {...initialData.courses} />,
               <InspirationalQuoteCard key="quote" {...initialData.quote} />,

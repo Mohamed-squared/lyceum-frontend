@@ -2,6 +2,7 @@ import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { getAuthenticated } from '@/utils/apiClient';
 import DashboardClient from '@/components/dashboard/DashboardClient';
+import MyCoursesCard from '@/components/dashboard/MyCoursesCard';
 
 export default async function DashboardPage() {
   const supabase = createServerClient();
@@ -21,6 +22,7 @@ export default async function DashboardPage() {
   try {
     // getAuthenticated will be run on the server here
     dashboardData = await getAuthenticated('/api/v1/dashboard', session.access_token);
+    const myCoursesData = await getAuthenticated('/api/v1/courses', session.access_token);
   } catch (error) {
     console.error('API Error fetching dashboard data:', error);
     apiError = 'Failed to load dashboard content. Please try again later.';
@@ -30,6 +32,7 @@ export default async function DashboardPage() {
     <DashboardClient
       session={session}
       initialData={dashboardData?.data} // Pass the nested 'data' object
+      myCourses={myCoursesData?.data || []} // Add this new prop
       apiError={apiError}
     />
   );
